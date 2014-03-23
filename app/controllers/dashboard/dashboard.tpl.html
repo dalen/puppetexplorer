@@ -1,0 +1,85 @@
+
+<div class="ui four column grid" style="margin:0;">
+  <div class="column">
+    <div class="ui segment">
+      <div class="ui bottom attached label">Nodes</div>
+      <h1 style="color: #43a2ca;margin-bottom:1em;"><i class="loading icon" ng-if="!activeNodes"></i>{{activeNodes}}</h1>
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui segment">
+      <div class="ui bottom attached label">Resources</div>
+      <h1 style="color: #43a2ca;margin-bottom:1em;"><i class="loading icon" ng-if="!resources"></i>{{resources}}</h1>
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui segment">
+      <div class="ui bottom attached label">Avg resources/node</div>
+      <h1 style="color: #43a2ca;margin-bottom:1em;"><i class="loading icon" ng-if="!avgResources"></i>{{avgResources}}</h1>
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui segment">
+      <div class="ui bottom attached label">Resource duplication</div>
+      <h1 style="color: #43a2ca;margin-bottom:1em;"><i class="loading icon" ng-if="!resDuplication"></i>{{resDuplication}} %</h1>
+    </div>
+  </div>
+</div>
+
+<article class="ui three column divided grid">
+  <div class="column">
+    <h3>Syntax</h3>
+    <p>Use <tt>fact=value</tt> to search for nodes where <tt>fact</tt> equals <tt>value</tt>.</p>
+
+    <p>Resources can be matched using the syntax <tt>type[title]{param=value}</tt>.
+       The part in brackets is optional. You can also specify <tt>~</tt> before the <tt>title</tt>
+       to do a regexp match on the title. Type names and class names are case insensitive.</p>
+
+    <p>Strings can contain letters, numbers or the characters .:-_ without needing to be quoted.
+       If they contain any other characters they need to be quoted with single or double quotes.
+       Use backslash (\) to escape quotes within a quoted string or double backslash for backslashes.</p>
+
+    <p>An unquoted number or the strings true/false will be interpreted as numbers and boolean
+       values, use quotation marks around them to search for them as strings instead.</p>
+
+    <p>A bare string without comparison operator will be treated as a regexp match against the certname.</p>
+  </div>
+
+  <div class="column">
+    <h4>Comparison operators</h4>
+
+    <table class="ui small table segment">
+      <tr><td>=</td><td>Equality</td></tr>
+      <tr><td>!=</td><td>Not equal</td></tr>
+      <tr><td>~</td><td>Regexp match</td></tr>
+      <tr><td>&lt;</td><td>Less than</td></tr>
+      <tr><td>&lt;=</td><td>Less than or equal</td></tr>
+      <tr><td>&gt;</td><td>Greater than</td></tr>
+      <tr><td>&gt;=</td><td>Greater than or equal</td></tr>
+    </table>
+
+    <h4>Logical operators</h4>
+    <table class="ui small table segment">
+      <tr><td>not</td><td>(unary op)</td></tr>
+      <tr><td>and</td><td></td></tr>
+      <tr><td>or</td><td></td></tr>
+    </table>
+    <p>Shown in precedence order from highest to lowest. Use parenthesis to change order in an expression.</p>
+  </div>
+
+  <div class="column">
+    <h3>Query Examples</h3>
+    Nodes with package mysql-server and amd64 arcitecture
+    <div class="ui visible small message">
+      <tt>package["mysql-server"] and architecture=amd64</tt>
+    </div>
+    Nodes with the class Postgresql::Server and a version set to 9.3
+    <div class="ui visible small message">
+        <tt>class[postgresql::server]{version=9.3}</tt>
+    </div>
+    Nodes with 4 or 8 processors running Linux
+    <div class="ui visible small message">
+        <tt>(processorcount=4 or processorcount=8) and kernel=Linux</tt>
+    </div>
+  </div>
+</article>

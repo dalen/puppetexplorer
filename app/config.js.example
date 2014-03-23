@@ -1,0 +1,21 @@
+// List of PuppetDB servers, pairs of name and URL
+// The first one will be used as the default server
+PUPPETDB_SERVERS = [
+  ['production', '/api'],
+  ['testing', '/api']
+];
+
+// A list of important facts that you want shown in the node detail view
+NODE_FACTS = [
+  'operatingsystem',
+  'operatingsystemrelease',
+  'manufacturer',
+  'productname',
+  'processorcount',
+  'memorytotal',
+  'ipaddress'
+];
+
+// Google Analytics settings
+GA_TRACKING_ID = 'UA-XXXXXXXX-YY';
+GA_DOMAIN = 'auto';

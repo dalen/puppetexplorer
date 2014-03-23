@@ -1,0 +1,62 @@
+<div class="ui warning message" ng-if="nodeList.nodes.length === 0">
+  No nodes found
+</div>
+
+<div class="ui grid">
+  <div class="ten wide column">
+    <table class="ui table segment" ng-if="nodeList.nodes.length > 0">
+      <thead><tr>
+        <th>Name</th>
+        <th>Last run</th>
+        <th style="text-align:center">Successes</th>
+        <th style="text-align:center">Noops</th>
+        <th style="text-align:center">Skips</th>
+        <th style="text-align:center">Failures</th>
+        <th></th>
+      </tr></thead>
+      <tbody>
+        <tr ng-repeat="node in nodeList.nodes">
+          <td ng-click="nodeList.selectNode(node)">{{node.name}}</td>
+          <td title="{{node['catalog-timestamp']}}" am-time-ago="node['catalog-timestamp']"></td>
+          <td style="text-align:center">{{node.status.successes || ""}}</td>
+          <td style="text-align:center">{{node.status.noops || ""}}</td>
+          <td style="text-align:center">{{node.status.skips || ""}}</td>
+          <td style="text-align:center">{{node.status.failures || ""}}</td>
+          <td style="text-align:right" ng-click="nodeList.showEvents(node.name)">
+            <i ng-class="nodeList.nodeStatus(node)"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="six wide column" ng-if="nodeList.selectedNode">
+    <h2>{{nodeList.selectedNode.name}}</h2>
+    <table class="ui table segment" ng-if="nodeList.selectedNode.facts">
+      <thead><tr>
+        <th>Fact</th>
+        <th>Value</th>
+      </tr></thead>
+      <tbody>
+        <tr ng-repeat="fact in nodeList.importantFacts(nodeList.selectedNode)">
+          <td>{{fact.name}}</td>
+          <td>{{fact.value}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <input type="button" value="Show all" ng-click="nodeList.selectedNode.showAllFacts = !nodeList.selectedNode.showAllFacts">
+    <table class="ui table segment" ng-if="nodeList.selectedNode.facts && nodeList.selectedNode.showAllFacts">
+      <thead><tr>
+        <th>Fact</th>
+        <th>Value</th>
+      </tr></thead>
+      <tbody>
+        <tr ng-repeat="fact in nodeList.selectedNode.facts">
+          <td>{{fact.name}}</td>
+          <td>{{fact.value}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-include src="'services/pagination/pagination.tpl.html'"></ng-include>

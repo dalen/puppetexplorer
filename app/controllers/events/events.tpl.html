@@ -1,0 +1,91 @@
+<div class="ui basic form segment" style="margin-bottom: 0">
+  <div class="three fields">
+    <div ng-class="latestReport ? 'disabled field' : 'field'">
+      <label for="date-from">From</label>
+      <input id="date-from" type="date" ng-model="dateFrom" ng-change="events.setFilters()" name="date_from">
+    </div>
+    <div ng-class="latestReport ? 'disabled field' : 'field'">
+      <label for="date-to">Until</label>
+      <input id="date-to" type="date" ng-model="dateTo" ng-change="events.setFilters()" name="date_to">
+    </div>
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" id="latest-report" ng-model="latestReport" ng-change="events.setFilters()" name="latest">
+        <label for="latest-report">Latest report only</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui warning message" ng-if="events.events.length === 0">
+  No matching events found
+</div>
+
+<div class="ui three column grid" style="margin: 0;">
+  <div class="column">
+    <div google-chart chart="containingChart" on-select="events.onChartSelect('containing_class', containingChart.data, selectedItem)" on-ready="events.setChartSelection('containing_class', containingChart.data, chartWrapper)"></div>
+  </div>
+  <div class="column">
+    <div google-chart chart="resourceChart" on-select="events.onChartSelect('resource_type', resourceChart.data, selectedItem)" on-ready="events.setChartSelection('resource_type', resourceChart.data, chartWrapper)"></div>
+  </div>
+  <div class="column">
+    <div google-chart chart="statusChart" on-select="events.onChartSelect('status', statusChart.data, selectedItem)" on-ready="events.setChartSelection('status', statusChart.data, chartWrapper)"></div>
+  </div>
+</div>
+
+
+<table class="ui table segment" ng-if="events.events.length > 0">
+  <thead><tr>
+    <th>Node</th>
+    <th>Type</th>
+    <th>Title</th>
+    <th>Property</th>
+    <th>From</th>
+    <th>To</th>
+  </tr></thead>
+  <tbody ng-repeat="event in events.events">
+    <tr ng-class="events.color(event.status)" ng-click="events.toggleRow(event)">
+      <td>{{event["certname"]}}</td>
+      <td>{{event["resource-type"]}}</td>
+      <td>{{event["resource-title"]}}</td>
+      <td>{{event["property"]}}</td>
+      <td>{{event["old-value"]}}</td>
+      <td>{{event["new-value"]}}</td>
+    </tr>
+    <tr>
+      <td class="reveal-animation" ng-if="event.show" colspan="6">
+        <table class="ui compact basic collapsing table">
+          <tr>
+            <th>Message</th>
+            <td>{{event["message"]}}</td>
+          </tr>
+          <tr>
+            <th>Containing-class</th>
+            <td>{{event["containing-class"]}}</td>
+          </tr>
+          <tr>
+            <th>Containment-path</th>
+            <td>
+              <div class="ui breadcrumb">
+                <span ng-repeat="container in event['containment-path']">
+                  <a class="section">{{container}}</a>
+                  <i ng-if="!$last" class="right arrow icon divider"></i>
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>File</th>
+            <td>{{event["file"]}}<span ng-if="event.file && event.line">:</span>{{event["line"]}}</td>
+          </tr>
+          <tr>
+            <th>Timestamp</th>
+            <td title="{{event['timestamp']}}" am-time-ago="event['timestamp']"></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-include src="'services/pagination/pagination.tpl.html'"></ng-include>

@@ -1,0 +1,23 @@
+<div class="ui grid">
+  <div class="four wide column">
+    <div class="ui left fluid icon input">
+      <input type="text" placeholder="Search" ng-model="query">
+      <i class="search icon"></i>
+    </div>
+
+    <table class="ui compact collapsing basic table">
+      <tbody>
+        <tr ng-repeat="fact in facts.factNames | filter: query" ng-click="facts.addChart(fact)" >
+          <td><i class="signal icon"></i> {{fact}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="twelve wide column">
+    <span ng-repeat="chart in facts.chartList()">
+      <i class="red remove icon" ng-click="facts.deleteChart(chart)"></i>
+      <div google-chart chart="facts.charts[chart]" on-select="facts.chartSelect(chart, selectedItem)"></div>
+    </span>
+  </div>
+</div>
