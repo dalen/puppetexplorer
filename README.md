@@ -13,7 +13,9 @@ It has the same query language as the popular Puppet module
 This lets you easily filter for a selection of nodes and show the events or
 facts for only them. So you can handle hosts as groups without needing to have
 predefined groups, just make them up as you need and click on the pie charts to
-drill down further.
+drill down further. The JavaScript version of this query parser is available as
+a separate component so you can use it in your own projects easily,
+[node-puppetdbquery](https://github.com/dalen/node-puppetdbquery).
 
 All views in the application are made to be able to link directly to them, so
 it is easy to share information you find with coworkers.
