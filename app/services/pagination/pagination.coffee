@@ -3,8 +3,8 @@ angular.module('app').factory 'Pagination', ($location, $rootScope) ->
     constructor: (@perPage = 50) ->
       @page = parseInt($location.search().page) || 1
 
-    numItems: (num) ->
-      if num?
+    numItems: (@num) ->
+      if @num?
         @numPages = Math.ceil(num / @perPage)
 
     reset: ->
