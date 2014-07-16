@@ -16,13 +16,13 @@
       </tr></thead>
       <tbody>
         <tr ng-repeat="node in nodeList.nodes">
-          <td ng-click="nodeList.selectNode(node)">{{node.name}}</td>
+          <td ng-click="nodeList.selectNode(node)">{{node.certname}}</td>
           <td title="{{node['catalog-timestamp']}}" am-time-ago="node['catalog-timestamp']"></td>
           <td style="text-align:center">{{node.status.successes || ""}}</td>
           <td style="text-align:center">{{node.status.noops || ""}}</td>
           <td style="text-align:center">{{node.status.skips || ""}}</td>
           <td style="text-align:center">{{node.status.failures || ""}}</td>
-          <td style="text-align:right" ng-click="nodeList.showEvents(node.name)">
+          <td style="text-align:right" ng-click="nodeList.showEvents(node.certname)">
             <i ng-class="nodeList.nodeStatus(node)"></i>
           </td>
         </tr>
@@ -30,7 +30,7 @@
     </table>
   </div>
   <div class="six wide column" ng-if="nodeList.selectedNode">
-    <h2>{{nodeList.selectedNode.name}}</h2>
+    <h2>{{nodeList.selectedNode.certname}}</h2>
     <table class="ui table segment" ng-if="nodeList.selectedNode.facts">
       <thead><tr>
         <th>Fact</th>
