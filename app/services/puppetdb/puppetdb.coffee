@@ -30,13 +30,10 @@ angular.module('app').factory "PuppetDB", ($http,
     # Public: Parse a query
     #
     # query     - The {String} query to parse
-    # nodeQuery - A {Boolean} specifying if it should be
-    #             parsed for the nodes endpoint or other endpoints.
     #
     # Returns: The resulting query
-    parse: (query, nodeQuery) ->
+    parse: (query) ->
       if query
-        @puppetdbquery.yy.nodeQuery = nodeQuery
         @puppetdbquery.parse query
       else
         null
@@ -62,7 +59,7 @@ angular.module('app').factory "PuppetDB", ($http,
     parseAndQuery: (endpoint, nodeQuery, additionalQuery, params = {}, success) ->
       # Handle all the parsing of the query and putting them together
       if nodeQuery
-        query = @parse(nodeQuery, endpoint is "nodes")
+        query = @parse(nodeQuery)
       else
         query = null
       if additionalQuery

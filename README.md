@@ -22,9 +22,8 @@ It has support for multiple PuppetDB servers.
 
 ### Dependencies
 
-It is using the V4 PuppetDB API, so therefore it needs PuppetDB 2.0. This is
-currently marked as experimental, so PuppetDB 2.1 will likely break
-compatibility but we should be able to create a fix for that quickly.
+It is using the V4 PuppetDB API from PuppetDB 2.1. Version 1.0.0 works with
+PuppetDB 2.0, but the current version only works with PuppetDB 2.1.
 
 ### Screenshots
 

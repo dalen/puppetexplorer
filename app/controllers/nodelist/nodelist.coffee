@@ -22,7 +22,7 @@ angular.module("app").controller "NodeListCtrl", class
       {
         offset: @Pagination.offset()
         limit: @Pagination.perPage
-        "order-by": angular.toJson([field: "name", order: "asc"])
+        "order-by": angular.toJson([field: "certname", order: "asc"])
       },
       (data, total) =>
         @Pagination.numItems(total)
@@ -42,7 +42,7 @@ angular.module("app").controller "NodeListCtrl", class
     @PuppetDB.parseAndQuery(
       "event-counts"
       null
-      ["and", ["=", "certname", node.name], ["=", "latest-report?", true]],
+      ["and", ["=", "certname", node.certname], ["=", "latest-report?", true]],
         'summarize-by': 'certname'
         'order-by': angular.toJson([field: "certname", order: "asc"])
       do (node) ->
@@ -67,7 +67,7 @@ angular.module("app").controller "NodeListCtrl", class
     @PuppetDB.parseAndQuery(
       "facts"
       null
-      ["=", "certname", node.name],
+      ["=", "certname", node.certname],
         'order-by': angular.toJson([field: "name", order: "asc"])
       do (node) ->
         (data, total) ->
@@ -85,7 +85,7 @@ angular.module("app").controller "NodeListCtrl", class
   # Returns: `undefined`
   fetchSelectedNode: () =>
     for node in @nodes
-      if node.name == @$location.search().node
+      if node.certname == @$location.search().node
         @selectNode(node)
 
 
@@ -109,7 +109,7 @@ angular.module("app").controller "NodeListCtrl", class
       @$location.search('node', null)
       @selectedNode = null
     else
-      @$location.search('node', node.name)
+      @$location.search('node', node.certname)
       @selectedNode = node
       unless node.facts?
         @fetchNodeFacts(node)
