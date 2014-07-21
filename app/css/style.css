@@ -1,14 +1,4 @@
-html,
-body {
-  font-size: 15px;
-}
-
-body {
-  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  background: #FFFFFF;
-  color: #555555;
-  min-width: 320px;
-}
+.table-hover, .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 .reveal-animation.ng-enter {
   -webkit-animation: enter_sequence 0.4s linear; /* Safari/Chrome */
@@ -34,4 +24,21 @@ body {
 @keyframes leave_sequence {
   from { opacity:1; }
   to { opacity:0; }
+}
+
+.spin{
+     -webkit-transform-origin: 50% 50%;
+     transform-origin: 50% 50%;
+     -webkit-animation: spin 1s infinite linear;
+     -moz-animation: spin 1s infinite linear;
+     -o-animation: spin 1s infinite linear;
+     animation: spin 1s infinite linear;
+}
+@-webkit-keyframes spin {
+    from {-webkit-transform: rotate(0deg);}
+    to   {-webkit-transform: rotate(359deg);}
+}
+@keyframes spin {
+    from {transform: rotate(0deg);}
+    to   {transform: rotate(359deg);}
 }

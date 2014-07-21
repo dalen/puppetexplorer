@@ -1,38 +1,37 @@
-
-<div class="ui four column grid" style="margin:0;">
-  <div class="column">
-    <div class="ui segment">
-      <div class="ui bottom attached label">Nodes</div>
-      <h1 style="color: #43a2ca;margin-bottom:1em;"><i class="loading icon" ng-if="!activeNodes"></i>{{activeNodes}}</h1>
+<div class="row">
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h3 class="panel-title">Nodes</h3></div>
+      <div class="panel-body"><span class="lead"><span ng-class="activeNodes ? '' : 'glyphicon glyphicon-refresh spin'">{{activeNodes}}</span></span></div>
     </div>
   </div>
-  <div class="column">
-    <div class="ui segment">
-      <div class="ui bottom attached label">Resources</div>
-      <h1 style="color: #43a2ca;margin-bottom:1em;"><i class="loading icon" ng-if="!resources"></i>{{resources}}</h1>
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h3 class="panel-title">Resources</h3></div>
+      <div class="panel-body"><span class="lead"><span ng-class="resources ? '' : 'glyphicon glyphicon-refresh spin'">{{resources}}</span></span></div>
     </div>
   </div>
-  <div class="column">
-    <div class="ui segment">
-      <div class="ui bottom attached label">Avg resources/node</div>
-      <h1 style="color: #43a2ca;margin-bottom:1em;"><i class="loading icon" ng-if="!avgResources"></i>{{avgResources}}</h1>
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h3 class="panel-title">Avg resources/node</h3></div>
+      <div class="panel-body"><span class="lead"><span ng-class="avgResources ? '' : 'glyphicon glyphicon-refresh spin'">{{avgResources}}</span></span></div>
     </div>
   </div>
-  <div class="column">
-    <div class="ui segment">
-      <div class="ui bottom attached label">Resource duplication</div>
-      <h1 style="color: #43a2ca;margin-bottom:1em;"><i class="loading icon" ng-if="!resDuplication"></i>{{resDuplication}} %</h1>
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h3 class="panel-title">Resource duplication %</h3></div>
+      <div class="panel-body"><span class="lead"><span ng-class="resDuplication ? '' : 'glyphicon glyphicon-refresh spin'">{{resDuplication}}</span></span></div>
     </div>
   </div>
 </div>
 
-<article class="ui three column divided grid">
-  <div class="column">
+<div class="row">
+  <div class="col-md-4">
     <h3>Syntax</h3>
-    <p>Use <tt>fact=value</tt> to search for nodes where <tt>fact</tt> equals <tt>value</tt>.</p>
+    <p>Use <code>fact=value</code> to search for nodes where <code>fact</code> equals <code>value</code>.</p>
 
-    <p>Resources can be matched using the syntax <tt>type[title]{param=value}</tt>.
-       The part in brackets is optional. You can also specify <tt>~</tt> before the <tt>title</tt>
+    <p>Resources can be matched using the syntax <code>type[title]{param=value}</code>.
+       The part in brackets is optional. You can also specify <code>~</code> before the <code>title</code>
        to do a regexp match on the title. Type names and class names are case insensitive.</p>
 
     <p>Strings can contain letters, numbers or the characters .:-_ without needing to be quoted.
@@ -45,10 +44,10 @@
     <p>A bare string without comparison operator will be treated as a regexp match against the certname.</p>
   </div>
 
-  <div class="column">
+  <div class="col-md-4">
     <h4>Comparison operators</h4>
 
-    <table class="ui small table segment">
+    <table class="table table-condensed table-striped">
       <tr><td>=</td><td>Equality</td></tr>
       <tr><td>!=</td><td>Not equal</td></tr>
       <tr><td>~</td><td>Regexp match</td></tr>
@@ -59,7 +58,7 @@
     </table>
 
     <h4>Logical operators</h4>
-    <table class="ui small table segment">
+    <table class="table table-condensed table-striped">
       <tr><td>not</td><td>(unary op)</td></tr>
       <tr><td>and</td><td></td></tr>
       <tr><td>or</td><td></td></tr>
@@ -67,19 +66,19 @@
     <p>Shown in precedence order from highest to lowest. Use parenthesis to change order in an expression.</p>
   </div>
 
-  <div class="column">
+  <div class="col-md-4">
     <h3>Query Examples</h3>
     Nodes with package mysql-server and amd64 arcitecture
-    <div class="ui visible small message">
+    <div class="well well-sm">
       <tt>package["mysql-server"] and architecture=amd64</tt>
     </div>
     Nodes with the class Postgresql::Server and a version set to 9.3
-    <div class="ui visible small message">
+    <div class="well well-sm">
         <tt>class[postgresql::server]{version=9.3}</tt>
     </div>
     Nodes with 4 or 8 processors running Linux
-    <div class="ui visible small message">
+    <div class="well well-sm">
         <tt>(processorcount=4 or processorcount=8) and kernel=Linux</tt>
     </div>
   </div>
-</article>
+</div>

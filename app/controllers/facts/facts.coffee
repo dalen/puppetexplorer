@@ -51,16 +51,14 @@ angular.module("app").controller "FactsCtrl", class
     @charts[fact] =
       type: 'PieChart'
       options:
-        width: 500
+        backgroundColor: 'transparent'
+        width: 450
         height: 300
         chartArea:
           width: "100%"
           height: "100%"
           left: 10
           top: 20
-        title: fact
-        titleTextStyle:
-          fontSize: 15
         colors: ['#BBBBBB']
         pieSliceText: 'label'
         enableInteractivity: false

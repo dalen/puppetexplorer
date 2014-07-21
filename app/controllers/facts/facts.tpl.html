@@ -1,11 +1,11 @@
-<div class="ui grid">
-  <div class="four wide column">
-    <div class="ui left fluid icon input">
-      <input type="text" placeholder="Search" ng-model="query">
-      <i class="search icon"></i>
+<div class="row">
+  <div class="col-md-3">
+    <div class="input-group">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></span>
+      <input class="form-control" type="text" placeholder="Filter" ng-model="query">
     </div>
 
-    <table class="ui compact collapsing basic table">
+    <table class="table table-striped">
       <tbody>
         <tr ng-repeat="fact in facts.factNames | filter: query" ng-click="facts.addChart(fact)" >
           <td><i class="signal icon"></i> {{fact}}</td>
@@ -14,10 +14,15 @@
     </table>
   </div>
 
-  <div class="twelve wide column">
-    <span ng-repeat="chart in facts.chartList()">
-      <i class="red remove icon" ng-click="facts.deleteChart(chart)"></i>
-      <div google-chart chart="facts.charts[chart]" on-select="facts.chartSelect(chart, selectedItem)"></div>
-    </span>
+  <div class="col-md-6">
+    <div class="panel panel-default" ng-repeat="chart in facts.chartList()">
+      <div class="panel-heading">
+        <button type="button" class="close" ng-click="facts.deleteChart(chart)"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="panel-title">{{chart}}</h3>
+      </div>
+      <div class="panel-body">
+        <div google-chart chart="facts.charts[chart]" on-select="facts.chartSelect(chart, selectedItem)"></div>
+      </div>
+    </div>
   </div>
 </div>

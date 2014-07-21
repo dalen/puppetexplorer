@@ -1,10 +1,10 @@
-<div class="ui warning message" ng-if="nodeList.nodes.length === 0">
+<div class="alert alert-warning" role="alert" ng-if="nodeList.nodes.length === 0">
   No nodes found
 </div>
 
-<div class="ui grid">
-  <div class="ten wide column">
-    <table class="ui table segment" ng-if="nodeList.nodes.length > 0">
+<div class="row">
+  <div class="col-md-8">
+    <table class="table table-striped table-hover" ng-if="nodeList.nodes.length > 0">
       <thead><tr>
         <th>Name</th>
         <th>Last run</th>
@@ -18,20 +18,20 @@
         <tr ng-repeat="node in nodeList.nodes">
           <td ng-click="nodeList.selectNode(node)">{{node.certname}}</td>
           <td title="{{node['catalog-timestamp']}}" am-time-ago="node['catalog-timestamp']"></td>
-          <td style="text-align:center">{{node.status.successes || ""}}</td>
-          <td style="text-align:center">{{node.status.noops || ""}}</td>
-          <td style="text-align:center">{{node.status.skips || ""}}</td>
-          <td style="text-align:center">{{node.status.failures || ""}}</td>
-          <td style="text-align:right" ng-click="nodeList.showEvents(node.certname)">
-            <i ng-class="nodeList.nodeStatus(node)"></i>
+          <td class="text-center">{{node.status.successes || ""}}</td>
+          <td class="text-center">{{node.status.noops || ""}}</td>
+          <td class="text-center">{{node.status.skips || ""}}</td>
+          <td class="text-center">{{node.status.failures || ""}}</td>
+          <td class="text-right" ng-click="nodeList.showEvents(node.certname)">
+            <span class="glyphicon" ng-class="nodeList.nodeStatus(node)"></span>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="six wide column" ng-if="nodeList.selectedNode">
-    <h2>{{nodeList.selectedNode.certname}}</h2>
-    <table class="ui table segment" ng-if="nodeList.selectedNode.facts">
+  <div class="col-md-4" ng-if="nodeList.selectedNode">
+    <h4>{{nodeList.selectedNode.certname}}</h4>
+    <table class="table table-striped" ng-if="nodeList.selectedNode.facts">
       <thead><tr>
         <th>Fact</th>
         <th>Value</th>
@@ -43,7 +43,7 @@
         </tr>
       </tbody>
     </table>
-    <input type="button" value="Show all" ng-click="nodeList.selectedNode.showAllFacts = !nodeList.selectedNode.showAllFacts">
+    <button type="button" class="btn btn-default" ng-class="nodeList.selectedNode.showAllFacts ? 'active' : ''" ng-click="nodeList.selectedNode.showAllFacts = !nodeList.selectedNode.showAllFacts">Show all</button>
     <table class="ui table segment" ng-if="nodeList.selectedNode.facts && nodeList.selectedNode.showAllFacts">
       <thead><tr>
         <th>Fact</th>
@@ -59,4 +59,4 @@
   </div>
 </div>
 
-<ng-include src="'services/pagination/pagination.tpl.html'"></ng-include>
+<pagination ng-if="numItems > 50" ng-change="changePage(page)" ng-model="page" num-pages="numPages" items-per-page="50"  boundary-links="numItems > 250" max-size="5" total-items="numItems" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">

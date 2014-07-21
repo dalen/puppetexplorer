@@ -46,7 +46,7 @@ module.exports = (grunt) ->
         files: 'app/**/*.coffee'
         tasks: ['coffeeify']
       static:
-        files: ['app/**/*.html', 'app/**/*.css', 'app/config.js.example', 'app/favicon.ico']
+        files: ['app/**/*.html', 'app/**/*.css', 'app/config.js.example', 'app/favicon.ico', 'fonts/**']
         tasks: ['copy:src']
 
     coffeeify:
@@ -62,14 +62,13 @@ module.exports = (grunt) ->
       src:
         expand: true
         cwd: 'app/'
-        src: ['**/*.html', '**/*.css', 'config.js.example', 'favicon.ico']
+        src: ['**/*.html', '**/*.css', 'config.js.example', 'favicon.ico', 'fonts/**']
         dest: 'dist/'
       dependencies:
         expand: true
         cwd: 'node_modules/'
         src: [
-          'jquery/dist/**'
-          'semantic/build/packaged/**'
+          'bootstrap/dist/**'
           'moment/moment.js'
         ]
         dest: 'dist/lib/'
