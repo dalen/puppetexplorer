@@ -1,7 +1,7 @@
 {
   "name": "puppetexplorer",
   "version": "1.1.0",
-  "description": "web frontend for PuppetDB\n\nA web interface made in AngularJS and SemanticUI for exploring PuppetDB data.",
+  "description": "web frontend for PuppetDB\n\nA web interface made in AngularJS and CoffeeScript for exploring PuppetDB data.",
   "license": "Apache-2.0",
   "keywords": [
     "puppet",
@@ -30,11 +30,10 @@
     "angular-animate": "^1.2.16",
     "angular-moment": "^0.7.1",
     "angular-route": "^1.2.17-build.163.1",
-    "jquery": "^2.1.1",
     "moment": "^2.7.0",
     "node-puppetdbquery": "^0.2.0",
-    "semantic": "git://github.com/Semantic-Org/Semantic-UI",
-    "angular-google-chart": "git://github.com/dalen/angular-google-chart"
+    "angular-google-chart": "git://github.com/dalen/angular-google-chart",
+    "bootstrap": "~3.2.0"
   },
   "devDependencies": {
     "casper-chai": "^0.2.1",

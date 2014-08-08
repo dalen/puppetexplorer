@@ -1,40 +1,76 @@
-<div class="ui basic form segment" style="margin-bottom: 0">
-  <div class="three fields">
-    <div ng-class="latestReport ? 'disabled field' : 'field'">
-      <label for="date-from">From</label>
-      <input id="date-from" type="date" ng-model="dateFrom" ng-change="events.setFilters()" name="date_from">
+<form class="form" role="form">
+<div class="row" style="margin: 10px;">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="date-from">Date from:</label>
+      <div class="input-group">
+        <input datepicker-popup ng-disabled="latestReport" type="text" id="date-from" class="form-control" ng-model="dateFrom" ng-change="events.setFilters()" is-open="dateFromOpen" close-text="Close">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-disabled="latestReport" ng-click="events.toggleDatePicker($event,'dateFromOpen')"><span class="glyphicon glyphicon-calendar"></span></button>
+        </span>
+      </div>
     </div>
-    <div ng-class="latestReport ? 'disabled field' : 'field'">
-      <label for="date-to">Until</label>
-      <input id="date-to" type="date" ng-model="dateTo" ng-change="events.setFilters()" name="date_to">
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="date-to">Date to:</label>
+      <div class="input-group">
+        <input datepicker-popup ng-disabled="latestReport" type="text" id="date-to" class="form-control" ng-model="dateTo" ng-change="events.setFilters()" is-open="dateToOpen" close-text="Close">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-disabled="latestReport" ng-click="events.toggleDatePicker($event,'dateToOpen')"><span class="glyphicon glyphicon-calendar"></span></button>
+        </span>
+      </div>
     </div>
-    <div class="field">
-      <div class="ui checkbox">
+  </div>
+  <div class="col-md-4">
+    <div class="checkbox">
+      <label>
         <input type="checkbox" id="latest-report" ng-model="latestReport" ng-change="events.setFilters()" name="latest">
-        <label for="latest-report">Latest report only</label>
+        Latest report only
+      </label>
+    </div>
+  </div>
+</div>
+</form>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Containing class</h3>
+      </div>
+      <div class="panel-body">
+        <div google-chart chart="containingChart" on-select="events.onChartSelect('containing_class', containingChart.data, selectedItem)" on-ready="events.setChartSelection('containing_class', containingChart.data, chartWrapper)"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Resource type</h3>
+      </div>
+      <div class="panel-body">
+        <div google-chart chart="resourceChart" on-select="events.onChartSelect('resource_type', resourceChart.data, selectedItem)" on-ready="events.setChartSelection('resource_type', resourceChart.data, chartWrapper)"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Event status</h3>
+      </div>
+      <div class="panel-body">
+        <div google-chart chart="statusChart" on-select="events.onChartSelect('status', statusChart.data, selectedItem)" on-ready="events.setChartSelection('status', statusChart.data, chartWrapper)"></div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="ui warning message" ng-if="events.events.length === 0">
+<div class="alert alert-warning" role="alert" ng-if="events.events.length === 0">
   No matching events found
 </div>
 
-<div class="ui three column grid" style="margin: 0;">
-  <div class="column">
-    <div google-chart chart="containingChart" on-select="events.onChartSelect('containing_class', containingChart.data, selectedItem)" on-ready="events.setChartSelection('containing_class', containingChart.data, chartWrapper)"></div>
-  </div>
-  <div class="column">
-    <div google-chart chart="resourceChart" on-select="events.onChartSelect('resource_type', resourceChart.data, selectedItem)" on-ready="events.setChartSelection('resource_type', resourceChart.data, chartWrapper)"></div>
-  </div>
-  <div class="column">
-    <div google-chart chart="statusChart" on-select="events.onChartSelect('status', statusChart.data, selectedItem)" on-ready="events.setChartSelection('status', statusChart.data, chartWrapper)"></div>
-  </div>
-</div>
-
-
-<table class="ui table segment" ng-if="events.events.length > 0">
+<table class="table table-hover" ng-if="events.events.length > 0">
   <thead><tr>
     <th>Node</th>
     <th>Type</th>
@@ -54,7 +90,7 @@
     </tr>
     <tr>
       <td class="reveal-animation" ng-if="event.show" colspan="6">
-        <table class="ui compact basic collapsing table">
+        <table class="table">
           <tr>
             <th>Message</th>
             <td>{{event["message"]}}</td>
@@ -66,12 +102,9 @@
           <tr>
             <th>Containment-path</th>
             <td>
-              <div class="ui breadcrumb">
-                <span ng-repeat="container in event['containment-path']">
-                  <a class="section">{{container}}</a>
-                  <i ng-if="!$last" class="right arrow icon divider"></i>
-                </span>
-              </div>
+              <ol class="breadcrumb">
+                <li ng-repeat="container in event['containment-path']">{{container}}</li>
+              </ol>
             </td>
           </tr>
           <tr>
@@ -88,4 +121,4 @@
   </tbody>
 </table>
 
-<ng-include src="'services/pagination/pagination.tpl.html'"></ng-include>
+<pagination ng-if="numItems > 50" ng-change="changePage(page)" ng-model="page" num-pages="numPages" items-per-page="50"  boundary-links="numItems > 250" max-size="5" total-items="numItems" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">

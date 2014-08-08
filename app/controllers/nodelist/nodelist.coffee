@@ -1,13 +1,16 @@
 angular.module("app").controller "NodeListCtrl", class
-  constructor: (@$location, @$scope, @PuppetDB, @Pagination) ->
+  constructor: (@$location, @$scope, @PuppetDB) ->
     # Reload nodes if either the page changes
     @$scope.$on('pageChange', @fetchNodes)
     # Reset pagination and reload nodes if query changes
     @$scope.$on('queryChange', @reset)
+    @$scope.perPage = 50
+    @$scope.page = 1
     @reset()
 
   reset: =>
-    @Pagination.reset()
+    @$location.search('page', null)
+    @$scope.numItems = undefined
     @fetchNodes()
 
   # Public: Fetch the list of nodes for the current query
@@ -20,12 +23,12 @@ angular.module("app").controller "NodeListCtrl", class
       @$location.search().query,
       null,
       {
-        offset: @Pagination.offset()
-        limit: @Pagination.perPage
+        offset: @$scope.perPage * (@$scope.page - 1)
+        limit:  @$scope.perPage
         "order-by": angular.toJson([field: "certname", order: "asc"])
       },
       (data, total) =>
-        @Pagination.numItems(total)
+        @$scope.numItems = total
         @nodes = data
         for node in @nodes
           @fetchNodeStatus(node)
@@ -93,10 +96,8 @@ angular.module("app").controller "NodeListCtrl", class
   #
   # Returns: A {Array} of important facts {String}.
   importantFacts: (node) ->
-    NODE_FACTS.map((factName) ->
-      node.facts.filter((fact) ->
-        fact.name == factName
-      )[0]
+    node.facts.filter((fact) ->
+      NODE_FACTS.indexOf(fact.name) != -1
     )
 
   # Public: Select a node to show info for
@@ -130,9 +131,9 @@ angular.module("app").controller "NodeListCtrl", class
   # Returns: The {String} "failure", "skipped", "noop", "success" or "none"
   #          of `null` if no status known.
   nodeStatus: (node) ->
-    return 'loading icon' unless node.status
-    return 'red warning icon' if node.status.failures > 0
-    return 'yellow attention icon' if node.status.skips > 0
-    return 'blue attention icon' if node.status.noops > 0
-    return 'green ok sign icon' if node.status.successes > 0
-    return 'disabled ok sign icon'
+    return 'glyphicon-refresh spin' unless node.status
+    return 'glyphicon-warning-sign text-danger' if node.status.failures > 0
+    return 'glyphicon-exlamation-sign text-warning' if node.status.skips > 0
+    return 'glyphicon-exlamation-sign text-info' if node.status.noops > 0
+    return 'glyphicon-ok-sign text-success' if node.status.successes > 0
+    return 'glyphicon-ok-sign text-muted'

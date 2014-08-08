@@ -1,15 +1,18 @@
 angular.module("app").controller "EventsCtrl", class
-  constructor: (@$scope, @$rootScope, @$location, @PuppetDB, @Pagination) ->
+  constructor: (@$scope, @$rootScope, @$location, @PuppetDB) ->
     @$scope.$on('queryChange', @reset)
     @$scope.$on('pageChange', @fetchEvents)
     @$scope.$on('filterChange', @reset)
     @$scope.latestReport = @$location.search().latest != 'false'
     @$scope.dateFrom = @$location.search().date_from || moment.utc().format('YYYY-MM-DD')
     @$scope.dateTo = @$location.search().date_to || moment.utc().format('YYYY-MM-DD')
+    @$scope.perPage = 50
+    @$scope.page = 1
     @reset()
 
   reset: (event, exclude) =>
-    @Pagination.reset()
+    @$location.search('page', null)
+    @$scope.numItems = undefined
     @fetchEvents()
     @fetchContainingClasses() unless exclude == 'containing_class'
     @fetchResourceCounts() unless exclude == 'resource_type'
@@ -20,8 +23,8 @@ angular.module("app").controller "EventsCtrl", class
       @$location.search('latest', null)
     else
       @$location.search('latest', 'false')
-    @$location.search('date_from', @$scope.dateFrom)
-    @$location.search('date_to', @$scope.dateTo)
+    @$location.search('date_from', moment(@$scope.dateFrom).format('YYYY-MM-DD'))
+    @$location.search('date_to', moment(@$scope.dateTo).format('YYYY-MM-DD'))
     @$rootScope.$broadcast('filterChange')
 
   # Public: Create a event query for current filters
@@ -57,12 +60,12 @@ angular.module("app").controller "EventsCtrl", class
       @$location.search().query,
       @createEventQuery(),
       {
-        offset: @Pagination.offset(),
-        limit: @Pagination.perPage,
+        offset: @$scope.perPage * (@$scope.page - 1)
+        limit:  @$scope.perPage
         "order-by": angular.toJson([ field: "timestamp", order: "desc" ]),
       }
       (data, total) =>
-        @Pagination.numItems(total)
+        @$scope.numItems = total
         @events = data
     )
 
@@ -149,9 +152,7 @@ angular.module("app").controller "EventsCtrl", class
     @$scope[name] =
       type: 'PieChart'
       options:
-        title: title
-        titleTextStyle:
-          fontSize: 15
+        backgroundColor: 'transparent'
         colors: colors
         pieSliceText: sliceText
         enableInteractivity: enableInteractivity
@@ -169,11 +170,11 @@ angular.module("app").controller "EventsCtrl", class
   color: (status) ->
     switch status
       when "success"
-        "positive"
+        "success"
       when "noop"
-        "disabled"
+        "text-muted"
       when "failure"
-        "negative"
+        "danger"
       when "skipped"
         "warning"
       else
@@ -207,3 +208,8 @@ angular.module("app").controller "EventsCtrl", class
       for r, i in data
         row = i if r[0] == selected
       chart.getChart().setSelection([{row: row - 1}])
+
+  toggleDatePicker: ($event, name) ->
+    $event.preventDefault()
+    $event.stopPropagation()
+    @$scope[name] = !@$scope[name]

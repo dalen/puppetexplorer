@@ -1,23 +1,28 @@
-require('semantic/build/packaged/javascript/semantic')
 require('angular')
 require('angular-route')
 require('angular-animate')
 require('angular-moment/angular-moment')
 require('angular-google-chart/ng-google-chart')
+require('./deps/ui-bootstrap-tpls-0.11.0.min')
+require('./deps/angular-css-injector.min')
 
 angular.module('app', [
   'ngRoute'
   'ngAnimate'
   'googlechart'
   'angularMoment'
-]).run ($rootScope, $location, $http, Pagination) ->
+  'ui.bootstrap'
+  'angular.css.injector'
+]).run ($rootScope, $location, $http) ->
   # Make the $location service available in root scope
   $rootScope.location = $location
   $rootScope.isLoading = -> ($http.pendingRequests.length isnt 0)
-  $rootScope.pagination = Pagination
   $rootScope.clearError = ->
     $rootScope.error = null
   $rootScope.$on('queryChange', $rootScope.clearError)
+  $rootScope.changePage = (page) ->
+    $location.search('page', page)
+    $rootScope.$broadcast('pageChange', page: page)
 
 angular.module('app').factory '$exceptionHandler', ($injector, $log) ->
   (exception, cause) ->
