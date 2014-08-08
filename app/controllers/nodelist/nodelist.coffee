@@ -24,7 +24,7 @@ angular.module("app").controller "NodeListCtrl", class
       null,
       {
         offset: @$scope.perPage * (@$scope.page - 1)
-        limit:  @$scope.perPage
+        limit: @$scope.perPage
         "order-by": angular.toJson([field: "certname", order: "asc"])
       },
       (data, total) =>
@@ -98,7 +98,7 @@ angular.module("app").controller "NodeListCtrl", class
   importantFacts: (node) ->
     node.facts.filter((fact) ->
       NODE_FACTS.indexOf(fact.name) != -1
-    )
+    ).sort((a,b) -> NODE_FACTS.indexOf(a.name) - NODE_FACTS.indexOf(b.name))
 
   # Public: Select a node to show info for
   #
