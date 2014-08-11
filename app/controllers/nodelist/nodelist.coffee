@@ -156,7 +156,8 @@ angular.module("app").controller "NodeListCtrl", class
   # Returns: The {String} "failure", "skipped", "noop", "success" or "none"
   #          of `null` if no status known.
   nodeStatus: (node) ->
-    return 'glyphicon-refresh spin' unless node.report
+    return 'glyphicon-refresh spin' if node.report == undefined
+    return 'glyphicon-question-sign' if node.report == null
     return 'glyphicon-warning-sign text-danger' if node.report.status == 'failed'
     return 'glyphicon-exclamation-sign text-success' if node.report.status == 'changed'
     return 'glyphicon-exclamation-sign text-warning' if node.events?.skips > 0
