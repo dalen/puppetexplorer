@@ -42,7 +42,10 @@ angular.module("app").controller "EventsCtrl", class
       query.push ["<", "timestamp", moment.utc(@$scope.dateTo).add('days', 1).toISOString()]
 
     if @$location.search().containing_class? and exclude != 'containing_class'
-      query.push([ "=", "containing-class", @$location.search().containing_class])
+      cc = @$location.search().containing_class
+      if cc is 'none'
+        cc = null
+      query.push([ "=", "containing-class", cc])
     if @$location.search().resource_type? and exclude != 'resource_type'
       query.push([ "=", "resource-type", @$location.search().resource_type])
     if @$location.search().status? and exclude != 'status'
@@ -61,7 +64,7 @@ angular.module("app").controller "EventsCtrl", class
       @createEventQuery(),
       {
         offset: @$scope.perPage * (@$scope.page - 1)
-        limit:  @$scope.perPage
+        limit: @$scope.perPage
         "order-by": angular.toJson([ field: "timestamp", order: "desc" ]),
       }
       (data, total) =>
