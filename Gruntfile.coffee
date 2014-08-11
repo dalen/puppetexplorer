@@ -35,7 +35,7 @@ module.exports = (grunt) ->
         proxies: [
           context: '/api'
           host: puppetdb.hostname
-          port: puppetdb.port or 443
+          port: puppetdb.port or (if puppetdb.protocol is 'https:' then 443 else 80)
           https: puppetdb.protocol is 'https:'
           rewrite:
             '^/api': ''
