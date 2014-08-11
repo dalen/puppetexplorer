@@ -19,45 +19,70 @@ angular.module("app").controller "NodeListCtrl", class
   fetchNodes: =>
     @nodes = undefined
     @PuppetDB.parseAndQuery(
-      "nodes",
-      @$location.search().query,
-      null,
+      "nodes"
+      @$location.search().query
+      null
       {
         offset: @$scope.perPage * (@$scope.page - 1)
         limit: @$scope.perPage
         "order-by": angular.toJson([field: "certname", order: "asc"])
-      },
+      }
       (data, total) =>
         @$scope.numItems = total
         @nodes = data
         for node in @nodes
+          @fetchNodeEventCount(node)
           @fetchNodeStatus(node)
         if @$location.search().node?
           @fetchSelectedNode()
       )
 
-  # Public: Fetch node status
+  # Public: Fetch node event counts
+  #
+  # node - The {Object} node to fetch event counts for
+  #
+  # Returns: `undefined`
+  fetchNodeEventCount: (node) =>
+    @PuppetDB.parseAndQuery(
+      "event-counts"
+      null
+      ["and", ["=", "certname", node.certname], ["=", "latest-report?", true]]
+      {
+        'summarize-by': 'certname'
+        'order-by': angular.toJson([field: "certname", order: "asc"])
+      }
+      do (node) ->
+        (data, total) ->
+          if data.length
+            node.events = data[0]
+          else # The node didn't have any events
+            node.events =
+              failures: 0
+              skips: 0
+              noops: 0
+              successes: 0
+      )
+
+  # Public: Fetch node report status
   #
   # node - The {Object} node to fetch status for
   #
   # Returns: `undefined`
   fetchNodeStatus: (node) =>
     @PuppetDB.parseAndQuery(
-      "event-counts"
+      "reports"
       null
-      ["and", ["=", "certname", node.certname], ["=", "latest-report?", true]],
-        'summarize-by': 'certname'
-        'order-by': angular.toJson([field: "certname", order: "asc"])
+      ["=", "certname", node.certname]
+      {
+        'order-by': angular.toJson([field: "receive-time", order: "desc"])
+        'limit': 1
+      }
       do (node) ->
         (data, total) ->
           if data.length
-            node.status = data[0]
-          else # The node didn't have any events
-            node.status =
-              failures: 0
-              skips: 0
-              noops: 0
-              successes: 0
+            node.report = data[0]
+          else # The node didn't have any report
+            node.report = null
       )
 
   # Public: Fetch facts for a node and store them in it
@@ -70,8 +95,8 @@ angular.module("app").controller "NodeListCtrl", class
     @PuppetDB.parseAndQuery(
       "facts"
       null
-      ["=", "certname", node.certname],
-        'order-by': angular.toJson([field: "name", order: "asc"])
+      ["=", "certname", node.certname]
+      { 'order-by': angular.toJson([field: "name", order: "asc"]) }
       do (node) ->
         (data, total) ->
           node.facts = data.filter((fact) ->
@@ -131,9 +156,9 @@ angular.module("app").controller "NodeListCtrl", class
   # Returns: The {String} "failure", "skipped", "noop", "success" or "none"
   #          of `null` if no status known.
   nodeStatus: (node) ->
-    return 'glyphicon-refresh spin' unless node.status
-    return 'glyphicon-warning-sign text-danger' if node.status.failures > 0
-    return 'glyphicon-exlamation-sign text-warning' if node.status.skips > 0
-    return 'glyphicon-exlamation-sign text-info' if node.status.noops > 0
-    return 'glyphicon-ok-sign text-success' if node.status.successes > 0
+    return 'glyphicon-refresh spin' unless node.report
+    return 'glyphicon-warning-sign text-danger' if node.report.status == 'failed'
+    return 'glyphicon-exclamation-sign text-success' if node.report.status == 'changed'
+    return 'glyphicon-exclamation-sign text-warning' if node.events?.skips > 0
+    return 'glyphicon-exclamation-sign text-info' if node.events?.noops > 0
     return 'glyphicon-ok-sign text-muted'

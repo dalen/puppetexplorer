@@ -18,10 +18,10 @@
         <tr ng-repeat="node in nodeList.nodes">
           <td ng-click="nodeList.selectNode(node)">{{node.certname}}</td>
           <td title="{{node['catalog-timestamp']}}" am-time-ago="node['catalog-timestamp']"></td>
-          <td class="text-center">{{node.status.successes || ""}}</td>
-          <td class="text-center">{{node.status.noops || ""}}</td>
-          <td class="text-center">{{node.status.skips || ""}}</td>
-          <td class="text-center">{{node.status.failures || ""}}</td>
+          <td class="text-center">{{node.events.successes || ""}}</td>
+          <td class="text-center">{{node.events.noops || ""}}</td>
+          <td class="text-center">{{node.events.skips || ""}}</td>
+          <td class="text-center">{{node.events.failures || ""}}</td>
           <td class="text-right" ng-click="nodeList.showEvents(node.certname)">
             <span class="glyphicon" ng-class="nodeList.nodeStatus(node)"></span>
           </td>
