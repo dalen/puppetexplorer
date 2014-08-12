@@ -163,3 +163,9 @@ angular.module("app").controller "NodeListCtrl", class
     return 'glyphicon-exclamation-sign text-warning' if node.events?.skips > 0
     return 'glyphicon-exclamation-sign text-info' if node.events?.noops > 0
     return 'glyphicon-ok-sign text-muted'
+
+  # Return if a node is unresponsive or not
+  nodeUnresponsive: (node) ->
+    return true unless node['report-timestamp']?
+    return moment(node['report-timestamp']).isBefore(
+      moment.utc().subtract(UNRESPONSIVE_HOURS || 2,'hours'))

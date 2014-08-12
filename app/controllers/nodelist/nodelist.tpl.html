@@ -17,7 +17,10 @@
       <tbody>
         <tr ng-repeat="node in nodeList.nodes">
           <td ng-click="nodeList.selectNode(node)">{{node.certname}}</td>
-          <td title="{{node['catalog-timestamp']}}" am-time-ago="node['catalog-timestamp']"></td>
+          <td title="{{node['catalog-timestamp']}}">
+            <span class="glyphicon glyphicon-warning-sign text-warning" ng-if="nodeList.nodeUnresponsive(node)"></span>
+            <span am-time-ago="node['report-timestamp']"></span>
+          </td>
           <td class="text-center">{{node.events.successes || ""}}</td>
           <td class="text-center">{{node.events.noops || ""}}</td>
           <td class="text-center">{{node.events.skips || ""}}</td>
