@@ -29,6 +29,17 @@ angular.module('app').factory 'PuppetDB', ($http,
       for server in PUPPETDB_SERVERS
         return server[1] if server[0] == @server()
 
+    # Public: Get config properties of current server
+    #
+    # Returns: The {Object} config
+    serverConfig: () ->
+      for server in PUPPETDB_SERVERS
+         if server[0] == @server()
+           if server[2]
+             return server[2]
+           else
+             return {}
+
     # Public: Parse a query
     #
     # query     - The {String} query to parse
@@ -47,10 +58,10 @@ angular.module('app').factory 'PuppetDB', ($http,
     #
     # Returns: A promise from $http
     query: (endpoint, params = {}) ->
-      $http.get("#{@serverUrl()}/#{@apiVersion}/#{endpoint}", {
-        params: params
-        timeout: @canceller.promise
-      })
+      config = @serverConfig()
+      config.params = params
+      config.timeout = @canceller.promise
+      $http.get("#{@serverUrl()}/#{@apiVersion}/#{endpoint}", config)
 
     # Public: Combined function to both parse and query PuppetDB.
     #
