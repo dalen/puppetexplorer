@@ -1,8 +1,9 @@
-// List of PuppetDB servers, pairs of name and URL
+// List of PuppetDB servers, pairs of name and URL. Optionaly eextended by
+// and API Version string ('v4') and a $http config object ({}) to use.
 // The first one will be used as the default server
 PUPPETDB_SERVERS = [
   ['production', '/api'],
-  ['testing', '/api']
+  ['testing', 'https://puppetdb-testing', 'v4', {withCredentials: true}]
 ];
 
 // A list of important facts that you want shown in the node detail view

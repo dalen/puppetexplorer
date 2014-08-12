@@ -2,8 +2,6 @@ angular.module('app').factory "PuppetDB", ($http,
                                            $location) ->
   new class PuppetDB
 
-    apiVersion: 'v4'
-
     constructor: ->
       @servers = PUPPETDB_SERVERS.map (srv) -> srv[0]
       @puppetdbquery = require('node-puppetdbquery').parser
@@ -27,13 +25,46 @@ angular.module('app').factory "PuppetDB", ($http,
       for server in PUPPETDB_SERVERS
         return server[1] if server[0] == @server()
 
+    # Public: Get api version to use
+    #
+    # Returns: The {String} apiversion
+    apiVersion: () ->
+      for server in PUPPETDB_SERVERS
+        if server[0] == @server()
+          if server[2]
+            return server[2]
+          else
+            return 'v4'
+
+    # Public: Get config properties of current server
+    #
+    # Returns: The {Object} config
+    serverConfig: () ->
+      for server in PUPPETDB_SERVERS
+         if server[0] == @server()
+           if server[3]
+             return server[3]
+           else
+             return {}
+
+    #  Public: Get the (cert)name query parameter name.
+    #
+    # Returns: The {String} nodenameString
+    nodenameString: () ->
+      if @apiVersion() == 'v3'
+        return 'name'
+      return 'certname'
+
     # Public: Parse a query
     #
     # query     - The {String} query to parse
+    # nodeQuery - A {Boolean} specifying if it should be
+    #             parsed for the nodes endpoint or other endpoints.
     #
     # Returns: The resulting query
-    parse: (query) ->
+    parse: (query, nodeQuery=false) ->
       if query
+        @puppetdbquery.yy.nodeQuery = nodeQuery && (@apiVersion() == 'v3')
         @puppetdbquery.parse query
       else
         null
@@ -45,7 +76,9 @@ angular.module('app').factory "PuppetDB", ($http,
     #
     # Returns: A promise from $http
     query: (endpoint, params = {}) ->
-      $http.get("#{@serverUrl()}/#{@apiVersion}/#{endpoint}", {params: params})
+      config = @serverConfig()
+      config.params = params
+      $http.get("#{@serverUrl()}/#{@apiVersion()}/#{endpoint}", config)
 
     # Public: Combined function to both parse and query PuppetDB.
     #
@@ -59,7 +92,7 @@ angular.module('app').factory "PuppetDB", ($http,
     parseAndQuery: (endpoint, nodeQuery, additionalQuery, params = {}, success) ->
       # Handle all the parsing of the query and putting them together
       if nodeQuery
-        query = @parse(nodeQuery)
+        query = @parse(nodeQuery, endpoint is "nodes")
       else
         query = null
       if additionalQuery
