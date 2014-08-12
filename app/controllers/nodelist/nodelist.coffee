@@ -160,8 +160,10 @@ angular.module("app").controller "NodeListCtrl", class
     return 'glyphicon-question-sign' if node.report == null
     return 'glyphicon-warning-sign text-danger' if node.report.status == 'failed'
     return 'glyphicon-exclamation-sign text-success' if node.report.status == 'changed'
+    return 'glyphicon-warning-sign text-danger' if node.events?.failures > 0
     return 'glyphicon-exclamation-sign text-warning' if node.events?.skips > 0
     return 'glyphicon-exclamation-sign text-info' if node.events?.noops > 0
+    return 'glyphicon-exclamation-sign text-success' if node.events?.successes > 0
     return 'glyphicon-ok-sign text-muted'
 
   # Return if a node is unresponsive or not
