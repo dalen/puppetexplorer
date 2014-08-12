@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Puppet Explorer : Puppet web interface written in CoffeeScript using AngularJS">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Puppet Explorer</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/spotify/puppetexplorer">View on GitHub</a>
+
+          <h1 id="project_title">Puppet Explorer</h1>
+          <h2 id="project_tagline">Puppet web interface written in CoffeeScript using AngularJS</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/spotify/puppetexplorer/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/spotify/puppetexplorer/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h3>
+
+<p>Puppet Explorer is a web application for PuppetDB that lets you explore your
+Puppet data.
+It is made using AngularJS and CoffeeScript and runs entirely on the client
+side, so the only backend that is needed is PuppetDB itself and a web server to
+share the static resources.</p>
+
+<p>It has the same query language as the popular Puppet module
+<a href="https://forge.puppetlabs.com/dalen/puppetdbquery">dalen-puppetdbquery</a>.
+This lets you easily filter for a selection of nodes and show the events or
+facts for only them. So you can handle hosts as groups without needing to have
+predefined groups, just make them up as you need and click on the pie charts to
+drill down further. The JavaScript version of this query parser is available as
+a separate component so you can use it in your own projects easily,
+<a href="https://github.com/dalen/node-puppetdbquery">node-puppetdbquery</a>.</p>
+
+<p>All views in the application are made to be able to link directly to them, so
+it is easy to share information you find with coworkers.</p>
+
+<p>It has support for multiple PuppetDB servers.</p>
+
+<h3>
+<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h3>
+
+<p>It is using the V4 PuppetDB API from PuppetDB 2.1. Version 1.0.0 works with
+PuppetDB 2.0, but the current version only works with PuppetDB 2.1.</p>
+
+<h3>
+<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots</h3>
+
+<h5>
+<a name="the-dashboard" class="anchor" href="#the-dashboard"><span class="octicon octicon-link"></span></a>The dashboard:</h5>
+
+<p><img src="screenshots/dashboard.png" alt="The dashboard"></p>
+
+<h5>
+<a name="node-search" class="anchor" href="#node-search"><span class="octicon octicon-link"></span></a>Node search:</h5>
+
+<p><img src="screenshots/nodelist.png" alt="Node search"></p>
+
+<h5>
+<a name="events-view-and-filtering" class="anchor" href="#events-view-and-filtering"><span class="octicon octicon-link"></span></a>Events view and filtering:</h5>
+
+<p><img src="screenshots/events.png" alt="Events view"></p>
+
+<h5>
+<a name="facts-view" class="anchor" href="#facts-view"><span class="octicon octicon-link"></span></a>Facts view:</h5>
+
+<p><img src="screenshots/facts.png" alt="Facts view"></p>
+
+<h3>
+<a name="development-and-local-testing" class="anchor" href="#development-and-local-testing"><span class="octicon octicon-link"></span></a>Development and local testing</h3>
+
+<p>Install all required dependencies using <code>npm install</code>, then you can build the
+application using <code>grunt</code>. The results will be located in the <code>dist</code> directory.</p>
+
+<p>Use <code>grunt serve</code> to start a local web server pointing to a local PuppetDB
+instance.</p>
+
+<p>Optionally you can use the <code>--puppetdb=url</code> option to specify a URL to proxy
+PuppetDB connections to. Another way is to create a SSH tunnel to your PuppetDB
+server, <code>ssh -L 8080:localhost:8080 puppetdb.example.com</code>.</p>
+
+<p>With <code>grunt watch</code> it will rebuild any source files that changes and put the
+results in the <code>dist</code> directory.</p>
+
+<p>To build a Debian package use <code>grunt build_debian</code>, this requires the
+<code>devscripts</code> and <code>debhelper</code> packages to be installed.</p>
+
+<h3>
+<a name="see-also" class="anchor" href="#see-also"><span class="octicon octicon-link"></span></a>See also</h3>
+
+<ul>
+<li><a href="https://github.com/nedap/puppetboard">Puppetboard</a></li>
+<li><a href="http://puppetlabs.com/puppet/puppet-enterprise">Puppet Enterprise</a></li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Puppet Explorer maintained by <a href="https://github.com/spotify">spotify</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
