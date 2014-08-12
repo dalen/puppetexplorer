@@ -55,12 +55,6 @@ it is easy to share information you find with coworkers.</p>
 <p>It has support for multiple PuppetDB servers.</p>
 
 <h3>
-<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h3>
-
-<p>It is using the V4 PuppetDB API from PuppetDB 2.1. Version 1.0.0 works with
-PuppetDB 2.0, but the current version only works with PuppetDB 2.1.</p>
-
-<h3>
 <a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots</h3>
 
 <h5>
@@ -88,6 +82,28 @@ PuppetDB 2.0, but the current version only works with PuppetDB 2.1.</p>
 
 <p>Try it out live with some made up AWS data at
 <a href="http://demo.puppetexplorer.io">demo.puppetexplorer.io</a></p>
+
+<h3>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<p>The recommended way to install it is on the same host as your PuppetDB instance.
+Then proxy /api to port 8080 of your PuppetDB instance (except the /commands
+endpoint). This avoids the need for any
+<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> headers.</p>
+
+<p>It is possible to have it on a separate domain from your PuppetDB though. If you
+do, make sure you have the correct <code>Access-Control-Allow-Origin</code> header and a
+<code>Access-Control-Expose-Headers: X-Records</code> header.</p>
+
+<p>To simplify installation you can use the
+<a href="https://forge.puppetlabs.com/spotify/puppetexplorer">spotify-puppetexplorer</a>
+Puppet module.</p>
+
+<h3>
+<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h3>
+
+<p>It is using the V4 PuppetDB API from PuppetDB 2.1. Version 1.0.0 works with
+PuppetDB 2.0, but the current version only works with PuppetDB 2.1.</p>
 
 <h3>
 <a name="development-and-local-testing" class="anchor" href="#development-and-local-testing"><span class="octicon octicon-link"></span></a>Development and local testing</h3>
