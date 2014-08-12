@@ -167,5 +167,8 @@ angular.module("app").controller "NodeListCtrl", class
   # Return if a node is unresponsive or not
   nodeUnresponsive: (node) ->
     return true unless node['report-timestamp']?
-    return moment(node['report-timestamp']).isBefore(
-      moment.utc().subtract(UNRESPONSIVE_HOURS || 2,'hours'))
+    if UNRESPONSIVE_HOURS?
+      hours = UNRESPONSIVE_HOURS
+    else
+      hours = 2
+    return moment(node['report-timestamp']).isBefore(moment.utc().subtract(hours,'hours'))
