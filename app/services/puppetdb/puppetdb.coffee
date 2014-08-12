@@ -47,13 +47,24 @@ angular.module('app').factory "PuppetDB", ($http,
            else
              return {}
 
+    #  Public: Get the (cert)name query parameter name.
+    #
+    # Returns: The {String} nodenameString
+    nodenameString: () ->
+      if @apiVersion() == 'v3'
+        return 'name'
+      return 'certname'
+
     # Public: Parse a query
     #
     # query     - The {String} query to parse
+    # nodeQuery - A {Boolean} specifying if it should be
+    #             parsed for the nodes endpoint or other endpoints.
     #
     # Returns: The resulting query
-    parse: (query) ->
+    parse: (query, nodeQuery=false) ->
       if query
+        @puppetdbquery.yy.nodeQuery = nodeQuery && (@apiVersion() == 'v3')
         @puppetdbquery.parse query
       else
         null
@@ -81,7 +92,7 @@ angular.module('app').factory "PuppetDB", ($http,
     parseAndQuery: (endpoint, nodeQuery, additionalQuery, params = {}, success) ->
       # Handle all the parsing of the query and putting them together
       if nodeQuery
-        query = @parse(nodeQuery)
+        query = @parse(nodeQuery, endpoint is "nodes")
       else
         query = null
       if additionalQuery

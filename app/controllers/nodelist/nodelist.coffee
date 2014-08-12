@@ -25,12 +25,14 @@ angular.module("app").controller "NodeListCtrl", class
       {
         offset: @$scope.perPage * (@$scope.page - 1)
         limit: @$scope.perPage
-        "order-by": angular.toJson([field: "certname", order: "asc"])
+        "order-by": angular.toJson([field: @PuppetDB.nodenameString(), order: "asc"])
       }
       (data, total) =>
         @$scope.numItems = total
         @nodes = data
         for node in @nodes
+          if node.name
+            node.certname = node.name
           @fetchNodeEventCount(node)
           @fetchNodeStatus(node)
         if @$location.search().node?
