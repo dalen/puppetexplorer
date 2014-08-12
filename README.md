@@ -41,6 +41,11 @@ PuppetDB 2.0, but the current version only works with PuppetDB 2.1.
 ##### Facts view:
 ![Facts view](screenshots/facts.png)
 
+### Demo
+
+Try it out live with some made up AWS data at
+[demo.puppetexplorer.io](http://demo.puppetexplorer.io)
+
 ### Development and local testing
 
 Install all required dependencies using `npm install`, then you can build the
