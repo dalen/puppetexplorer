@@ -2,8 +2,6 @@ angular.module('app').factory "PuppetDB", ($http,
                                            $location) ->
   new class PuppetDB
 
-    apiVersion: 'v4'
-
     constructor: ->
       @servers = PUPPETDB_SERVERS.map (srv) -> srv[0]
       @puppetdbquery = require('node-puppetdbquery').parser
@@ -27,14 +25,25 @@ angular.module('app').factory "PuppetDB", ($http,
       for server in PUPPETDB_SERVERS
         return server[1] if server[0] == @server()
 
+    # Public: Get api version to use
+    #
+    # Returns: The {String} apiversion
+    apiVersion: () ->
+      for server in PUPPETDB_SERVERS
+        if server[0] == @server()
+          if server[2]
+            return server[2]
+          else
+            return 'v4'
+
     # Public: Get config properties of current server
     #
     # Returns: The {Object} config
     serverConfig: () ->
       for server in PUPPETDB_SERVERS
          if server[0] == @server()
-           if server[2]
-             return server[2]
+           if server[3]
+             return server[3]
            else
              return {}
 
@@ -58,7 +67,7 @@ angular.module('app').factory "PuppetDB", ($http,
     query: (endpoint, params = {}) ->
       config = @serverConfig()
       config.params = params
-      $http.get("#{@serverUrl()}/#{@apiVersion}/#{endpoint}", config)
+      $http.get("#{@serverUrl()}/#{@apiVersion()}/#{endpoint}", config)
 
     # Public: Combined function to both parse and query PuppetDB.
     #
