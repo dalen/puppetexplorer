@@ -46,6 +46,21 @@ PuppetDB 2.0, but the current version only works with PuppetDB 2.1.
 Try it out live with some made up AWS data at
 [demo.puppetexplorer.io](http://demo.puppetexplorer.io)
 
+### Installation
+
+The recommended way to install it is on the same host as your PuppetDB instance.
+Then proxy /api to port 8080 of your PuppetDB instance (except the /commands
+endpoint). This avoids the need for any
+[CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) headers.
+
+It is possible to have it on a separate domain from your PuppetDB though. If you
+do, make sure you have the correct `Access-Control-Allow-Origin` header and a
+`Access-Control-Expose-Headers: X-Records` header.
+
+To simplify installation you can use the
+[spotify-puppetexplorer](https://forge.puppetlabs.com/spotify/puppetexplorer)
+Puppet module.
+
 ### Development and local testing
 
 Install all required dependencies using `npm install`, then you can build the
