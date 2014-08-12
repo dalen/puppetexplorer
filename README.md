@@ -22,11 +22,6 @@ it is easy to share information you find with coworkers.
 
 It has support for multiple PuppetDB servers.
 
-### Dependencies
-
-It is using the V4 PuppetDB API from PuppetDB 2.1. Version 1.0.0 works with
-PuppetDB 2.0, but the current version only works with PuppetDB 2.1.
-
 ### Screenshots
 
 ##### The dashboard:
@@ -60,6 +55,11 @@ do, make sure you have the correct `Access-Control-Allow-Origin` header and a
 To simplify installation you can use the
 [spotify-puppetexplorer](https://forge.puppetlabs.com/spotify/puppetexplorer)
 Puppet module.
+
+### Dependencies
+
+It is using the V4 PuppetDB API from PuppetDB 2.1. Version 1.0.0 works with
+PuppetDB 2.0, but the current version only works with PuppetDB 2.1.
 
 ### Development and local testing
 
