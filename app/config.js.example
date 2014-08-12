@@ -1,4 +1,4 @@
-// List of PuppetDB servers, pairs of name and URL
+// List of PuppetDB servers, pairs of name, URL and $http config object
 // The first one will be used as the default server
 PUPPETDB_SERVERS = [
   ['production', '/api'],
