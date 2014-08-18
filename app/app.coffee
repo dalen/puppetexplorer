@@ -13,13 +13,15 @@ angular.module('app', [
   'angularMoment'
   'ui.bootstrap'
   'angular.css.injector'
-]).run ($rootScope, $location, $http) ->
+]).run ($rootScope, $location, $http, PuppetDB) ->
   # Make the $location service available in root scope
   $rootScope.location = $location
   $rootScope.isLoading = -> ($http.pendingRequests.length isnt 0)
   $rootScope.clearError = ->
     $rootScope.error = null
   $rootScope.$on('queryChange', $rootScope.clearError)
+  $rootScope.$on('queryChange', PuppetDB.cancel)
+  $rootScope.$on('filterChange', PuppetDB.cancel)
   $rootScope.changePage = (page) ->
     $location.search('page', page)
     $rootScope.$broadcast('pageChange', page: page)

@@ -1,5 +1,6 @@
-angular.module('app').factory "PuppetDB", ($http,
-                                           $location) ->
+angular.module('app').factory 'PuppetDB', ($http,
+                                           $location
+                                           $q) ->
   new class PuppetDB
 
     apiVersion: 'v4'
@@ -7,6 +8,7 @@ angular.module('app').factory "PuppetDB", ($http,
     constructor: ->
       @servers = PUPPETDB_SERVERS.map (srv) -> srv[0]
       @puppetdbquery = require('node-puppetdbquery').parser
+      @canceller = $q.defer()
 
     # Public: Get/Set server
     #
@@ -45,7 +47,10 @@ angular.module('app').factory "PuppetDB", ($http,
     #
     # Returns: A promise from $http
     query: (endpoint, params = {}) ->
-      $http.get("#{@serverUrl()}/#{@apiVersion}/#{endpoint}", {params: params})
+      $http.get("#{@serverUrl()}/#{@apiVersion}/#{endpoint}", {
+        params: params
+        timeout: @canceller.promise
+      })
 
     # Public: Combined function to both parse and query PuppetDB.
     #
@@ -79,7 +84,12 @@ angular.module('app').factory "PuppetDB", ($http,
         params['include-total'] = true
 
       # Start querying
-      @query(endpoint, params).success((data, status, headers, config) ->
+      @query(endpoint, params)
+      .success (data, status, headers, config) ->
         success(angular.fromJson(data), headers('X-Records'))
-      ).error (data, status, headers, config) ->
-        throw new Error(data or "Failed to fetch #{endpoint}")
+      .error (data, status, headers, config) ->
+        throw new Error(data or "Failed to fetch #{endpoint}") unless status == 0
+
+    cancel: =>
+      @canceller.resolve("user cancelled")
+      @canceller = $q.defer()
