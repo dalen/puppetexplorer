@@ -11,6 +11,9 @@
   "bugs": {
     "url": "https://github.com/spotify/puppetexplorer/issues"
   },
+  "scripts": {
+    "test": "grunt test"
+  },
   "author": {
     "name": "Erik Dalén",
     "email": "dalen@spotify.com"
