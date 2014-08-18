@@ -66,7 +66,7 @@ PuppetDB 2.0, but the current version only works with PuppetDB 2.1.
 Install all required dependencies using `npm install`, then you can build the
 application using `grunt`. The results will be located in the `dist` directory.
 
-Use `grunt serve` to start a local web server pointing to a local PuppetDB
+Use `grunt serve` to start a local web server pointing to the demo site PuppetDB
 instance.
 
 Optionally you can use the `--puppetdb=url` option to specify a URL to proxy

@@ -1,6 +1,6 @@
 module.exports = (grunt) ->
   url = require('url')
-  puppetdb = url.parse(grunt.option('puppetdb') or 'http://127.0.0.1:8080/')
+  puppetdb = url.parse(grunt.option('puppetdb') or 'http://puppetdb.puppetexplorer.io:80/')
   properties = grunt.file.readJSON('package.json')
 
   # Define the configuration for all the tasks
