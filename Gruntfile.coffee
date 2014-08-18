@@ -79,16 +79,6 @@ module.exports = (grunt) ->
         ]
         dest: 'dist/lib/'
 
-    coffee:
-      compile:
-        options:
-          sourceMap: true
-        expand: true,
-        cwd: 'app/',
-        src: ['*.coffee', 'controllers/**/*.coffee', 'services/**/*.coffee'],
-        dest: 'app/'
-        ext: '.js'
-
     jshint:
       options:
         eqeqeq: true
@@ -137,7 +127,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-connect-rewrite'
   grunt.loadNpmTasks 'grunt-connect-prism'
-  grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-debian-package'
