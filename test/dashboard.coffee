@@ -1,6 +1,6 @@
 describe 'Dashboard', ->
   before ->
-    casper.start 'http://localhost:8000/'
+    casper.start 'http://localhost:8001/'
 
   it 'should redirect to the dashboard', ->
     casper.then ->

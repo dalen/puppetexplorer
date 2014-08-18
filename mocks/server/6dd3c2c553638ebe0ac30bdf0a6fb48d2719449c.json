@@ -1,0 +1,8 @@
+{
+  "requestUrl": "/v4/metrics/mbean/com.puppetlabs.puppetdb.query.population:type=default,name=num-resources",
+  "contentType": "application/json; charset=utf-8",
+  "statusCode": 200,
+  "data": {
+    "Value": 275
+  }
+}

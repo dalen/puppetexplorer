@@ -10,36 +10,42 @@ module.exports = (grunt) ->
           from: '^/config.js$'
           to: '/config.js.example'
       ]
+      options:
+        hostname: 'localhost'
+        base: 'dist'
+        middleware: (connect, options) ->
+          proxy = require('grunt-connect-prism/middleware')
+          rewriteRules = require('grunt-connect-rewrite/lib/utils').rewriteRequest
+          [
+            # Include the proxy first
+            proxy
+
+            # Then rewrite rules
+            rewriteRules
+
+            # Serve static files.
+            connect.static(options.base[0])
+
+            # Make empty directories browsable.
+            connect.directory(options.base[0])
+          ]
       server:
         options:
           port: 8000
-          hostname: 'localhost'
-          base: 'dist'
-          keepalive: true
-          middleware: (connect, options) ->
-            proxy = require('grunt-connect-proxy/lib/utils').proxyRequest
-            rewriteRules = require('grunt-connect-rewrite/lib/utils').rewriteRequest
-            [
-              # Include the proxy first
-              proxy
+      testserver:
+        options:
+          port: 8001
 
-              # Then rewrite rules
-              rewriteRules
-
-              # Serve static files.
-              connect.static(options.base[0])
-
-              # Make empty directories browsable.
-              connect.directory(options.base[0])
-            ]
-        proxies: [
-          context: '/api'
-          host: puppetdb.hostname
-          port: puppetdb.port or (if puppetdb.protocol is 'https:' then 443 else 80)
-          https: puppetdb.protocol is 'https:'
-          rewrite:
-            '^/api': ''
-        ]
+    prism:
+      options:
+        mocksPath: './mocks'
+        context: '/api'
+        host: puppetdb.hostname
+        port: puppetdb.port or (if puppetdb.protocol is 'https:' then 443 else 80)
+        https: puppetdb.protocol is 'https:'
+        rewrite:
+          '^/api': ''
+      server: {}
 
     watch:
       coffee:
@@ -130,7 +136,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-connect-rewrite'
-  grunt.loadNpmTasks 'grunt-connect-proxy'
+  grunt.loadNpmTasks 'grunt-connect-prism'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-clean'
@@ -139,10 +145,15 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'serve', [
     'configureRewriteRules'
-    'configureProxies:server'
-    'connect:server'
+    'prism:server:proxy'
+    'connect:server:keepalive'
   ]
   grunt.registerTask 'build', ['clean', 'coffeeify', 'copy']
   grunt.registerTask 'build_debian', ['build', 'debian_package']
   grunt.registerTask 'default', ['build']
-  grunt.registerTask 'test', ['mocha_casperjs']
+  grunt.registerTask 'test', [
+    'configureRewriteRules'
+    'prism:server:mockrecord'
+    'connect:testserver'
+    'mocha_casperjs'
+  ]
