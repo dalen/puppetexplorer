@@ -4,7 +4,6 @@ require('angular-animate')
 require('angular-moment/angular-moment')
 require('angular-google-chart/ng-google-chart')
 require('./deps/ui-bootstrap-tpls-0.11.0.min')
-require('./deps/angular-css-injector.min')
 
 angular.module('app', [
   'ngRoute'
@@ -12,7 +11,6 @@ angular.module('app', [
   'googlechart'
   'angularMoment'
   'ui.bootstrap'
-  'angular.css.injector'
 ]).run ($rootScope, $location, $http, PuppetDB) ->
   # Make the $location service available in root scope
   $rootScope.location = $location
