@@ -79,6 +79,9 @@ results in the `dist` directory.
 To build a Debian package use `grunt build_debian`, this requires the
 `devscripts` and `debhelper` packages to be installed.
 
+To build a RPM use `grunt build rpm:snapshot`, this requires the `rpm-build`
+package to be installed. The resulting RPM will be in `rpm/RPMS/noarch`.
+
 ### See also
 
  * [Puppetboard](https://github.com/nedap/puppetboard)

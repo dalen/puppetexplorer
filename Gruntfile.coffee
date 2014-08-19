@@ -113,6 +113,28 @@ module.exports = (grunt) ->
         src: [ '**' ]
         dest: "/usr/share/#{properties.name}/"
 
+    rpm:
+      options:
+        summary: 'web frontend for PuppetDB'
+      release:
+        options:
+          release: true
+        files: [
+          expand: true
+          cwd: 'dist'
+          src: [ '**' ]
+          dest: "/usr/share/#{properties.name}/"
+        ]
+      snapshot:
+        options:
+          release: false
+        files: [
+          expand: true
+          cwd: 'dist'
+          src: [ '**' ]
+          dest: "/usr/share/#{properties.name}/"
+        ]
+
     clean: ['dist', 'tmp']
 
     mocha_casperjs:
@@ -129,6 +151,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-debian-package'
+  grunt.loadNpmTasks 'grunt-rpm'
   grunt.loadNpmTasks 'grunt-mocha-casperjs'
 
   grunt.registerTask 'serve', [
