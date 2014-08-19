@@ -82,4 +82,5 @@ To build a Debian package use `grunt build_debian`, this requires the
 ### See also
 
  * [Puppetboard](https://github.com/nedap/puppetboard)
+ * [Foreman](http://theforeman.org/)
  * [Puppet Enterprise](http://puppetlabs.com/puppet/puppet-enterprise)
