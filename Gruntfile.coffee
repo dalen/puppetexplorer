@@ -74,7 +74,6 @@ module.exports = (grunt) ->
         expand: true
         cwd: 'node_modules/'
         src: [
-          'bootstrap/dist/**'
           'moment/moment.js'
         ]
         dest: 'dist/lib/'
