@@ -13,6 +13,5 @@ describe 'Node list', ->
         query: 'foo=bar and foo!=bar'
       , true
 
-    casper.then ->
-      'div.alert.alert-warning'.should.be.inDOM.and.be.visible
+    casper.waitUntilVisible 'div.alert.alert-warning', ->
       'div.alert.alert-warning'.should.have.text /No nodes found/
