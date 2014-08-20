@@ -7,7 +7,6 @@ angular.module("app").controller "EventsCtrl", class
     @$scope.dateFrom = @$location.search().date_from || moment.utc().format('YYYY-MM-DD')
     @$scope.dateTo = @$location.search().date_to || moment.utc().format('YYYY-MM-DD')
     @$scope.perPage = 50
-    @$scope.page = 1
     @reset()
 
   reset: (event, exclude) =>
@@ -63,7 +62,7 @@ angular.module("app").controller "EventsCtrl", class
       @$location.search().query,
       @createEventQuery(),
       {
-        offset: @$scope.perPage * (@$scope.page - 1)
+        offset: @$scope.perPage * ((@$location.search().page || 1) - 1)
         limit: @$scope.perPage
         "order-by": angular.toJson([ field: "timestamp", order: "desc" ]),
       }

@@ -5,7 +5,6 @@ angular.module("app").controller "NodeListCtrl", class
     # Reset pagination and reload nodes if query changes
     @$scope.$on('queryChange', @reset)
     @$scope.perPage = 50
-    @$scope.page = 1
     @reset()
 
   reset: =>
@@ -23,7 +22,7 @@ angular.module("app").controller "NodeListCtrl", class
       @$location.search().query
       null
       {
-        offset: @$scope.perPage * (@$scope.page - 1)
+        offset: @$scope.perPage * ((@$location.search().page || 1) - 1)
         limit: @$scope.perPage
         "order-by": angular.toJson([field: "certname", order: "asc"])
       }
