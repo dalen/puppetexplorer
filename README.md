@@ -52,6 +52,8 @@ It is possible to have it on a separate domain from your PuppetDB though. If you
 do, make sure you have the correct `Access-Control-Allow-Origin` header and a
 `Access-Control-Expose-Headers: X-Records` header.
 
+You need to copy config.js.example to config.js and modify it for your needs.
+
 To simplify installation you can use the
 [spotify-puppetexplorer](https://forge.puppetlabs.com/spotify/puppetexplorer)
 Puppet module.
@@ -63,7 +65,8 @@ PuppetDB 2.0, but the current version only works with PuppetDB 2.1.
 
 ### Development and local testing
 
-Install all required dependencies using `npm install`, then you can build the
+Install all required dependencies using `npm install` and the grunt cli tool
+globally using `npm install -g grunt-cli`. Then you can build the
 application using `grunt`. The results will be located in the `dist` directory.
 
 Use `grunt serve` to start a local web server pointing to the demo site PuppetDB
@@ -71,7 +74,8 @@ instance.
 
 Optionally you can use the `--puppetdb=url` option to specify a URL to proxy
 PuppetDB connections to. Another way is to create a SSH tunnel to your PuppetDB
-server, `ssh -L 8080:localhost:8080 puppetdb.example.com`.
+server, `ssh -L 8080:localhost:8080 puppetdb.example.com` and
+`grunt serve --puppetdb=http://localhost:8080/`.
 
 With `grunt watch` it will rebuild any source files that changes and put the
 results in the `dist` directory.
