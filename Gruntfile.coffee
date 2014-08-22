@@ -82,7 +82,7 @@ module.exports = (grunt) ->
         flatten: true
         dest: 'dist/css/'
         src: [
-          'node_modules/bootswatch/cerulean/bootstrap.min.css'
+          'node_modules/bootswatch/sandstone/bootstrap.min.css'
         ]
 
     jshint:
