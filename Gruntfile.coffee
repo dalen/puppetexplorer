@@ -77,6 +77,13 @@ module.exports = (grunt) ->
           'moment/moment.js'
         ]
         dest: 'dist/lib/'
+      theme:
+        expand: true
+        flatten: true
+        dest: 'dist/css/'
+        src: [
+          'node_modules/bootswatch/cerulean/bootstrap.min.css'
+        ]
 
     jshint:
       options:
