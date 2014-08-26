@@ -1,6 +1,6 @@
 {
   "name": "puppetexplorer",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "web frontend for PuppetDB\n\nA web interface made in AngularJS and CoffeeScript for exploring PuppetDB data.",
   "license": "Apache-2.0",
   "keywords": [
