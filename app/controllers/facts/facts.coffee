@@ -1,5 +1,5 @@
 angular.module("app").controller "FactsCtrl", class
-  constructor: (@$scope, @$location, @PuppetDB) ->
+  constructor: (@$scope, @$rootScope, @$location, @PuppetDB) ->
     @charts = {}
     @getFactNames()
     @$scope.$on('queryChange', @reloadCharts)
@@ -111,6 +111,9 @@ angular.module("app").controller "FactsCtrl", class
     # Push the values as rows
     for k, v of values
       @charts[fact].data.push([k, v])
+
+    # Always trigger a redraw of charts
+    @$rootScope.$broadcast('resizeMsg')
 
   chartSelect: (fact, item) ->
     value = @charts[fact].data[item.row + 1][0]

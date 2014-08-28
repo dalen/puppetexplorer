@@ -163,6 +163,8 @@ angular.module("app").controller "EventsCtrl", class
           width: "100%"
           height: "85%"
       data: [['Type', 'Number']].concat(data)
+    # Always trigger a redraw of charts
+    @$rootScope.$broadcast('resizeMsg')
 
   # Public: Return the CSS class event states should correspond to
   #
