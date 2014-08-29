@@ -34,11 +34,11 @@ angular.module('app').factory 'PuppetDB', ($http,
     # Returns: The {Object} config
     serverConfig: () ->
       for server in PUPPETDB_SERVERS
-         if server[0] == @server()
-           if server[2]
-             return server[2]
-           else
-             return {}
+        if server[0] == @server()
+          if server[2]
+            return server[2]
+          else
+            return {}
 
     # Public: Parse a query
     #
