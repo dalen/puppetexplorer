@@ -7,8 +7,10 @@
 
     <table class="table table-striped">
       <tbody>
-        <tr ng-repeat="fact in facts.factNames | filter: query" ng-click="facts.addChart(fact)" >
-          <td><i class="signal icon"></i> {{fact}}</td>
+        <tr ng-repeat="fact in facts.factPaths | filter: query" ng-click="facts.addChart(fact)" >
+          <td><i class="signal icon"></i>
+            <span ng-repeat="factCompontent in fact">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span>
+          </td>
         </tr>
       </tbody>
     </table>

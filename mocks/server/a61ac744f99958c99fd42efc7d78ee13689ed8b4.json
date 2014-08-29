@@ -1,6 +1,0 @@
-{
-  "requestUrl": "/v4/nodes?include-total=true&limit=50&offset=0&order-by=%5B%7B%22field%22:%22certname%22,%22order%22:%22asc%22%7D%5D&query=%5B%22and%22,%5B%22in%22,%22certname%22,%5B%22extract%22,%22certname%22,%5B%22select-facts%22,%5B%22and%22,%5B%22%3D%22,%22name%22,%22foo%22%5D,%5B%22%3D%22,%22value%22,%22bar%22%5D%5D%5D%5D%5D,%5B%22not%22,%5B%22in%22,%22certname%22,%5B%22extract%22,%22certname%22,%5B%22select-facts%22,%5B%22and%22,%5B%22%3D%22,%22name%22,%22foo%22%5D,%5B%22%3D%22,%22value%22,%22bar%22%5D%5D%5D%5D%5D%5D%5D",
-  "contentType": "application/json; charset=utf-8",
-  "statusCode": 200,
-  "data": []
-}

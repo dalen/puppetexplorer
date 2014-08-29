@@ -92,7 +92,7 @@ angular.module("app").controller "NodeListCtrl", class
   fetchNodeFacts: (node) =>
     return if node.facts?
     @PuppetDB.parseAndQuery(
-      "facts"
+      "fact-contents"
       null
       ["=", "certname", node.certname]
       { 'order-by': angular.toJson([field: "name", order: "asc"]) }
@@ -102,7 +102,7 @@ angular.module("app").controller "NodeListCtrl", class
             fact.name[0] isnt '_'
           ).map((fact) ->
             # insert some spaces to break lines
-            fact.value = fact.value.replace(/(.{25})/g,"\u200B$1")
+            fact.value = String(fact.value).replace(/(.{25})/g,"\u200B$1")
             fact
           )
       )

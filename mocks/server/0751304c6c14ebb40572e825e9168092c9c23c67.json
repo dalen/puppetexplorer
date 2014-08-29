@@ -1,0 +1,20 @@
+{
+  "requestUrl": "/v4/reports?include-total=true&limit=1&order-by=%5B%7B%22field%22:%22receive-time%22,%22order%22:%22desc%22%7D%5D&query=%5B%22%3D%22,%22certname%22,%22ip-172-31-0-182.eu-west-1.compute.internal%22%5D",
+  "contentType": "application/json; charset=utf-8",
+  "statusCode": 200,
+  "data": [
+    {
+      "hash": "831e827f91ed728c5fb53efc683998376131af14",
+      "puppet-version": "3.6.2",
+      "receive-time": "2014-08-29T07:45:36.414Z",
+      "report-format": 4,
+      "start-time": "2014-08-29T07:45:29.051Z",
+      "end-time": "2014-08-29T07:45:30.200Z",
+      "transaction-uuid": "b2c2b2be-318a-4ac2-a097-f638adecb81b",
+      "status": "unchanged",
+      "environment": "production",
+      "configuration-version": "1409298293",
+      "certname": "ip-172-31-0-182.eu-west-1.compute.internal"
+    }
+  ]
+}

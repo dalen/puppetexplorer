@@ -4,34 +4,14 @@
   "statusCode": 200,
   "data": [
     {
+      "catalog-environment": "production",
+      "catalog-timestamp": "2014-08-29T07:45:35.439Z",
+      "certname": "ip-172-31-0-182.eu-west-1.compute.internal",
       "deactivated": null,
-      "report-environment": "production",
-      "certname": "ip-172-31-1-47.eu-west-1.compute.internal",
-      "facts-timestamp": "2014-08-11T20:50:25.756Z",
       "facts-environment": "production",
-      "catalog-timestamp": "2014-08-11T20:50:28.111Z",
-      "report-timestamp": "2014-08-11T20:50:27.813Z",
-      "catalog-environment": "production"
-    },
-    {
-      "deactivated": null,
+      "facts-timestamp": "2014-08-29T07:45:34.969Z",
       "report-environment": "production",
-      "certname": "ip-172-31-5-21.eu-west-1.compute.internal",
-      "facts-timestamp": "2014-08-11T20:30:26.247Z",
-      "facts-environment": "production",
-      "catalog-timestamp": "2014-08-11T20:30:27.224Z",
-      "report-timestamp": "2014-08-11T20:30:45.959Z",
-      "catalog-environment": "production"
-    },
-    {
-      "deactivated": null,
-      "report-environment": "production",
-      "certname": "ip-172-31-7-31.eu-west-1.compute.internal",
-      "facts-timestamp": "2014-08-11T20:51:48.099Z",
-      "facts-environment": "production",
-      "catalog-timestamp": "2014-08-11T20:51:51.801Z",
-      "report-timestamp": "2014-08-11T20:52:38.968Z",
-      "catalog-environment": "production"
+      "report-timestamp": "2014-08-29T07:45:30.200Z"
     }
   ]
 }

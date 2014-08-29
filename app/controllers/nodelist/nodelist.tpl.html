@@ -41,7 +41,7 @@
       </tr></thead>
       <tbody>
         <tr ng-repeat="fact in nodeList.importantFacts(nodeList.selectedNode)">
-          <td>{{fact.name}}</td>
+          <td><span ng-repeat="factCompontent in fact.path">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span></td>
           <td>{{fact.value}}</td>
         </tr>
       </tbody>
@@ -54,7 +54,7 @@
       </tr></thead>
       <tbody>
         <tr ng-repeat="fact in nodeList.selectedNode.facts">
-          <td>{{fact.name}}</td>
+          <td><span ng-repeat="factCompontent in fact.path">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span></td>
           <td>{{fact.value}}</td>
         </tr>
       </tbody>

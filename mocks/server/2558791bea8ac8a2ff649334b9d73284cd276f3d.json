@@ -3,6 +3,6 @@
   "contentType": "application/json; charset=utf-8",
   "statusCode": 200,
   "data": {
-    "Value": 3
+    "Value": 1
   }
 }
