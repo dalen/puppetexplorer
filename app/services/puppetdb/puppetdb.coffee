@@ -7,7 +7,7 @@ angular.module('app').factory 'PuppetDB', ($http,
 
     constructor: ->
       @servers = PUPPETDB_SERVERS.map (srv) -> srv[0]
-      @puppetdbquery = require('node-puppetdbquery').parser
+      @puppetdbquery = require('node-puppetdbquery')
       @canceller = $q.defer()
 
     # Public: Get/Set server
