@@ -52,7 +52,13 @@ module.exports = (grunt) ->
         files: 'app/**/*.coffee'
         tasks: ['coffeeify']
       static:
-        files: ['app/**/*.html', 'app/**/*.css', 'app/config.js.example', 'app/favicon.ico', 'fonts/**']
+        files: [
+          'app/**/*.html'
+          'app/**/*.css'
+          'app/config.js.example'
+          'app/favicon.ico'
+          'fonts/**'
+        ]
         tasks: ['copy:src']
 
     coffeeify:
