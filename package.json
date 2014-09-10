@@ -35,6 +35,7 @@
     "angular-moment": "^0.8.0",
     "angular-route": "^1.2.17-build.163.1",
     "bootswatch": "^3.2.0",
+    "grunt-connect-prism": "^0.7.1",
     "moment": "^2.8.1",
     "node-puppetdbquery": "^0.3.0"
   },
@@ -46,7 +47,7 @@
     "grunt-bower-installer": "^0.3.6",
     "grunt-coffeeify": "^0.1.3",
     "grunt-coffeelint": "0.0.10",
-    "grunt-connect-prism": "~0.5.0",
+    "grunt-connect-prism": "^0.7.1",
     "grunt-connect-rewrite": "^0.2.1",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-connect": "^0.7.1",
