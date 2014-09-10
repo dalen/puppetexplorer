@@ -38,7 +38,7 @@ angular.module("app").controller "EventsCtrl", class
     else
       moment = require('moment')
       query.push [">", "timestamp", moment.utc(@$scope.dateFrom).toISOString()]
-      query.push ["<", "timestamp", moment.utc(@$scope.dateTo).add('days', 1).toISOString()]
+      query.push ["<", "timestamp", moment.utc(@$scope.dateTo).add(1, 'days').toISOString()]
 
     if @$location.search().containing_class? and exclude != 'containing_class'
       cc = @$location.search().containing_class
