@@ -1,0 +1,6 @@
+{
+  "requestUrl": "/v4/nodes?include-total=true&limit=1&query=%5B%22in%22,%22certname%22,%5B%22extract%22,%22certname%22,%5B%22select-nodes%22,%5B%22not%22,%5B%22%3D%22,%22catalog-environment%22,%22production%22%5D%5D%5D%5D%5D",
+  "contentType": "application/json; charset=utf-8",
+  "statusCode": 200,
+  "data": []
+}

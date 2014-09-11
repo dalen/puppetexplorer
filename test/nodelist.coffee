@@ -4,7 +4,7 @@ describe 'Node list', ->
 
   it 'should display a list of nodes', ->
     casper.then ->
-      'document.querySelectorAll("tr").length'.should.evaluate.to.be.above(0)
+      @getElementsInfo('tr').length.should.be.above(0)
 
   it 'should display a warning if it cannot find any nodes', ->
     casper.then ->

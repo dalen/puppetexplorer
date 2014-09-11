@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" id="beanMetrics">
   <div class="col-md-3">
     <div class="panel panel-primary">
       <div class="panel-heading"><h3 class="panel-title">Nodes</h3></div>
@@ -21,6 +21,15 @@
     <div class="panel panel-primary">
       <div class="panel-heading"><h3 class="panel-title">Resource duplication %</h3></div>
       <div class="panel-body"><span class="lead"><span ng-class="resDuplication ? '' : 'glyphicon glyphicon-refresh spin'">{{resDuplication}}</span></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div ng-class="'col-md-' +  panelWidth" ng-repeat="panel in panels">
+    <div class="panel" ng-class="'panel-' + panel.type" ng-click="dashboard.setQuery(panel.query)">
+      <div class="panel-heading"><h3 class="panel-title">{{panel.name}}</h3></div>
+      <div class="panel-body"><span class="lead"><span ng-class="panel.count ? '' : 'glyphicon glyphicon-refresh spin'">{{panel.count}}</span></span></div>
     </div>
   </div>
 </div>

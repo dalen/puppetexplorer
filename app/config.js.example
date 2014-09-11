@@ -16,8 +16,30 @@ NODE_FACTS = [
   'ipaddress'
 ];
 
-// The amount of hours since the last check-in after which a node is considered unresponsive
+// The amount of hours since the last check-in after which a node is considered
+// unresponsive
 UNRESPONSIVE_HOURS = 2;
+
+// Customisable dashboard panels
+// type can be either 'primary', 'success', 'info', 'warning' or 'danger'
+// Different types will be displayed with different colors
+DASHBOARD_PANELS = [
+  {
+    name: 'Unresponsive nodes',
+    type: 'danger',
+    query: '#node.report-timestamp < @"now - 2 hours"'
+  },
+  {
+    name: 'Nodes in production env',
+    type: 'success',
+    query: '#node.catalog-environment = production'
+  },
+  {
+    name: 'Nodes in non-production env',
+    type: 'warning',
+    query: '#node.catalog-environment != production'
+  }
+];
 
 // Google Analytics settings
 GA_TRACKING_ID = 'UA-XXXXXXXX-YY';

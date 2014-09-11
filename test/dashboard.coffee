@@ -6,9 +6,8 @@ describe 'Dashboard', ->
     casper.then ->
       expect(/\/#\/dashboard/).to.matchCurrentUrl
 
-  it 'should display four metrics', ->
+  it 'should display metrics in all panels', ->
     casper.then ->
-      'document.querySelectorAll("div.panel-body").length'.should.evaluate.to.equal(4)
       'div.panel-body'.should.have.text /^[\d,\.]+\s*%?$/
 
   it 'should redirect to node list when entering a query', ->

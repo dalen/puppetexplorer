@@ -35,6 +35,7 @@ angular.module('app').config ($routeProvider) ->
   $routeProvider.when('/dashboard',
     templateUrl: 'controllers/dashboard/dashboard.tpl.html'
     controller: 'DashboardCtrl'
+    controllerAs: 'dashboard'
   ).when('/nodes',
     templateUrl: 'controllers/nodelist/nodelist.tpl.html'
     controller: 'NodeListCtrl'
