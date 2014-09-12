@@ -5,7 +5,8 @@ angular.module('app').controller 'DashboardCtrl', class
     @getBean('avg-resources-per-node', 'avgResources')
     @getBean('pct-resource-dupes', 'resDuplication', 100)
 
-    @$scope.panels = DASHBOARD_PANELS || []
+    @$scope.panels = DASHBOARD_PANELS? || []
+    #@$scope.panels ?= []
     for panel, i in @$scope.panels
       callback = (panel) ->
         (count) ->
