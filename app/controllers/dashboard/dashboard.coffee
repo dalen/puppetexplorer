@@ -13,6 +13,7 @@ angular.module('app').controller 'DashboardCtrl', class
       @getNodeCount panel.query, callback(panel)
 
     @$scope.panelWidth = Math.max(2, 12 / @$scope.panels.length)
+    @checkVersion()
 
   getBean: (name, scopeName, multiply = 1, bean = 'com.puppetlabs.puppetdb.query.population') ->
     @PuppetDB.query("metrics/mbean/#{bean}:type=default,name=#{name}")
@@ -36,3 +37,13 @@ angular.module('app').controller 'DashboardCtrl', class
   setQuery: (query) ->
     @$location.search('query', query)
     @$location.path "/nodes"
+
+  checkVersion: () ->
+    @PuppetDB.query("version")
+      .success (data) ->
+        major = parseInt(data.version.split('.')[0], 10)
+        minor = parseInt(data.version.split('.')[1], 10)
+        patch = parseInt(data.version.split('.')[2], 10)
+        unless major >= 2 and minor >= 2
+          throw new Error("This version of Puppet Explorer requires PuppetDB version 2.2.0" +
+            ", you are running PuppetDB #{data.version}")
