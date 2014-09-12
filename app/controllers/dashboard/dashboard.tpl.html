@@ -37,18 +37,34 @@
 <div class="row">
   <div class="col-md-4">
     <h3>Syntax</h3>
-    <p>Use <code>fact=value</code> to search for nodes where <code>fact</code> equals <code>value</code>.</p>
+    <p>Use <code>fact=value</code> to search for nodes where <code>fact</code> equals <code>value</code>.
+       To search for structured facts use dots between each part of the fact path, for example
+       <code>foo.bar=baz</code>. </p>
 
     <p>Resources can be matched using the syntax <code>type[title]{param=value}</code>.
        The part in brackets is optional. You can also specify <code>~</code> before the <code>title</code>
-       to do a regexp match on the title. Type names and class names are case insensitive.</p>
+       to do a regexp match on the title. Type names and class names are case insensitive.
+       A resource can be preceded by <code>@@</code> to match exported resources, the default is to only
+       match "local" resources.</p>
 
-    <p>Strings can contain letters, numbers or the characters .:-_ without needing to be quoted.
+    <p>Strings can contain letters, numbers or the characters :-_ without needing to be quoted.
        If they contain any other characters they need to be quoted with single or double quotes.
        Use backslash (\) to escape quotes within a quoted string or double backslash for backslashes.</p>
 
     <p>An unquoted number or the strings true/false will be interpreted as numbers and boolean
        values, use quotation marks around them to search for them as strings instead.</p>
+
+    <p>A <code>@</code> sign before a string causes it to be interpreted as a date parsed with
+       <a href="https://github.com/calebcase/timespec">timespec</a>.
+       For example <code>@"2 hours ago"</code>.</p>
+
+    <p>A <code>#</code> sign can be used to do a subquery, against the nodes endpoint for example to
+       query the <code>report-timestamp</code>, <code>catalog-timestamp</code> or <code>facts-timestamp</code>
+       fields. For example <code>#node.report-timestamp < @"2 hours ago"</code>.</p>
+
+    <p>A subquery using the <code>#</code> sign can have a block of expressions instead of a single
+       expression. For example <code>#node { report-timestamp > @"4 hours ago" and
+       report-timestamp < @"2 hours ago" }</code></p>
 
     <p>A bare string without comparison operator will be treated as a regexp match against the certname.</p>
   </div>
@@ -60,6 +76,7 @@
       <tr><td>=</td><td>Equality</td></tr>
       <tr><td>!=</td><td>Not equal</td></tr>
       <tr><td>~</td><td>Regexp match</td></tr>
+      <tr><td>!~</td><td>Not regexp match</td></tr>
       <tr><td>&lt;</td><td>Less than</td></tr>
       <tr><td>&lt;=</td><td>Less than or equal</td></tr>
       <tr><td>&gt;</td><td>Greater than</td></tr>
@@ -83,11 +100,15 @@
     </div>
     Nodes with the class Postgresql::Server and a version set to 9.3
     <div class="well well-sm">
-        <tt>class[postgresql::server]{version=9.3}</tt>
+        <tt>class[postgresql::server]{ version="9.3" }</tt>
     </div>
     Nodes with 4 or 8 processors running Linux
     <div class="well well-sm">
         <tt>(processorcount=4 or processorcount=8) and kernel=Linux</tt>
+    </div>
+    Nodes that haven't reported in the last 2 hours
+    <div class="well well-sm">
+        <tt>#node.report-timestamp<@"now - 2 hours"</tt>
     </div>
   </div>
 </div>
