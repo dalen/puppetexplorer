@@ -176,6 +176,15 @@ module.exports = (grunt) ->
     'prism:server:proxy'
     'connect:server:keepalive'
   ]
+
+  grunt.registerTask 'dev', [
+    'build'
+    'configureRewriteRules'
+    'prism:server:proxy'
+    'connect:server'
+    'watch'
+  ]
+
   grunt.registerTask 'build', ['clean', 'browserify', 'copy']
   grunt.registerTask 'build_debian', ['build', 'debian_package']
   grunt.registerTask 'default', ['build']
