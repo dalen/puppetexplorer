@@ -40,12 +40,14 @@
     "node-puppetdbquery": "^0.4.1"
   },
   "devDependencies": {
+    "browserify": "^5.11.2",
     "casper-chai": "^0.2.1",
     "casperjs": "^1.1.0-beta3",
     "chai": "^1.9.1",
+    "coffeeify": "^0.7.0",
     "grunt": "^0.4.5",
     "grunt-bower-installer": "^0.3.6",
-    "grunt-coffeeify": "^0.1.3",
+    "grunt-browserify": "^3.0.1",
     "grunt-coffeelint": "0.0.10",
     "grunt-connect-prism": "^0.7.1",
     "grunt-connect-rewrite": "^0.2.1",
@@ -60,6 +62,7 @@
     "jshint-stylish": "^0.2.0",
     "mocha": "^1.20.1",
     "mocha-casperjs": "^0.4.4",
-    "phantomjs": "^1.9.7-12"
+    "phantomjs": "^1.9.7-12",
+    "uglifyify": "^2.5.0"
   }
 }

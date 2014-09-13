@@ -61,9 +61,13 @@ module.exports = (grunt) ->
         ]
         tasks: ['copy:src']
 
-    coffeeify:
+    browserify:
       options:
         debug: true
+        transform: [
+          'coffeeify'
+          ['uglifyify', { global: true, mangle: false }]
+        ]
       files:
         src: [
           'app/**/*.coffee'
@@ -155,7 +159,7 @@ module.exports = (grunt) ->
         src: ['test/**/*.coffee']
 
   grunt.loadNpmTasks 'grunt-contrib-copy'
-  grunt.loadNpmTasks 'grunt-coffeeify'
+  grunt.loadNpmTasks 'grunt-browserify'
   grunt.loadNpmTasks 'grunt-contrib-jshint'
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-connect'
@@ -172,7 +176,7 @@ module.exports = (grunt) ->
     'prism:server:proxy'
     'connect:server:keepalive'
   ]
-  grunt.registerTask 'build', ['clean', 'coffeeify', 'copy']
+  grunt.registerTask 'build', ['clean', 'browserify', 'copy']
   grunt.registerTask 'build_debian', ['build', 'debian_package']
   grunt.registerTask 'default', ['build']
   grunt.registerTask 'test', [
