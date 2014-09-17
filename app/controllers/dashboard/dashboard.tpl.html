@@ -56,15 +56,15 @@
 
     <p>A <code>@</code> sign before a string causes it to be interpreted as a date parsed with
        <a href="https://github.com/calebcase/timespec">timespec</a>.
-       For example <code>@"2 hours ago"</code>.</p>
+       For example <code>@"now - 2 hours"</code>.</p>
 
     <p>A <code>#</code> sign can be used to do a subquery, against the nodes endpoint for example to
        query the <code>report-timestamp</code>, <code>catalog-timestamp</code> or <code>facts-timestamp</code>
-       fields. For example <code>#node.report-timestamp < @"2 hours ago"</code>.</p>
+       fields. For example <code>#node.report-timestamp < @"now - 2 hours"</code>.</p>
 
     <p>A subquery using the <code>#</code> sign can have a block of expressions instead of a single
-       expression. For example <code>#node { report-timestamp > @"4 hours ago" and
-       report-timestamp < @"2 hours ago" }</code></p>
+       expression. For example <code>#node { report-timestamp > @"now - 4 hours" and
+       report-timestamp < @"now - 2 hours" }</code></p>
 
     <p>A bare string without comparison operator will be treated as a regexp match against the certname.</p>
   </div>
