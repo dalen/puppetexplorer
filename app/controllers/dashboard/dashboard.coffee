@@ -5,8 +5,10 @@ angular.module('app').controller 'DashboardCtrl', class
     @getBean('avg-resources-per-node', 'avgResources')
     @getBean('pct-resource-dupes', 'resDuplication', 100)
 
-    @$scope.panels = DASHBOARD_PANELS? || []
-    #@$scope.panels ?= []
+    if DASHBOARD_PANELS?
+      @$scope.panels = DASHBOARD_PANELS
+    else
+      @$scope.panels = []
     for panel, i in @$scope.panels
       callback = (panel) ->
         (count) ->
@@ -23,7 +25,7 @@ angular.module('app').controller 'DashboardCtrl', class
           .toLocaleString()
           .replace(/^(.*\..).*/, "$1")
       .error (data) ->
-        console?.log "Could not get #{name} from PuppetDB"
+        throw new Error("Could not get #{name} from PuppetDB")
 
   getNodeCount: (query, callback) ->
     @PuppetDB.parseAndQuery(
