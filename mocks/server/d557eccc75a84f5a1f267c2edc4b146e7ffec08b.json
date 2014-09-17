@@ -5,13 +5,33 @@
   "data": [
     {
       "catalog-environment": "production",
-      "catalog-timestamp": "2014-08-29T07:45:35.439Z",
-      "certname": "ip-172-31-0-182.eu-west-1.compute.internal",
+      "catalog-timestamp": "2014-09-13T22:18:03.073Z",
+      "certname": "ip-172-31-15-102.eu-west-1.compute.internal",
       "deactivated": null,
       "facts-environment": "production",
-      "facts-timestamp": "2014-08-29T07:45:34.969Z",
+      "facts-timestamp": "2014-09-13T22:17:58.898Z",
       "report-environment": "production",
-      "report-timestamp": "2014-08-29T07:45:30.200Z"
+      "report-timestamp": "2014-09-13T22:19:15.029Z"
+    },
+    {
+      "catalog-environment": "production",
+      "catalog-timestamp": "2014-09-13T22:19:00.748Z",
+      "certname": "ip-172-31-15-103.eu-west-1.compute.internal",
+      "deactivated": null,
+      "facts-environment": "production",
+      "facts-timestamp": "2014-09-13T22:18:58.644Z",
+      "report-environment": "production",
+      "report-timestamp": "2014-09-13T22:19:04.430Z"
+    },
+    {
+      "catalog-environment": "production",
+      "catalog-timestamp": "2014-09-13T22:15:56.738Z",
+      "certname": "ip-172-31-15-104.eu-west-1.compute.internal",
+      "deactivated": null,
+      "facts-environment": "production",
+      "facts-timestamp": "2014-09-13T22:15:54.805Z",
+      "report-environment": "production",
+      "report-timestamp": "2014-09-13T22:16:09.312Z"
     }
   ]
 }
