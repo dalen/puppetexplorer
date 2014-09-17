@@ -176,6 +176,11 @@ module.exports = (grunt) ->
     'prism:server:proxy'
     'connect:server:keepalive'
   ]
+  grunt.registerTask 'serve:mock', [
+    'configureRewriteRules'
+    'prism:server:mockrecord'
+    'connect:server:keepalive'
+  ]
 
   grunt.registerTask 'dev', [
     'build'
