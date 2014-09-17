@@ -50,7 +50,7 @@ module.exports = (grunt) ->
     watch:
       coffee:
         files: 'app/**/*.coffee'
-        tasks: ['coffeeify']
+        tasks: ['browserify']
       static:
         files: [
           'app/**/*.html'
