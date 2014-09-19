@@ -36,6 +36,7 @@ angular.module('app').config ($routeProvider) ->
     templateUrl: 'controllers/dashboard/dashboard.tpl.html'
     controller: 'DashboardCtrl'
     controllerAs: 'dashboard'
+    reloadOnSearch: false
   ).when('/nodes',
     templateUrl: 'controllers/nodelist/nodelist.tpl.html'
     controller: 'NodeListCtrl'

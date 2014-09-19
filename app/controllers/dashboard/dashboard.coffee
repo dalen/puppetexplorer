@@ -1,5 +1,9 @@
 angular.module('app').controller 'DashboardCtrl', class
   constructor: (@$scope, @PuppetDB, @$location) ->
+    @$scope.$on('queryChange', @loadMetrics)
+    @loadMetrics()
+
+  loadMetrics: () =>
     @getBean('num-nodes', 'activeNodes')
     @getBean('num-resources', 'resources')
     @getBean('avg-resources-per-node', 'avgResources')
@@ -10,6 +14,7 @@ angular.module('app').controller 'DashboardCtrl', class
     else
       @$scope.panels = []
     for panel, i in @$scope.panels
+      panel.count = undefined # reset if we switched server
       callback = (panel) ->
         (count) ->
           panel.count = count
@@ -19,6 +24,7 @@ angular.module('app').controller 'DashboardCtrl', class
     @checkVersion()
 
   getBean: (name, scopeName, multiply = 1, bean = 'com.puppetlabs.puppetdb.query.population') ->
+    @$scope[scopeName] = undefined
     @PuppetDB.query("metrics/mbean/#{bean}:type=default,name=#{name}")
       .success (data) =>
         @$scope[scopeName] = (angular.fromJson(data).Value * multiply)
