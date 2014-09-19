@@ -31,7 +31,8 @@ angular.module('app').controller 'DashboardCtrl', class
           .toLocaleString()
           .replace(/^(.*\..).*/, "$1")
       .error (data) ->
-        throw new Error("Could not get #{name} from PuppetDB")
+        unless status == 0
+          throw new Error("Could not fetch metric #{name} from PuppetDB")
 
   getNodeCount: (query, callback) ->
     @PuppetDB.parseAndQuery(
