@@ -56,7 +56,7 @@
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-debian-package": "^0.1.8",
+    "grunt-debian-package": "^0.1.10",
     "grunt-mocha-casperjs": "^0.1.4",
     "grunt-rpm": "^0.1.7",
     "jshint-stylish": "^0.2.0",
