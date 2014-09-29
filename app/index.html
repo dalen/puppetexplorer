@@ -47,16 +47,16 @@
   <nav class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="MenuCtrl as menu">
     <div class="container-fluid">
       <ul class="nav navbar-nav">
-        <li ng-class="menu.currentView() == 'dashboard' ? 'active' : ''"><a ng-click="menu.view('/dashboard')">
+        <li ng-class="menu.currentView() == 'dashboard' ? 'active' : ''"><a ng-click="menu.view('/dashboard')" id="menu-dashboard">
           <span class="glyphicon glyphicon-dashboard"></span> Dashboard
         </a></li>
-        <li ng-class="menu.currentView() == 'nodes' ? 'active' : ''"><a ng-click="menu.view('/nodes')">
+        <li ng-class="menu.currentView() == 'nodes' ? 'active' : ''"><a ng-click="menu.view('/nodes')" id="menu-nodes">
           <span class="glyphicon glyphicon-list"></span> Nodes
         </a></li>
-        <li ng-class="menu.currentView() == 'events' ? 'active' : ''"><a ng-click="menu.view('/events')">
+        <li ng-class="menu.currentView() == 'events' ? 'active' : ''"><a ng-click="menu.view('/events')" id="menu-events">
           <span class="glyphicon glyphicon-calendar"></span> Events
         </a></li>
-        <li ng-class="menu.currentView() == 'facts' ? 'active' : ''"><a ng-click="menu.view('/facts')">
+        <li ng-class="menu.currentView() == 'facts' ? 'active' : ''"><a ng-click="menu.view('/facts')" id="menu-facts">
           <span class="glyphicon glyphicon-stats"></span> Facts
         </a></li>
       </ul>

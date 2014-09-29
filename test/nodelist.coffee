@@ -1,9 +1,11 @@
 describe 'Node list', ->
-  before ->
-    casper.start 'http://localhost:8001/#/nodes'
+  beforeEach ->
+    casper.start 'http://localhost:8001/'
+    casper.then ->
+      @click '#menu-nodes'
 
   it 'should display a list of nodes', ->
-    casper.then ->
+    casper.waitUntilVisible '#node-list', ->
       @getElementsInfo('tr').length.should.be.above(0)
 
   it 'should display a warning if it cannot find any nodes', ->
@@ -13,5 +15,5 @@ describe 'Node list', ->
         query: 'foo=bar and foo!=bar'
       , true
 
-    casper.waitUntilVisible 'div.alert.alert-warning', ->
-      'div.alert.alert-warning'.should.have.text /No nodes found/
+      @waitUntilVisible 'div.alert.alert-warning', ->
+        'div.alert.alert-warning'.should.have.text /No nodes found/
