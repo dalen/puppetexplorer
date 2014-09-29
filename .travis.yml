@@ -18,3 +18,4 @@ deploy:
     endpoint: bucket-name.s3-website-eu-west-1.amazonaws.com
     on:
       branch: master
+      repo: spotify/puppetexplorer
