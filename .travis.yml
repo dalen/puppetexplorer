@@ -1,21 +1,19 @@
 language: node_js
 node_js:
-  - "0.10"
+  - '0.10'
 before_install:
   - npm install -g grunt-cli
 before_script: grunt build
 
 deploy:
   - provider: s3
-    access_key_id:
-      secure: "himn5xcIE9302Lu+lXVMuJOohJ3OIZst57EJXAyOcmWjg7PWN/cXwwhQkGo5+dy2sYLUrP87UmlEJHzGXCB7BBURNcb5Qy2K1w7gtjRU/TGEWnC+Do2lJfslntNf6XqMVg7PaiM7fdNuFVx+DIMdMf8jNuRzZsrrjTF6+IblXpM="
+    access_key_id: AKIAJEZEAAG2CU6PZHTQ
     secret_access_key:
-      secure: "mm7AwCAEURdN2Ivh/Xzv22IusddQSXy4XR6fZTA2uv3HAQIv44bxtUgrG4fx4lEiL6SrdOw35ATxx06QZallK/ekcYfBZOHQl+EmaZKAPjKPY9XsvJivCgLPc4OL+7OKVCGtChh/aicY+E/soj8Jxw+gU9+WZ8Gc6sVKThahhv0="
+      secure: Nd9tsVNDsUMEDveeKMCZHj4nEv2zM4Y0Y+gTF47JQ2bRWKS9fSWrSfISvm72VKhMrBrpDFyL/sVzLe7nrDyxqJSdKdGm1o6bPPcKDnREwUpVipbMVTpo4wLTJ1RnfuVsvQR9N1xeGVEWFM+wVSerbDVIcr3LGmWxQCfZCLus6rM=
     bucket: puppetexplorer
     skip_cleanup: true
-    region: eu-west-1
     local-dir: dist
-    endpoint: bucket-name.s3-website-eu-west-1.amazonaws.com
+    acl: public_read
     on:
       branch: master
       repo: spotify/puppetexplorer
