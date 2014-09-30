@@ -20,7 +20,7 @@ angular.module('app').controller 'DashboardCtrl', class
           panel.count = count
       @getNodeCount panel.query, callback(panel)
 
-    @$scope.panelWidth = Math.max(2, 12 / @$scope.panels.length)
+    @$scope.panelWidth = Math.max(2, Math.floor(12 / @$scope.panels.length))
     @checkVersion()
 
   getBean: (name, scopeName, multiply = 1, bean = 'com.puppetlabs.puppetdb.query.population') ->
