@@ -4,6 +4,7 @@ node_js:
 before_install:
   - npm install -g grunt-cli
 before_script: grunt build
+after_success: bash .travis.buildpackages.sh
 
 deploy:
   - provider: s3
@@ -17,3 +18,17 @@ deploy:
     on:
       branch: master
       repo: spotify/puppetexplorer
+  - provider: releases
+    api_key:
+      secure: fIuXoPBhqJem2JIjw4aLm/kU81zhwquRoHGw0QHI5j+VSPQtxxj9u+AO+csFu+M92gLZRT2fz8TIjYm+1K1UZrIaSkEpGiOVqVo1mEbAhq2wAIbmXo8OyOjDOkpAaQ+FOV1VjuyBI+7+85izQ3HnMvgqONiwS9Xd2pM+HYLfRG4=
+    file:
+      - puppetexplorer.deb
+      - puppetexplorer.rpm
+      - puppetexplorer.tar.gz
+    skip_cleanup: true
+    on:
+      tags: true
+      all_branches: true
+      repo: spotify/puppetexplorer
+env:
+  secure: "bT8qEfhnq2N5Ty0FoMC6bibhgd7+9Iilv9kHAxPBgWv7ZDNWtf9//ih9S2MTUuTRTirw21UQG6jb0g4mcewEuZkoA8yAaXMAswWeHMSepf36aLa6Ig2LQVPr7KUTtw7xNDmzX7Zgbm617t9vSEs6mRdNFtaLWj9qq8cb4rFNXnY="
