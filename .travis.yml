@@ -4,7 +4,13 @@ node_js:
 before_install:
   - npm install -g grunt-cli
 before_script: grunt build
-after_success: bash .travis.buildpackages.sh
+after_success:
+  - '[ -n "$TRAVIS_TAG" ] && sudo apt-get update -qq'
+  - '[ -n "$TRAVIS_TAG" ] && sudo apt-get install -y devscripts debhelper rpm'
+  - '[ -n "$TRAVIS_TAG" ] && grunt debian_package'
+  - '[ -n "$TRAVIS_TAG" ] && grunt rpm:release'
+  - '[ -n "$TRAVIS_TAG" ] && cp -r dist puppetexplorer-$TRAVIS_TAG'
+  - '[ -n "$TRAVIS_TAG" ] && tar czf puppetexplorer-$TRAVIS_TAG.tar.gz puppetexplorer-$TRAVIS_TAG'
 
 deploy:
   - provider: s3
@@ -19,12 +25,14 @@ deploy:
       branch: master
       repo: spotify/puppetexplorer
   - provider: releases
+    edge: true
     api_key:
       secure: fIuXoPBhqJem2JIjw4aLm/kU81zhwquRoHGw0QHI5j+VSPQtxxj9u+AO+csFu+M92gLZRT2fz8TIjYm+1K1UZrIaSkEpGiOVqVo1mEbAhq2wAIbmXo8OyOjDOkpAaQ+FOV1VjuyBI+7+85izQ3HnMvgqONiwS9Xd2pM+HYLfRG4=
     file:
-      - puppetexplorer.deb
-      - puppetexplorer.rpm
-      - puppetexplorer.tar.gz
+      - tmp/puppetexplorer*.deb
+      - rpm/RPMS/noarch/puppetexplorer*.rpm
+      - puppetexplorer-*.tar.gz
+    file_glob: true
     skip_cleanup: true
     on:
       tags: true
