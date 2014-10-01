@@ -5,12 +5,30 @@ before_install:
   - npm install -g grunt-cli
 before_script: grunt build
 after_success:
+  # Install dependencies for releasing
   - '[ -n "$TRAVIS_TAG" ] && sudo apt-get update -qq'
-  - '[ -n "$TRAVIS_TAG" ] && sudo apt-get install -y devscripts debhelper rpm'
+  - '[ -n "$TRAVIS_TAG" ] && sudo apt-get install -y devscripts debhelper rpm gnupg s3cmd createrepo'
+  - '[ -n "$TRAVIS_TAG" ] && gem install deb-s3'
+  # RPM and DEB packaging
   - '[ -n "$TRAVIS_TAG" ] && grunt debian_package'
   - '[ -n "$TRAVIS_TAG" ] && grunt rpm:release'
+  # Package up tar.gz release
   - '[ -n "$TRAVIS_TAG" ] && cp -r dist puppetexplorer-$TRAVIS_TAG'
   - '[ -n "$TRAVIS_TAG" ] && tar czf puppetexplorer-$TRAVIS_TAG.tar.gz puppetexplorer-$TRAVIS_TAG'
+  # Add GPG key
+  - '[ -n "$TRAVIS_TAG" ] && openssl aes-256-cbc -K $encrypted_c566a7b9b8eb_key -iv $encrypted_c566a7b9b8eb_iv -in .gpg.key.enc -out .gpg.key -d'
+  - '[ -n "$TRAVIS_TAG" ] && gpg --allow-secret-key-import --import .gpg.key'
+  # Release Debian package
+  - '[ -n "$TRAVIS_TAG" ] && deb-s3 upload --preserve-versions --bucket puppetexplorerapt --secret-access-key=$S3_SECRET_KEY --access-key-id $S3_ACCESS_KEY --sign=3FF5E93D tmp/puppetexplorer*.deb'
+  # Release RPM package
+  - '[ -n "$TRAVIS_TAG" ] && mkdir yumrepo'
+  - '[ -n "$TRAVIS_TAG" ] && echo "[default]" > .s3cfg'
+  - '[ -n "$TRAVIS_TAG" ] && echo "access_key = ${S3_ACCESS_KEY}" >> .s3cfg'
+  - '[ -n "$TRAVIS_TAG" ] && echo "secret_key = ${S3_SECRET_KEY}" >> .s3cfg'
+  - '[ -n "$TRAVIS_TAG" ] && s3cmd get -r s3://puppetexploreryum yumrepo'
+  - '[ -n "$TRAVIS_TAG" ] && createrepo --update yumrepo'
+  - '[ -n "$TRAVIS_TAG" ] && rm yumrepo/repodata/repomd.xml.asc'
+  - '[ -n "$TRAVIS_TAG" ] && gpg --detach-sign --armor yumrepo/repodata/repomd.xml'
 
 deploy:
   - provider: s3
@@ -23,6 +41,18 @@ deploy:
     acl: public_read
     on:
       branch: master
+      repo: spotify/puppetexplorer
+  - provider: s3
+    access_key_id: AKIAJEZEAAG2CU6PZHTQ
+    secret_access_key:
+      secure: Nd9tsVNDsUMEDveeKMCZHj4nEv2zM4Y0Y+gTF47JQ2bRWKS9fSWrSfISvm72VKhMrBrpDFyL/sVzLe7nrDyxqJSdKdGm1o6bPPcKDnREwUpVipbMVTpo4wLTJ1RnfuVsvQR9N1xeGVEWFM+wVSerbDVIcr3LGmWxQCfZCLus6rM=
+    bucket: puppetexploreryum
+    skip_cleanup: true
+    local-dir: yumrepo
+    acl: public_read
+    on:
+      tags: true
+      all_branches: true
       repo: spotify/puppetexplorer
   - provider: releases
     edge: true
