@@ -26,6 +26,8 @@ after_success:
   - '[ -n "$TRAVIS_TAG" ] && echo "access_key = ${S3_ACCESS_KEY}" >> .s3cfg'
   - '[ -n "$TRAVIS_TAG" ] && echo "secret_key = ${S3_SECRET_KEY}" >> .s3cfg'
   - '[ -n "$TRAVIS_TAG" ] && s3cmd get -r s3://puppetexploreryum yumrepo'
+  - '[ -n "$TRAVIS_TAG" ] && rpm --addsign rpm/RPMS/noarch/puppetexplorer*.rpm'
+  - '[ -n "$TRAVIS_TAG" ] && cp rpm/RPMS/noarch/puppetexplorer*.rpm yumrepo'
   - '[ -n "$TRAVIS_TAG" ] && createrepo --update yumrepo'
   - '[ -n "$TRAVIS_TAG" ] && rm yumrepo/repodata/repomd.xml.asc'
   - '[ -n "$TRAVIS_TAG" ] && gpg --detach-sign --armor yumrepo/repodata/repomd.xml'
