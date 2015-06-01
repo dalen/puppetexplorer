@@ -3,7 +3,7 @@ require('angular-route')
 require('angular-animate')
 require('angular-moment/angular-moment')
 require('angular-google-chart/ng-google-chart')
-require('./deps/ui-bootstrap-tpls-0.11.0.min')
+require('angular-bootstrap')
 
 angular.module('app', [
   'ngRoute'

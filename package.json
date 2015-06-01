@@ -34,6 +34,7 @@
     "angular-google-chart": "0.0.11",
     "angular-moment": "^0.10.1",
     "angular-route": "^1.4.0",
+    "angular-bootstrap": "^0.12.0",
     "bootswatch": "^3.2.0",
     "moment": "^2.8.3",
     "node-puppetdbquery": "^0.4.2"
