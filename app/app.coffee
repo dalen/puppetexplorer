@@ -1,8 +1,8 @@
 require('angular')
 require('angular-route')
 require('angular-animate')
-require('angular-moment/angular-moment')
-require('angular-google-chart/ng-google-chart')
+require('angular-google-chart')
+require('angular-moment')
 require('angular-bootstrap')
 
 angular.module('app', [
