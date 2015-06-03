@@ -84,60 +84,13 @@ angular.module("app").controller "NodeListCtrl", class
             node.report = null
       )
 
-  # Public: Fetch facts for a node and store them in it
-  #
-  # node - The node {Object}
-  #
-  # Returns: `undefined`
-  fetchNodeFacts: (node) =>
-    return if node.facts?
-    @PuppetDB.parseAndQuery(
-      "fact-contents"
-      null
-      ["=", "certname", node.certname]
-      { 'order-by': angular.toJson([field: "name", order: "asc"]) }
-      do (node) ->
-        (data, total) ->
-          node.facts = data.filter((fact) ->
-            fact.name[0] isnt '_'
-          ).map((fact) ->
-            # insert some spaces to break lines
-            fact.value = String(fact.value).replace(/(.{25})/g,"\u200B$1")
-            fact
-          )
-      )
-
-  # Public: Fetch the currently selected node
-  #
-  # Returns: `undefined`
-  fetchSelectedNode: () =>
-    for node in @nodes
-      if node.certname == @$location.search().node
-        @selectNode(node)
-
-
-  # Public: Get the list of important facts to show in detail view
-  #
-  # Returns: A {Array} of important facts {String}.
-  importantFacts: (node) ->
-    node.facts.filter((fact) ->
-      NODE_FACTS.indexOf(fact.name) != -1
-    ).sort((a,b) -> NODE_FACTS.indexOf(a.name) - NODE_FACTS.indexOf(b.name))
-
   # Public: Select a node to show info for
   #
   # node - The node {Object}
   #
   # Returns: `undefined`
   selectNode: (node) =>
-    if @selectedNode == node
-      @$location.search('node', null)
-      @selectedNode = null
-    else
-      @$location.search('node', node.certname)
-      @selectedNode = node
-      unless node.facts?
-        @fetchNodeFacts(node)
+    @$location.path "/node/#{node.certname}"
 
   # Public: set the query to find a node and show events for it
   #

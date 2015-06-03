@@ -42,6 +42,11 @@ angular.module('app').config ($routeProvider) ->
     controller: 'NodeListCtrl'
     controllerAs: 'nodeList'
     reloadOnSearch: false
+  ).when('/node/:node',
+    templateUrl: 'controllers/nodedetail/nodedetail.tpl.html'
+    controller: 'NodeDetailCtrl'
+    controllerAs: 'nodeDetail'
+    reloadOnSearch: false
   ).when('/events',
     templateUrl: 'controllers/events/events.tpl.html'
     controller: 'EventsCtrl'
