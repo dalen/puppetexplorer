@@ -39,6 +39,12 @@ angular.module("app").controller "FactsCtrl", class
   chartList: ->
     @$location.search().facts?.split(',') || []
 
+  # Check if a chart is activated or not
+  #
+  # Returns: A {Boolean} indicating if the chart is active
+  chartActive: (chart) ->
+    @chartList().indexOf(@factPathToString(chart)) != -1
+
   # Public: Sync the charts object with the list of charts to display
   #
   # Returns: `undefined`
@@ -64,6 +70,13 @@ angular.module("app").controller "FactsCtrl", class
       @factPaths = (fact.path for fact in angular.fromJson(data) when fact.path[0][0] isnt '_')
     .error (data, status, headers, config) ->
       throw new Error(data or "Fetching fact names failed")
+
+  # Public: Toggle display of a chart
+  toggleChart: (fact) ->
+    if @chartActive(fact)
+      @deleteChart(@factPathToString(fact))
+    else
+      @addChart(fact)
 
   # Public: Add or reload a chart
   #

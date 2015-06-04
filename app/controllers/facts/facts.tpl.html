@@ -7,8 +7,9 @@
 
     <table class="table table-striped">
       <tbody>
-        <tr ng-repeat="fact in facts.factPaths | filter: query" ng-click="facts.addChart(fact)" >
-          <td><i class="signal icon"></i>
+        <tr ng-repeat="fact in facts.factPaths | filter: query" ng-click="facts.toggleChart(fact)" >
+          <td><span class="glyphicon glyphicon-stats" aria-hidden="true" ng-if="facts.chartActive(fact)"></span</td>
+          <td>
             <span ng-repeat="factCompontent in fact">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span>
           </td>
         </tr>
