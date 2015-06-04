@@ -2,17 +2,25 @@ angular.module("app").controller "EventsCtrl", class
   constructor: (@$scope, @$rootScope, @$location, @PuppetDB) ->
     @$scope.$on('queryChange', @reset)
     @$scope.$on('pageChange', @fetchEvents)
+    @$scope.$on('$locationChangeSuccess', @setFields)
     @$scope.$on('filterChange', @reset)
+    @$scope.perPage = 50
     @mode = {}
+    @setFields()
+
+  # Sets fields values to match the URL parameters
+  setFields: (event, exclude) =>
     @mode.current = @$location.search().mode || 'latest'
     @mode[@mode.current] = true
     @$scope.reportHash = @$location.search().report
     @$scope.dateFrom = @$location.search().date_from || moment.utc().format('YYYY-MM-DD')
     @$scope.dateTo = @$location.search().date_to || moment.utc().format('YYYY-MM-DD')
-    @$scope.perPage = 50
-    @reset()
+    @reset(event, exclude)
 
   reset: (event, exclude) =>
+    if event && event.name == 'pageChange'
+      console.log(event)
+      @setFields()
     @$location.search('page', null)
     @$scope.numItems = undefined
     @fetchEvents()
