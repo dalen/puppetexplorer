@@ -1,39 +1,40 @@
-<form class="form" role="form">
-<div class="row" style="margin: 10px;">
-  <div class="col-md-4">
-    <div class="form-group">
-      <label for="date-from">Date from:</label>
-      <div class="input-group">
-        <input datepicker-popup ng-disabled="latestReport" type="text" id="date-from" class="form-control" ng-model="dateFrom" ng-change="events.setFilters()" is-open="dateFromOpen" close-text="Close">
-        <span class="input-group-btn">
-          <button type="button" class="btn btn-default" ng-disabled="latestReport" ng-click="events.toggleDatePicker($event,'dateFromOpen')"><span class="glyphicon glyphicon-calendar"></span></button>
-        </span>
+<tabset>
+  <tab heading="Latest report" active="events.mode.latest" select="events.setMode('latest')"></tab>
+  <tab heading="Date range" active="events.mode.daterange" select="events.setMode('daterange')">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="date-from">Date from:</label>
+          <div class="input-group">
+            <input datepicker-popup type="text" id="date-from" class="form-control" ng-model="dateFrom" ng-change="events.setFilters()" is-open="dateFromOpen" close-text="Close">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-disabled="latestReport" ng-click="events.toggleDatePicker($event,'dateFromOpen')"><span class="glyphicon glyphicon-calendar"></span></button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="date-to">Date to:</label>
+          <div class="input-group">
+            <input datepicker-popup type="text" id="date-to" class="form-control" ng-model="dateTo" ng-change="events.setFilters()" is-open="dateToOpen" close-text="Close">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-disabled="latestReport" ng-click="events.toggleDatePicker($event,'dateToOpen')"><span class="glyphicon glyphicon-calendar"></span></button>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-4">
+  </tab>
+  <tab heading="Single report" active="events.mode.report" select="events.setMode('report')">
     <div class="form-group">
-      <label for="date-to">Date to:</label>
-      <div class="input-group">
-        <input datepicker-popup ng-disabled="latestReport" type="text" id="date-to" class="form-control" ng-model="dateTo" ng-change="events.setFilters()" is-open="dateToOpen" close-text="Close">
-        <span class="input-group-btn">
-          <button type="button" class="btn btn-default" ng-disabled="latestReport" ng-click="events.toggleDatePicker($event,'dateToOpen')"><span class="glyphicon glyphicon-calendar"></span></button>
-        </span>
-      </div>
+      <label for="report-hash">Report hash</label>
+      <input type="text" class="form-control" id="report-hash" ng-model="reportHash" placeholder="Report hash">
     </div>
-  </div>
-  <div class="col-md-4">
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" id="latest-report" ng-model="latestReport" ng-change="events.setFilters()" name="latest">
-        Latest report only
-      </label>
-    </div>
-  </div>
-</div>
-</form>
+  </tab>
+</tabset>
 
-<div class="row">
+<div class="row" style="margin-top: 10px">
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -114,6 +115,10 @@
           <tr>
             <th>Timestamp</th>
             <td title="{{event['timestamp']}}" am-time-ago="event['timestamp']"></td>
+          </tr>
+          <tr ng-click="events.selectReport(event.report)">
+            <th>Report</th>
+            <td>{{event.report}}</td>
           </tr>
         </table>
       </td>

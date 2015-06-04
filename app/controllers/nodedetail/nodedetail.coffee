@@ -82,3 +82,9 @@ angular.module("app").controller "NodeDetailCtrl", class
     return 'glyphicon-exclamation-sign text-info' if report.events?.noops > 0
     return 'glyphicon-exclamation-sign text-success' if report.events?.successes > 0
     return 'glyphicon-ok-sign text-muted'
+
+  # Switch to events view for a specified report
+  selectReport: (report) ->
+    @$location.search "mode", "report"
+    @$location.search "report", report
+    @$location.path "/events"

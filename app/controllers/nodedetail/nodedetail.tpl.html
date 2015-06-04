@@ -18,7 +18,7 @@
           <th></th>
         </tr></thead>
         <tbody>
-          <tr ng-repeat="report in nodeDetail.reports">
+          <tr ng-repeat="report in nodeDetail.reports" ng-click="nodeDetail.selectReport(report.hash)">
             <td title="{{report['end-time']}}">
               <span am-time-ago="report['end-time']"></span>
             </td>

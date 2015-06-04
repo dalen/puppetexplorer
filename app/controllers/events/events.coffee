@@ -3,7 +3,10 @@ angular.module("app").controller "EventsCtrl", class
     @$scope.$on('queryChange', @reset)
     @$scope.$on('pageChange', @fetchEvents)
     @$scope.$on('filterChange', @reset)
-    @$scope.latestReport = @$location.search().latest != 'false'
+    @mode = {}
+    @mode.current = @$location.search().mode || 'latest'
+    @mode[@mode.current] = true
+    @$scope.reportHash = @$location.search().report
     @$scope.dateFrom = @$location.search().date_from || moment.utc().format('YYYY-MM-DD')
     @$scope.dateTo = @$location.search().date_to || moment.utc().format('YYYY-MM-DD')
     @$scope.perPage = 50
@@ -17,11 +20,14 @@ angular.module("app").controller "EventsCtrl", class
     @fetchResourceCounts() unless exclude == 'resource_type'
     @fetchStatusCounts() unless exclude == 'status'
 
+  setMode: (mode) ->
+    @mode.current = mode
+    @$location.search('mode', mode)
+    @setFilters()
+
+  # Public: Set URL to match currently selected filters
   setFilters: () ->
-    if @$scope.latestReport
-      @$location.search('latest', null)
-    else
-      @$location.search('latest', 'false')
+    @$location.search('report', @$scope.reportHash)
     @$location.search('date_from', moment(@$scope.dateFrom).format('YYYY-MM-DD'))
     @$location.search('date_to', moment(@$scope.dateTo).format('YYYY-MM-DD'))
     @$rootScope.$broadcast('filterChange')
@@ -33,8 +39,10 @@ angular.module("app").controller "EventsCtrl", class
   # Returns: A {Array} PuppetDB query
   createEventQuery: (exclude = false) ->
     query = ["and"]
-    if @$scope.latestReport
+    if @mode.current == 'latest'
       query.push ["=", "latest-report?", true]
+    else if @mode.current == 'report'
+      query.push ["=", "report", @$scope.reportHash]
     else
       moment = require('moment')
       query.push [">", "timestamp", moment.utc(@$scope.dateFrom).toISOString()]
@@ -217,3 +225,8 @@ angular.module("app").controller "EventsCtrl", class
     $event.preventDefault()
     $event.stopPropagation()
     @$scope[name] = !@$scope[name]
+
+  # Switch to events view for a specified report
+  selectReport: (report) ->
+    @$scope.reportHash = report
+    @setMode('report')
