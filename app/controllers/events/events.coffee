@@ -222,12 +222,14 @@ angular.module("app").controller "EventsCtrl", class
   #
   # Returns: `undefined`
   setChartSelection: (param, data, chart) ->
+    return unless chart.getOptions().enableInteractivity
     selected = @$location.search()[param]
     if selected?
       row = null
       for r, i in data
         row = i if r[0] == selected
-      chart.getChart().setSelection([{row: row - 1}])
+      if row
+        chart.getChart().setSelection([{row: row - 1}])
 
   toggleDatePicker: ($event, name) ->
     $event.preventDefault()
