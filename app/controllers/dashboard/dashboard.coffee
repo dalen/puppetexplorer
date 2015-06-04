@@ -30,7 +30,7 @@ angular.module('app').controller 'DashboardCtrl', class
         @$scope[scopeName] = (angular.fromJson(data).Value * multiply)
           .toLocaleString()
           .replace(/^(.*\..).*/, "$1")
-      .error (data) ->
+      .error (data, status) ->
         unless status == 0
           throw new Error("Could not fetch metric #{name} from PuppetDB")
 
