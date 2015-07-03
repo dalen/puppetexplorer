@@ -2,11 +2,14 @@ angular.module("app").controller "NodeDetailCtrl", class
   constructor: (@$location, @$routeParams, @$scope, @PuppetDB) ->
     @node = @$routeParams.node
     # Reload nodes if either the page changes
-    @$scope.$on('pageChange', @reset)
+    @$scope.$on('pageChange', @fetchReports)
+    @$scope.perPage = 10
     @reset()
 
   reset: =>
     @reports = undefined
+    @$location.search('page', null)
+    @$scope.numItems = undefined
     @fetchReports()
     @fetchFacts()
 
@@ -14,14 +17,16 @@ angular.module("app").controller "NodeDetailCtrl", class
   fetchReports: () =>
     @reports = @PuppetDB.parseAndQuery(
       "reports"
-      null
+      @$location.search().query
       ["=", "certname", @node]
       {
         'order-by': angular.toJson([field: "end-time", order: "desc"])
-        'limit': 10
+        'offset': @$scope.perPage * ((@$location.search().page || 1) - 1)
+        'limit': @$scope.perPage
       }
       (data, total) =>
         @reports = data
+        @$scope.numItems = total
         @reports.forEach (report) =>
           @PuppetDB.parseAndQuery(
             "event-counts"

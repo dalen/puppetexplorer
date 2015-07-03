@@ -32,6 +32,7 @@
           </tr>
         </tbody>
       </table>
+      <pagination ng-if="numItems > 10" ng-change="changePage(page)" ng-model="page" num-pages="numPages" items-per-page="10"  boundary-links="numItems > 250" max-size="5" total-items="numItems" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
     </div>
   </div>
   <div class="col-md-6" ng-if="nodeDetail.facts">
