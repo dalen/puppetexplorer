@@ -29,13 +29,13 @@
     "url": "https://spotify/puppetexplorer.git"
   },
   "dependencies": {
-    "angular": "^1.4.0",
-    "angular-animate": "^1.4.0",
+    "angular": "^1.4.3",
+    "angular-animate": "^1.4.3",
+    "angular-bootstrap": "^0.12.0",
     "angular-google-chart": "0.0.11",
     "angular-moment": "^0.10.1",
-    "angular-route": "^1.4.0",
-    "angular-bootstrap": "^0.12.0",
-    "bootswatch": "^3.2.0",
+    "angular-route": "^1.4.3",
+    "bootswatch": "^3.3.5",
     "moment": "^2.8.3",
     "node-puppetdbquery": "^0.5.0"
   },
@@ -56,8 +56,8 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-debian-package": "^0.1.10",
     "grunt-mocha-casperjs": "^1.4.0",
-    "grunt-rpm": "^0.1.7",
-    "jshint-stylish": "^2.0.0",
+    "grunt-rpm": "^0.1.12",
+    "jshint-stylish": "^2.0.1",
     "uglifyify": "^3.0.1"
   }
 }
