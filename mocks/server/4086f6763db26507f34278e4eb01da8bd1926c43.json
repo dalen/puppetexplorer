@@ -1,8 +1,0 @@
-{
-  "requestUrl": "/v4/metrics/mbean/com.puppetlabs.puppetdb.query.population:type=default,name=avg-resources-per-node",
-  "contentType": "application/json; charset=utf-8",
-  "statusCode": 200,
-  "data": {
-    "Value": 91.66666666666667
-  }
-}
