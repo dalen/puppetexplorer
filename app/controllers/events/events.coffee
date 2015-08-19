@@ -48,7 +48,7 @@ angular.module("app").controller "EventsCtrl", class
   createEventQuery: (exclude = false) ->
     query = ["and"]
     if @mode.current == 'latest'
-      query.push ["=", "latest-report?", true]
+      query.push ["=", "latest_report?", true]
     else if @mode.current == 'report'
       query.push ["=", "report", @$scope.reportHash]
     else
@@ -60,9 +60,9 @@ angular.module("app").controller "EventsCtrl", class
       cc = @$location.search().containing_class
       if cc is 'none'
         cc = null
-      query.push([ "=", "containing-class", cc])
+      query.push([ "=", "containing_class", cc])
     if @$location.search().resource_type? and exclude != 'resource_type'
-      query.push([ "=", "resource-type", @$location.search().resource_type])
+      query.push([ "=", "resource_type", @$location.search().resource_type])
     if @$location.search().status? and exclude != 'status'
       query.push([ "=", "status", @$location.search().status.toLowerCase()])
 
@@ -80,7 +80,7 @@ angular.module("app").controller "EventsCtrl", class
       {
         offset: @$scope.perPage * ((@$location.search().page || 1) - 1)
         limit: @$scope.perPage
-        "order-by": angular.toJson([ field: "timestamp", order: "desc" ]),
+        order_by: angular.toJson([ field: "timestamp", order: "desc" ]),
       }
       (data, total) =>
         @$scope.numItems = total
@@ -101,7 +101,7 @@ angular.module("app").controller "EventsCtrl", class
       @$location.search().query
       @createEventQuery('containing_class')
       {
-        'summarize-by': 'containing-class'
+        summarize_by: 'containing_class'
       }
       (data, total) =>
         chartData = []
@@ -118,7 +118,7 @@ angular.module("app").controller "EventsCtrl", class
       @$location.search().query
       @createEventQuery('resource_type')
       {
-        'summarize-by': 'resource'
+        summarize_by: 'resource'
       }
       (data, total) =>
         chartData = []
@@ -137,7 +137,7 @@ angular.module("app").controller "EventsCtrl", class
       @$location.search().query
       @createEventQuery('status')
       {
-        'summarize-by': 'resource'
+        summarize_by: 'resource'
       }
       (data, total) =>
         chartData = [

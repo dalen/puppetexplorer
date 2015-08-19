@@ -1,8 +1,0 @@
-{
-  "requestUrl": "/v4/version",
-  "contentType": "application/json; charset=utf-8",
-  "statusCode": 200,
-  "data": {
-    "version": "2.2.0"
-  }
-}

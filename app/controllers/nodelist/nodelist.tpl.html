@@ -17,7 +17,7 @@
       <td ng-click="nodeList.selectNode(node)">{{node.certname}}</td>
       <td title="{{node['catalog-timestamp']}}">
         <span class="glyphicon glyphicon-warning-sign text-warning" ng-if="nodeList.nodeUnresponsive(node)"></span>
-        <span am-time-ago="node['report-timestamp']"></span>
+        <span am-time-ago="node.report_timestamp"></span>
       </td>
       <td class="text-center">{{node.events.successes || ""}}</td>
       <td class="text-center">{{node.events.noops || ""}}</td>

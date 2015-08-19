@@ -23,9 +23,9 @@ angular.module('app').controller 'DashboardCtrl', class
     @$scope.panelWidth = Math.max(2, Math.floor(12 / @$scope.panels.length))
     @checkVersion()
 
-  getBean: (name, scopeName, multiply = 1, bean = 'com.puppetlabs.puppetdb.query.population') ->
+  getBean: (name, scopeName, multiply = 1, bean = 'puppetlabs.puppetdb.query.population') ->
     @$scope[scopeName] = undefined
-    @PuppetDB.query("metrics/mbean/#{bean}:type=default,name=#{name}")
+    @PuppetDB.getBean("#{bean}:type=default,name=#{name}")
       .success (data) =>
         @$scope[scopeName] = (angular.fromJson(data).Value * multiply)
           .toLocaleString()
@@ -49,11 +49,11 @@ angular.module('app').controller 'DashboardCtrl', class
     @$location.path "/nodes"
 
   checkVersion: () ->
-    @PuppetDB.query("version")
+    @PuppetDB.getVersion()
       .success (data) ->
         major = parseInt(data.version.split('.')[0], 10)
         minor = parseInt(data.version.split('.')[1], 10)
         patch = parseInt(data.version.split('.')[2], 10)
-        unless major >= 2 and minor >= 2
-          throw new Error("This version of Puppet Explorer requires PuppetDB version 2.2.0" +
+        unless major >= 3
+          throw new Error("This version of Puppet Explorer requires PuppetDB version 3.0.0+" +
             ", you are running PuppetDB #{data.version}")

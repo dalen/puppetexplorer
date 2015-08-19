@@ -65,7 +65,7 @@ angular.module("app").controller "FactsCtrl", class
   #
   # Returns: `undefined`
   getFactNames: ->
-    @PuppetDB.query("fact-paths", { "order-by": angular.toJson([ field: "path", order: "asc" ]) })
+    @PuppetDB.query("fact-paths", { order_by: angular.toJson([ field: "path", order: "asc" ]) })
     .success (data, status, headers, config) =>
       @factPaths = (fact.path for fact in angular.fromJson(data) when fact.path[0][0] isnt '_')
     .error (data, status, headers, config) ->

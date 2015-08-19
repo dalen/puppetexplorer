@@ -59,12 +59,12 @@
        For example <code>@"now - 2 hours"</code>.</p>
 
     <p>A <code>#</code> sign can be used to do a subquery, against the nodes endpoint for example to
-       query the <code>report-timestamp</code>, <code>catalog-timestamp</code> or <code>facts-timestamp</code>
-       fields. For example <code>#node.report-timestamp < @"now - 2 hours"</code>.</p>
+       query the <code>report_timestamp</code>, <code>catalog_timestamp</code> or <code>facts_timestamp</code>
+       fields. For example <code>#node.report_timestamp < @"now - 2 hours"</code>.</p>
 
     <p>A subquery using the <code>#</code> sign can have a block of expressions instead of a single
-       expression. For example <code>#node { report-timestamp > @"now - 4 hours" and
-       report-timestamp < @"now - 2 hours" }</code></p>
+       expression. For example <code>#node { report_timestamp > @"now - 4 hours" and
+       report_timestamp < @"now - 2 hours" }</code></p>
 
     <p>A bare string without comparison operator will be treated as a regexp match against the certname.</p>
   </div>
@@ -108,7 +108,7 @@
     </div>
     Nodes that haven't reported in the last 2 hours
     <div class="well well-sm">
-        <tt>#node.report-timestamp<@"now - 2 hours"</tt>
+        <tt>#node.report_timestamp<@"now - 2 hours"</tt>
     </div>
   </div>
 </div>
