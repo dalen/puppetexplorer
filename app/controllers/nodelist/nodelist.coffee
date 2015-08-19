@@ -24,7 +24,7 @@ angular.module("app").controller "NodeListCtrl", class
       {
         offset: @$scope.perPage * ((@$location.search().page || 1) - 1)
         limit: @$scope.perPage
-        "order-by": angular.toJson([field: "certname", order: "asc"])
+        order_by: angular.toJson([field: "certname", order: "asc"])
       }
       (data, total) =>
         @$scope.numItems = total
@@ -45,10 +45,10 @@ angular.module("app").controller "NodeListCtrl", class
     @PuppetDB.parseAndQuery(
       "event-counts"
       null
-      ["and", ["=", "certname", node.certname], ["=", "latest-report?", true]]
+      ["and", ["=", "certname", node.certname], ["=", "latest_report?", true]]
       {
-        'summarize-by': 'certname'
-        'order-by': angular.toJson([field: "certname", order: "asc"])
+        summarize_by: 'certname'
+        order_by: angular.toJson([field: "certname", order: "asc"])
       }
       do (node) ->
         (data, total) ->
@@ -73,8 +73,8 @@ angular.module("app").controller "NodeListCtrl", class
       null
       ["=", "certname", node.certname]
       {
-        'order-by': angular.toJson([field: "receive-time", order: "desc"])
-        'limit': 1
+        order_by: angular.toJson([field: "receive_time", order: "desc"])
+        limit: 1
       }
       do (node) ->
         (data, total) ->
@@ -120,9 +120,9 @@ angular.module("app").controller "NodeListCtrl", class
 
   # Return if a node is unresponsive or not
   nodeUnresponsive: (node) ->
-    return true unless node['report-timestamp']?
+    return true unless node.report_timestamp?
     if UNRESPONSIVE_HOURS?
       hours = UNRESPONSIVE_HOURS
     else
       hours = 2
-    return moment(node['report-timestamp']).isBefore(moment.utc().subtract(hours,'hours'))
+    return moment(node.report_timestamp).isBefore(moment.utc().subtract(hours,'hours'))

@@ -61,7 +61,7 @@ angular.module('app').factory 'PuppetDB', ($http,
       config = @serverConfig()
       config.params = params
       config.timeout = @canceller.promise
-      $http.get("#{@serverUrl()}/#{@apiVersion}/#{endpoint}", config)
+      $http.get("#{@serverUrl()}/pdb/query/#{@apiVersion}/#{endpoint}", config)
 
     # Public: Combined function to both parse and query PuppetDB.
     #
@@ -92,7 +92,7 @@ angular.module('app').factory 'PuppetDB', ($http,
 
       params.query = angular.toJson(query)
       if endpoint in ['nodes', 'reports', 'events', 'facts']
-        params['include-total'] = true
+        params['include_total'] = true
 
       # Start querying
       @query(endpoint, params)

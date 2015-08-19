@@ -20,9 +20,9 @@ angular.module("app").controller "NodeDetailCtrl", class
       @$location.search().query
       ["=", "certname", @node]
       {
-        'order-by': angular.toJson([field: "end-time", order: "desc"])
-        'offset': @$scope.perPage * ((@$location.search().page || 1) - 1)
-        'limit': @$scope.perPage
+        order_by: angular.toJson([field: "end_time", order: "desc"])
+        offset: @$scope.perPage * ((@$location.search().page || 1) - 1)
+        limit: @$scope.perPage
       }
       (data, total) =>
         @reports = data
@@ -33,7 +33,7 @@ angular.module("app").controller "NodeDetailCtrl", class
             null
             ["=", "report", report.hash]
             {
-              'summarize-by': 'certname'
+              'summarize_by': 'certname'
             }
             (data, total) ->
               report.events = data[0]
@@ -48,7 +48,7 @@ angular.module("app").controller "NodeDetailCtrl", class
       "fact-contents"
       null
       ["=", "certname", @node]
-      { 'order-by': angular.toJson([field: "name", order: "asc"]) }
+      { order_by: angular.toJson([field: "name", order: "asc"]) }
       (data, total) =>
         @facts = data.filter((fact) ->
           fact.name[0] isnt '_'

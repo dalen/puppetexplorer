@@ -82,12 +82,12 @@
   </tr></thead>
   <tbody ng-repeat="event in events.events">
     <tr ng-class="events.color(event.status)" ng-click="events.toggleRow(event)">
-      <td>{{event["certname"]}}</td>
-      <td>{{event["resource-type"]}}</td>
-      <td>{{event["resource-title"]}}</td>
-      <td>{{event["property"]}}</td>
-      <td>{{event["old-value"]}}</td>
-      <td>{{event["new-value"]}}</td>
+      <td>{{event.certname}}</td>
+      <td>{{event.resource_type}}</td>
+      <td>{{event.resource_title}}</td>
+      <td>{{event.property}}</td>
+      <td>{{event.old_value}}</td>
+      <td>{{event.new_value}}</td>
     </tr>
     <tr>
       <td class="reveal-animation" ng-if="event.show" colspan="6">
@@ -98,13 +98,13 @@
           </tr>
           <tr>
             <th>Containing-class</th>
-            <td>{{event["containing-class"]}}</td>
+            <td>{{event.containing_class}}</td>
           </tr>
           <tr>
             <th>Containment-path</th>
             <td>
               <ol class="breadcrumb">
-                <li ng-repeat="container in event['containment-path']">{{container}}</li>
+                <li ng-repeat="container in event.containment_path">{{container}}</li>
               </ol>
             </td>
           </tr>
@@ -114,7 +114,7 @@
           </tr>
           <tr>
             <th>Timestamp</th>
-            <td title="{{event['timestamp']}}" am-time-ago="event['timestamp']"></td>
+            <td title="{{event.timestamp}}" am-time-ago="event.timestamp"></td>
           </tr>
           <tr ng-click="events.selectReport(event.report)">
             <th>Report</th>
