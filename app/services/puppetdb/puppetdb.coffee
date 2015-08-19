@@ -114,3 +114,11 @@ angular.module('app').factory 'PuppetDB', ($http,
       config = @serverConfig()
       config.timeout = @canceller.promise
       $http.get("#{@serverUrl()}/metrics/v1/mbeans/#{name}", config)
+
+    # Public: Get PuppetDB version, returns a promise just like $http
+    #
+    # Returns: A promise from $http
+    getVersion: ->
+      config = @serverConfig()
+      config.timeout = @canceller.promise
+      $http.get("#{@serverUrl()}/pdb/meta/v1/version", config)
