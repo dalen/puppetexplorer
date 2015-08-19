@@ -104,3 +104,13 @@ angular.module('app').factory 'PuppetDB', ($http,
     cancel: =>
       @canceller.resolve("user cancelled")
       @canceller = $q.defer()
+
+    # Public: Get a bean value, returns a promise just like $http
+    #
+    # name - The {String} bean name
+    #
+    # Returns: A promise from $http
+    getBean: (name) ->
+      config = @serverConfig()
+      config.timeout = @canceller.promise
+      $http.get("#{@serverUrl()}/metrics/v1/mbeans/#{name}", config)
