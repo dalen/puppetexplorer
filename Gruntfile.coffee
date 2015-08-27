@@ -16,6 +16,8 @@ module.exports = (grunt) ->
         middleware: (connect, options) ->
           proxy = require('grunt-connect-prism/middleware')
           rewriteRules = require('grunt-connect-rewrite/lib/utils').rewriteRequest
+          serveStatic = require('serve-static')
+          serveIndex = require('serve-index')
           [
             # Include the proxy first
             proxy
@@ -24,10 +26,10 @@ module.exports = (grunt) ->
             rewriteRules
 
             # Serve static files.
-            connect.static(options.base[0])
+            serveStatic(options.base[0])
 
             # Make empty directories browsable.
-            connect.directory(options.base[0])
+            serveIndex(options.base[0])
           ]
       server:
         options:
