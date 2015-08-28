@@ -17,7 +17,7 @@ angular.module('app').factory 'PuppetDB', ($http,
     # Returns: the String current server
     server: (server) ->
       if server
-        $location.search "server", server
+        $location.search 'server', server
       else
         $location.search().server or
           PUPPETDB_SERVERS[0][0]
@@ -80,15 +80,15 @@ angular.module('app').factory 'PuppetDB', ($http,
         query = null
       if additionalQuery
         query = if query
-          [ "and", query, additionalQuery ]
+          [ 'and', query, additionalQuery ]
         else
           additionalQuery
       else unless query # no query and no additional query either
-        if endpoint in ["reports", "events", "event-count", "aggregate-event-count"]
+        if endpoint in ['reports', 'events', 'event-count', 'aggregate-event-count']
           # PuppetDB really requires a valid query for some endpoints even
           # if we want to query all. So we just make something up that will
           # match all of them...
-          query = [ ">", "timestamp", "1970-01-01T00:00:00.000Z" ]
+          query = [ '>', 'timestamp', '1970-01-01T00:00:00.000Z' ]
 
       params.query = angular.toJson(query)
       if endpoint in ['nodes', 'reports', 'events', 'facts']
@@ -102,7 +102,7 @@ angular.module('app').factory 'PuppetDB', ($http,
         throw new Error(data or "Failed to fetch #{endpoint}") unless status == 0
 
     cancel: =>
-      @canceller.resolve("user cancelled")
+      @canceller.resolve('user cancelled')
       @canceller = $q.defer()
 
     # Public: Get a bean value, returns a promise just like $http

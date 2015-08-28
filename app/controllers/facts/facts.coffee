@@ -1,4 +1,4 @@
-angular.module("app").controller "FactsCtrl", class
+angular.module('app').controller 'FactsCtrl', class
   constructor: (@$scope, @$rootScope, @$location, @PuppetDB) ->
     @charts = {}
     @getFactNames()
@@ -65,11 +65,11 @@ angular.module("app").controller "FactsCtrl", class
   #
   # Returns: `undefined`
   getFactNames: ->
-    @PuppetDB.query("fact-paths", { order_by: angular.toJson([ field: "path", order: "asc" ]) })
+    @PuppetDB.query('fact-paths', { order_by: angular.toJson([ field: 'path', order: 'asc' ]) })
     .success (data, status, headers, config) =>
       @factPaths = (fact.path for fact in angular.fromJson(data) when fact.path[0][0] isnt '_')
     .error (data, status, headers, config) ->
-      throw new Error(data or "Fetching fact names failed")
+      throw new Error(data or 'Fetching fact names failed')
 
   # Public: Toggle display of a chart
   toggleChart: (fact) ->
@@ -96,8 +96,8 @@ angular.module("app").controller "FactsCtrl", class
         width: 450
         height: 300
         chartArea:
-          width: "100%"
-          height: "100%"
+          width: '100%'
+          height: '100%'
           left: 10
           top: 20
         colors: ['#BBBBBB']
@@ -107,7 +107,7 @@ angular.module("app").controller "FactsCtrl", class
 
     @PuppetDB.parseAndQuery('fact-contents',
       @$location.search().query,
-      [ "=", "path", fact ],
+      [ '=', 'path', fact ],
       {},
       (data, total) =>
         @setChartData(fact, data)

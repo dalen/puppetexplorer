@@ -1,4 +1,4 @@
-angular.module("app").controller "NodeListCtrl", class
+angular.module('app').controller 'NodeListCtrl', class
   constructor: (@$location, @$scope, @PuppetDB) ->
     # Reload nodes if either the page changes
     @$scope.$on('pageChange', @fetchNodes)
@@ -18,13 +18,13 @@ angular.module("app").controller "NodeListCtrl", class
   fetchNodes: =>
     @nodes = undefined
     @PuppetDB.parseAndQuery(
-      "nodes"
+      'nodes'
       @$location.search().query
       null
       {
         offset: @$scope.perPage * ((@$location.search().page || 1) - 1)
         limit: @$scope.perPage
-        order_by: angular.toJson([field: "certname", order: "asc"])
+        order_by: angular.toJson([field: 'certname', order: 'asc'])
       }
       (data, total) =>
         @$scope.numItems = total
@@ -43,12 +43,12 @@ angular.module("app").controller "NodeListCtrl", class
   # Returns: `undefined`
   fetchNodeEventCount: (node) =>
     @PuppetDB.parseAndQuery(
-      "event-counts"
+      'event-counts'
       null
-      ["and", ["=", "certname", node.certname], ["=", "latest_report?", true]]
+      ['and', ['=', 'certname', node.certname], ['=', 'latest_report?', true]]
       {
         summarize_by: 'certname'
-        order_by: angular.toJson([field: "certname", order: "asc"])
+        order_by: angular.toJson([field: 'certname', order: 'asc'])
       }
       do (node) ->
         (data, total) ->
@@ -69,11 +69,11 @@ angular.module("app").controller "NodeListCtrl", class
   # Returns: `undefined`
   fetchNodeStatus: (node) =>
     @PuppetDB.parseAndQuery(
-      "reports"
+      'reports'
       null
-      ["=", "certname", node.certname]
+      ['=', 'certname', node.certname]
       {
-        order_by: angular.toJson([field: "receive_time", order: "desc"])
+        order_by: angular.toJson([field: 'receive_time', order: 'desc'])
         limit: 1
       }
       do (node) ->
@@ -98,8 +98,8 @@ angular.module("app").controller "NodeListCtrl", class
   #
   # Returns: `undefined`
   showEvents: (node) ->
-    @$location.search "query", "\"#{node}\""
-    @$location.path "/events"
+    @$location.search 'query', "\"#{node}\""
+    @$location.path '/events'
 
   # Public: Return the status of a node
   #

@@ -29,7 +29,7 @@ angular.module('app').controller 'DashboardCtrl', class
       .success (data) =>
         @$scope[scopeName] = (angular.fromJson(data).Value * multiply)
           .toLocaleString()
-          .replace(/^(.*\..).*/, "$1")
+          .replace(/^(.*\..).*/, '$1')
       .error (data, status) ->
         unless status == 0
           throw new Error("Could not fetch metric #{name} from PuppetDB")
@@ -46,7 +46,7 @@ angular.module('app').controller 'DashboardCtrl', class
 
   setQuery: (query) ->
     @$location.search('query', query)
-    @$location.path "/nodes"
+    @$location.path '/nodes'
 
   checkVersion: () ->
     @PuppetDB.getVersion()
@@ -55,5 +55,5 @@ angular.module('app').controller 'DashboardCtrl', class
         minor = parseInt(data.version.split('.')[1], 10)
         patch = parseInt(data.version.split('.')[2], 10)
         unless major >= 3
-          throw new Error("This version of Puppet Explorer requires PuppetDB version 3.0.0+" +
+          throw new Error('This version of Puppet Explorer requires PuppetDB version 3.0.0+' +
             ", you are running PuppetDB #{data.version}")

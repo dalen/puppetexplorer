@@ -1,4 +1,4 @@
-angular.module("app").controller "NodeDetailCtrl", class
+angular.module('app').controller 'NodeDetailCtrl', class
   constructor: (@$location, @$routeParams, @$scope, @PuppetDB) ->
     @node = @$routeParams.node
     # Reload nodes if either the page changes
@@ -16,11 +16,11 @@ angular.module("app").controller "NodeDetailCtrl", class
   # Public: Fetches reports for node and stores them in @reports
   fetchReports: () =>
     @reports = @PuppetDB.parseAndQuery(
-      "reports"
+      'reports'
       @$location.search().query
-      ["=", "certname", @node]
+      ['=', 'certname', @node]
       {
-        order_by: angular.toJson([field: "end_time", order: "desc"])
+        order_by: angular.toJson([field: 'end_time', order: 'desc'])
         offset: @$scope.perPage * ((@$location.search().page || 1) - 1)
         limit: @$scope.perPage
       }
@@ -29,9 +29,9 @@ angular.module("app").controller "NodeDetailCtrl", class
         @$scope.numItems = total
         @reports.forEach (report) =>
           @PuppetDB.parseAndQuery(
-            "event-counts"
+            'event-counts'
             null
-            ["=", "report", report.hash]
+            ['=', 'report', report.hash]
             {
               'summarize_by': 'certname'
             }
@@ -45,16 +45,16 @@ angular.module("app").controller "NodeDetailCtrl", class
   # Returns: `undefined`
   fetchFacts: () =>
     @PuppetDB.parseAndQuery(
-      "fact-contents"
+      'fact-contents'
       null
-      ["=", "certname", @node]
-      { order_by: angular.toJson([field: "name", order: "asc"]) }
+      ['=', 'certname', @node]
+      { order_by: angular.toJson([field: 'name', order: 'asc']) }
       (data, total) =>
         @facts = data.filter((fact) ->
           fact.name[0] isnt '_'
         ).map((fact) ->
           # insert some spaces to break lines
-          fact.value = String(fact.value).replace(/(.{25})/g,"\u200B$1")
+          fact.value = String(fact.value).replace(/(.{25})/g,'\u200B$1')
           fact
         )
       )
@@ -90,6 +90,6 @@ angular.module("app").controller "NodeDetailCtrl", class
 
   # Switch to events view for a specified report
   selectReport: (report) ->
-    @$location.search "mode", "report"
-    @$location.search "report", report
-    @$location.path "/events"
+    @$location.search 'mode', 'report'
+    @$location.search 'report', report
+    @$location.path '/events'

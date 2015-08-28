@@ -1,7 +1,7 @@
-angular.module("app").controller "SearchCtrl", class
+angular.module('app').controller 'SearchCtrl', class
   constructor: (@$scope, @$rootScope, @$location) ->
     @$scope.query = @$location.search().query
-    @$scope.$on "$locationChangeSuccess", (event) =>
+    @$scope.$on '$locationChangeSuccess', (event) =>
       old = @$scope.query
       @$scope.query = @$location.search().query
       if old isnt @$scope.query
@@ -14,9 +14,9 @@ angular.module("app").controller "SearchCtrl", class
       @$location.search('node', null)
 
   submit: () ->
-    @$location.search "query", @$scope.query
+    @$location.search 'query', @$scope.query
 
     @$rootScope.$broadcast('queryChange', query: @$scope.query)
 
     # Change view to nodes if we are on dashboard
-    @$location.path "/nodes" if @$location.path() is "/dashboard"
+    @$location.path '/nodes' if @$location.path() is '/dashboard'

@@ -1,4 +1,4 @@
-angular.module("app").controller "EventsCtrl", class
+angular.module('app').controller 'EventsCtrl', class
   constructor: (@$scope, @$rootScope, @$location, @PuppetDB) ->
     @$scope.$on('queryChange', @reset)
     @$scope.$on('pageChange', @fetchEvents)
@@ -46,25 +46,25 @@ angular.module("app").controller "EventsCtrl", class
   #
   # Returns: A {Array} PuppetDB query
   createEventQuery: (exclude = false) ->
-    query = ["and"]
+    query = ['and']
     if @mode.current == 'latest'
-      query.push ["=", "latest_report?", true]
+      query.push ['=', 'latest_report?', true]
     else if @mode.current == 'report'
-      query.push ["=", "report", @$scope.reportHash]
+      query.push ['=', 'report', @$scope.reportHash]
     else
       moment = require('moment')
-      query.push [">", "timestamp", moment.utc(@$scope.dateFrom).toISOString()]
-      query.push ["<", "timestamp", moment.utc(@$scope.dateTo).add(1, 'days').toISOString()]
+      query.push ['>', 'timestamp', moment.utc(@$scope.dateFrom).toISOString()]
+      query.push ['<', 'timestamp', moment.utc(@$scope.dateTo).add(1, 'days').toISOString()]
 
     if @$location.search().containing_class? and exclude != 'containing_class'
       cc = @$location.search().containing_class
       if cc is 'none'
         cc = null
-      query.push([ "=", "containing_class", cc])
+      query.push([ '=', 'containing_class', cc])
     if @$location.search().resource_type? and exclude != 'resource_type'
-      query.push([ "=", "resource_type", @$location.search().resource_type])
+      query.push([ '=', 'resource_type', @$location.search().resource_type])
     if @$location.search().status? and exclude != 'status'
-      query.push([ "=", "status", @$location.search().status.toLowerCase()])
+      query.push([ '=', 'status', @$location.search().status.toLowerCase()])
 
     query
 
@@ -74,13 +74,13 @@ angular.module("app").controller "EventsCtrl", class
   fetchEvents: =>
     @events = undefined
 
-    @PuppetDB.parseAndQuery("events",
+    @PuppetDB.parseAndQuery('events',
       @$location.search().query,
       @createEventQuery(),
       {
         offset: @$scope.perPage * ((@$location.search().page || 1) - 1)
         limit: @$scope.perPage
-        order_by: angular.toJson([ field: "timestamp", order: "desc" ]),
+        order_by: angular.toJson([ field: 'timestamp', order: 'desc' ]),
       }
       (data, total) =>
         @$scope.numItems = total
@@ -97,7 +97,7 @@ angular.module("app").controller "EventsCtrl", class
 
   fetchContainingClasses: =>
     @drawChart('containingChart', 'Containing class')
-    @PuppetDB.parseAndQuery("event-counts",
+    @PuppetDB.parseAndQuery('event-counts',
       @$location.search().query
       @createEventQuery('containing_class')
       {
@@ -106,7 +106,7 @@ angular.module("app").controller "EventsCtrl", class
       (data, total) =>
         chartData = []
         for item in data
-          key = item.subject.title || "none"
+          key = item.subject.title || 'none'
           value = item.failures + item.successes + item.noops + item.skips
           chartData.push [key, value]
         @drawChart('containingChart', 'Containing class', chartData)
@@ -114,7 +114,7 @@ angular.module("app").controller "EventsCtrl", class
 
   fetchResourceCounts: =>
     @drawChart('resourceChart', 'Resource')
-    @PuppetDB.parseAndQuery("event-counts",
+    @PuppetDB.parseAndQuery('event-counts',
       @$location.search().query
       @createEventQuery('resource_type')
       {
@@ -133,7 +133,7 @@ angular.module("app").controller "EventsCtrl", class
 
   fetchStatusCounts: =>
     @drawChart('statusChart', 'Event status')
-    @PuppetDB.parseAndQuery("aggregate-event-counts",
+    @PuppetDB.parseAndQuery('aggregate-event-counts',
       @$location.search().query
       @createEventQuery('status')
       {
@@ -176,8 +176,8 @@ angular.module("app").controller "EventsCtrl", class
         enableInteractivity: enableInteractivity
         height: 250
         chartArea:
-          width: "100%"
-          height: "85%"
+          width: '100%'
+          height: '85%'
       data: [['Type', 'Number']].concat(data)
     # Always trigger a redraw of charts
     @$rootScope.$broadcast('resizeMsg')
@@ -189,16 +189,16 @@ angular.module("app").controller "EventsCtrl", class
   # Returns: A {String} with the CSS class
   color: (status) ->
     switch status
-      when "success"
-        "success"
-      when "noop"
-        "text-muted"
-      when "failure"
-        "danger"
-      when "skipped"
-        "warning"
+      when 'success'
+        'success'
+      when 'noop'
+        'text-muted'
+      when 'failure'
+        'danger'
+      when 'skipped'
+        'warning'
       else
-        ""
+        ''
 
   # Public: Set the current chart selection on click
   #

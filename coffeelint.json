@@ -89,7 +89,7 @@
         "allowed_in_empty_lines": true
     },
     "no_unnecessary_double_quotes": {
-        "level": "ignore"
+        "level": "error"
     },
     "no_unnecessary_fat_arrows": {
         "level": "warn"
