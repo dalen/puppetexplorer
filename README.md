@@ -60,8 +60,8 @@ Puppet module.
 
 ### Dependencies
 
-It is using the V4 PuppetDB API from PuppetDB 2.1. Version 1.0.0 works with
-PuppetDB 2.0, but the current version only works with PuppetDB 2.1.
+It is using the V4 PuppetDB API from PuppetDB 3.0. Version 1.5.0 works with
+PuppetDB 2.3.x, but the current version only works with PuppetDB 3.x.
 
 ### Development and local testing
 
