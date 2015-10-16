@@ -37,7 +37,7 @@
     "angular-route": "^1.4.4",
     "bootswatch": "^3.3.5",
     "moment": "^2.10.6",
-    "node-puppetdbquery": "^1.0.0"
+    "node-puppetdbquery": "^1.0.1"
   },
   "devDependencies": {
     "coffeeify": "^1.1.0",
