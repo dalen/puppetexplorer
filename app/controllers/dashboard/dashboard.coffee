@@ -54,6 +54,6 @@ angular.module('app').controller 'DashboardCtrl', class
         major = parseInt(data.version.split('.')[0], 10)
         minor = parseInt(data.version.split('.')[1], 10)
         patch = parseInt(data.version.split('.')[2], 10)
-        unless major >= 3
-          throw new Error('This version of Puppet Explorer requires PuppetDB version 3.0.0+' +
+        unless major >= 3 && minor >= 2
+          throw new Error('This version of Puppet Explorer requires PuppetDB version 3.2.0+' +
             ", you are running PuppetDB #{data.version}")

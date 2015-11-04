@@ -60,7 +60,7 @@ Puppet module.
 
 ### Dependencies
 
-It is using the V4 PuppetDB API from PuppetDB 3.0. Version 1.5.0 works with
+It is using the V4 PuppetDB API from PuppetDB 3.2. Version 1.5.0 works with
 PuppetDB 2.3.x, but the current version only works with PuppetDB 3.x.
 
 ### Development and local testing
