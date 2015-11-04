@@ -52,7 +52,7 @@ module.exports = (grunt) ->
     watch:
       coffee:
         files: 'app/**/*.coffee'
-        tasks: ['browserify']
+        tasks: ['browserify:dev']
       static:
         files: [
           'app/**/*.html'
@@ -64,17 +64,23 @@ module.exports = (grunt) ->
         tasks: ['copy:src']
 
     browserify:
-      options:
-        debug: true
-        transform: [
-          'coffeeify'
-          ['uglifyify', { global: true, mangle: false }]
-        ]
-      files:
-        src: [
-          'app/**/*.coffee'
+      # Build for distribution
+      dist:
+        files:
+          'dist/app.js': [ 'app/**/*.coffee' ]
+        options:
+          debug: true
+          transform: [
+            'coffeeify'
+            ['uglifyify', { global: true, mangle: false }]
           ]
-        dest: 'dist/app.js'
+      # Dev target without ulgifyify
+      dev:
+        options:
+          debug: true
+          transform: [ 'coffeeify' ]
+        files:
+          'dist/app.js': [ 'app/**/*.coffee' ]
 
     copy:
       src:
@@ -185,14 +191,16 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'dev', [
-    'build'
+    'clean'
+    'browserify:dev'
+    'copy'
     'configureRewriteRules'
     'prism:server:proxy'
     'connect:server'
     'watch'
   ]
 
-  grunt.registerTask 'build', ['clean', 'browserify', 'copy']
+  grunt.registerTask 'build', ['clean', 'browserify:dist', 'copy']
   grunt.registerTask 'build_debian', ['build', 'debian_package']
   grunt.registerTask 'default', ['build']
   grunt.registerTask 'test', [
