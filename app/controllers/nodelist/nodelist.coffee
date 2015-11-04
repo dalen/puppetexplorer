@@ -41,9 +41,8 @@ angular.module('app').controller 'NodeListCtrl', class
   #
   # Returns: `undefined`
   fetchNodeEventCount: (node) =>
-    @PuppetDB.parseAndQuery(
+    @PuppetDB.query(
       'event-counts'
-      null
       ['and', ['=', 'certname', node.certname], ['=', 'latest_report?', true]]
       {
         summarize_by: 'certname'
