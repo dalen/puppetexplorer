@@ -19,10 +19,10 @@
         <span class="glyphicon glyphicon-warning-sign text-warning" ng-if="nodeList.nodeUnresponsive(node)"></span>
         <span am-time-ago="node.report_timestamp"></span>
       </td>
-      <td class="text-center">{{node.events.successes || ""}}</td>
-      <td class="text-center">{{node.events.noops || ""}}</td>
-      <td class="text-center">{{node.events.skips || ""}}</td>
-      <td class="text-center">{{node.events.failures || ""}}</td>
+      <td class="text-center">{{node.metrics.events.success || ""}}</td>
+      <td class="text-center">{{node.metrics.events.noop || ""}}</td>
+      <td class="text-center">{{node.metrics.events.skip || ""}}</td>
+      <td class="text-center">{{node.metrics.events.failure || ""}}</td>
       <td class="text-right" ng-click="nodeList.showEvents(node.certname)">
         <span class="glyphicon" ng-class="nodeList.nodeStatus(node)"></span>
       </td>

@@ -41,24 +41,16 @@ angular.module('app').controller 'NodeListCtrl', class
   #
   # Returns: `undefined`
   fetchNodeEventCount: (node) =>
-    @PuppetDB.query(
-      'event-counts'
-      ['and', ['=', 'certname', node.certname], ['=', 'latest_report?', true]]
-      {
-        summarize_by: 'certname'
-        order_by: angular.toJson([field: 'certname', order: 'asc'])
-      }
-      do (node) ->
-        (data, total) ->
-          if data.length
-            node.events = data[0]
-          else # The node didn't have any events
-            node.events =
-              failures: 0
-              skips: 0
-              noops: 0
-              successes: 0
-      )
+    return unless node.latest_report_hash
+    resp = @PuppetDB.getQuery("reports/#{node.latest_report_hash}/metrics")
+    @PuppetDB.handleResponse(resp, do (node) ->
+      (data) ->
+        node.metrics = {}
+        # Create a nested hash out of all the metrics
+        for metric in data
+          node.metrics[metric.category] ?= {}
+          node.metrics[metric.category][metric.name] = metric.value
+    )
 
   # Public: Select a node to show info for
   #
