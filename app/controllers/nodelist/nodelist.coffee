@@ -31,7 +31,6 @@ angular.module('app').controller 'NodeListCtrl', class
         @nodes = data
         for node in @nodes
           @fetchNodeEventCount(node)
-          @fetchNodeStatus(node)
         if @$location.search().node?
           @fetchSelectedNode()
       )
@@ -60,28 +59,6 @@ angular.module('app').controller 'NodeListCtrl', class
               skips: 0
               noops: 0
               successes: 0
-      )
-
-  # Public: Fetch node report status
-  #
-  # node - The {Object} node to fetch status for
-  #
-  # Returns: `undefined`
-  fetchNodeStatus: (node) =>
-    @PuppetDB.parseAndQuery(
-      'reports'
-      null
-      ['=', 'certname', node.certname]
-      {
-        order_by: angular.toJson([field: 'receive_time', order: 'desc'])
-        limit: 1
-      }
-      do (node) ->
-        (data, total) ->
-          if data.length
-            node.report = data[0]
-          else # The node didn't have any report
-            node.report = null
       )
 
   # Public: Select a node to show info for
