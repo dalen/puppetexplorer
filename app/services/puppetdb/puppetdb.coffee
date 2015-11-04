@@ -51,17 +51,33 @@ angular.module('app').factory 'PuppetDB', ($http,
       else
         null
 
-    # Public: Query a endpoint, returns a promise just like $http
+    # Public: Basic function to get a path from current server
     #
-    # endpoint - The {String} endpoint to query
-    # params   - The {Object} query parameters
+    # path - The {String} path to get
+    # params - A {Object} with query parameters
     #
     # Returns: A promise from $http
-    query: (endpoint, params = {}) ->
+    get: (path, params = {}) ->
       config = @serverConfig()
       config.params = params
       config.timeout = @canceller.promise
-      $http.get("#{@serverUrl()}/pdb/query/#{@apiVersion}/#{endpoint}", config)
+      $http.get("#{@serverUrl()}/#{path}", config)
+
+    # Public: Query a endpoint and handle parsing return data and errors
+    #
+    # endpoint - The {String} endpoint to query
+    # params   - The {Object} query parameters
+    query: (endpoint, query, params = {}, success) ->
+      params.query = angular.toJson(query)
+      @get("pdb/query/#{@apiVersion}/#{endpoint}", params)
+        .success (data, status, headers, config) ->
+          success(angular.fromJson(data), headers('X-Records'))
+        .error (data, status, headers, config) ->
+          throw new Error(data or "Failed to fetch #{endpoint}") unless status == 0
+
+    cancel: =>
+      @canceller.resolve('user cancelled')
+      @canceller = $q.defer()
 
     # Public: Combined function to both parse and query PuppetDB.
     #
@@ -90,20 +106,11 @@ angular.module('app').factory 'PuppetDB', ($http,
           # match all of them...
           query = [ '>', 'timestamp', '1970-01-01T00:00:00.000Z' ]
 
-      params.query = angular.toJson(query)
       if endpoint in ['nodes', 'reports', 'events', 'facts']
         params['include_total'] = true
 
       # Start querying
-      @query(endpoint, params)
-      .success (data, status, headers, config) ->
-        success(angular.fromJson(data), headers('X-Records'))
-      .error (data, status, headers, config) ->
-        throw new Error(data or "Failed to fetch #{endpoint}") unless status == 0
-
-    cancel: =>
-      @canceller.resolve('user cancelled')
-      @canceller = $q.defer()
+      @query(endpoint, query, params, success)
 
     # Public: Get a bean value, returns a promise just like $http
     #
@@ -111,14 +118,10 @@ angular.module('app').factory 'PuppetDB', ($http,
     #
     # Returns: A promise from $http
     getBean: (name) ->
-      config = @serverConfig()
-      config.timeout = @canceller.promise
-      $http.get("#{@serverUrl()}/metrics/v1/mbeans/#{name}", config)
+      @get("metrics/v1/mbeans/#{name}")
 
     # Public: Get PuppetDB version, returns a promise just like $http
     #
     # Returns: A promise from $http
     getVersion: ->
-      config = @serverConfig()
-      config.timeout = @canceller.promise
-      $http.get("#{@serverUrl()}/pdb/meta/v1/version", config)
+      @get('pdb/meta/v1/version')
