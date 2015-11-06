@@ -75,6 +75,16 @@ angular.module('app').factory 'PuppetDB', ($http,
       params.query = angular.toJson(query)
       @handleResponse(@getQuery(endpoint, params), success)
 
+    # Combine queries together
+    combine: (queries...) ->
+      queries = queries.filter (q) -> q?
+      if queries.length == 0
+        null
+      else if queries.length == 1
+        queries[0]
+      else
+        ['and', queries...]
+
     # Generically handle a response on a HTTP promise object
     #
     # promise - {HttpPromise}
@@ -106,12 +116,8 @@ angular.module('app').factory 'PuppetDB', ($http,
         query = @parse(nodeQuery)
       else
         query = null
-      if additionalQuery
-        query = if query
-          [ 'and', query, additionalQuery ]
-        else
-          additionalQuery
-      else unless query # no query and no additional query either
+      query = @combine(query, additionalQuery)
+      unless query # no query and no additional query either
         if endpoint in ['reports', 'events', 'event-count', 'aggregate-event-count']
           # PuppetDB really requires a valid query for some endpoints even
           # if we want to query all. So we just make something up that will
