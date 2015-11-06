@@ -94,7 +94,7 @@ angular.module('app').factory 'PuppetDB', ($http,
         (resp) ->
           success(angular.fromJson(resp.data), resp.headers('X-Records'))
         (resp) ->
-          throw new Error("Failed to fetch #{resp.config.url}\n#{resp.status}: #{resp.statusText}") unless resp.status == 0
+          throw new Error("Failed to fetch #{resp.config.url}\n#{resp.status}: #{resp.statusText}") unless resp.status <= 0
       )
 
     cancel: =>
