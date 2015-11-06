@@ -28,6 +28,8 @@ angular.module('app').controller 'EventsCtrl', class
     @fetchResourceCounts() unless exclude == 'resource_type'
     @fetchStatusCounts() unless exclude == 'status'
 
+  # Switch mode to 'latest' or 'report'
+  # either vieeing latest report of a specified report
   setMode: (mode) ->
     @mode.current = mode
     @$location.search('mode', mode)
