@@ -114,39 +114,57 @@ angular.module('app').controller 'EventsCtrl', class
         @drawChart('containingChart', 'Containing class', chartData)
     )
 
+  fetchContainingClasses: =>
+    @drawChart('containingChart', 'Containing class')
+    @PuppetDB.query('events'
+      ['extract', [['function', 'count'], 'containing_class'],
+        @PuppetDB.combine(
+          @PuppetDB.parse @$location.search().query
+          @createEventQuery('containing_class')
+        )
+        ['group_by', 'containing_class']]
+      null
+      (data) =>
+        chartData = data.map (i) ->
+          [i.containing_class || 'none', i.count]
+        @drawChart('containingChart', 'Containing class', chartData)
+      )
+
   fetchResourceCounts: =>
     @drawChart('resourceChart', 'Resource')
-    @PuppetDB.parseAndQuery('event-counts',
-      @$location.search().query
-      @createEventQuery('resource_type')
-      {
-        summarize_by: 'resource'
-      }
-      (data, total) =>
-        chartData = []
-        types = {}
-        for item in data
-          types[item.subject.type] ||= 0
-          types[item.subject.type] += item.failures + item.successes + item.noops + item.skips
-        for key, value of types
-          chartData.push [key, value]
+    @PuppetDB.query('events'
+      ['extract', [['function', 'count'], 'resource_type'],
+        @PuppetDB.combine(
+          @PuppetDB.parse @$location.search().query
+          @createEventQuery('resource_type')
+        )
+        ['group_by', 'resource_type']]
+      null
+      (data) =>
+        chartData = data.map (i) ->
+          [i.resource_type || 'none', i.count]
         @drawChart('resourceChart', 'Resource type', chartData)
-    )
+      )
 
   fetchStatusCounts: =>
     @drawChart('statusChart', 'Event status')
-    @PuppetDB.parseAndQuery('aggregate-event-counts',
-      @$location.search().query
-      @createEventQuery('status')
-      {
-        summarize_by: 'resource'
-      }
-      (data, total) =>
+    @PuppetDB.query('events'
+      ['extract', [['function', 'count'], 'status'],
+        @PuppetDB.combine(
+          @PuppetDB.parse @$location.search().query
+          @createEventQuery('status')
+        )
+        ['group_by', 'status']]
+      null
+      (data) =>
+        dataHash = {}
+        for item in data
+          dataHash[item.status] = item.count
         chartData = [
-          ['Success', data.successes]
-          ['Skipped', data.skips]
-          ['Failure', data.failures]
-          ['Noop', data.noops]
+          ['Success', dataHash.success || 0]
+          ['Skipped', dataHash.skipped || 0]
+          ['Failure', data.failure || 0]
+          ['Noop', data.noop || 0]
         ]
         @drawChart('statusChart', 'Event status', chartData)
     )
