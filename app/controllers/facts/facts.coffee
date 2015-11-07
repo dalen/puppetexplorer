@@ -65,11 +65,12 @@ angular.module('app').controller 'FactsCtrl', class
   #
   # Returns: `undefined`
   getFactNames: ->
-    @PuppetDB.query('fact-paths', { order_by: angular.toJson([ field: 'path', order: 'asc' ]) })
-    .success (data, status, headers, config) =>
-      @factPaths = (fact.path for fact in angular.fromJson(data) when fact.path[0][0] isnt '_')
-    .error (data, status, headers, config) ->
-      throw new Error(data or 'Fetching fact names failed')
+    @PuppetDB.query('fact-paths'
+      null
+      { order_by: angular.toJson([ field: 'path', order: 'asc' ]) }
+      (data) =>
+        @factPaths = (fact.path for fact in angular.fromJson(data) when fact.path[0][0] isnt '_')
+      )
 
   # Public: Toggle display of a chart
   toggleChart: (fact) ->
