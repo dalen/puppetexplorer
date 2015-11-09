@@ -163,8 +163,8 @@ angular.module('app').controller 'EventsCtrl', class
         chartData = [
           ['Success', dataHash.success || 0]
           ['Skipped', dataHash.skipped || 0]
-          ['Failure', data.failure || 0]
-          ['Noop', data.noop || 0]
+          ['Failure', dataHash.failure || 0]
+          ['Noop', dataHash.noop || 0]
         ]
         @drawChart('statusChart', 'Event status', chartData)
     )
