@@ -143,7 +143,7 @@ angular.module('app').controller 'FactsCtrl', class
       '#F05940' # orange
     ]
     @charts[factString].options.pieSliceText = 'percent'
-    @charts[factString].enableInteractivity = true
+    @charts[factString].options.enableInteractivity = true
     @charts[factString].data = [['Value', 'Number']]
 
     # Count occurrences of each value (could be done using reduce instead)
