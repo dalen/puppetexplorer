@@ -63,6 +63,12 @@ Puppet module.
 It is using the V4 PuppetDB API from PuppetDB 3.2. Version 1.5.0 works with
 PuppetDB 2.3.x, but the current version only works with PuppetDB 3.x.
 
+Versions of Puppet prior to 4.0, converted Facter's facts to string, limiting the
+puppetexplorer's ability to compare them.  The
+[stringifyfacts](https://docs.puppetlabs.com/puppet/3.8/reference/configuration.html#stringifyfacts)
+Puppet parameter permits to disable this old behaviour.  Please note that Facter
+2.3.0 or newer is required for this setting to take effect.
+
 ### Development and local testing
 
 Install all required dependencies using `npm install` and the grunt cli tool
