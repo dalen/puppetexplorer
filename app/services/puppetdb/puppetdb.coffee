@@ -1,5 +1,5 @@
 angular.module('app').factory 'PuppetDB', ($http,
-                                           $location
+                                           $location,
                                            $q) ->
   new class PuppetDB
 
