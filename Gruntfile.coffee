@@ -14,7 +14,7 @@ module.exports = (grunt) ->
         hostname: 'localhost'
         base: 'dist'
         middleware: (connect, options) ->
-          proxy = require('grunt-connect-prism/middleware')
+          proxy = require('grunt-connect-proxy/lib/utils').proxyRequest
           rewriteRules = require('grunt-connect-rewrite/lib/utils').rewriteRequest
           serveStatic = require('serve-static')
           serveIndex = require('serve-index')
@@ -37,17 +37,13 @@ module.exports = (grunt) ->
       testserver:
         options:
           port: 8001
-
-    prism:
-      options:
-        mocksPath: './mocks'
+      proxies:
         context: '/api'
         host: puppetdb.hostname
         port: puppetdb.port or (if puppetdb.protocol is 'https:' then 443 else 80)
         https: puppetdb.protocol is 'https:'
         rewrite:
           '^/api': ''
-      server: {}
 
     watch:
       coffee:
@@ -172,7 +168,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-connect-rewrite'
-  grunt.loadNpmTasks 'grunt-connect-prism'
+  grunt.loadNpmTasks 'grunt-connect-proxy'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-debian-package'
@@ -195,7 +191,7 @@ module.exports = (grunt) ->
     'browserify:dev'
     'copy'
     'configureRewriteRules'
-    'prism:server:proxy'
+    'configureProxies'
     'connect:server'
     'watch'
   ]
@@ -205,7 +201,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'default', ['build']
   grunt.registerTask 'test', [
     'configureRewriteRules'
-    'prism:server:mockrecord'
+    'configureProxies'
     'connect:testserver'
     'mocha_casperjs'
   ]

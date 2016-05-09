@@ -46,7 +46,6 @@
     "grunt-bower-installer": "^0.3.6",
     "grunt-browserify": "^5.0.0",
     "grunt-coffeelint": "^0.0.15",
-    "grunt-connect-prism": "^1.0.5",
     "grunt-connect-proxy": "^0.2.0",
     "grunt-connect-rewrite": "^0.2.1",
     "grunt-contrib-clean": "^1.0.0",
