@@ -55,7 +55,6 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-debian-package": "^0.1.10",
-    "grunt-mocha-casperjs": "^1.4.4",
     "grunt-rpm": "^0.1.12",
     "jshint-stylish": "^2.0.1",
     "serve-index": "^1.7.2",

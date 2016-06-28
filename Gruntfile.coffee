@@ -162,6 +162,12 @@ module.exports = (grunt) ->
       files:
         src: ['test/**/*.coffee']
 
+    casperjs:
+      options:
+        async:
+          parallel: false
+      files: ['tests/casperjs/**/*.js']
+
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-browserify'
   grunt.loadNpmTasks 'grunt-contrib-jshint'
@@ -173,7 +179,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-debian-package'
   grunt.loadNpmTasks 'grunt-rpm'
-  grunt.loadNpmTasks 'grunt-mocha-casperjs'
+  grunt.loadNpmTasks 'grunt-casperjs'
 
   grunt.registerTask 'serve', [
     'configureRewriteRules'
@@ -198,5 +204,5 @@ module.exports = (grunt) ->
     'configureRewriteRules'
     'configureProxies'
     'connect:testserver'
-    'mocha_casperjs'
+    'casperjs'
   ]
