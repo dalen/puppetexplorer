@@ -134,7 +134,7 @@ module.exports = (grunt) => {
     },
 
     eslint: {
-      files: ['app/**/*.js', ['tests/**/*.js'], 'Gruntfile.js'],
+      files: ['app/**/*.js', 'tests/**/*.js', '!tests/casperjs/**/*.js', 'Gruntfile.js'],
     },
 
     debian_package: {
