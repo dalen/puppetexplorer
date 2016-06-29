@@ -1,4 +1,4 @@
-.table-hover, .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.table-hover, .nav, .pagination, .carousel, .panel-title a, [ng-click] { cursor: pointer; }
 
 .reveal-animation.ng-enter {
   -webkit-animation: enter_sequence 0.4s linear; /* Safari/Chrome */
