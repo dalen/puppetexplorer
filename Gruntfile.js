@@ -79,12 +79,13 @@ module.exports = (grunt) => {
       // Build for distribution
       dist: {
         files: {
-          'dist/app.js': ['app/**/*.coffee'],
+          'dist/app.js': ['app/**/*.js', 'app/**/*.coffee'],
         },
         options: {
           debug: true,
           transform: [
             'coffeeify',
+            ['babelify', { presets: ['es2015'] }],
             ['uglifyify', { global: true, mangle: false }],
           ],
         },
