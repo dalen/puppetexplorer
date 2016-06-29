@@ -59,10 +59,6 @@ module.exports = (grunt) => {
     },
 
     watch: {
-      coffee: {
-        files: 'app/**/*.coffee',
-        tasks: ['browserify:dev'],
-      },
       js: {
         files: 'app/**/*.js',
         tasks: ['browserify:dev'],
@@ -83,12 +79,11 @@ module.exports = (grunt) => {
       // Build for distribution
       dist: {
         files: {
-          'dist/app.js': ['app/**/*.js', 'app/**/*.coffee'],
+          'dist/app.js': ['app/**/*.js'],
         },
         options: {
           debug: true,
           transform: [
-            'coffeeify',
             ['babelify', {
               global: true,
               presets: ['es2015'],
@@ -105,7 +100,6 @@ module.exports = (grunt) => {
         options: {
           debug: true,
           transform: [
-            'coffeeify',
             ['babelify', {
               global: true,
               presets: ['es2015'],
@@ -115,7 +109,7 @@ module.exports = (grunt) => {
           ],
         },
         files: {
-          'dist/app.js': ['app/**/*.js', 'app/**/*.coffee'],
+          'dist/app.js': ['app/**/*.js'],
         },
       },
     },
@@ -143,13 +137,6 @@ module.exports = (grunt) => {
           'node_modules/bootswatch/sandstone/bootstrap.min.css',
         ],
       },
-    },
-
-    coffeelint: {
-      options: {
-        configFile: 'coffeelint.json',
-      },
-      all: ['app/**/*.coffee', 'Gruntfile.coffee'],
     },
 
     eslint: {
