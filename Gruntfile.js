@@ -210,5 +210,6 @@ module.exports = (grunt) => {
     'configureProxies',
     'connect:testserver',
     'casperjs',
+    'eslint',
   ]);
 };
