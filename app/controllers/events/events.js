@@ -256,7 +256,6 @@ angular.module('app').controller('EventsCtrl', class {
   //
   // Returns: `undefined`
   onChartSelect(param, data, item) {
-    console.log(param, data, chart);
     if (item) {
       this.$location.search(param, data[item.row + 1][0]);
     } else {
