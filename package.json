@@ -58,6 +58,7 @@
     "grunt-debian-package": "^0.1.10",
     "grunt-eslint": "^18.1.0",
     "grunt-rpm": "^0.1.12",
+    "load-grunt-tasks": "^3.5.0",
     "serve-index": "^1.7.2",
     "serve-static": "^1.10.0",
     "uglifyify": "^3.0.1"

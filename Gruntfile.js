@@ -3,8 +3,10 @@ const proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
 const rewriteRules = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
 const serveStatic = require('serve-static');
 const serveIndex = require('serve-index');
+const taskLoader = require('load-grunt-tasks');
 
 module.exports = (grunt) => {
+  taskLoader(grunt);
   const puppetdb = url.parse(grunt.option('puppetdb') || 'http://puppetdb.puppetexplorer.io:80/');
   const properties = grunt.file.readJSON('package.json');
 
@@ -183,19 +185,6 @@ module.exports = (grunt) => {
       files: ['tests/casperjs/**/*.js'],
     },
   });
-
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-eslint');
-  grunt.loadNpmTasks('grunt-coffeelint');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-connect-rewrite');
-  grunt.loadNpmTasks('grunt-connect-proxy');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-debian-package');
-  grunt.loadNpmTasks('grunt-rpm');
-  grunt.loadNpmTasks('grunt-casperjs');
 
   grunt.registerTask('serve', [
     'configureRewriteRules',
