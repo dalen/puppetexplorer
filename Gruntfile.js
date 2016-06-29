@@ -85,7 +85,12 @@ module.exports = (grunt) => {
           debug: true,
           transform: [
             'coffeeify',
-            ['babelify', { presets: ['es2015'] }],
+            ['babelify', {
+              global: true,
+              presets: ['es2015'],
+              // FIXME: This "list" of ES6 modules is pretty ugly
+              only: /(app\/.*\.js|node_modules\/node-puppetdbquery)/,
+            }],
             ['uglifyify', { global: true, mangle: false }],
           ],
         },
