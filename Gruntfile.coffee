@@ -158,14 +158,7 @@ module.exports = (grunt) ->
 
     clean: ['dist', 'tmp']
 
-    mocha_casperjs:
-      files:
-        src: ['test/**/*.coffee']
-
     casperjs:
-      options:
-        async:
-          parallel: false
       files: ['tests/casperjs/**/*.js']
 
   grunt.loadNpmTasks 'grunt-contrib-copy'
