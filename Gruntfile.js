@@ -89,7 +89,7 @@ module.exports = (grunt) => {
               global: true,
               presets: ['es2015'],
               // FIXME: This "list" of ES6 modules is pretty ugly
-              only: /(app\/.*\.js|node_modules\/node-puppetdbquery)/,
+              only: [/app\//, /node_modules\/node-puppetdbquery/],
             }],
             ['uglifyify', { global: true, mangle: false }],
           ],
@@ -99,10 +99,17 @@ module.exports = (grunt) => {
       dev: {
         options: {
           debug: true,
-          transform: ['coffeeify'],
+          transform: [
+            'coffeeify',
+            ['babelify', {
+              global: true,
+              presets: ['es2015'],
+              only: [/app\//, /node_modules\/node-puppetdbquery/],
+            }],
+          ],
         },
         files: {
-          'dist/app.js': ['app/**/*.coffee'],
+          'dist/app.js': ['app/**/*.js', 'app/**/*.coffee'],
         },
       },
     },
