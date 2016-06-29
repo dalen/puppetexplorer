@@ -63,6 +63,10 @@ module.exports = (grunt) => {
         files: 'app/**/*.coffee',
         tasks: ['browserify:dev'],
       },
+      js: {
+        files: 'app/**/*.js',
+        tasks: ['browserify:dev'],
+      },
       static: {
         files: [
           'app/**/*.html',
