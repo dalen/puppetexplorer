@@ -45,7 +45,7 @@
         </tr></thead>
         <tbody>
           <tr ng-repeat="fact in nodeDetail.importantFacts()">
-            <td><span ng-repeat="factCompontent in fact.path">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span></td>
+            <td><span ng-repeat="factCompontent in fact.path track by $index">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span></td>
             <td>{{fact.value}}</td>
           </tr>
         </tbody>
@@ -61,7 +61,7 @@
         </tr></thead>
         <tbody>
           <tr ng-repeat="fact in nodeDetail.facts">
-            <td><span ng-repeat="factCompontent in fact.path">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span></td>
+            <td><span ng-repeat="factCompontent in fact.path track by $index">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span></td>
             <td>{{fact.value}}</td>
           </tr>
         </tbody>
