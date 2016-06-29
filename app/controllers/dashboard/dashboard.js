@@ -16,16 +16,14 @@ angular.module('app').controller('DashboardCtrl', class {
     this.getBean('avg-resources-per-node', 'avgResources');
     this.getBean('pct-resource-dupes', 'resDuplication', 100);
 
-    if (typeof DASHBOARD_PANELS !== 'undefined' && DASHBOARD_PANELS !== null) {
+    if (DASHBOARD_PANELS) {
       this.$scope.panels = DASHBOARD_PANELS;
     } else {
       this.$scope.panels = [];
     }
-    for (let i = 0; i < this.$scope.panels.length; i++) {
-      const panel = this.$scope.panels[i];
+    for (const panel of this.$scope.panels) {
       panel.count = undefined; // reset if we switched server
-      const callback = (p) => (count) => { p.count = count; };
-      this.getNodeCount(panel.query, callback(panel));
+      this.getNodeCount(panel.query, (count) => { panel.count = String(count); });
     }
 
     this.$scope.panelWidth = Math.max(2, Math.floor(12 / this.$scope.panels.length));
@@ -51,13 +49,12 @@ angular.module('app').controller('DashboardCtrl', class {
   }
 
   getNodeCount(query, callback) {
-    return this.PuppetDB.parseAndQuery(
+    this.PuppetDB.query(
       'nodes',
-      query,
-      null,
-      { limit: 1 },
-      (data, total) => callback(total)
-      );
+      ['extract', [['function', 'count']], this.PuppetDB.parse(query)],
+      {},
+      (data) => callback(data[0].count)
+    );
   }
 
   setQuery(query) {
