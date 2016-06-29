@@ -1,9 +1,9 @@
-const angular = require('angular');
-require('angular-route');
-require('angular-animate');
-require('angular-google-chart');
-require('angular-moment');
-require('angular-bootstrap');
+import angular from 'angular';
+import 'angular-route';
+import 'angular-animate';
+import 'angular-google-chart';
+import 'angular-moment';
+import 'angular-bootstrap';
 
 angular.module('app', [
   'ngRoute',
@@ -21,7 +21,7 @@ angular.module('app', [
   $rootScope.$on('filterChange', PuppetDB.cancel);
   $rootScope.changePage = (page) => {
     $location.search('page', page);
-    return $rootScope.$broadcast('pageChange', { page });
+    $rootScope.$broadcast('pageChange', { page });
   };
 });
 

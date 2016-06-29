@@ -92,6 +92,7 @@ module.exports = (grunt) => {
             ['babelify', {
               global: true,
               presets: ['es2015'],
+              plugins: [['transform-es2015-modules-commonjs', { loose: false }]],
               // FIXME: This "list" of ES6 modules is pretty ugly
               only: [/app\//, /node_modules\/node-puppetdbquery/],
             }],
@@ -108,6 +109,7 @@ module.exports = (grunt) => {
             ['babelify', {
               global: true,
               presets: ['es2015'],
+              plugins: [['transform-es2015-modules-commonjs', { loose: false }]],
               only: [/app\//, /node_modules\/node-puppetdbquery/],
             }],
           ],
