@@ -1,6 +1,4 @@
-angular.module('app').factory 'PuppetDB', ($http,
-                                           $location,
-                                           $q) ->
+angular.module('app').factory 'PuppetDB', ($http, $location, $q) ->
   new class PuppetDB
 
     apiVersion: 'v4'
@@ -92,7 +90,7 @@ angular.module('app').factory 'PuppetDB', ($http,
     handleResponse: (promise, success) ->
       promise.then(
         (resp) ->
-          success(angular.fromJson(resp.data), resp.headers('X-Records'))
+          success(angular.fromJson resp.data, resp.headers 'X-Records')
         (resp) ->
           throw new Error("Failed to fetch #{resp.config.url}\n#{resp.status}: #{resp.statusText}") unless resp.status <= 0
       )
@@ -113,10 +111,10 @@ angular.module('app').factory 'PuppetDB', ($http,
     parseAndQuery: (endpoint, nodeQuery, additionalQuery, params = {}, success) ->
       # Handle all the parsing of the query and putting them together
       if nodeQuery
-        query = @parse(nodeQuery)
+        query = @parse nodeQuery
       else
         query = null
-      query = @combine(query, additionalQuery)
+      query = @combine query, additionalQuery
       unless query # no query and no additional query either
         if endpoint in ['reports', 'events', 'event-count', 'aggregate-event-count']
           # PuppetDB really requires a valid query for some endpoints even
@@ -128,7 +126,7 @@ angular.module('app').factory 'PuppetDB', ($http,
         params['include_total'] = true
 
       # Start querying
-      @query(endpoint, query, params, success)
+      @query endpoint, query, params, success
 
     # Public: Get a bean value, returns a promise just like $http
     #
