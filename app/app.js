@@ -35,20 +35,20 @@ angular.module('app').factory('$exceptionHandler', ($injector, $log) =>
   }
 );
 
-angular.module('app').config($routeProvider =>
+angular.module('app').config(($routeProvider) =>
   $routeProvider.when('/dashboard', {
     templateUrl: 'controllers/dashboard/dashboard.tpl.html',
     controller: 'DashboardCtrl',
     controllerAs: 'dashboard',
     reloadOnSearch: false,
-  }
-  ).when('/nodes', {
+  })
+  .when('/nodes', {
     templateUrl: 'controllers/nodelist/nodelist.tpl.html',
     controller: 'NodeListCtrl',
     controllerAs: 'nodeList',
     reloadOnSearch: false,
-  }
-  ).when('/node/:node', {
+  })
+  .when('/node/:node', {
     templateUrl: 'controllers/nodedetail/nodedetail.tpl.html',
     controller: 'NodeDetailCtrl',
     controllerAs: 'nodeDetail',
