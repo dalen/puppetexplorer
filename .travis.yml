@@ -3,6 +3,8 @@ node_js:
   - '6'
 sudo: required
 dist: trusty
+addons:
+  firefox: "46.0"
 before_install:
   - npm install -g grunt-cli
 before_script:
