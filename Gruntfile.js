@@ -187,10 +187,6 @@ module.exports = (grunt) => {
 
     clean: ['dist', 'tmp'],
 
-    casperjs: {
-      files: ['tests/casperjs/**/*.js'],
-    },
-
     protractor: {
       local: {
         options: { configFile: 'tests/protractor/conf-local.js' },
