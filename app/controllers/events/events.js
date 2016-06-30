@@ -134,8 +134,7 @@ angular.module('app').controller('EventsCtrl', class {
       },
       (data) => {
         const chartData = [];
-        for (let i = 0; i < data.length; i++) {
-          const item = data[i];
+        for (const item of data) {
           const key = item.subject.title || 'none';
           const value = item.failures + item.successes + item.noops + item.skips;
           chartData.push([key, value]);
