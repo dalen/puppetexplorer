@@ -216,11 +216,18 @@ module.exports = (grunt) => {
   grunt.registerTask('build', ['clean', 'browserify:dist', 'copy']);
   grunt.registerTask('build_debian', ['build', 'debian_package']);
   grunt.registerTask('default', ['build']);
-  return grunt.registerTask('test', [
+  grunt.registerTask('test', [
     'configureRewriteRules',
     'configureProxies',
     'connect:testserver',
     'protractor:local',
+    'eslint',
+  ]);
+  grunt.registerTask('test:saucelabs', [
+    'configureRewriteRules',
+    'configureProxies',
+    'connect:testserver',
+    'protractor:saucelabs',
     'eslint',
   ]);
 };
