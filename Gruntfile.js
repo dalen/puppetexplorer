@@ -190,6 +190,15 @@ module.exports = (grunt) => {
     casperjs: {
       files: ['tests/casperjs/**/*.js'],
     },
+
+    protractor: {
+      local: {
+        options: { configFile: 'tests/protractor/conf-local.js' },
+      },
+      saucelabs: {
+        options: { configFile: 'tests/protractor/conf-saucelabs.js' },
+      },
+    },
   });
 
   grunt.registerTask('serve', [
@@ -215,7 +224,7 @@ module.exports = (grunt) => {
     'configureRewriteRules',
     'configureProxies',
     'connect:testserver',
-    'casperjs',
+    'protractor:local',
     'eslint',
   ]);
 };
