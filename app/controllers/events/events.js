@@ -100,7 +100,7 @@ angular.module('app').controller('EventsCtrl', class {
   fetchEvents() {
     this.events = undefined;
 
-    return this.PuppetDB.parseAndQuery('events',
+    this.PuppetDB.parseAndQuery('events',
       this.$location.search().query,
       this.createEventQuery(),
       {
@@ -126,7 +126,7 @@ angular.module('app').controller('EventsCtrl', class {
 
   fetchContainingClasses() {
     this.drawChart('containingChart', 'Containing class');
-    return this.PuppetDB.parseAndQuery('event-counts',
+    this.PuppetDB.parseAndQuery('event-counts',
       this.$location.search().query,
       this.createEventQuery('containing_class'),
       {
@@ -147,7 +147,7 @@ angular.module('app').controller('EventsCtrl', class {
 
   fetchResourceCounts() {
     this.drawChart('resourceChart', 'Resource');
-    return this.PuppetDB.query('events',
+    this.PuppetDB.query('events',
       ['extract', [['function', 'count'], 'resource_type'],
         this.PuppetDB.combine(
           this.PuppetDB.parse(this.$location.search().query),
@@ -164,7 +164,7 @@ angular.module('app').controller('EventsCtrl', class {
 
   fetchStatusCounts() {
     this.drawChart('statusChart', 'Event status');
-    return this.PuppetDB.query('events',
+    this.PuppetDB.query('events',
       ['extract', [['function', 'count'], 'status'],
         this.PuppetDB.combine(
           this.PuppetDB.parse(this.$location.search().query),
