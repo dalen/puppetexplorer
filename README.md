@@ -4,7 +4,7 @@
 
 Puppet Explorer is a web application for PuppetDB that lets you explore your
 Puppet data.
-It is made using AngularJS and CoffeeScript and runs entirely on the client
+It is made using AngularJS and runs entirely on the client
 side, so the only backend that is needed is PuppetDB itself and a web server to
 share the static resources.
 
@@ -83,8 +83,8 @@ PuppetDB connections to. Another way is to create a SSH tunnel to your PuppetDB
 server, `ssh -L 8080:localhost:8080 puppetdb.example.com` and
 `grunt serve --puppetdb=http://localhost:8080/`.
 
-With `grunt watch` it will rebuild any source files that changes and put the
-results in the `dist` directory.
+With `grunt dev` it will start a development server rebuild any source files that
+changes and put the results in the `dist` directory.
 
 To build a Debian package use `grunt build_debian`, this requires the
 `devscripts` and `debhelper` packages to be installed.
