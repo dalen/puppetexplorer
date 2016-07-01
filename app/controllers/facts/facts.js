@@ -91,11 +91,11 @@ export class FactsCtrl {
     this.puppetDB.query('fact-paths',
       null,
       { order_by: JSON.stringify([{ field: 'path', order: 'asc' }]) },
-      data => {
-        this.factPaths = JSON.parse(data).filter(fact => fact.path[0][0] !== '_')
+      (data) => {
+        this.factPaths = data.filter(fact => fact.path[0][0] !== '_')
           .map(fact => fact.path);
       }
-      );
+    );
   }
 
   // Public: Toggle display of a chart
