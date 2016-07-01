@@ -37,7 +37,7 @@ export class DashboardCtrl {
       `${bean}:name=${name}` : `${bean}:type=default,name=${name}`;
     return this.PuppetDB.getBean(metric)
       .success((data) => {
-        this.$scope[scopeName] = (angular.fromJson(data).Value * multiply)
+        this.$scope[scopeName] = (JSON.parse(data).Value * multiply)
           .toLocaleString()
           .replace(/^(.*\..).*/, '$1');
       })

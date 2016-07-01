@@ -107,7 +107,7 @@ export class EventsCtrl {
       {
         offset: this.$scope.perPage * ((this.$location.search().page || 1) - 1),
         limit: this.$scope.perPage,
-        order_by: angular.toJson([{ field: 'timestamp', order: 'desc' }]),
+        order_by: JSON.stringify([{ field: 'timestamp', order: 'desc' }]),
       },
       (data, total) => {
         this.$scope.numItems = total;
