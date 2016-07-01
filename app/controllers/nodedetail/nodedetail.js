@@ -1,5 +1,5 @@
-/* global angular NODE_FACTS */
-angular.module('app').controller('NodeDetailCtrl', class {
+/* global NODE_FACTS */
+export class NodeDetailCtrl {
   constructor($location, $routeParams, $scope, PuppetDB) {
     this.reset = this.reset.bind(this);
     this.fetchReports = this.fetchReports.bind(this);
@@ -30,7 +30,7 @@ angular.module('app').controller('NodeDetailCtrl', class {
       this.$location.search().query,
       ['=', 'certname', this.node],
       {
-        order_by: angular.toJson([{ field: 'end_time', order: 'desc' }]),
+        order_by: JSON.stringify([{ field: 'end_time', order: 'desc' }]),
         offset: this.$scope.perPage * ((this.$location.search().page || 1) - 1),
         limit: this.$scope.perPage,
       },
@@ -60,7 +60,7 @@ angular.module('app').controller('NodeDetailCtrl', class {
       'fact-contents',
       null,
       ['=', 'certname', this.node],
-      { order_by: angular.toJson([{ field: 'name', order: 'asc' }]) },
+      { order_by: JSON.stringify([{ field: 'name', order: 'asc' }]) },
       (data) => {
         this.facts = data.filter(fact => fact.name[0] !== '_').map((fact) => {
           // insert some spaces to break lines
@@ -115,4 +115,4 @@ angular.module('app').controller('NodeDetailCtrl', class {
     this.$location.search('report', report);
     return this.$location.path('/events');
   }
-});
+}

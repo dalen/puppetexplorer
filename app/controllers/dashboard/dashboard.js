@@ -1,5 +1,5 @@
-/* global angular DASHBOARD_PANELS */
-angular.module('app').controller('DashboardCtrl', class {
+/* global DASHBOARD_PANELS */
+export class DashboardCtrl {
   constructor($scope, PuppetDB, $location) {
     this.loadMetrics = this.loadMetrics.bind(this);
     this.$scope = $scope;
@@ -75,4 +75,4 @@ angular.module('app').controller('DashboardCtrl', class {
         return this.loadMetrics();
       });
   }
-});
+}

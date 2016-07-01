@@ -1,5 +1,4 @@
-/* global angular */
-angular.module('app').controller('MenuCtrl', class {
+export class MenuCtrl {
   constructor($scope, $rootScope, $location, PuppetDB) {
     this.$scope = $scope;
     this.$rootScope = $rootScope;
@@ -27,4 +26,4 @@ angular.module('app').controller('MenuCtrl', class {
     // Not technically, but we have to do the same things
     this.$rootScope.$broadcast('queryChange');
   }
-});
+}

@@ -1,5 +1,4 @@
-/* global angular */
-angular.module('app').controller('SearchCtrl', class {
+export class SearchCtrl {
   constructor($scope, $rootScope, $location) {
     this.$scope = $scope;
     this.$rootScope = $rootScope;
@@ -29,4 +28,4 @@ angular.module('app').controller('SearchCtrl', class {
     // Change view to nodes if we are on dashboard
     if (this.$location.path() === '/dashboard') { this.$location.path('/nodes'); }
   }
-});
+}

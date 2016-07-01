@@ -1,5 +1,5 @@
-/* global angular UNRESPONSIVE_HOURS moment */
-angular.module('app').controller('NodeListCtrl', class {
+/* global UNRESPONSIVE_HOURS moment */
+export class NodeListCtrl {
   constructor($location, $scope, PuppetDB) {
     // Reload nodes if either the page changes
     this.reset = this.reset.bind(this);
@@ -34,7 +34,7 @@ angular.module('app').controller('NodeListCtrl', class {
       {
         offset: this.$scope.perPage * ((this.$location.search().page || 1) - 1),
         limit: this.$scope.perPage,
-        order_by: angular.toJson([{ field: 'certname', order: 'asc' }]),
+        order_by: JSON.stringify([{ field: 'certname', order: 'asc' }]),
       },
       (data, total) => {
         this.$scope.numItems = total;
@@ -110,4 +110,4 @@ angular.module('app').controller('NodeListCtrl', class {
     const hours = UNRESPONSIVE_HOURS || 2;
     return moment(node.report_timestamp).isBefore(moment.utc().subtract(hours, 'hours'));
   }
-});
+}

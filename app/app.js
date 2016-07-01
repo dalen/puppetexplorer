@@ -5,25 +5,41 @@ import 'angular-google-chart';
 import 'angular-moment';
 import 'angular-bootstrap';
 
+import { SearchCtrl } from './controllers/search/search';
+import { NodeListCtrl } from './controllers/nodelist/nodelist';
+import { NodeDetailCtrl } from './controllers/nodedetail/nodedetail';
+import { MenuCtrl } from './controllers/menu/menu';
+import { FactsCtrl } from './controllers/facts/facts';
+import { DashboardCtrl } from './controllers/dashboard/dashboard';
+import { EventsCtrl } from './controllers/events/events';
+
 angular.module('app', [
   'ngRoute',
   'ngAnimate',
   'googlechart',
   'angularMoment',
   'ui.bootstrap',
-]).run(($rootScope, $location, $http, PuppetDB) => {
-  // Make the $location service available in root scope
-  $rootScope.location = $location;
-  $rootScope.isLoading = () => $http.pendingRequests.length !== 0;
-  $rootScope.clearError = () => { $rootScope.error = null; };
-  $rootScope.$on('queryChange', $rootScope.clearError);
-  $rootScope.$on('queryChange', PuppetDB.cancel);
-  $rootScope.$on('filterChange', PuppetDB.cancel);
-  $rootScope.changePage = (page) => {
-    $location.search('page', page);
-    $rootScope.$broadcast('pageChange', { page });
-  };
-});
+])
+  .controller('SearchCtrl', SearchCtrl)
+  .controller('NodeListCtrl', NodeListCtrl)
+  .controller('NodeDetailCtrl', NodeDetailCtrl)
+  .controller('MenuCtrl', MenuCtrl)
+  .controller('FactsCtrl', FactsCtrl)
+  .controller('DashboardCtrl', DashboardCtrl)
+  .controller('EventsCtrl', EventsCtrl)
+  .run(($rootScope, $location, $http, PuppetDB) => {
+    // Make the $location service available in root scope
+    $rootScope.location = $location;
+    $rootScope.isLoading = () => $http.pendingRequests.length !== 0;
+    $rootScope.clearError = () => { $rootScope.error = null; };
+    $rootScope.$on('queryChange', $rootScope.clearError);
+    $rootScope.$on('queryChange', PuppetDB.cancel);
+    $rootScope.$on('filterChange', PuppetDB.cancel);
+    $rootScope.changePage = (page) => {
+      $location.search('page', page);
+      $rootScope.$broadcast('pageChange', { page });
+    };
+  });
 
 angular.module('app').factory('$exceptionHandler', ($injector, $log) =>
   (exception, cause) => {

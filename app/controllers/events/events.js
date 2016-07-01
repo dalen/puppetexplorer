@@ -1,6 +1,7 @@
-/* global angular DASHBOARD_PANELS */
+/* global DASHBOARD_PANELS */
 import moment from 'moment';
-angular.module('app').controller('EventsCtrl', class {
+
+export class EventsCtrl {
   constructor($scope, $rootScope, $location, PuppetDB) {
     this.setFields = this.setFields.bind(this);
     this.reset = this.reset.bind(this);
@@ -296,4 +297,4 @@ angular.module('app').controller('EventsCtrl', class {
     this.$scope.reportHash = report;
     this.setMode('report');
   }
-});
+}

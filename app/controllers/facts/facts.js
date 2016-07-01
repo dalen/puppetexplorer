@@ -1,5 +1,4 @@
-/* global angular */
-angular.module('app').controller('FactsCtrl', class {
+export class FactsCtrl {
   constructor($scope, $rootScope, $location, PuppetDB) {
     this.syncCharts = this.syncCharts.bind(this);
     this.reloadCharts = this.reloadCharts.bind(this);
@@ -91,9 +90,9 @@ angular.module('app').controller('FactsCtrl', class {
   getFactNames() {
     this.PuppetDB.query('fact-paths',
       null,
-      { order_by: angular.toJson([{ field: 'path', order: 'asc' }]) },
+      { order_by: JSON.stringify([{ field: 'path', order: 'asc' }]) },
       data => {
-        this.factPaths = angular.fromJson(data).filter(fact => fact.path[0][0] !== '_')
+        this.factPaths = JSON.parse(data).filter(fact => fact.path[0][0] !== '_')
           .map(fact => fact.path);
       }
       );
@@ -211,4 +210,4 @@ angular.module('app').controller('FactsCtrl', class {
       this.$location.search('query', `${fact}=${value}`);
     }
   }
-});
+}
