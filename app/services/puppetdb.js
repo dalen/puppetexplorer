@@ -1,15 +1,15 @@
-/* global PUPPETDB_SERVERS */
 import puppetdbquery from 'node-puppetdbquery';
 
 export class PuppetDB {
-  constructor($http, $location, $q) {
-    this.apiVersion = 'v4';
-    this.cancel = this.cancel.bind(this);
-    this.servers = PUPPETDB_SERVERS.map(srv => srv[0]);
-    this.canceller = $q.defer();
+  constructor($http, $location, $q, config) {
     this.$http = $http;
     this.$location = $location;
     this.$q = $q;
+
+    this.apiVersion = 'v4';
+    this.cancel = this.cancel.bind(this);
+    this.servers = config.get('puppetdbServers');
+    this.canceller = $q.defer();
   }
 
   // Public: Get/Set server
@@ -21,14 +21,18 @@ export class PuppetDB {
     if (server) {
       return this.$location.search('server', server);
     }
-    return this.$location.search().server || PUPPETDB_SERVERS[0][0];
+    return this.$location.search().server || this.servers[0][0];
+  }
+
+  serverNames() {
+    return this.servers.map((srv) => srv[0]);
   }
 
   // Public: Get URL of current server
   //
   // Returns: The {String} URL
   serverUrl() {
-    for (const server of PUPPETDB_SERVERS) {
+    for (const server of this.servers) {
       if (server[0] === this.server()) { return server[1]; }
     }
     throw new Error('Server config not found');
@@ -38,7 +42,7 @@ export class PuppetDB {
   //
   // Returns: The {Object} config
   serverConfig() {
-    for (const server of PUPPETDB_SERVERS) {
+    for (const server of this.servers) {
       if (server[0] === this.server()) {
         if (server[2]) {
           return server[2];

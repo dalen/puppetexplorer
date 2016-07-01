@@ -1,12 +1,12 @@
-/* global NODE_FACTS */
 export class NodeDetailCtrl {
-  constructor($location, $routeParams, $scope, puppetDB) {
+  constructor($location, $routeParams, $scope, config, puppetDB) {
     this.reset = this.reset.bind(this);
     this.fetchReports = this.fetchReports.bind(this);
     this.fetchFacts = this.fetchFacts.bind(this);
     this.$location = $location;
     this.$routeParams = $routeParams;
     this.$scope = $scope;
+    this.config = config;
     this.puppetDB = puppetDB;
     this.node = this.$routeParams.node;
     // Reload nodes if either the page changes
@@ -75,8 +75,9 @@ export class NodeDetailCtrl {
   //
   // Returns: A {Array} of important facts {String}.
   importantFacts() {
-    return this.facts.filter((fact) => NODE_FACTS.indexOf(fact.name) !== -1)
-      .sort((a, b) => NODE_FACTS.indexOf(a.name) - NODE_FACTS.indexOf(b.name));
+    return this.facts.filter((fact) => this.config.get('nodeFacts').indexOf(fact.name) !== -1)
+      .sort((a, b) => this.config.get('nodeFacts').indexOf(a.name)
+        - this.config.get('nodeFacts').indexOf(b.name));
   }
 
   // Public: Return the status of a node

@@ -1,10 +1,12 @@
 /* global DASHBOARD_PANELS */
 export class DashboardCtrl {
-  constructor($scope, puppetDB, $location) {
-    this.loadMetrics = this.loadMetrics.bind(this);
+  constructor($scope, puppetDB, $location, config) {
     this.$scope = $scope;
     this.puppetDB = puppetDB;
     this.$location = $location;
+
+    this.panels = config.get('dashboardPanels');
+    this.loadMetrics = this.loadMetrics.bind(this);
     this.$scope.$on('queryChange', this.loadMetrics);
     this.major = this.minor = this.patch = null;
     this.checkVersion();
@@ -16,17 +18,12 @@ export class DashboardCtrl {
     this.getBean('avg-resources-per-node', 'avgResources');
     this.getBean('pct-resource-dupes', 'resDuplication', 100);
 
-    if (DASHBOARD_PANELS) {
-      this.$scope.panels = DASHBOARD_PANELS;
-    } else {
-      this.$scope.panels = [];
-    }
-    for (const panel of this.$scope.panels) {
+    for (const panel of this.panels) {
       panel.count = undefined; // reset if we switched server
       this.getNodeCount(panel.query, (count) => { panel.count = String(count); });
     }
 
-    this.$scope.panelWidth = Math.max(2, Math.floor(12 / this.$scope.panels.length));
+    this.$scope.panelWidth = Math.max(2, Math.floor(12 / this.panels.length));
   }
 
   getBean(name, scopeName, multiply = 1) {

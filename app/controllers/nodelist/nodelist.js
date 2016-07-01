@@ -1,14 +1,16 @@
-/* global UNRESPONSIVE_HOURS moment */
+/* global moment */
 export class NodeListCtrl {
-  constructor($location, $scope, puppetDB) {
+  constructor($location, $scope, config, puppetDB) {
+    this.$location = $location;
+    this.$scope = $scope;
+    this.unresponsiveHours = config.get('unresponsiveHours');
+    this.puppetDB = puppetDB;
+
     // Reload nodes if either the page changes
     this.reset = this.reset.bind(this);
     this.fetchNodes = this.fetchNodes.bind(this);
     this.fetchNodeEventCount = this.fetchNodeEventCount.bind(this);
     this.selectNode = this.selectNode.bind(this);
-    this.$location = $location;
-    this.$scope = $scope;
-    this.puppetDB = puppetDB;
     this.$scope.$on('pageChange', this.fetchNodes);
     // Reset pagination and reload nodes if query changes
     this.$scope.$on('queryChange', this.reset);
@@ -107,7 +109,7 @@ export class NodeListCtrl {
   // Return if a node is unresponsive or not
   nodeUnresponsive(node) {
     if (node.report_timestamp == null) { return true; }
-    const hours = UNRESPONSIVE_HOURS || 2;
-    return moment(node.report_timestamp).isBefore(moment.utc().subtract(hours, 'hours'));
+    return moment(node.report_timestamp)
+      .isBefore(moment.utc().subtract(this.unresponsiveHours, 'hours'));
   }
 }

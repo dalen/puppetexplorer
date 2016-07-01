@@ -1,4 +1,3 @@
-/* global DASHBOARD_PANELS */
 import moment from 'moment';
 
 export class EventsCtrl {

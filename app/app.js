@@ -13,6 +13,7 @@ import { FactsCtrl } from './controllers/facts/facts';
 import { DashboardCtrl } from './controllers/dashboard/dashboard';
 import { EventsCtrl } from './controllers/events/events';
 
+import { Config } from './services/config';
 import { PuppetDB } from './services/puppetdb';
 
 angular.module('app', [
@@ -29,6 +30,7 @@ angular.module('app', [
   .controller('FactsCtrl', FactsCtrl)
   .controller('DashboardCtrl', DashboardCtrl)
   .controller('EventsCtrl', EventsCtrl)
+  .service('config', Config)
   .service('puppetDB', PuppetDB)
   .run(($rootScope, $location, $http, puppetDB) => {
     // Make the $location service available in root scope

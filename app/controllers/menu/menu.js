@@ -5,7 +5,7 @@ export class MenuCtrl {
     this.$location = $location;
     this.puppetDB = puppetDB;
     this.$scope.server = this.puppetDB.server();
-    this.servers = this.puppetDB.servers;
+    this.servers = this.puppetDB.serverNames();
   }
 
   currentView() {
