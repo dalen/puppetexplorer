@@ -35,7 +35,7 @@ export class DashboardCtrl {
       'puppetlabs.puppetdb.population' : 'puppetlabs.puppetdb.query.population';
     const metric = this.major > 3 ?
       `${bean}:name=${name}` : `${bean}:type=default,name=${name}`;
-    return this.PuppetDB.getBean(metric)
+    this.PuppetDB.getBean(metric)
       .success((data) => {
         this.$scope[scopeName] = (JSON.parse(data).Value * multiply)
           .toLocaleString()
@@ -59,11 +59,11 @@ export class DashboardCtrl {
 
   setQuery(query) {
     this.$location.search('query', query);
-    return this.$location.path('/nodes');
+    this.$location.path('/nodes');
   }
 
   checkVersion() {
-    return this.PuppetDB.getVersion()
+    this.PuppetDB.getVersion()
       .success(data => {
         this.major = parseInt(data.version.split('.')[0], 10);
         this.minor = parseInt(data.version.split('.')[1], 10);
@@ -72,7 +72,7 @@ export class DashboardCtrl {
           throw new Error('This version of Puppet Explorer requires PuppetDB version 3.2.0+' +
             `, you are running PuppetDB ${data.version}`);
         }
-        return this.loadMetrics();
+        this.loadMetrics();
       });
   }
 }
