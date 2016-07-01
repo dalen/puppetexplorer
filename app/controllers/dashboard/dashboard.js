@@ -1,9 +1,9 @@
 /* global DASHBOARD_PANELS */
 export class DashboardCtrl {
-  constructor($scope, PuppetDB, $location) {
+  constructor($scope, puppetDB, $location) {
     this.loadMetrics = this.loadMetrics.bind(this);
     this.$scope = $scope;
-    this.PuppetDB = PuppetDB;
+    this.puppetDB = puppetDB;
     this.$location = $location;
     this.$scope.$on('queryChange', this.loadMetrics);
     this.major = this.minor = this.patch = null;
@@ -35,23 +35,23 @@ export class DashboardCtrl {
       'puppetlabs.puppetdb.population' : 'puppetlabs.puppetdb.query.population';
     const metric = this.major > 3 ?
       `${bean}:name=${name}` : `${bean}:type=default,name=${name}`;
-    this.PuppetDB.getBean(metric)
+    this.puppetDB.getBean(metric)
       .success((data) => {
-        this.$scope[scopeName] = (JSON.parse(data).Value * multiply)
+        this.$scope[scopeName] = (data.Value * multiply)
           .toLocaleString()
           .replace(/^(.*\..).*/, '$1');
       })
       .error((data, status) => {
         if (status !== 0) {
-          throw new Error(`Could not fetch metric ${name} from PuppetDB`);
+          throw new Error(`Could not fetch metric ${name} from puppetDB`);
         }
       });
   }
 
   getNodeCount(query, callback) {
-    this.PuppetDB.query(
+    this.puppetDB.query(
       'nodes',
-      ['extract', [['function', 'count']], this.PuppetDB.parse(query)],
+      ['extract', [['function', 'count']], this.puppetDB.parse(query)],
       {},
       (data) => callback(data[0].count)
     );
@@ -63,14 +63,14 @@ export class DashboardCtrl {
   }
 
   checkVersion() {
-    this.PuppetDB.getVersion()
+    this.puppetDB.getVersion()
       .success(data => {
         this.major = parseInt(data.version.split('.')[0], 10);
         this.minor = parseInt(data.version.split('.')[1], 10);
         this.patch = parseInt(data.version.split('.')[2], 10);
         if (this.major < 4 || (this.major === 3 && this.minor < 2)) {
-          throw new Error('This version of Puppet Explorer requires PuppetDB version 3.2.0+' +
-            `, you are running PuppetDB ${data.version}`);
+          throw new Error('This version of Puppet Explorer requires puppetDB version 3.2.0+' +
+            `, you are running puppetDB ${data.version}`);
         }
         this.loadMetrics();
       });

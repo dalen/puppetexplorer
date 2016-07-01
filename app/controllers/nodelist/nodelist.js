@@ -1,6 +1,6 @@
 /* global UNRESPONSIVE_HOURS moment */
 export class NodeListCtrl {
-  constructor($location, $scope, PuppetDB) {
+  constructor($location, $scope, puppetDB) {
     // Reload nodes if either the page changes
     this.reset = this.reset.bind(this);
     this.fetchNodes = this.fetchNodes.bind(this);
@@ -8,7 +8,7 @@ export class NodeListCtrl {
     this.selectNode = this.selectNode.bind(this);
     this.$location = $location;
     this.$scope = $scope;
-    this.PuppetDB = PuppetDB;
+    this.puppetDB = puppetDB;
     this.$scope.$on('pageChange', this.fetchNodes);
     // Reset pagination and reload nodes if query changes
     this.$scope.$on('queryChange', this.reset);
@@ -27,7 +27,7 @@ export class NodeListCtrl {
   // Returns: `undefined`
   fetchNodes() {
     this.nodes = undefined;
-    return this.PuppetDB.parseAndQuery(
+    return this.puppetDB.parseAndQuery(
       'nodes',
       this.$location.search().query,
       null,
@@ -56,8 +56,8 @@ export class NodeListCtrl {
   // Returns: `undefined`
   fetchNodeEventCount(node) {
     if (!node.latest_report_hash) { return; }
-    const resp = this.PuppetDB.getQuery(`reports/${node.latest_report_hash}/metrics`);
-    this.PuppetDB.handleResponse(resp, ((n) =>
+    const resp = this.puppetDB.getQuery(`reports/${node.latest_report_hash}/metrics`);
+    this.puppetDB.handleResponse(resp, ((n) =>
       (data) => {
         node.metrics = {};
         // Create a nested hash out of all the metrics

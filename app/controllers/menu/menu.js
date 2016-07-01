@@ -1,11 +1,11 @@
 export class MenuCtrl {
-  constructor($scope, $rootScope, $location, PuppetDB) {
+  constructor($scope, $rootScope, $location, puppetDB) {
     this.$scope = $scope;
     this.$rootScope = $rootScope;
     this.$location = $location;
-    this.PuppetDB = PuppetDB;
-    this.$scope.server = this.PuppetDB.server();
-    this.servers = this.PuppetDB.servers;
+    this.puppetDB = puppetDB;
+    this.$scope.server = this.puppetDB.server();
+    this.servers = this.puppetDB.servers;
   }
 
   currentView() {
@@ -22,7 +22,7 @@ export class MenuCtrl {
   }
 
   setServer(server) {
-    this.PuppetDB.server(server);
+    this.puppetDB.server(server);
     // Not technically, but we have to do the same things
     this.$rootScope.$broadcast('queryChange');
   }

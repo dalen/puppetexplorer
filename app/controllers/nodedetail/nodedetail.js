@@ -1,13 +1,13 @@
 /* global NODE_FACTS */
 export class NodeDetailCtrl {
-  constructor($location, $routeParams, $scope, PuppetDB) {
+  constructor($location, $routeParams, $scope, puppetDB) {
     this.reset = this.reset.bind(this);
     this.fetchReports = this.fetchReports.bind(this);
     this.fetchFacts = this.fetchFacts.bind(this);
     this.$location = $location;
     this.$routeParams = $routeParams;
     this.$scope = $scope;
-    this.PuppetDB = PuppetDB;
+    this.puppetDB = puppetDB;
     this.node = this.$routeParams.node;
     // Reload nodes if either the page changes
     this.$scope.$on('pageChange', this.fetchReports);
@@ -25,7 +25,7 @@ export class NodeDetailCtrl {
 
   // Public: Fetches reports for node and stores them in @reports
   fetchReports() {
-    this.reports = this.PuppetDB.parseAndQuery(
+    this.reports = this.puppetDB.parseAndQuery(
       'reports',
       this.$location.search().query,
       ['=', 'certname', this.node],
@@ -38,7 +38,7 @@ export class NodeDetailCtrl {
         this.reports = data;
         this.$scope.numItems = total;
         for (const report of this.reports) {
-          this.PuppetDB.parseAndQuery(
+          this.puppetDB.parseAndQuery(
             'event-counts',
             null,
             ['=', 'report', report.hash],
@@ -56,7 +56,7 @@ export class NodeDetailCtrl {
   //
   // Returns: `undefined`
   fetchFacts() {
-    return this.PuppetDB.parseAndQuery(
+    return this.puppetDB.parseAndQuery(
       'fact-contents',
       null,
       ['=', 'certname', this.node],
@@ -87,8 +87,8 @@ export class NodeDetailCtrl {
   //          of `null` if no status known.
   //
   // TODO: This is largely duplicated from nodelist, but can be simplified
-  //       significantly when the PuppetDB 3.0 v4 API is released and moved to
-  //       a common file (PuppetDB service likely).
+  //       significantly when the puppetDB 3.0 v4 API is released and moved to
+  //       a common file (puppetDB service likely).
   status(report) {
     if (report === undefined) { return 'glyphicon-refresh spin'; }
     if (report === null) { return 'glyphicon-question-sign'; }

@@ -29,15 +29,15 @@ angular.module('app', [
   .controller('FactsCtrl', FactsCtrl)
   .controller('DashboardCtrl', DashboardCtrl)
   .controller('EventsCtrl', EventsCtrl)
-  .service('PuppetDB', PuppetDB)
-  .run(($rootScope, $location, $http) => {
+  .service('puppetDB', PuppetDB)
+  .run(($rootScope, $location, $http, puppetDB) => {
     // Make the $location service available in root scope
     $rootScope.location = $location;
     $rootScope.isLoading = () => $http.pendingRequests.length !== 0;
     $rootScope.clearError = () => { $rootScope.error = null; };
     $rootScope.$on('queryChange', $rootScope.clearError);
-    $rootScope.$on('queryChange', PuppetDB.cancel);
-    $rootScope.$on('filterChange', PuppetDB.cancel);
+    $rootScope.$on('queryChange', puppetDB.cancel);
+    $rootScope.$on('filterChange', puppetDB.cancel);
     $rootScope.changePage = (page) => {
       $location.search('page', page);
       $rootScope.$broadcast('pageChange', { page });

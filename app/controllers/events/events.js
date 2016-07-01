@@ -2,7 +2,7 @@
 import moment from 'moment';
 
 export class EventsCtrl {
-  constructor($scope, $rootScope, $location, PuppetDB) {
+  constructor($scope, $rootScope, $location, puppetDB) {
     this.setFields = this.setFields.bind(this);
     this.reset = this.reset.bind(this);
     this.fetchEvents = this.fetchEvents.bind(this);
@@ -13,7 +13,7 @@ export class EventsCtrl {
     this.$scope = $scope;
     this.$rootScope = $rootScope;
     this.$location = $location;
-    this.PuppetDB = PuppetDB;
+    this.puppetDB = puppetDB;
     this.$scope.$on('queryChange', this.reset);
     this.$scope.$on('pageChange', this.fetchEvents);
     this.$scope.$on('$locationChangeSuccess', this.setFields);
@@ -66,7 +66,7 @@ export class EventsCtrl {
   //
   // exclude - A {String} filter to exclude from the generated query
   //
-  // Returns: A {Array} PuppetDB query
+  // Returns: A {Array} puppetDB query
   createEventQuery(exclude = false) {
     const query = ['and'];
     if (this.mode.current === 'latest') {
@@ -101,7 +101,7 @@ export class EventsCtrl {
   fetchEvents() {
     this.events = undefined;
 
-    this.PuppetDB.parseAndQuery('events',
+    this.puppetDB.parseAndQuery('events',
       this.$location.search().query,
       this.createEventQuery(),
       {
@@ -127,7 +127,7 @@ export class EventsCtrl {
 
   fetchContainingClasses() {
     this.drawChart('containingChart', 'Containing class');
-    this.PuppetDB.parseAndQuery('event-counts',
+    this.puppetDB.parseAndQuery('event-counts',
       this.$location.search().query,
       this.createEventQuery('containing_class'),
       {
@@ -147,10 +147,10 @@ export class EventsCtrl {
 
   fetchResourceCounts() {
     this.drawChart('resourceChart', 'Resource');
-    this.PuppetDB.query('events',
+    this.puppetDB.query('events',
       ['extract', [['function', 'count'], 'resource_type'],
-        this.PuppetDB.combine(
-          this.PuppetDB.parse(this.$location.search().query),
+        this.puppetDB.combine(
+          this.puppetDB.parse(this.$location.search().query),
           this.createEventQuery('resource_type')
         ),
         ['group_by', 'resource_type']],
@@ -164,10 +164,10 @@ export class EventsCtrl {
 
   fetchStatusCounts() {
     this.drawChart('statusChart', 'Event status');
-    this.PuppetDB.query('events',
+    this.puppetDB.query('events',
       ['extract', [['function', 'count'], 'status'],
-        this.PuppetDB.combine(
-          this.PuppetDB.parse(this.$location.search().query),
+        this.puppetDB.combine(
+          this.puppetDB.parse(this.$location.search().query),
           this.createEventQuery('status')
         ),
         ['group_by', 'status']],

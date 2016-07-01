@@ -1,11 +1,11 @@
 export class FactsCtrl {
-  constructor($scope, $rootScope, $location, PuppetDB) {
+  constructor($scope, $rootScope, $location, puppetDB) {
     this.syncCharts = this.syncCharts.bind(this);
     this.reloadCharts = this.reloadCharts.bind(this);
     this.$scope = $scope;
     this.$rootScope = $rootScope;
     this.$location = $location;
-    this.PuppetDB = PuppetDB;
+    this.puppetDB = puppetDB;
     this.charts = new Map();
     this.getFactNames();
     this.$scope.$on('queryChange', this.reloadCharts);
@@ -88,7 +88,7 @@ export class FactsCtrl {
   //
   // Returns: `undefined`
   getFactNames() {
-    this.PuppetDB.query('fact-paths',
+    this.puppetDB.query('fact-paths',
       null,
       { order_by: JSON.stringify([{ field: 'path', order: 'asc' }]) },
       data => {
@@ -138,7 +138,7 @@ export class FactsCtrl {
       data: [['Value', 'Number'], ['Loading', 1]],
     };
 
-    return this.PuppetDB.parseAndQuery('fact-contents',
+    return this.puppetDB.parseAndQuery('fact-contents',
       this.$location.search().query,
       ['=', 'path', fact],
       {},
