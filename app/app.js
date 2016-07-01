@@ -13,6 +13,8 @@ import { FactsCtrl } from './controllers/facts/facts';
 import { DashboardCtrl } from './controllers/dashboard/dashboard';
 import { EventsCtrl } from './controllers/events/events';
 
+import { PuppetDB } from './services/puppetdb';
+
 angular.module('app', [
   'ngRoute',
   'ngAnimate',
@@ -27,7 +29,8 @@ angular.module('app', [
   .controller('FactsCtrl', FactsCtrl)
   .controller('DashboardCtrl', DashboardCtrl)
   .controller('EventsCtrl', EventsCtrl)
-  .run(($rootScope, $location, $http, PuppetDB) => {
+  .service('PuppetDB', PuppetDB)
+  .run(($rootScope, $location, $http) => {
     // Make the $location service available in root scope
     $rootScope.location = $location;
     $rootScope.isLoading = () => $http.pendingRequests.length !== 0;
