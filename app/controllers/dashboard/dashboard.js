@@ -35,17 +35,18 @@ export class DashboardCtrl {
       'puppetlabs.puppetdb.population' : 'puppetlabs.puppetdb.query.population';
     const metric = this.major > 3 ?
       `${bean}:name=${name}` : `${bean}:type=default,name=${name}`;
-    this.puppetDB.getBean(metric)
-      .success((data) => {
-        this.$scope[scopeName] = (data.Value * multiply)
+    this.puppetDB.getBean(metric).then(
+      (resp) => {
+        this.$scope[scopeName] = (resp.data.Value * multiply)
           .toLocaleString()
           .replace(/^(.*\..).*/, '$1');
-      })
-      .error((data, status) => {
-        if (status !== 0) {
+      },
+      (resp) => {
+        if (resp.status !== 0) {
           throw new Error(`Could not fetch metric ${name} from puppetDB`);
         }
-      });
+      }
+    );
   }
 
   getNodeCount(query, callback) {
@@ -63,16 +64,17 @@ export class DashboardCtrl {
   }
 
   checkVersion() {
-    this.puppetDB.getVersion()
-      .success(data => {
-        this.major = parseInt(data.version.split('.')[0], 10);
-        this.minor = parseInt(data.version.split('.')[1], 10);
-        this.patch = parseInt(data.version.split('.')[2], 10);
+    this.puppetDB.getVersion().then(
+      (resp) => {
+        this.major = parseInt(resp.data.version.split('.')[0], 10);
+        this.minor = parseInt(resp.data.version.split('.')[1], 10);
+        this.patch = parseInt(resp.data.version.split('.')[2], 10);
         if (this.major < 4 || (this.major === 3 && this.minor < 2)) {
           throw new Error('This version of Puppet Explorer requires puppetDB version 3.2.0+' +
-            `, you are running puppetDB ${data.version}`);
+            `, you are running puppetDB ${resp.data.version}`);
         }
         this.loadMetrics();
-      });
+      }
+    );
   }
 }
