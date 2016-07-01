@@ -82,34 +82,21 @@ module.exports = (grunt) => {
           'dist/app.js': ['app/**/*.js'],
         },
         options: {
-          debug: true,
           transform: [
-            ['babelify', {
-              global: true,
-              presets: ['es2015'],
-              plugins: [['transform-es2015-modules-commonjs', { loose: false }]],
-              // FIXME: This "list" of ES6 modules is pretty ugly
-              only: [/app\//, /node_modules\/node-puppetdbquery/],
-            }],
-            ['uglifyify', { global: true, mangle: false }],
+            ['babelify', { presets: ['es2015'] }],
+            ['uglifyify', { mangle: false }],
           ],
         },
       },
       // Dev target without ulgifyify
       dev: {
         options: {
-          debug: true,
           transform: [
-            ['babelify', {
-              global: true,
-              presets: ['es2015'],
-              plugins: [['transform-es2015-modules-commonjs', { loose: false }]],
-              only: [/app\//, /node_modules\/node-puppetdbquery/],
-            }],
+            ['babelify', { presets: ['es2015'] }],
           ],
         },
         files: {
-          'dist/app.js': ['app/**/*.js'],
+          'dist/app.js': ['app/app.js'],
         },
       },
     },
