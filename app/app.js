@@ -5,6 +5,8 @@ import 'angular-google-chart';
 import 'angular-moment';
 import 'angular-bootstrap';
 
+import { beanMetric } from './components/bean-metric';
+
 import { SearchCtrl } from './controllers/search/search';
 import { NodeListCtrl } from './controllers/nodelist/nodelist';
 import { NodeDetailCtrl } from './controllers/nodedetail/nodedetail';
@@ -23,6 +25,7 @@ angular.module('app', [
   'angularMoment',
   'ui.bootstrap',
 ])
+  .component('beanMetric', beanMetric)
   .controller('SearchCtrl', SearchCtrl)
   .controller('NodeListCtrl', NodeListCtrl)
   .controller('NodeDetailCtrl', NodeDetailCtrl)

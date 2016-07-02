@@ -6,44 +6,17 @@ export class DashboardCtrl {
     this.$location = $location;
 
     this.panels = config.get('dashboardPanels');
-    this.loadMetrics = this.loadMetrics.bind(this);
-    this.$scope.$on('queryChange', this.loadMetrics);
-    this.major = this.minor = this.patch = null;
     this.checkVersion();
+    this.loadMetrics();
   }
 
   loadMetrics() {
-    this.getBean('num-nodes', 'activeNodes');
-    this.getBean('num-resources', 'resources');
-    this.getBean('avg-resources-per-node', 'avgResources');
-    this.getBean('pct-resource-dupes', 'resDuplication', 100);
-
     for (const panel of this.panels) {
       panel.count = undefined; // reset if we switched server
       this.getNodeCount(panel.query, (count) => { panel.count = String(count); });
     }
 
     this.$scope.panelWidth = Math.max(2, Math.floor(12 / this.panels.length));
-  }
-
-  getBean(name, scopeName, multiply = 1) {
-    this.$scope[scopeName] = undefined;
-    const bean = this.major > 3 ?
-      'puppetlabs.puppetdb.population' : 'puppetlabs.puppetdb.query.population';
-    const metric = this.major > 3 ?
-      `${bean}:name=${name}` : `${bean}:type=default,name=${name}`;
-    this.puppetDB.getBean(metric).then(
-      (resp) => {
-        this.$scope[scopeName] = (resp.data.Value * multiply)
-          .toLocaleString()
-          .replace(/^(.*\..).*/, '$1');
-      },
-      (resp) => {
-        if (resp.status !== 0) {
-          throw new Error(`Could not fetch metric ${name} from puppetDB`);
-        }
-      }
-    );
   }
 
   getNodeCount(query, callback) {
@@ -70,7 +43,6 @@ export class DashboardCtrl {
           throw new Error('This version of Puppet Explorer requires puppetDB version 3.2.0+' +
             `, you are running puppetDB ${resp.data.version}`);
         }
-        this.loadMetrics();
       }
     );
   }

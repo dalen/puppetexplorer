@@ -1,28 +1,8 @@
 <div class="row" id="beanMetrics">
-  <div class="col-md-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading"><h3 class="panel-title">Nodes</h3></div>
-      <div class="panel-body"><span class="lead"><span ng-class="activeNodes ? '' : 'glyphicon glyphicon-refresh spin'">{{activeNodes}}</span></span></div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading"><h3 class="panel-title">Resources</h3></div>
-      <div class="panel-body"><span class="lead"><span ng-class="resources ? '' : 'glyphicon glyphicon-refresh spin'">{{resources}}</span></span></div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading"><h3 class="panel-title">Avg resources/node</h3></div>
-      <div class="panel-body"><span class="lead"><span ng-class="avgResources ? '' : 'glyphicon glyphicon-refresh spin'">{{avgResources}}</span></span></div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="panel panel-primary">
-      <div class="panel-heading"><h3 class="panel-title">Resource duplication %</h3></div>
-      <div class="panel-body"><span class="lead"><span ng-class="resDuplication ? '' : 'glyphicon glyphicon-refresh spin'">{{resDuplication}}</span></span></div>
-    </div>
-  </div>
+  <div class="col-md-3"><bean-metric title="Nodes" bean="puppetlabs.puppetdb.population" name="num-nodes"></div>
+  <div class="col-md-3"><bean-metric title="Resources" bean="puppetlabs.puppetdb.population" name="num-resources"></div>
+  <div class="col-md-3"><bean-metric title="Avg Resources/Node" bean="puppetlabs.puppetdb.population" name="avg-resources-per-node"></div>
+  <div class="col-md-3"><bean-metric title="Resource Duplication %" bean="puppetlabs.puppetdb.population" name="pct-resource-dupes" multiply="100"></div>
 </div>
 
 <div class="row">
