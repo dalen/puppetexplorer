@@ -6,6 +6,7 @@ import 'angular-moment';
 import 'angular-bootstrap';
 
 import { beanMetric } from './components/bean-metric';
+import { nodeMetric } from './components/node-metric';
 
 import { SearchCtrl } from './controllers/search/search';
 import { NodeListCtrl } from './controllers/nodelist/nodelist';
@@ -26,6 +27,7 @@ angular.module('app', [
   'ui.bootstrap',
 ])
   .component('beanMetric', beanMetric)
+  .component('nodeMetric', nodeMetric)
   .controller('SearchCtrl', SearchCtrl)
   .controller('NodeListCtrl', NodeListCtrl)
   .controller('NodeDetailCtrl', NodeDetailCtrl)

@@ -33,7 +33,7 @@ export const beanMetric = {
         },
         (resp) => {
           if (resp.status !== 0) {
-            throw new Error(`Could not fetch metric ${this.name} from puppetDB`);
+            throw new Error(`Could not fetch metric ${this.name} from PuppetDB`);
           }
         }
       );
