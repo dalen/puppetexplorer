@@ -7,6 +7,7 @@ import 'angular-bootstrap';
 
 import { beanMetric } from './components/bean-metric';
 import { nodeMetric } from './components/node-metric';
+import { searchField } from './components/search-field';
 
 import { SearchCtrl } from './controllers/search/search';
 import { NodeListCtrl } from './controllers/nodelist/nodelist';
@@ -28,6 +29,7 @@ angular.module('app', [
 ])
   .component('beanMetric', beanMetric)
   .component('nodeMetric', nodeMetric)
+  .component('searchField', searchField)
   .controller('SearchCtrl', SearchCtrl)
   .controller('NodeListCtrl', NodeListCtrl)
   .controller('NodeDetailCtrl', NodeDetailCtrl)
@@ -51,6 +53,7 @@ angular.module('app', [
     };
   });
 
+/*
 angular.module('app').factory('$exceptionHandler', ($injector, $log) =>
   (exception, cause) => {
     $log.error(exception, cause);
@@ -60,6 +63,7 @@ angular.module('app').factory('$exceptionHandler', ($injector, $log) =>
     }
   }
 );
+*/
 
 angular.module('app').config(($routeProvider) =>
   $routeProvider.when('/dashboard', {
