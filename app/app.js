@@ -9,11 +9,11 @@ import { beanMetric } from './components/bean-metric';
 import { nodeMetric } from './components/node-metric';
 import { searchField } from './components/search-field';
 import { dashboard } from './components/dashboard';
+import { menubar } from './components/menubar';
 
 import { SearchCtrl } from './controllers/search/search';
 import { NodeListCtrl } from './controllers/nodelist/nodelist';
 import { NodeDetailCtrl } from './controllers/nodedetail/nodedetail';
-import { MenuCtrl } from './controllers/menu/menu';
 import { FactsCtrl } from './controllers/facts/facts';
 import { EventsCtrl } from './controllers/events/events';
 
@@ -31,10 +31,10 @@ angular.module('app', [
   .component('nodeMetric', nodeMetric)
   .component('searchField', searchField)
   .component('dashboard', dashboard)
+  .component('menubar', menubar)
   .controller('SearchCtrl', SearchCtrl)
   .controller('NodeListCtrl', NodeListCtrl)
   .controller('NodeDetailCtrl', NodeDetailCtrl)
-  .controller('MenuCtrl', MenuCtrl)
   .controller('FactsCtrl', FactsCtrl)
   .controller('EventsCtrl', EventsCtrl)
   .service('config', Config)
@@ -65,7 +65,7 @@ angular.module('app').factory('$exceptionHandler', ($injector, $log) =>
 
 angular.module('app').config(($routeProvider) =>
   $routeProvider.when('/dashboard', {
-    template: '<dashboard>',
+    template: '<dashboard></dashboard>',
     reloadOnSearch: false,
   })
   .when('/nodes', {

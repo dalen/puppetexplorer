@@ -1,4 +1,5 @@
-/* global moment */
+import moment from 'moment';
+
 export class NodeListCtrl {
   constructor($location, $scope, config, puppetDB) {
     this.$location = $location;

@@ -37,36 +37,14 @@
       <input class="form-control" style="border-radius: 0" type="search" placeholder="Search" ng-model="query" name="query" id="node-query-field">
     </div>
 
-    <uib-alert type="danger" close="clearError()" ng-if="error"><samp style="white-space: pre;">{{error}}</samp></uib-alert>
+    <uib-alert type="danger" close="clearError()" ng-if="error">
+      <samp style="white-space: pre;">{{error}}</samp>
+    </uib-alert>
   </form>
 
   <!-- Menu -->
-  <nav class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="MenuCtrl as menu">
-    <div class="container-fluid">
-      <ul class="nav navbar-nav">
-        <li ng-class="menu.currentView() == 'dashboard' ? 'active' : ''"><a ng-click="menu.view('/dashboard')" id="menu-dashboard">
-          <span class="glyphicon glyphicon-dashboard"></span> Dashboard
-        </a></li>
-        <li ng-class="menu.currentView() == 'nodes' ? 'active' : ''"><a ng-click="menu.view('/nodes')" id="menu-nodes">
-          <span class="glyphicon glyphicon-list"></span> Nodes
-        </a></li>
-        <li ng-class="menu.currentView() == 'events' ? 'active' : ''"><a ng-click="menu.view('/events')" id="menu-events">
-          <span class="glyphicon glyphicon-calendar"></span> Events
-        </a></li>
-        <li ng-class="menu.currentView() == 'facts' ? 'active' : ''"><a ng-click="menu.view('/facts')" id="menu-facts">
-          <span class="glyphicon glyphicon-stats"></span> Facts
-        </a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" ng-if="menu.servers.length > 1" dropdown>
-          <a href="#" dropdown-toggle class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-hdd"></span> Server <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li ng-repeat="server in menu.servers"><a ng-click="menu.setServer(server)">{{server}}</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <menubar></menubar>
+
   <div class="container-fluid" ng-view></div>
 </body>
 </html>

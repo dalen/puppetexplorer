@@ -2,14 +2,14 @@ export const dashboard = {
   template: `
     <div class="row" id="beanMetrics">
       <div class="col-md-3"><bean-metric title="Nodes"
-         bean="puppetlabs.puppetdb.population" name="num-nodes"></div>
+         bean="puppetlabs.puppetdb.population" name="num-nodes"></bean-metric></div>
       <div class="col-md-3"><bean-metric title="Resources"
-         bean="puppetlabs.puppetdb.population" name="num-resources"></div>
+         bean="puppetlabs.puppetdb.population" name="num-resources"></bean-metric></div>
       <div class="col-md-3"><bean-metric title="Avg Resources/Node"
-         bean="puppetlabs.puppetdb.population" name="avg-resources-per-node"> </div>
+         bean="puppetlabs.puppetdb.population" name="avg-resources-per-node"></bean-metric></div>
       <div class="col-md-3"><bean-metric title="Resource Duplication %"
         bean="puppetlabs.puppetdb.population" name="pct-resource-dupes" multiply="100">
-      </div>
+      </bean-metric></div>
     </div>
 
     <div class="row">
