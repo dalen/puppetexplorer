@@ -31,10 +31,10 @@
   "dependencies": {
     "angular": "^1.5.5",
     "angular-animate": "^1.5.5",
-    "angular-route": "^1.4.7",
-    "angular-bootstrap": "^0.12.2",
     "angular-google-chart": "0.1.0",
     "angular-moment": "^1.0.0-beta.6",
+    "angular-route": "^1.4.7",
+    "angular-ui-bootstrap": "^1.3.3",
     "bootswatch": "^3.3.6",
     "moment": "^2.13.0",
     "node-puppetdbquery": "^1.0.1"

@@ -37,10 +37,7 @@
       <input class="form-control" style="border-radius: 0" type="search" placeholder="Search" ng-model="query" name="query" id="node-query-field">
     </div>
 
-    <div class="alert alert-danger alert-dismissible" role="alert" ng-if="error" ng-click="clearError()">
-      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <samp style="white-space: pre;">{{error}}</samp>
-    </div>
+    <uib-alert type="danger" close="clearError()" ng-if="error"><samp style="white-space: pre;">{{error}}</samp></uib-alert>
   </form>
 
   <!-- Menu -->

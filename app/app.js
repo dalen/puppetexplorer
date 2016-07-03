@@ -3,7 +3,7 @@ import 'angular-route';
 import 'angular-animate';
 import 'angular-google-chart';
 import 'angular-moment';
-import 'angular-bootstrap';
+import 'angular-ui-bootstrap';
 
 import { beanMetric } from './components/bean-metric';
 import { nodeMetric } from './components/node-metric';
@@ -53,7 +53,6 @@ angular.module('app', [
     };
   });
 
-/*
 angular.module('app').factory('$exceptionHandler', ($injector, $log) =>
   (exception, cause) => {
     $log.error(exception, cause);
@@ -63,7 +62,6 @@ angular.module('app').factory('$exceptionHandler', ($injector, $log) =>
     }
   }
 );
-*/
 
 angular.module('app').config(($routeProvider) =>
   $routeProvider.when('/dashboard', {
