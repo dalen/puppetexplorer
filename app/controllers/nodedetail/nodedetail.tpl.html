@@ -1,14 +1,14 @@
 <div class="page-header">
-  <h3>{{nodeDetail.node}}</h3>
+  <h3>{{$ctrl.node}}</h3>
 </div>
 <div class="row">
   <div class="col-md-6">
-    <div class="alert alert-warning" role="alert" ng-if="nodeDetail.reports.length === 0">
+    <div class="alert alert-warning" role="alert" ng-if="$ctrl.reports.length === 0">
       No reports found
     </div>
     <div class="panel panel-default">
       <div class="panel-heading">Reports</div>
-      <table class="table table-striped" ng-if="nodeDetail.reports">
+      <table class="table table-striped" ng-if="$ctrl.reports">
         <thead><tr>
           <th>Time</th>
           <th style="text-align:center">Successes</th>
@@ -18,7 +18,7 @@
           <th></th>
         </tr></thead>
         <tbody>
-          <tr ng-repeat="report in nodeDetail.reports" ng-click="nodeDetail.selectReport(report.hash)">
+          <tr ng-repeat="report in $ctrl.reports" ng-click="$ctrl.selectReport(report.hash)">
             <td title="{{report.end_time}}">
               <span am-time-ago="report.end_time"></span>
             </td>
@@ -27,7 +27,7 @@
             <td class="text-center">{{report.events.skips || ""}}</td>
             <td class="text-center">{{report.events.failures || ""}}</td>
             <td class="text-right">
-              <span class="glyphicon" ng-class="nodeDetail.status(report)"></span>
+              <span class="glyphicon" ng-class="$ctrl.status(report)"></span>
             </td>
           </tr>
         </tbody>
@@ -35,24 +35,24 @@
       <pagination ng-if="numItems > 10" ng-change="changePage(page)" ng-model="page" num-pages="numPages" items-per-page="10"  boundary-links="numItems > 250" max-size="5" total-items="numItems" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
     </div>
   </div>
-  <div class="col-md-6" ng-if="nodeDetail.facts">
+  <div class="col-md-6" ng-if="$ctrl.facts">
     <div class="panel panel-default">
       <div class="panel-heading">Facts</div>
-      <table class="table table-striped" ng-if="nodeDetail.facts">
+      <table class="table table-striped" ng-if="$ctrl.facts">
         <thead><tr>
           <th>Fact</th>
           <th>Value</th>
         </tr></thead>
         <tbody>
-          <tr ng-repeat="fact in nodeDetail.importantFacts()">
+          <tr ng-repeat="fact in $ctrl.importantFacts()">
             <td><span ng-repeat="factCompontent in fact.path track by $index">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span></td>
             <td>{{fact.value}}</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <button type="button" class="btn btn-default" ng-class="nodeDetail.showAllFacts ? 'active' : ''" ng-click="nodeDetail.showAllFacts = !nodeDetail.showAllFacts">Show all</button>
-    <div class="panel panel-default" ng-if="nodeDetail.facts && nodeDetail.showAllFacts">
+    <button type="button" class="btn btn-default" ng-class="$ctrl.showAllFacts ? 'active' : ''" ng-click="$ctrl.showAllFacts = !$ctrl.showAllFacts">Show all</button>
+    <div class="panel panel-default" ng-if="$ctrl.facts && $ctrl.showAllFacts">
       <div class="panel-heading">All facts</div>
       <table class="ui table segment">
         <thead><tr>
@@ -60,7 +60,7 @@
           <th>Value</th>
         </tr></thead>
         <tbody>
-          <tr ng-repeat="fact in nodeDetail.facts">
+          <tr ng-repeat="fact in $ctrl.facts">
             <td><span ng-repeat="factCompontent in fact.path track by $index">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span></td>
             <td>{{fact.value}}</td>
           </tr>

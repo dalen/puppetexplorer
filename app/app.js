@@ -71,25 +71,25 @@ angular.module('app').config(($routeProvider) =>
   .when('/nodes', {
     templateUrl: 'controllers/nodelist/nodelist.tpl.html',
     controller: 'NodeListCtrl',
-    controllerAs: 'nodeList',
+    controllerAs: '$ctrl',
     reloadOnSearch: false,
   })
   .when('/node/:node', {
     templateUrl: 'controllers/nodedetail/nodedetail.tpl.html',
     controller: 'NodeDetailCtrl',
-    controllerAs: 'nodeDetail',
+    controllerAs: '$ctrl',
     reloadOnSearch: false,
   })
   .when('/events', {
     templateUrl: 'controllers/events/events.tpl.html',
     controller: 'EventsCtrl',
-    controllerAs: 'events',
+    controllerAs: '$ctrl',
     reloadOnSearch: false,
   })
   .when('/facts', {
     templateUrl: 'controllers/facts/facts.tpl.html',
     controller: 'FactsCtrl',
-    controllerAs: 'facts',
+    controllerAs: '$ctrl',
     reloadOnSearch: false,
   })
   .otherwise({ redirectTo: '/dashboard' })

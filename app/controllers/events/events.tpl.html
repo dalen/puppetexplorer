@@ -1,14 +1,14 @@
 <tabset>
-  <tab heading="Latest report" active="events.mode.latest" select="events.setMode('latest')"></tab>
-  <tab heading="Date range" active="events.mode.daterange" select="events.setMode('daterange')">
+  <tab heading="Latest report" active="$ctrl.mode.latest" select="$ctrl.setMode('latest')"></tab>
+  <tab heading="Date range" active="$ctrl.mode.daterange" select="$ctrl.setMode('daterange')">
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
           <label for="date-from">Date from:</label>
           <div class="input-group">
-            <input datepicker-popup type="text" id="date-from" class="form-control" ng-model="dateFrom" ng-change="events.setFilters()" is-open="dateFromOpen" close-text="Close">
+            <input datepicker-popup type="text" id="date-from" class="form-control" ng-model="dateFrom" ng-change="$ctrl.setFilters()" is-open="dateFromOpen" close-text="Close">
             <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-disabled="latestReport" ng-click="events.toggleDatePicker($event,'dateFromOpen')"><span class="glyphicon glyphicon-calendar"></span></button>
+              <button type="button" class="btn btn-default" ng-disabled="latestReport" ng-click="$ctrl.toggleDatePicker($event,'dateFromOpen')"><span class="glyphicon glyphicon-calendar"></span></button>
             </span>
           </div>
         </div>
@@ -17,16 +17,16 @@
         <div class="form-group">
           <label for="date-to">Date to:</label>
           <div class="input-group">
-            <input datepicker-popup type="text" id="date-to" class="form-control" ng-model="dateTo" ng-change="events.setFilters()" is-open="dateToOpen" close-text="Close">
+            <input datepicker-popup type="text" id="date-to" class="form-control" ng-model="dateTo" ng-change="$ctrl.setFilters()" is-open="dateToOpen" close-text="Close">
             <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-disabled="latestReport" ng-click="events.toggleDatePicker($event,'dateToOpen')"><span class="glyphicon glyphicon-calendar"></span></button>
+              <button type="button" class="btn btn-default" ng-disabled="latestReport" ng-click="$ctrl.toggleDatePicker($event,'dateToOpen')"><span class="glyphicon glyphicon-calendar"></span></button>
             </span>
           </div>
         </div>
       </div>
     </div>
   </tab>
-  <tab heading="Single report" active="events.mode.report" select="events.setMode('report')">
+  <tab heading="Single report" active="$ctrl.mode.report" select="$ctrl.setMode('report')">
     <div class="form-group">
       <label for="report-hash">Report hash</label>
       <input type="text" class="form-control" id="report-hash" ng-model="reportHash" placeholder="Report hash">
@@ -41,7 +41,7 @@
         <h3 class="panel-title">Containing class</h3>
       </div>
       <div class="panel-body">
-        <div google-chart chart="containingChart" on-select="events.onChartSelect('containing_class', containingChart.data, selectedItem)" on-ready="events.setChartSelection('containing_class', containingChart.data, chartWrapper)"></div>
+        <div google-chart chart="containingChart" on-select="$ctrl.onChartSelect('containing_class', containingChart.data, selectedItem)" on-ready="$ctrl.setChartSelection('containing_class', containingChart.data, chartWrapper)"></div>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
         <h3 class="panel-title">Resource type</h3>
       </div>
       <div class="panel-body">
-        <div google-chart chart="resourceChart" on-select="events.onChartSelect('resource_type', resourceChart.data, selectedItem)" on-ready="events.setChartSelection('resource_type', resourceChart.data, chartWrapper)"></div>
+        <div google-chart chart="resourceChart" on-select="$ctrl.onChartSelect('resource_type', resourceChart.data, selectedItem)" on-ready="$ctrl.setChartSelection('resource_type', resourceChart.data, chartWrapper)"></div>
       </div>
     </div>
   </div>
@@ -61,17 +61,17 @@
         <h3 class="panel-title">Event status</h3>
       </div>
       <div class="panel-body">
-        <div google-chart chart="statusChart" on-select="events.onChartSelect('status', statusChart.data, selectedItem)" on-ready="events.setChartSelection('status', statusChart.data, chartWrapper)"></div>
+        <div google-chart chart="statusChart" on-select="$ctrl.onChartSelect('status', statusChart.data, selectedItem)" on-ready="$ctrl.setChartSelection('status', statusChart.data, chartWrapper)"></div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="alert alert-warning" role="alert" ng-if="events.events.length === 0">
+<div class="alert alert-warning" role="alert" ng-if="$ctrl.events.length === 0">
   No matching events found
 </div>
 
-<table class="table table-hover" ng-if="events.events.length > 0">
+<table class="table table-hover" ng-if="$ctrl.events.length > 0">
   <thead><tr>
     <th>Node</th>
     <th>Type</th>
@@ -80,8 +80,8 @@
     <th>From</th>
     <th>To</th>
   </tr></thead>
-  <tbody ng-repeat="event in events.events">
-    <tr ng-class="events.color(event.status)" ng-click="events.toggleRow(event)">
+  <tbody ng-repeat="event in $ctrl.events">
+    <tr ng-class="$ctrl.color(event.status)" ng-click="$ctrl.toggleRow(event)">
       <td>{{event.certname}}</td>
       <td>{{event.resource_type}}</td>
       <td>{{event.resource_title}}</td>
@@ -116,7 +116,7 @@
             <th>Timestamp</th>
             <td title="{{event.timestamp}}" am-time-ago="event.timestamp"></td>
           </tr>
-          <tr ng-click="events.selectReport(event.report)">
+          <tr ng-click="$ctrl.selectReport(event.report)">
             <th>Report</th>
             <td>{{event.report}}</td>
           </tr>
