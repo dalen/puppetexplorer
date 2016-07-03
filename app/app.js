@@ -8,13 +8,13 @@ import 'angular-ui-bootstrap';
 import { beanMetric } from './components/bean-metric';
 import { nodeMetric } from './components/node-metric';
 import { searchField } from './components/search-field';
+import { dashboard } from './components/dashboard';
 
 import { SearchCtrl } from './controllers/search/search';
 import { NodeListCtrl } from './controllers/nodelist/nodelist';
 import { NodeDetailCtrl } from './controllers/nodedetail/nodedetail';
 import { MenuCtrl } from './controllers/menu/menu';
 import { FactsCtrl } from './controllers/facts/facts';
-import { DashboardCtrl } from './controllers/dashboard/dashboard';
 import { EventsCtrl } from './controllers/events/events';
 
 import { Config } from './services/config';
@@ -30,12 +30,12 @@ angular.module('app', [
   .component('beanMetric', beanMetric)
   .component('nodeMetric', nodeMetric)
   .component('searchField', searchField)
+  .component('dashboard', dashboard)
   .controller('SearchCtrl', SearchCtrl)
   .controller('NodeListCtrl', NodeListCtrl)
   .controller('NodeDetailCtrl', NodeDetailCtrl)
   .controller('MenuCtrl', MenuCtrl)
   .controller('FactsCtrl', FactsCtrl)
-  .controller('DashboardCtrl', DashboardCtrl)
   .controller('EventsCtrl', EventsCtrl)
   .service('config', Config)
   .service('puppetDB', PuppetDB)
@@ -65,9 +65,7 @@ angular.module('app').factory('$exceptionHandler', ($injector, $log) =>
 
 angular.module('app').config(($routeProvider) =>
   $routeProvider.when('/dashboard', {
-    templateUrl: 'controllers/dashboard/dashboard.tpl.html',
-    controller: 'DashboardCtrl',
-    controllerAs: 'dashboard',
+    template: '<dashboard>',
     reloadOnSearch: false,
   })
   .when('/nodes', {
