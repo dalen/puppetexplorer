@@ -12,6 +12,7 @@ import { searchField } from './components/search-field';
 import { dashboard } from './components/dashboard';
 import { menubar } from './components/menubar';
 import { nodelist } from './components/nodelist';
+import { reportList } from './components/report-list';
 
 import { NodeDetailCtrl } from './controllers/nodedetail/nodedetail';
 import { FactsCtrl } from './controllers/facts/facts';
@@ -34,6 +35,7 @@ angular.module('app', [
   .component('dashboard', dashboard)
   .component('menubar', menubar)
   .component('nodelist', nodelist)
+  .component('reportList', reportList)
   .controller('NodeDetailCtrl', NodeDetailCtrl)
   .controller('FactsCtrl', FactsCtrl)
   .controller('EventsCtrl', EventsCtrl)
