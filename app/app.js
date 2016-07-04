@@ -5,14 +5,14 @@ import 'angular-google-chart';
 import 'angular-moment';
 import 'angular-ui-bootstrap';
 
+import { app } from './components/app';
 import { beanMetric } from './components/bean-metric';
 import { nodeMetric } from './components/node-metric';
 import { searchField } from './components/search-field';
 import { dashboard } from './components/dashboard';
 import { menubar } from './components/menubar';
+import { nodelist } from './components/nodelist';
 
-import { SearchCtrl } from './controllers/search/search';
-import { NodeListCtrl } from './controllers/nodelist/nodelist';
 import { NodeDetailCtrl } from './controllers/nodedetail/nodedetail';
 import { FactsCtrl } from './controllers/facts/facts';
 import { EventsCtrl } from './controllers/events/events';
@@ -27,13 +27,13 @@ angular.module('app', [
   'angularMoment',
   'ui.bootstrap',
 ])
+  .component('app', app)
   .component('beanMetric', beanMetric)
   .component('nodeMetric', nodeMetric)
   .component('searchField', searchField)
   .component('dashboard', dashboard)
   .component('menubar', menubar)
-  .controller('SearchCtrl', SearchCtrl)
-  .controller('NodeListCtrl', NodeListCtrl)
+  .component('nodelist', nodelist)
   .controller('NodeDetailCtrl', NodeDetailCtrl)
   .controller('FactsCtrl', FactsCtrl)
   .controller('EventsCtrl', EventsCtrl)
@@ -69,9 +69,7 @@ angular.module('app').config(($routeProvider) =>
     reloadOnSearch: false,
   })
   .when('/nodes', {
-    templateUrl: 'controllers/nodelist/nodelist.tpl.html',
-    controller: 'NodeListCtrl',
-    controllerAs: '$ctrl',
+    template: '<nodelist query="$ctrl.query"></nodelist>',
     reloadOnSearch: false,
   })
   .when('/node/:node', {

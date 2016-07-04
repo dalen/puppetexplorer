@@ -30,21 +30,6 @@
       ga('send', 'pageview');
   </script>
 
-  <!-- Search field -->
-  <form ng-controller="SearchCtrl as search" ng-submit="search.submit()" id="node-query">
-    <div class="input-group">
-      <span class="input-group-addon" style="border-radius: 0"><span ng-class="isLoading() ? 'glyphicon glyphicon-refresh spin' : 'glyphicon glyphicon-search'"></span></span>
-      <input class="form-control" style="border-radius: 0" type="search" placeholder="Search" ng-model="query" name="query" id="node-query-field">
-    </div>
-
-    <uib-alert type="danger" close="clearError()" ng-if="error">
-      <samp style="white-space: pre;">{{error}}</samp>
-    </uib-alert>
-  </form>
-
-  <!-- Menu -->
-  <menubar></menubar>
-
-  <div class="container-fluid" ng-view></div>
+  <app></app>
 </body>
 </html>
