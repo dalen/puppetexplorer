@@ -13,6 +13,7 @@ import { dashboard } from './components/dashboard';
 import { menubar } from './components/menubar';
 import { nodelist } from './components/nodelist';
 import { reportList } from './components/report-list';
+import { importantFacts } from './components/important-facts';
 
 import { NodeDetailCtrl } from './controllers/nodedetail/nodedetail';
 import { FactsCtrl } from './controllers/facts/facts';
@@ -36,6 +37,7 @@ angular.module('app', [
   .component('menubar', menubar)
   .component('nodelist', nodelist)
   .component('reportList', reportList)
+  .component('importantFacts', importantFacts)
   .controller('NodeDetailCtrl', NodeDetailCtrl)
   .controller('FactsCtrl', FactsCtrl)
   .controller('EventsCtrl', EventsCtrl)

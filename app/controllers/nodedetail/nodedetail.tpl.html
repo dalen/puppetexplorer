@@ -5,37 +5,7 @@
   <div class="col-md-6">
     <report-list node="$ctrl.node"></report-list>
   </div>
-  <div class="col-md-6" ng-if="$ctrl.facts">
-    <div class="panel panel-default">
-      <div class="panel-heading">Facts</div>
-      <table class="table table-striped" ng-if="$ctrl.facts">
-        <thead><tr>
-          <th>Fact</th>
-          <th>Value</th>
-        </tr></thead>
-        <tbody>
-          <tr ng-repeat="fact in $ctrl.importantFacts()">
-            <td><span ng-repeat="factCompontent in fact.path track by $index">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span></td>
-            <td>{{fact.value}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <button type="button" class="btn btn-default" ng-class="$ctrl.showAllFacts ? 'active' : ''" ng-click="$ctrl.showAllFacts = !$ctrl.showAllFacts">Show all</button>
-    <div class="panel panel-default" ng-if="$ctrl.facts && $ctrl.showAllFacts">
-      <div class="panel-heading">All facts</div>
-      <table class="ui table segment">
-        <thead><tr>
-          <th>Fact</th>
-          <th>Value</th>
-        </tr></thead>
-        <tbody>
-          <tr ng-repeat="fact in $ctrl.facts">
-            <td><span ng-repeat="factCompontent in fact.path track by $index">{{factCompontent}}<span class="text-muted" ng-if="!$last"> / </span></span></td>
-            <td>{{fact.value}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="col-md-6">
+    <important-facts node="$ctrl.node"></important-facts>
   </div>
 </div>
