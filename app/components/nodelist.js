@@ -77,6 +77,7 @@ export const nodelist = {
         'nodes',
         this.query,
         {
+          include_total: true,
           offset: this.perPage * ((this.$location.search().page || 1) - 1),
           limit: this.perPage,
           order_by: JSON.stringify([{ field: 'certname', order: 'asc' }]),

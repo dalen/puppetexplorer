@@ -58,6 +58,7 @@ export const reportList = {
         'reports',
         ['=', 'certname', this.node],
         {
+          include_total: true,
           order_by: JSON.stringify([{ field: 'end_time', order: 'desc' }]),
           offset: this.perPage * (this.page - 1),
           limit: this.perPage,
