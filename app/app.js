@@ -14,8 +14,8 @@ import { menubar } from './components/menubar';
 import { nodelist } from './components/nodelist';
 import { reportList } from './components/report-list';
 import { importantFacts } from './components/important-facts';
+import { nodeDetail } from './components/node-detail';
 
-import { NodeDetailCtrl } from './controllers/nodedetail/nodedetail';
 import { FactsCtrl } from './controllers/facts/facts';
 import { EventsCtrl } from './controllers/events/events';
 
@@ -38,23 +38,13 @@ angular.module('app', [
   .component('nodelist', nodelist)
   .component('reportList', reportList)
   .component('importantFacts', importantFacts)
-  .controller('NodeDetailCtrl', NodeDetailCtrl)
+  .component('nodeDetail', nodeDetail)
   .controller('FactsCtrl', FactsCtrl)
   .controller('EventsCtrl', EventsCtrl)
   .service('config', Config)
   .service('puppetDB', PuppetDB)
-  .run(($rootScope, $location, $http, puppetDB) => {
-    // Make the $location service available in root scope
-    $rootScope.location = $location;
-    $rootScope.isLoading = () => $http.pendingRequests.length !== 0;
+  .run(($rootScope) => {
     $rootScope.clearError = () => { $rootScope.error = null; };
-    $rootScope.$on('queryChange', $rootScope.clearError);
-    $rootScope.$on('queryChange', puppetDB.cancel);
-    $rootScope.$on('filterChange', puppetDB.cancel);
-    $rootScope.changePage = (page) => {
-      $location.search('page', page);
-      $rootScope.$broadcast('pageChange', { page });
-    };
   });
 
 angular.module('app').factory('$exceptionHandler', ($injector, $log) =>
@@ -77,9 +67,7 @@ angular.module('app').config(($routeProvider) =>
     reloadOnSearch: false,
   })
   .when('/node/:node', {
-    templateUrl: 'controllers/nodedetail/nodedetail.tpl.html',
-    controller: 'NodeDetailCtrl',
-    controllerAs: '$ctrl',
+    template: '<node-detail></node-detail>',
     reloadOnSearch: false,
   })
   .when('/events', {

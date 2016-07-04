@@ -35,7 +35,11 @@ export const searchField = {
     submit() {
       this.$location.search('query', this.query);
 
+      // cancel all requests
+      this.puppetDB.cancel();
+
       // FIXME: Catch errors here and show error ourself
+      //        Also clear previous error on submit
       const apiQuery = this.puppetDB.parse(this.query);
       this.onUpdate({ query: apiQuery });
 
