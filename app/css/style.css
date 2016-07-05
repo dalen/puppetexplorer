@@ -1,3 +1,10 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont,
+  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+  "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+}
+
 .table-hover, .nav, .pagination, .carousel, .panel-title a, [ng-click] { cursor: pointer; }
 
 .reveal-animation.ng-enter {
