@@ -1,5 +1,5 @@
 import angular from 'angular';
-import 'angular-route';
+import 'angular-ui-router';
 import 'angular-animate';
 import 'angular-google-chart';
 import 'angular-moment';
@@ -15,15 +15,16 @@ import { nodelist } from './components/nodelist';
 import { reportList } from './components/report-list';
 import { importantFacts } from './components/important-facts';
 import { nodeDetail } from './components/node-detail';
+import { events } from './components/events';
+import { eventList } from './components/event-list';
 
 import { FactsCtrl } from './controllers/facts/facts';
-import { EventsCtrl } from './controllers/events/events';
 
 import { Config } from './services/config';
 import { PuppetDB } from './services/puppetdb';
 
 angular.module('app', [
-  'ngRoute',
+  'ui.router',
   'ngAnimate',
   'googlechart',
   'angularMoment',
@@ -39,8 +40,9 @@ angular.module('app', [
   .component('reportList', reportList)
   .component('importantFacts', importantFacts)
   .component('nodeDetail', nodeDetail)
+  .component('events', events)
+  .component('eventList', eventList)
   .controller('FactsCtrl', FactsCtrl)
-  .controller('EventsCtrl', EventsCtrl)
   .service('config', Config)
   .service('puppetDB', PuppetDB)
   .run(($rootScope) => {
@@ -57,30 +59,55 @@ angular.module('app').factory('$exceptionHandler', ($injector, $log) =>
   }
 );
 
-angular.module('app').config(($routeProvider) =>
-  $routeProvider.when('/dashboard', {
-    template: '<dashboard></dashboard>',
-    reloadOnSearch: false,
-  })
-  .when('/nodes', {
-    template: '<nodelist query="$ctrl.query"></nodelist>',
-    reloadOnSearch: false,
-  })
-  .when('/node/:node', {
-    template: '<node-detail></node-detail>',
-    reloadOnSearch: false,
-  })
-  .when('/events', {
-    templateUrl: 'controllers/events/events.tpl.html',
-    controller: 'EventsCtrl',
-    controllerAs: '$ctrl',
-    reloadOnSearch: false,
-  })
-  .when('/facts', {
-    templateUrl: 'controllers/facts/facts.tpl.html',
-    controller: 'FactsCtrl',
-    controllerAs: '$ctrl',
-    reloadOnSearch: false,
-  })
-  .otherwise({ redirectTo: '/dashboard' })
-);
+angular.module('app').config(($stateProvider, $urlRouterProvider) => {
+  // For any unmatched url, redirect to dashboard
+  $urlRouterProvider.otherwise('/dashboard');
+
+  $stateProvider
+    .state('root', {
+      url: '/?query',
+      abstract: true,
+    })
+    .state('dashboard', {
+      url: '/dashboard',
+      component: 'dashboard',
+    })
+    .state('nodes', {
+      url: '/nodes?page',
+      params: {
+        page: {
+          type: 'int',
+          value: 1,
+          dynamic: true,
+        },
+      },
+      // template: '<nodelist query="$ctrl.query"></nodelist>',
+      component: 'nodelist',
+      resolve: {
+        query: ($ctrl) => $ctrl.query,
+      },
+    })
+    .state('node-detail', {
+      url: '/node/:node?page',
+      params: {
+        page: {
+          type: 'int',
+          value: 1,
+          dynamic: true,
+        },
+      },
+      component: 'nodeDetail',
+    })
+    .state('events', {
+      url: '/events',
+      // template: '<events query="$ctrl.query"></events>',
+      component: 'events',
+      resolve: {
+        query: '$ctrl.query',
+      },
+    })
+    .state('facts', {
+      url: '/facts',
+      component: 'facts',
+    });
+});

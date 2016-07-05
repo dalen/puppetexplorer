@@ -3,23 +3,23 @@ export const menubar = {
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li ng-class="$ctrl.currentView() == 'dashboard' ? 'active' : ''">
-            <a ng-click="$ctrl.view('/dashboard')" id="menu-dashboard">
+          <li ui-sref-active="active">
+            <a ui-sref="dashboard" id="menu-dashboard">
               <span class="glyphicon glyphicon-dashboard"></span> Dashboard
             </a>
           </li>
-          <li ng-class="$ctrl.currentView() == 'nodes' ? 'active' : ''">
-            <a ng-click="$ctrl.view('/nodes')" id="menu-nodes">
+          <li ui-sref-active="active">
+            <a ui-sref="nodes" id="menu-nodes">
               <span class="glyphicon glyphicon-list"></span> Nodes
             </a>
           </li>
-          <li ng-class="$ctrl.currentView() == 'events' ? 'active' : ''">
-            <a ng-click="$ctrl.view('/events')" id="menu-events">
+          <li ui-sref-active="active">
+            <a ui-sref="events" id="menu-events">
               <span class="glyphicon glyphicon-calendar"></span> Events
             </a>
           </li>
-          <li ng-class="$ctrl.currentView() == 'facts' ? 'active' : ''">
-            <a ng-click="$ctrl.view('/facts')" id="menu-facts">
+          <li ui-sref-active="active">
+            <a ui-sref="facts" id="menu-facts">
               <span class="glyphicon glyphicon-stats"></span> Facts
             </a>
           </li>
@@ -41,30 +41,13 @@ export const menubar = {
   `,
 
   controller: class {
-    constructor($rootScope, $location, puppetDB) {
-      this.$rootScope = $rootScope;
-      this.$location = $location;
+    constructor(puppetDB) {
       this.puppetDB = puppetDB;
       this.servers = this.puppetDB.serverNames();
     }
 
-    currentView() {
-      return this.$location.path().split('/')[1];
-    }
-
-    // FIXME: Both getter and setter
-    view(path) {
-      if (path) {
-        this.$location.path(path);
-        this.$location.search('page', null); // Clear page when switching
-      }
-      return this.$location.path().split('/')[1];
-    }
-
     setServer(server) {
       this.puppetDB.server(server);
-      // Not technically, but we have to do the same things
-      this.$rootScope.$broadcast('queryChange');
     }
   },
 };

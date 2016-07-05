@@ -8,14 +8,10 @@ export const app = {
 
     <menubar></menubar>
 
-    <div class="container-fluid" ng-view></div>
+    <div class="container-fluid" ui-view></div>
   `,
 
   controller: class {
-    constructor($location) {
-      this.$location = $location;
-    }
-
     queryChange(newQuery) {
       this.query = newQuery;
     }

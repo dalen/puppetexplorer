@@ -17,8 +17,7 @@ export const nodeMetric = {
   `,
 
   controller: class {
-    constructor($location, puppetDB) {
-      this.$location = $location;
+    constructor(puppetDB) {
       puppetDB.query(
         'nodes',
         ['extract', [['function', 'count']], puppetDB.parse(this.query)],

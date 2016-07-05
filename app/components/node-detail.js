@@ -14,8 +14,8 @@ export const nodeDetail = {
   `,
 
   controller: class {
-    constructor($routeParams) {
-      this.node = $routeParams.node;
+    constructor($stateParams) {
+      this.node = $stateParams.node;
     }
   },
 };

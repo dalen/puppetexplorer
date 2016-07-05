@@ -17,12 +17,12 @@ export const searchField = {
   `,
 
   controller: class {
-    constructor($http, $location, puppetDB) {
+    constructor($state, $http, puppetDB) {
+      this.$state = $state;
       this.$http = $http;
-      this.$location = $location;
       this.puppetDB = puppetDB;
 
-      this.query = $location.search().query;
+      this.query = $state.params.query;
       if (this.query) {
         this.submit();
       }
@@ -33,8 +33,6 @@ export const searchField = {
     }
 
     submit() {
-      this.$location.search('query', this.query);
-
       // cancel all requests
       this.puppetDB.cancel();
 
@@ -44,7 +42,7 @@ export const searchField = {
       this.onUpdate({ query: apiQuery });
 
       // Change view to nodes if we are on dashboard
-      if (this.$location.path() === '/dashboard') { this.$location.path('/nodes'); }
+      if (this.$state.includes('dashboard')) { this.$state.go('nodes', { query: this.query }); }
     }
   },
 };

@@ -227,25 +227,6 @@ export class EventsCtrl {
     this.$rootScope.$broadcast('resizeMsg');
   }
 
-  // Public: Return the CSS class event states should correspond to
-  //
-  // status - The {String} event status
-  //
-  // Returns: A {String} with the CSS class
-  color(status) {
-    switch (status) {
-      case 'success':
-        return 'success';
-      case 'noop':
-        return 'text-muted';
-      case 'failure':
-        return 'danger';
-      case 'skipped':
-        return 'warning';
-      default:
-        return '';
-    }
-  }
 
   // Public: Set the current chart selection on click
   //

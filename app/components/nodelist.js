@@ -26,7 +26,7 @@ export const nodelist = {
       </tr></thead>
       <tbody>
         <tr ng-repeat="node in $ctrl.nodes">
-          <td ng-click="$ctrl.selectNode(node)">{{node.certname}}</td>
+          <td ui-sref="node-detail({node: node.certname})">{{node.certname}}</td>
           <td title="{{node['catalog-timestamp']}}">
             <span class="glyphicon glyphicon-warning-sign text-warning"
               ng-if="$ctrl.nodeUnresponsive(node)"></span>
@@ -36,27 +36,29 @@ export const nodelist = {
           <td class="text-center">{{node.metrics.events.noop || ""}}</td>
           <td class="text-center">{{node.metrics.events.skip || ""}}</td>
           <td class="text-center">{{node.metrics.events.failure || ""}}</td>
-          <td class="text-right" ng-click="$ctrl.showEvents(node.certname)">
+          <td class="text-right" ui-sref="events({node: node.certname})">
             <span class="glyphicon" ng-class="$ctrl.nodeStatus(node)"></span>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <pagination ng-if="$ctrl.numItems > 50" ng-change="$ctrl.changePage(page)"
-      ng-model="page" num-pages="$ctrl.numPages" items-per-page="50"
-      boundary-links="$ctrl.numItems > 250" max-size="5" total-items="$ctrl.numItems"
+    <uib-pagination ng-if="$ctrl.numItems > $ctrl.perPage" ng-model="$ctrl.page"
+      ng-change="$ctrl.$state.go($ctrl.$state.current.name, { page: $ctrl.page })"
+      num-pages="$ctrl.numPages" items-per-page="$ctrl.perPage"
+      boundary-links="$ctrl.numItems > $ctrl.perPage*5" max-size="5" total-items="$ctrl.numItems"
       rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;"
-      first-text="&laquo;" last-text="&raquo;">
+      first-text="&laquo;" last-text="&raquo;"></uib-pagination>
   `,
 
   controller: class {
-    constructor($location, config, puppetDB) {
-      this.$location = $location;
+    constructor($state, config, puppetDB) {
+      this.$state = $state;
       this.unresponsiveHours = config.get('unresponsiveHours');
       this.puppetDB = puppetDB;
 
-      this.perPage = 50;
+      this.$state.params.page = this.$state.params.page || 1;
+      this.perPage = 5;
       this.reset();
     }
 
@@ -65,7 +67,6 @@ export const nodelist = {
     }
 
     reset() {
-      this.$location.search('page', null);
       this.numItems = undefined;
       this.fetchNodes();
     }
@@ -78,7 +79,7 @@ export const nodelist = {
         this.query,
         {
           include_total: true,
-          offset: this.perPage * ((this.$location.search().page || 1) - 1),
+          offset: this.perPage * (this.$state.params.page - 1),
           limit: this.perPage,
           order_by: JSON.stringify([{ field: 'certname', order: 'asc' }]),
         },
@@ -87,9 +88,6 @@ export const nodelist = {
           this.nodes = data;
           for (const node of this.nodes) {
             this.fetchNodeEventCount(node);
-          }
-          if (this.$location.search().node != null) {
-            this.fetchSelectedNode();
           }
         }
       );
@@ -114,25 +112,6 @@ export const nodelist = {
         }
       )(node)
       );
-    }
-
-    // Select a node to show info for
-    //
-    // node - The node {Object}
-    //
-    // Returns: `undefined`
-    selectNode(node) {
-      return this.$location.path(`/node/${node.certname}`);
-    }
-
-    // set the query to find a node and show events for it
-    //
-    // node - The {String} name of the node
-    //
-    // Returns: `undefined`
-    showEvents(node) {
-      this.$location.search('query', `\"${node}\"`);
-      return this.$location.path('/events');
     }
 
     // Public: Return the status of a node

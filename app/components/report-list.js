@@ -19,7 +19,8 @@ export const reportList = {
           <th></th>
         </tr></thead>
         <tbody>
-          <tr ng-repeat="report in $ctrl.reports" ng-click="$ctrl.selectReport(report.hash)">
+          <tr ng-repeat="report in $ctrl.reports"
+            ui-sref="events({ mode: report, report: report.hash })">
             <td title="{{report.end_time}}">
               <span am-time-ago="report.end_time"></span>
             </td>
@@ -33,22 +34,22 @@ export const reportList = {
           </tr>
         </tbody>
       </table>
-      <pagination ng-if="$ctrl.numItems > $ctrl.perPage"
-        ng-change="$ctrl.fetchReports()" ng-model="$ctrl.page"
+      <uib-pagination ng-if="$ctrl.numItems > $ctrl.perPage" ng-model="$ctrl.page"
+        ng-change="$ctrl.$state.go($ctrl.$state.current.name, { page: $ctrl.page })"
         num-pages="$ctrl.numPages" items-per-page="$ctrl.perPage"
-        boundary-links="$ctrl.numItems > 250" max-size="5" total-items="$ctrl.numItems"
+        boundary-links="$ctrl.numItems > $ctrl.perPage*5" max-size="5" total-items="$ctrl.numItems"
         rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;"
-        first-text="&laquo;" last-text="&raquo;">
+        first-text="&laquo;" last-text="&raquo;"></uib-pagination>
     </div>
   `,
 
   controller: class {
-    constructor($location, puppetDB) {
-      this.$location = $location;
+    constructor($state, puppetDB) {
+      this.$state = $state;
       this.puppetDB = puppetDB;
 
-      this.page = 1;
-      this.perPage = 10;
+      this.page = $state.params.page;
+      this.perPage = 1;
       this.fetchReports();
     }
 
@@ -60,7 +61,7 @@ export const reportList = {
         {
           include_total: true,
           order_by: JSON.stringify([{ field: 'end_time', order: 'desc' }]),
-          offset: this.perPage * (this.page - 1),
+          offset: this.perPage * (this.$state.params.page - 1),
           limit: this.perPage,
         },
         (data, total) => {
@@ -68,13 +69,6 @@ export const reportList = {
           this.numItems = total;
         }
       );
-    }
-
-    // Switch to events view for a specified report
-    selectReport(report) {
-      this.$location.search('mode', 'report');
-      this.$location.search('report', report);
-      return this.$location.path('/events');
     }
 
     // Return the status of a node
