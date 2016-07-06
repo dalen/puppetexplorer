@@ -16,7 +16,7 @@
   },
   "author": {
     "name": "Erik Dalén",
-    "email": "dalen@spotify.com"
+    "email": "erik.gustav.dalen@gmail.com"
   },
   "contributors": [
     {
@@ -36,17 +36,13 @@
     "angular-route": "^1.4.7",
     "angular-ui-bootstrap": "^1.3.3",
     "angular-ui-router": "^1.0.0-beta.1",
-    "bootswatch": "^3.3.6",
-    "moment": "^2.13.0",
-    "node-puppetdbquery": "^1.0.1"
-  },
-  "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
     "babelify": "^7.3.0",
+    "bootswatch": "^3.3.6",
+    "eslint": "^3.0.1",
     "eslint-config-airbnb-base": "^4.0.0",
-    "eslint-plugin-import": "^1.9.2",
+    "eslint-plugin-import": "^1.10.2",
     "grunt": "^1.0.1",
-    "grunt-bower-installer": "^0.3.6",
     "grunt-browserify": "^5.0.0",
     "grunt-connect-proxy": "^0.2.0",
     "grunt-connect-rewrite": "^0.2.1",
@@ -55,12 +51,15 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-debian-package": "^0.1.10",
-    "grunt-eslint": "^18.1.0",
+    "grunt-eslint": "^19.0.0",
     "grunt-protractor-runner": "^3.2.0",
     "grunt-rpm": "^0.1.12",
     "load-grunt-tasks": "^3.5.0",
+    "moment": "^2.14.1",
+    "node-puppetdbquery": "^1.0.1",
     "serve-index": "^1.7.2",
     "serve-static": "^1.10.0",
     "uglifyify": "^3.0.1"
-  }
+  },
+  "devDependencies": {}
 }
