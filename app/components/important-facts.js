@@ -1,4 +1,4 @@
-export const importantFacts = {
+export default {
   bindings: {
     node: '<',
   },

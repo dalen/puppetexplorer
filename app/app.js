@@ -5,18 +5,18 @@ import 'angular-google-chart';
 import 'angular-moment';
 import 'angular-ui-bootstrap';
 
-import { app } from './components/app';
-import { beanMetric } from './components/bean-metric';
-import { nodeMetric } from './components/node-metric';
-import { searchField } from './components/search-field';
-import { dashboard } from './components/dashboard';
-import { menubar } from './components/menubar';
-import { nodelist } from './components/nodelist';
-import { reportList } from './components/report-list';
-import { importantFacts } from './components/important-facts';
-import { nodeDetail } from './components/node-detail';
-import { events } from './components/events';
-import { eventList } from './components/event-list';
+import app from './components/app';
+import beanMetric from './components/bean-metric';
+import nodeMetric from './components/node-metric';
+import searchField from './components/search-field';
+import dashboard from './components/dashboard';
+import menubar from './components/menubar';
+import nodelist from './components/nodelist';
+import reportList from './components/report-list';
+import importantFacts from './components/important-facts';
+import nodeDetail from './components/node-detail';
+import events from './components/events';
+import eventList from './components/event-list';
 
 import { FactsCtrl } from './controllers/facts/facts';
 
@@ -112,7 +112,14 @@ angular.module('app').config(($stateProvider, $urlRouterProvider) => {
       url: '/events',
       component: 'events',
       resolve: {
+        mode: () => 'latest',
         query: ($stateParams, puppetDB) => puppetDB.parse($stateParams.query),
+      },
+    })
+    .state('root.events.report', {
+      url: '/report/:hash',
+      resolve: {
+        mode: () => 'report',
       },
     })
     .state('root.facts', {

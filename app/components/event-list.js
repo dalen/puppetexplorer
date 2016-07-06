@@ -1,4 +1,4 @@
-export const eventList = {
+export default {
   bindings: {
     query: '<',
   },

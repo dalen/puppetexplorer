@@ -1,4 +1,4 @@
-export const searchField = {
+export default {
   bindings: {
     onUpdate: '&',
   },

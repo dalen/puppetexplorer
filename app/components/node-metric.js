@@ -1,4 +1,4 @@
-export const nodeMetric = {
+export default {
   bindings: {
     title: '@',
     type: '@',

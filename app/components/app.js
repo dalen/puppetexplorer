@@ -1,4 +1,4 @@
-export const app = {
+export default {
   template: `
     <search-field on-update="$ctrl.queryChange(query)"></search-field>
 

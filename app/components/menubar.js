@@ -1,4 +1,4 @@
-export const menubar = {
+export default {
   template: `
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container-fluid">

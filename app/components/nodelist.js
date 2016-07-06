@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const nodelist = {
+export default {
   bindings: {
     query: '<',
   },
@@ -83,7 +83,6 @@ export const nodelist = {
 
     // Fetch the list of nodes for the current query
     fetchNodes() {
-      this.nodes = undefined;
       this.puppetDB.query(
         'nodes',
         this.query,

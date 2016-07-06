@@ -1,4 +1,4 @@
-export const dashboard = {
+export default {
   template: `
     <div class="row" id="beanMetrics">
       <div class="col-md-3"><bean-metric title="Nodes"

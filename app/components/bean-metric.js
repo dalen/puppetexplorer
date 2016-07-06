@@ -1,4 +1,4 @@
-export const beanMetric = {
+export default {
   bindings: {
     bean: '@',
     name: '@',

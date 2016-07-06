@@ -1,4 +1,4 @@
-export const reportList = {
+export default {
   bindings: {
     node: '<',
   },
@@ -20,7 +20,7 @@ export const reportList = {
         </tr></thead>
         <tbody>
           <tr ng-repeat="report in $ctrl.reports"
-            ui-sref="root.events({ mode: report, report: report.hash })">
+            ui-sref="root.events.report({ hash: report.hash })">
             <td title="{{report.end_time}}">
               <span am-time-ago="report.end_time"></span>
             </td>
@@ -76,7 +76,7 @@ export const reportList = {
 
     // Fetches reports for node and stores them in reports
     fetchReports() {
-      this.reports = this.puppetDB.query(
+      this.puppetDB.query(
         'reports',
         ['extract', ['hash', 'end_time', 'status', 'metrics'], ['=', 'certname', this.node]],
         {

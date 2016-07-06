@@ -1,4 +1,4 @@
-export const nodeDetail = {
+export default {
   template: `
     <div class="page-header">
       <h3>{{$ctrl.node}}</h3>

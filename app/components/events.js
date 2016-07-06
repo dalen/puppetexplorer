@@ -1,14 +1,15 @@
 import moment from 'moment';
 
-export const events = {
+export default {
   bindings: {
     query: '<',
+    mode: '<',
   },
 
   template: `
-    <tabset>
-      <tab heading="Latest report" active="$ctrl.mode.latest" select="$ctrl.setMode('latest')"></tab>
-      <tab heading="Date range" active="$ctrl.mode.daterange" select="$ctrl.setMode('daterange')">
+    <uib-tabset active="$ctrl.mode">
+      <uib-tab heading="Latest report" index="latest" select="$ctrl.$state.go('.latest')"></tab>
+      <uib-tab heading="Date range" index="daterange" select="$ctrl.$state.go('.daterange')">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -33,14 +34,14 @@ export const events = {
             </div>
           </div>
         </div>
-      </tab>
-      <tab heading="Single report" active="$ctrl.mode.report" select="$ctrl.setMode('report')">
+      </uib-tab>
+      <uib-uib-tab heading="Single report" index="report" select="$ctrl.$state.go('.report')">
         <div class="form-group">
           <label for="report-hash">Report hash</label>
           <input type="text" class="form-control" id="report-hash" ng-model="reportHash" placeholder="Report hash">
         </div>
-      </tab>
-    </tabset>
+      </uib-tab>
+    </uib-tabset>
 
     <div class="row" style="margin-top: 10px">
       <div class="col-md-4">
@@ -79,10 +80,10 @@ export const events = {
   `,
 
   controller: class {
-    constructor($location, puppetDB) {
+    constructor($state, $stateParams, puppetDB) {
+      this.$state = $state;
+      this.$stateParams = $stateParams;
       this.puppetDB = puppetDB;
-
-      this.mode = {};
 
       this.setEventQuery();
     }
