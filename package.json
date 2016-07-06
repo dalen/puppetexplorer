@@ -35,7 +35,7 @@
     "angular-moment": "^1.0.0-beta.6",
     "angular-route": "^1.4.7",
     "angular-ui-bootstrap": "^1.3.3",
-    "angular-ui-router": "^1.0.0-alpha.3",
+    "angular-ui-router": "^1.0.0-beta.1",
     "bootswatch": "^3.3.6",
     "moment": "^2.13.0",
     "node-puppetdbquery": "^1.0.1"
