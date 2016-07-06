@@ -26,7 +26,7 @@ export const nodelist = {
       </tr></thead>
       <tbody>
         <tr ng-repeat="node in $ctrl.nodes">
-          <td ui-sref="node-detail({node: node.certname})">{{node.certname}}</td>
+          <td ui-sref="root.node-detail({node: node.certname})">{{node.certname}}</td>
           <td title="{{node['catalog-timestamp']}}">
             <span class="glyphicon glyphicon-warning-sign text-warning"
               ng-if="$ctrl.nodeUnresponsive(node)"></span>
@@ -36,7 +36,7 @@ export const nodelist = {
           <td class="text-center">{{node.metrics.events.noop || ""}}</td>
           <td class="text-center">{{node.metrics.events.skip || ""}}</td>
           <td class="text-center">{{node.metrics.events.failure || ""}}</td>
-          <td class="text-right" ui-sref="events({node: node.certname})">
+          <td class="text-right" ui-sref="root.events({node: node.certname})">
             <span class="glyphicon" ng-class="$ctrl.nodeStatus(node)"></span>
           </td>
         </tr>
@@ -44,7 +44,7 @@ export const nodelist = {
     </table>
 
     <uib-pagination ng-if="$ctrl.numItems > $ctrl.perPage" ng-model="$ctrl.page"
-      ng-change="$ctrl.$state.go($ctrl.$state.current.name, { page: $ctrl.page })"
+      ng-change="$ctrl.changePage($ctrl.page)"
       num-pages="$ctrl.numPages" items-per-page="$ctrl.perPage"
       boundary-links="$ctrl.numItems > $ctrl.perPage*5" max-size="5" total-items="$ctrl.numItems"
       rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;"
@@ -52,22 +52,32 @@ export const nodelist = {
   `,
 
   controller: class {
-    constructor($state, config, puppetDB) {
+    constructor($state, $stateParams, config, puppetDB) {
       this.$state = $state;
+      this.$stateParams = $stateParams;
       this.unresponsiveHours = config.get('unresponsiveHours');
       this.puppetDB = puppetDB;
 
-      this.$state.params.page = this.$state.params.page || 1;
       this.perPage = 5;
-      this.reset();
     }
 
-    $onChanges() {
+    $onChanges(changes) {
+      if (!changes.query.isFirstChange()) {
+        this.$state.go(this.$state.current.name, { page: 1 });
+      }
       this.reset();
     }
 
     reset() {
+      this.page = this.$stateParams.page;
       this.numItems = undefined;
+      this.fetchNodes();
+    }
+
+    changePage(page) {
+      this.page = page;
+      // Push the new state
+      this.$state.go(this.$state.current.name, { page });
       this.fetchNodes();
     }
 
@@ -79,7 +89,7 @@ export const nodelist = {
         this.query,
         {
           include_total: true,
-          offset: this.perPage * (this.$state.params.page - 1),
+          offset: this.perPage * (this.page - 1),
           limit: this.perPage,
           order_by: JSON.stringify([{ field: 'certname', order: 'asc' }]),
         },

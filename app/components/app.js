@@ -12,8 +12,14 @@ export const app = {
   `,
 
   controller: class {
+    constructor($state) {
+      this.$state = $state;
+    }
+
+    // FIXME: not needed
     queryChange(newQuery) {
       this.query = newQuery;
+      // this.$state.params.query = newQuery;
     }
   },
 };

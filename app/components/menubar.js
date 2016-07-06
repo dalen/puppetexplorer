@@ -4,22 +4,22 @@ export const menubar = {
       <div class="container-fluid">
         <ul class="nav navbar-nav">
           <li ui-sref-active="active">
-            <a ui-sref="dashboard" id="menu-dashboard">
+            <a ui-sref="root.dashboard" id="menu-dashboard">
               <span class="glyphicon glyphicon-dashboard"></span> Dashboard
             </a>
           </li>
           <li ui-sref-active="active">
-            <a ui-sref="nodes" id="menu-nodes">
+            <a ui-sref="root.nodes" id="menu-nodes">
               <span class="glyphicon glyphicon-list"></span> Nodes
             </a>
           </li>
           <li ui-sref-active="active">
-            <a ui-sref="events" id="menu-events">
+            <a ui-sref="root.events" id="menu-events">
               <span class="glyphicon glyphicon-calendar"></span> Events
             </a>
           </li>
           <li ui-sref-active="active">
-            <a ui-sref="facts" id="menu-facts">
+            <a ui-sref="root.facts" id="menu-facts">
               <span class="glyphicon glyphicon-stats"></span> Facts
             </a>
           </li>

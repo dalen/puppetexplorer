@@ -65,49 +65,61 @@ angular.module('app').config(($stateProvider, $urlRouterProvider) => {
 
   $stateProvider
     .state('root', {
-      url: '/?query',
+      url: '?query',
       abstract: true,
+      component: 'app',
+      params: {
+        query: {
+          type: 'string',
+          value: '',
+          squash: true,
+        },
+      },
+      data: {},
     })
-    .state('dashboard', {
+    .state('root.dashboard', {
       url: '/dashboard',
       component: 'dashboard',
     })
-    .state('nodes', {
+    .state('root.nodes', {
       url: '/nodes?page',
       params: {
         page: {
           type: 'int',
           value: 1,
           dynamic: true,
+          squash: true,
         },
       },
-      // template: '<nodelist query="$ctrl.query"></nodelist>',
       component: 'nodelist',
       resolve: {
-        query: ($ctrl) => $ctrl.query,
+        query: ($stateParams, puppetDB) => puppetDB.parse($stateParams.query),
       },
     })
-    .state('node-detail', {
+    .state('root.node-detail', {
       url: '/node/:node?page',
       params: {
         page: {
           type: 'int',
           value: 1,
           dynamic: true,
+          squash: true,
         },
       },
       component: 'nodeDetail',
     })
-    .state('events', {
+    .state('root.events', {
       url: '/events',
-      // template: '<events query="$ctrl.query"></events>',
       component: 'events',
       resolve: {
-        query: '$ctrl.query',
+        query: ($stateParams, puppetDB) => puppetDB.parse($stateParams.query),
       },
     })
-    .state('facts', {
+    .state('root.facts', {
       url: '/facts',
       component: 'facts',
+      resolve: {
+        query: ($stateParams, puppetDB) => puppetDB.parse($stateParams.query),
+      },
     });
 });
