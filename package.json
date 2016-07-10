@@ -57,6 +57,7 @@
     "load-grunt-tasks": "^3.5.0",
     "moment": "^2.14.1",
     "node-puppetdbquery": "^1.0.1",
+    "react": "^15.2.1",
     "serve-index": "^1.7.2",
     "serve-static": "^1.10.0",
     "uglifyify": "^3.0.1"

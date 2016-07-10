@@ -91,10 +91,20 @@ angular.module('app').config(($stateProvider, $urlRouterProvider) => {
           squash: true,
         },
       },
-      component: 'nodelist',
-      resolve: {
-        query: ($stateParams, puppetDB) => puppetDB.parse($stateParams.query),
+      template: '<nodelist query="query" page="$stateParams.page" />',
+      controller: class {
+        constructor($scope, $stateParams, puppetDB) {
+          $scope.$stateParams = $stateParams;
+          $scope.query = puppetDB.parse($stateParams.query);
+        }
       },
+      controllerAs: '$ctrl',
+      // component: 'nodelist',
+      // resolve: {
+      //  statep: ($stateParams) => $stateParams,
+      //  page: ($stateParams) => $stateParams.page,
+      //  query: ($stateParams, puppetDB) => puppetDB.parse($stateParams.query),
+      // },
     })
     .state('root.node-detail', {
       url: '/node/:node?page',

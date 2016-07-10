@@ -45,17 +45,21 @@ export default {
   `,
 
   controller: class {
-    constructor($state, $stateParams, puppetDB) {
+    constructor($state, $stateParams, $rootScope, puppetDB) {
       this.$state = $state;
       this.$stateParams = $stateParams;
       this.puppetDB = puppetDB;
+      $rootScope.$on('$stateChangeStart',
+        (event, toState, toParams, fromState, fromParams, options) => {
+          console.log(event);
+        });
 
       this.perPage = 1;
     }
 
     $onChanges(changes) {
       if (!changes.node.isFirstChange()) {
-        this.$state.go(this.$state.current.name, { page: 1 });
+        this.$state.go('.', { page: 1 }, { notify: false });
         this.page = 1;
       }
       this.reset();
@@ -68,9 +72,8 @@ export default {
     }
 
     changePage(page) {
-      this.page = page;
       // Push the new state
-      this.$state.go(this.$state.current.name, { page });
+      this.$state.go('.', { page }, { notify: false });
       this.fetchReports();
     }
 

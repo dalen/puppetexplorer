@@ -3,6 +3,8 @@ import moment from 'moment';
 export default {
   bindings: {
     query: '<',
+    page: '<',
+    statep: '<',
   },
 
   template: `
@@ -43,8 +45,8 @@ export default {
       </tbody>
     </table>
 
-    <uib-pagination ng-if="$ctrl.numItems > $ctrl.perPage" ng-model="$ctrl.page"
-      ng-change="$ctrl.changePage($ctrl.page)"
+    <uib-pagination ng-if="$ctrl.numItems > $ctrl.perPage" ng-model="$ctrl.pagel"
+      ng-change="$ctrl.changePage($ctrl.pagel)"
       num-pages="$ctrl.numPages" items-per-page="$ctrl.perPage"
       boundary-links="$ctrl.numItems > $ctrl.perPage*5" max-size="5" total-items="$ctrl.numItems"
       rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;"
@@ -52,9 +54,14 @@ export default {
   `,
 
   controller: class {
-    constructor($state, $stateParams, config, puppetDB) {
+    constructor($state, $stateParams, $scope, config, puppetDB) {
       this.$state = $state;
-      this.$stateParams = $stateParams;
+      $scope.$watchCollection(this.$stateParams, () => {
+        console.log('watch');
+        console.log(this.$stateParams);
+        this.page = this.$stateParams.page;
+        this.reset();
+      });
       this.unresponsiveHours = config.get('unresponsiveHours');
       this.puppetDB = puppetDB;
 
@@ -62,22 +69,25 @@ export default {
     }
 
     $onChanges(changes) {
+      this.pagel = this.page;
+      console.log(changes);
       if (!changes.query.isFirstChange()) {
-        this.$state.go(this.$state.current.name, { page: 1 });
+        this.$state.go('.', { page: 1 }, { notify: false });
       }
       this.reset();
     }
 
     reset() {
-      this.page = this.$stateParams.page;
       this.numItems = undefined;
       this.fetchNodes();
     }
 
     changePage(page) {
-      this.page = page;
       // Push the new state
-      this.$state.go(this.$state.current.name, { page });
+      this.$state.go('.', { page });
+      console.log(this.$state.params);
+      console.log(this.$stateParams);
+      console.log(this.page);
       this.fetchNodes();
     }
 
