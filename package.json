@@ -1,49 +1,46 @@
 {
   "name": "puppetexplorer",
   "version": "2.0.0",
-  "description": "web frontend for PuppetDB\n\nA web interface made in AngularJS and CoffeeScript for exploring PuppetDB data.",
+  "description": "A web interface for exploring PuppetDB data",
   "license": "Apache-2.0",
   "keywords": [
     "puppet",
     "puppetdb"
   ],
-  "homepage": "https://github.com/spotify/puppetexplorer",
+  "homepage": "https://github.com/dalen/puppetexplorer",
   "bugs": {
-    "url": "https://github.com/spotify/puppetexplorer/issues"
+    "url": "https://github.com/dalen/puppetexplorer/issues"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "lint": "eslint src",
+    "build": "webpack",
+    "build-watch": "webpack --watch",
+    "start": "webpack-dev-server"
   },
   "author": {
     "name": "Erik Dalén",
     "email": "erik.gustav.dalen@gmail.com"
   },
-  "contributors": [
-    {
-      "name": "Johan Haals",
-      "email": "jhaals@spotify.com"
-    }
-  ],
   "repository": {
     "type": "git",
-    "url": "https://spotify/puppetexplorer.git"
+    "url": "https://github.com/dalen/puppetexplorer.git"
   },
   "dependencies": {
-    "angular": "^1.5.5",
-    "angular-animate": "^1.5.5",
-    "angular-google-chart": "0.1.0",
-    "angular-moment": "^1.0.0-beta.6",
-    "angular-route": "^1.4.7",
-    "angular-ui-bootstrap": "^1.3.3",
-    "angular-ui-router": "^1.0.0-beta.1",
+    "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
-    "babelify": "^7.3.0",
+    "babel-preset-react": "^6.11.1",
     "bootswatch": "^3.3.6",
+    "css-loader": "^0.23.1",
     "eslint": "^3.0.1",
+    "eslint-config-airbnb": "^9.0.1",
     "eslint-config-airbnb-base": "^4.0.0",
     "eslint-plugin-import": "^1.10.2",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-react": "^5.2.2",
+    "extract-loader": "0.0.2",
+    "file-loader": "^0.9.0",
     "grunt": "^1.0.1",
-    "grunt-browserify": "^5.0.0",
     "grunt-connect-proxy": "^0.2.0",
     "grunt-connect-rewrite": "^0.2.1",
     "grunt-contrib-clean": "^1.0.0",
@@ -54,13 +51,17 @@
     "grunt-eslint": "^19.0.0",
     "grunt-protractor-runner": "^3.2.0",
     "grunt-rpm": "^0.1.12",
+    "html-loader": "^0.4.3",
+    "html-minify-loader": "^1.1.0",
     "load-grunt-tasks": "^3.5.0",
     "moment": "^2.14.1",
     "node-puppetdbquery": "^1.0.1",
+    "raw-loader": "^0.5.1",
     "react": "^15.2.1",
-    "serve-index": "^1.7.2",
-    "serve-static": "^1.10.0",
-    "uglifyify": "^3.0.1"
+    "react-bootstrap": "^0.29.5",
+    "react-dom": "^15.2.1",
+    "serve-static": "^1.11.1",
+    "webpack": "^1.13.1"
   },
   "devDependencies": {}
 }
