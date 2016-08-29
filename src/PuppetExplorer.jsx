@@ -1,10 +1,10 @@
 import React from 'react';
-import SearchField from './SearchField';
-import MenuBar from './MenuBar';
-import DashBoard from './DashBoard';
+import { Router, Route, IndexRoute, hashHistory as history } from 'react-router';
+import SearchField from './SearchField.jsx';
+import MenuBar from './MenuBar.jsx';
+import DashBoard from './DashBoard.jsx';
 import Config from './Config';
 import PuppetDB from './PuppetDB';
-import { Router, Route, IndexRoute, hashHistory as history } from 'react-router';
 
 export default class PuppetExplorer extends React.Component {
   constructor(props) {

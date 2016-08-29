@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   watch: true,
   entry: [
-    path.resolve(__dirname, 'src', 'main.js'),
+    path.resolve(__dirname, 'src', 'main.jsx'),
     path.resolve(__dirname, 'src', 'config.js.example'),
     path.resolve(__dirname, 'src', 'index.html'),
   ],
@@ -15,7 +15,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel',
         query: {
