@@ -1,11 +1,10 @@
 {
-    "extends": "airbnb-base",
+    "extends": "airbnb",
     "env": {
       "browser": true,
-      "jasmine": true,
-      "protractor": true
+      "jasmine": true
     },
     "rules": {
-      "no-param-reassign": ["error", { "props": false }]
+      "react/prefer-stateless-function": "off"
     }
 }
