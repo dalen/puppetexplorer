@@ -17,7 +17,7 @@ class DashBoardPanel extends React.Component {
 
   render() {
     let children;
-    if (this.state.hasOwnProperty('value')) {
+    if ('value' in this.state) {
       children = `${this.state.value} ${this.props.unit}`;
     } else {
       children = <Glyphicon glyph="refresh" className="spin" />;

@@ -2,7 +2,6 @@ import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import DashBoardMetric from './DashBoardMetric.jsx';
 import Usage from './Usage.jsx';
-import PuppetDB from './PuppetDB';
 
 class DashBoard extends React.Component {
   panelWidth(panelRow) {

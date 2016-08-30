@@ -1,3 +1,4 @@
+import { autobind } from 'core-decorators';
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory as history } from 'react-router';
 import SearchField from './SearchField.jsx';
@@ -12,6 +13,7 @@ export default class PuppetExplorer extends React.Component {
     this.state = { serverUrl: Config.get('servers')[0].url };
   }
 
+  @autobind
   setServer(serverName) {
     this.setState({ serverUrl: PuppetDB.serverUrl(serverName, Config.get('servers')) });
   }
