@@ -3,6 +3,7 @@ const path = require('path');
 
 module.exports = {
   watch: true,
+  devtool: 'source-map',
   entry: [
     path.resolve(__dirname, 'src', 'main.jsx'),
     path.resolve(__dirname, 'src', 'config.js.example'),
@@ -20,7 +21,6 @@ module.exports = {
         loader: 'babel',
         query: {
           presets: ['es2015', 'react'],
-          plugins: ['transform-decorators-legacy'],
         },
       },
       {

@@ -60,9 +60,13 @@
     "node-puppetdbquery": "^1.0.1",
     "raw-loader": "^0.5.1",
     "react": "^15.2.1",
+    "react-addons-update": "^15.3.1",
     "react-bootstrap": "^0.30.0-rc.2",
     "react-dom": "^15.2.1",
+    "react-redux": "^4.4.5",
     "react-router": "^2.6.0",
+    "react-router-redux": "^4.0.5",
+    "redux": "^3.5.2",
     "serve-static": "^1.11.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"

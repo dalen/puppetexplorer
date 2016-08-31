@@ -2,8 +2,14 @@ import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import DashBoardMetric from './DashBoardMetric.jsx';
 import Usage from './Usage.jsx';
+import Config from '../Config';
 
 class DashBoard extends React.Component {
+  constructor() {
+    super();
+    this.panels = Config.get('dashBoardPanels');
+  }
+
   panelWidth(panelRow) {
     return Math.max(2, Math.floor(12 / panelRow.length));
   }
@@ -12,7 +18,7 @@ class DashBoard extends React.Component {
     return (
       <div>
         <Grid>
-          {this.props.route.panels.map((panelRow, i) =>
+          {this.panels.map((panelRow, i) =>
             <Row key={i}>
               {panelRow.map((panel, j) =>
                 <Col key={j} md={this.panelWidth(panelRow)}>
