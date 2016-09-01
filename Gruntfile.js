@@ -1,8 +1,8 @@
 const url = require('url');
+const historyFallback = require('connect-history-api-fallback');
 const proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
 const rewriteRules = require('grunt-connect-rewrite/lib/utils').rewriteRequest;
 const serveStatic = require('serve-static');
-const serveIndex = require('serve-index');
 const taskLoader = require('load-grunt-tasks');
 
 module.exports = (grunt) => {
@@ -29,11 +29,11 @@ module.exports = (grunt) => {
             // Then rewrite rules
             rewriteRules,
 
+            // History API fallback
+            historyFallback(),
+
             // Serve static files.
             serveStatic(options.base[0]),
-
-            // Make empty directories browsable.
-            serveIndex(options.base[0]),
           ];
         },
       },
