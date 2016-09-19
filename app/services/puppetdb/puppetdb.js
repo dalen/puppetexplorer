@@ -81,6 +81,9 @@ angular.module('app').factory('PuppetDB', ($http, $location, $q) =>
     // endpoint - The {String} endpoint to query
     // params   - The {Object} query parameters
     query(endpoint, query, params = {}, success) {
+      if (params == null){
+        params = {}
+      }
       params.query = angular.toJson(query);
       return this.handleResponse(this.getQuery(endpoint, params), success);
     }
