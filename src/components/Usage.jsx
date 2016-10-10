@@ -74,8 +74,8 @@ class Usage extends React.Component {
             <Table condensed striped>
               <tbody>
                 <tr><td>not</td><td>(unary op)</td></tr>
-                <tr><td>and</td><td></td></tr>
-                <tr><td>or</td><td></td></tr>
+                <tr><td>and</td><td /></tr>
+                <tr><td>or</td><td /></tr>
               </tbody>
             </Table>
             <p>Shown in precedence order from highest to lowest. Use parenthesis to change order

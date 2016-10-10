@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputGroup, FormControl, Glyphicon } from 'react-bootstrap';
 
-export default class SearchField extends React.Component {
+class SearchField extends React.Component {
   render() {
     return (
       <form id="node-query">
@@ -13,3 +13,9 @@ export default class SearchField extends React.Component {
     );
   }
 }
+
+SearchField.propTypes = {
+  updateQuery: React.PropTypes.func,
+};
+
+export default SearchField;

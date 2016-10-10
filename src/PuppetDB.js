@@ -20,24 +20,19 @@ export default class PuppetDB {
     return null;
   }
 
-  // Get URL of the named server
-  static serverUrl(name, servers) {
-    return servers.find((server) => server.name === name).url;
-  }
-
   // Get a URL from server
-  static get(server, servers, path) {
-    return fetch(`${this.serverUrl(server, servers)}${path}`)
-    .then((response) => response.json());
+  static get(serverUrl, path) {
+    return fetch(`${serverUrl}${path}`)
+    .then(response => response.json());
   }
 
   // Get a bean value, returns a promise
-  static getBean(server, servers, name) {
-    return this.get(server, servers, `metrics/v1/mbeans/${name}`);
+  static getBean(serverUrl, name) {
+    return this.get(serverUrl, `metrics/v1/mbeans/${name}`);
   }
 
   // Get PuppetDB version, returns a promise
-  static getVersion(server, servers) {
-    return this.get(server, servers, 'pdb/meta/v1/version');
+  static getVersion(serverUrl) {
+    return this.get(serverUrl, 'pdb/meta/v1/version');
   }
 }

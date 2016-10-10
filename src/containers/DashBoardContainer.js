@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import DashBoard from '../components/DashBoard.jsx';
 
 const DashBoardContainer = connect(
-  (state) => ({
-    panels: state.config.dashBoardPanels,
+  (state, props) => ({
+    serverUrl: props.config.serverUrl,
+    panels: props.config.dashBoardPanels,
   })
 )(DashBoard);
 

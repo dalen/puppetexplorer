@@ -1,16 +1,7 @@
 export default class Config {
   static defaults() {
     return {
-      servers: [
-        {
-          name: 'production',
-          url: '/api',
-        },
-        {
-          name: 'testing',
-          url: '/api',
-        },
-      ],
+      serverUrl: '/api',
       nodeFacts: [
         'operatingsystem',
         'operatingsystemrelease',
