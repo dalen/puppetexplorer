@@ -29,7 +29,10 @@ class DashBoard extends React.Component {
 }
 
 DashBoard.propTypes = {
-  panels: React.PropTypes.array,
+  panels: React.PropTypes.arrayOf(
+    React.PropTypes.arrayOf(
+      React.PropTypes.object
+    )),
   serverUrl: React.PropTypes.string.isRequired,
 };
 

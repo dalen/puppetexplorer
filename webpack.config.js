@@ -63,11 +63,9 @@ module.exports = {
     historyApiFallback: true,
     // lazy: true,
     proxy: {
-      '/api/*': {
+      '/api': {
         target: 'http://puppetdb.puppetexplorer.io',
-        rewrite: (req) => {
-          req.url = req.url.replace(/^\/api/, '');
-        },
+        pathRewrite: { '^/api': '' },
       },
     },
   },

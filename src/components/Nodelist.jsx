@@ -19,14 +19,14 @@ class NodeList extends React.Component {
                '1 node found' : `${this.props.nodes.length} nodes found`}
           </Label></th>
           <th>Last run</th>
-          <th style="text-align:center">Successes</th>
-          <th style="text-align:center">Noops</th>
-          <th style="text-align:center">Skips</th>
-          <th style="text-align:center">Failures</th>
+          <th style={{ 'text-align': 'center' }}>Successes</th>
+          <th style={{ 'text-align': 'center' }}>Noops</th>
+          <th style={{ 'text-align': 'center' }}>Skips</th>
+          <th style={{ 'text-align': 'center' }}>Failures</th>
           <th />
         </tr></thead>
         <tbody>
-          {this.nodes.map((node) =>
+          {this.nodes.map(node =>
             <NodeListItem node={node} />
           )}
         </tbody>
