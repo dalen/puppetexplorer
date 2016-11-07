@@ -22,7 +22,7 @@ export default class PuppetDB {
 
   // Get a URL from server
   static get(serverUrl, path) {
-    return fetch(`${serverUrl}${path}`, {
+    return fetch(`${serverUrl}/${path}`, {
       headers: { Accept: 'application/json' },
     })
     .then(response => response.json());
@@ -30,19 +30,19 @@ export default class PuppetDB {
 
   // Get a bean value, returns a promise
   static getBean(serverUrl, name) {
-    return this.get(serverUrl, `/metrics/v1/mbeans/${name}`);
+    return this.get(serverUrl, `metrics/v1/mbeans/${name}`);
   }
 
   // Get PuppetDB version, returns a promise
   static getVersion(serverUrl) {
-    return this.get(serverUrl, '/pdb/meta/v1/version');
+    return this.get(serverUrl, 'pdb/meta/v1/version');
   }
 
   // Do a query against the server
   static query(serverUrl, endpoint, query) {
     if (query) {
-      return this.get(serverUrl, `/pdb/query/v4/${endpoint}?query=${encodeURIComponent(JSON.stringify(query))}`);
+      return this.get(serverUrl, `pdb/query/v4/${endpoint}?query=${encodeURIComponent(JSON.stringify(query))}`);
     }
-    return this.get(serverUrl, `/pdb/query/v4/${endpoint}`);
+    return this.get(serverUrl, `pdb/query/v4/${endpoint}`);
   }
 }

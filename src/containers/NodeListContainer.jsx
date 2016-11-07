@@ -1,11 +1,12 @@
 import React from 'react';
 
 import PuppetDB from '../PuppetDB';
+import PropTypes from '../PropTypes';
 import NodeList from '../components/NodeList';
 
 // Takes care of feching nodes and passing it to node list
 //
-class NodeListContainer extends React.Component {
+class NodeDetailContainer extends React.Component {
   // FIXME useless?
   constructor(props) {
     super(props);
@@ -34,11 +35,11 @@ class NodeListContainer extends React.Component {
   }
 }
 
-NodeListContainer.propTypes = {
+NodeDetailContainer.propTypes = {
   config: React.PropTypes.shape({
     serverUrl: React.PropTypes.string,
   }),
-  queryParsed: React.PropTypes.array,
+  queryParsed: PropTypes.query,
 };
 
-export default NodeListContainer;
+export default NodeDetailContainer;

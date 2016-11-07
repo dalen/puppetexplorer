@@ -20,7 +20,7 @@ class Usage extends React.Component {
               <code>title</code>
               to do a regexp match on the title. Type names and class names are case insensitive.
               A resource can be preceded by <code>@@</code> to match exported resources, the default
-              is to only match "local" resources.
+              is to only match &quot;local&quot; resources.
             </p>
 
             <p>Strings can contain letters, numbers or the characters :-_ without needing to be
@@ -35,19 +35,19 @@ class Usage extends React.Component {
 
             <p>A <code>@</code> sign before a string causes it to be interpreted as a date parsed
               with <a href="https://github.com/calebcase/timespec"> timespec</a>.
-              For example <code>@"now - 2 hours"</code>.
+              For example <code>@&quot;now - 2 hours&quot;</code>.
             </p>
 
             <p>A <code>#</code> sign can be used to do a subquery, against the nodes endpoint for
               example to query the <code>report_timestamp</code>, <code>catalog_timestamp</code> or
               <code>facts_timestamp</code> fields.
-              For example <code>#node.report_timestamp &lt; @"now - 2 hours"</code>.
+              For example <code>#node.report_timestamp &lt; @&quot;now - 2 hours&quot;</code>.
             </p>
 
             <p>A subquery using the <code>#</code> sign can have a block of expressions instead of a
               single expression. For example
-              <code>#node {'{'} report_timestamp &gt; @"now - 4 hours" and report_timestamp &lt;
-              @"now - 2 hours" {'}'}</code>
+              <code>#node {'{'} report_timestamp &gt; @&quot;now - 4 hours&quot; and report_timestamp &lt;
+                @&quot;now - 2 hours&quot; {'}'}</code>
             </p>
 
             <p>A bare string without comparison operator will be treated as a regexp match against
@@ -86,11 +86,11 @@ class Usage extends React.Component {
             <h3>Query Examples</h3>
             Nodes with package mysql-server and amd64 arcitecture
             <Well bsSize="sm">
-              <tt>package["mysql-server"] and architecture=amd64</tt>
+              <tt>package[&quot;mysql-server&quot;] and architecture=amd64</tt>
             </Well>
             Nodes with the class Postgresql::Server and a version set to 9.3
             <Well bsSize="sm">
-              <tt>class[postgresql::server]{'{'} version="9.3" {'}'}</tt>
+              <tt>class[postgresql::server]{'{'} version=&quot;9.3&quot; {'}'}</tt>
             </Well>
             Nodes with 4 or 8 processors running Linux
             <Well bsSize="sm">
@@ -98,7 +98,7 @@ class Usage extends React.Component {
             </Well>
             Nodes that haven&apos;t reported in the last 2 hours
             <Well bsSize="sm">
-              <tt>#node.report_timestamp &lt; @"now - 2 hours"</tt>
+              <tt>#node.report_timestamp &lt; @&quot;now - 2 hours&quot;</tt>
             </Well>
           </Col>
         </Row>

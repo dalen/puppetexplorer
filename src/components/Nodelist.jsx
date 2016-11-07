@@ -18,7 +18,7 @@ class NodeList extends React.Component {
         <thead><tr>
           <th><Label>
             { this.props.nodes.length === 1 ?
-               '1 node found' : `${this.props.nodes.length} nodes found`}
+            '1 node found' : `${this.props.nodes.length} nodes found`}
           </Label></th>
           <th>Last run</th>
           <th style={{ textAlign: 'center' }}>Successes</th>
@@ -29,8 +29,9 @@ class NodeList extends React.Component {
         </tr></thead>
         <tbody>
           {this.props.nodes.map(node =>
-            <NodeListItem node={node} key={node.certname} />
-          )}
+            <NodeListItem
+              node={node} serverUrl={this.props.serverUrl} key={node.certname}
+            />)}
         </tbody>
       </Table>
     );
@@ -39,6 +40,7 @@ class NodeList extends React.Component {
 
 NodeList.propTypes = {
   nodes: React.PropTypes.array, // TODO: specify
+  serverUrl: React.PropTypes.string,
 };
 
 export default NodeList;

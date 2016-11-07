@@ -30,7 +30,6 @@ class App extends React.Component {
       queryString: query,
       queryParsed: PuppetDB.parse(query),
     });
-    console.log(query);
   }
 
   render() {

@@ -65,11 +65,9 @@ module.exports = {
     ],
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
     colors: true,
     inline: true,
     historyApiFallback: true,
-    // lazy: true,
     proxy: {
       '/api': {
         target: 'http://puppetdb.puppetexplorer.io',

@@ -17,9 +17,9 @@ class DashBoard extends React.Component {
               {panelRow.map((panel, j) =>
                 <Col key={j} md={DashBoard.panelWidth(panelRow)}>
                   <DashBoardMetric serverUrl={this.props.serverUrl} {...panel} />
-                </Col>
+                </Col>,
               )}
-            </Row>
+            </Row>,
           )}
         </Grid>
         <Usage />
@@ -31,7 +31,7 @@ class DashBoard extends React.Component {
 DashBoard.propTypes = {
   panels: React.PropTypes.arrayOf(
     React.PropTypes.arrayOf(
-      React.PropTypes.object
+      React.PropTypes.object,
     )),
   serverUrl: React.PropTypes.string.isRequired,
 };
