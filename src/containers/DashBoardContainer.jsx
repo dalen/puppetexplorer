@@ -2,9 +2,10 @@ import React from 'react';
 
 import DashBoard from '../components/DashBoard';
 
-// Takes care of feching nodes and passing it to node list
+// Takes care of passing the panels configuration to DashBoard
 //
 class DashBoardContainer extends React.Component {
+
   render() {
     return (
       <DashBoard
@@ -16,7 +17,10 @@ class DashBoardContainer extends React.Component {
 
 
 DashBoardContainer.propTypes = {
-  config: React.PropTypes.object,
+  config: React.PropTypes.shape({
+    serverUrl: React.PropTypes.string,
+    dashBoardPanels: React.PropTypes.array,
+  }),
 };
 
 export default DashBoardContainer;

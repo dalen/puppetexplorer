@@ -10,8 +10,8 @@ class DashBoardMetric extends React.Component {
   componentDidMount() {
     if (this.props.bean) {
       fetch(`${this.props.serverUrl}/metrics/v1/mbeans/${this.props.bean}`)
-      .then((response) => response.json())
-      .then((data) => this.setState({ value: data[this.props.beanValue] }));
+      .then(response => response.json())
+      .then(data => this.setState({ value: data[this.props.beanValue] }));
     }
   }
 

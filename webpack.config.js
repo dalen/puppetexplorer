@@ -1,5 +1,6 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   watch: true,
@@ -16,6 +17,12 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
+  // use imports loader to add whatwg-fetch polyfill
+  plugins: [
+    new webpack.ProvidePlugin({
+      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+    }),
+  ],
   module: {
     loaders: [
       {
@@ -23,7 +30,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          presets: ['es2015', 'react'],
+          presets: ['react'], // ['es2015', 'react'] for release build
+          plugins: ['babel-plugin-transform-es2015-modules-commonjs'],
         },
       },
       {
@@ -59,7 +67,7 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     colors: true,
-    // inline: true,
+    inline: true,
     historyApiFallback: true,
     // lazy: true,
     proxy: {

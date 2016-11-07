@@ -7,35 +7,41 @@ import PuppetDB from '../PuppetDB';
 class App extends React.Component {
   constructor() {
     super();
-    let query;
-    let queryParsed;
-    if (this.props &&
-        this.props.location &&
-        this.props.location.query &&
-        this.props.location.query.query) {
-      query = this.props.location.query.query;
-      queryParsed = PuppetDB.parse(query);
-    } else {
-      query = '';
-      queryParsed = null;
-    }
+    this.updateQuery = this.updateQuery.bind(this);
+  }
+
+  componentWillMount() {
     this.state = {
       config: Config.defaults(),
-      query,
-      queryParsed,
     };
+
+    let queryString;
+    if (this.props.location.query &&
+        this.props.location.query.query) {
+      queryString = this.props.location.query.query;
+    } else {
+      queryString = '';
+    }
+    this.updateQuery(queryString);
+  }
+
+  updateQuery(query) {
+    this.setState({
+      queryString: query,
+      queryParsed: PuppetDB.parse(query),
+    });
+    console.log(query);
   }
 
   render() {
     const child = React.cloneElement(this.props.children, {
       config: this.state.config,
-      query: this.state.query,
-      queryString: this.state.queryString,
+      queryParsed: this.state.queryParsed,
     });
 
     return (
       <div>
-        <SearchField updateQuery={alert} />
+        <SearchField updateQuery={this.updateQuery} queryString={this.state.queryString} />
         <MenuBar />
         {child}
       </div>

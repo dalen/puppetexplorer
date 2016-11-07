@@ -4,7 +4,7 @@ import DashBoardMetric from './DashBoardMetric';
 import Usage from './Usage';
 
 class DashBoard extends React.Component {
-  panelWidth(panelRow) {
+  static panelWidth(panelRow) {
     return Math.max(2, Math.floor(12 / panelRow.length));
   }
 
@@ -15,7 +15,7 @@ class DashBoard extends React.Component {
           {this.props.panels.map((panelRow, i) =>
             <Row key={i}>
               {panelRow.map((panel, j) =>
-                <Col key={j} md={this.panelWidth(panelRow)}>
+                <Col key={j} md={DashBoard.panelWidth(panelRow)}>
                   <DashBoardMetric serverUrl={this.props.serverUrl} {...panel} />
                 </Col>
               )}

@@ -5,7 +5,9 @@ import NodeListItem from './NodeListItem';
 
 class NodeList extends React.Component {
   render() {
-    if (this.props.nodes.length === 0) {
+    if (this.props.nodes === undefined) { // FIXME: Move to container instead?
+      return (<Label>Loading...</Label>);
+    } else if (this.props.nodes.length === 0) {
       return (
         <Alert bsStyle="warning">No nodes found</Alert>
       );
@@ -19,15 +21,15 @@ class NodeList extends React.Component {
                '1 node found' : `${this.props.nodes.length} nodes found`}
           </Label></th>
           <th>Last run</th>
-          <th style={{ 'text-align': 'center' }}>Successes</th>
-          <th style={{ 'text-align': 'center' }}>Noops</th>
-          <th style={{ 'text-align': 'center' }}>Skips</th>
-          <th style={{ 'text-align': 'center' }}>Failures</th>
+          <th style={{ textAlign: 'center' }}>Successes</th>
+          <th style={{ textAlign: 'center' }}>Noops</th>
+          <th style={{ textAlign: 'center' }}>Skips</th>
+          <th style={{ textAlign: 'center' }}>Failures</th>
           <th />
         </tr></thead>
         <tbody>
-          {this.nodes.map(node =>
-            <NodeListItem node={node} />
+          {this.props.nodes.map(node =>
+            <NodeListItem node={node} key={node.certname} />
           )}
         </tbody>
       </Table>
@@ -37,11 +39,6 @@ class NodeList extends React.Component {
 
 NodeList.propTypes = {
   nodes: React.PropTypes.array, // TODO: specify
-};
-
-
-NodeList.defaultProps = {
-  nodes: [],
 };
 
 export default NodeList;
