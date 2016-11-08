@@ -4,7 +4,7 @@ import MenuBar from './MenuBar';
 import Config from '../Config';
 import PuppetDB from '../PuppetDB';
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor() {
     super();
     this.updateQuery = this.updateQuery.bind(this);
@@ -52,5 +52,3 @@ App.propTypes = {
   children: React.PropTypes.node.isRequired,
   location: React.PropTypes.object.isRequired,
 };
-
-export default App;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import NodeDetail from '../components/NodeDetail';
 
-class NodeDetailContainer extends React.Component {
+export default class NodeDetailContainer extends React.Component {
   render() {
     return (
       <NodeDetail node={this.props.params.node} />);
@@ -14,5 +14,3 @@ NodeDetailContainer.propTypes = {
     node: React.PropTypes.string,
   }),
 };
-
-export default NodeDetailContainer;

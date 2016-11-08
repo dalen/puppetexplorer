@@ -3,7 +3,7 @@ import InputGroup from 'react-bootstrap/lib/InputGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
-class SearchField extends React.Component {
+export default class SearchField extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -44,5 +44,3 @@ SearchField.propTypes = {
   updateQuery: React.PropTypes.func,
   queryString: React.PropTypes.string,
 };
-
-export default SearchField;

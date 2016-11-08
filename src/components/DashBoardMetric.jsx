@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel, Glyphicon } from 'react-bootstrap';
 
-class DashBoardMetric extends React.Component {
+export default class DashBoardMetric extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -41,7 +41,6 @@ DashBoardMetric.propTypes = {
     'warning',
     'danger',
   ]).isRequired,
-  query: React.PropTypes.string,
   bean: React.PropTypes.string,
   beanValue: React.PropTypes.string,
   multiply: React.PropTypes.number,
@@ -54,5 +53,3 @@ DashBoardMetric.defaultProps = {
   unit: '',
   beanValue: 'Value',
 };
-
-export default DashBoardMetric;

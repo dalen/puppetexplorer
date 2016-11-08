@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col, Table, Well } from 'react-bootstrap';
 
-class Usage extends React.Component {
+export default class Usage extends React.Component {
   render() {
     return (
       <Grid>
@@ -106,5 +106,3 @@ class Usage extends React.Component {
     );
   }
 }
-
-export default Usage;

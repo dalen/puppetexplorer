@@ -3,7 +3,7 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import DashBoardMetric from './DashBoardMetric';
 import Usage from './Usage';
 
-class DashBoard extends React.Component {
+export default class DashBoard extends React.Component {
   static panelWidth(panelRow) {
     return Math.max(2, Math.floor(12 / panelRow.length));
   }
@@ -39,5 +39,3 @@ DashBoard.propTypes = {
 DashBoard.defaultProps = {
   panels: [],
 };
-
-export default DashBoard;

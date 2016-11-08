@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavItem, Glyphicon } from 'react-bootstrap';
 import { browserHistory as history } from 'react-router';
 
-class MenuBar extends React.Component {
+export default class MenuBar extends React.Component {
   render() {
     return (
       <Navbar fluid>
@@ -22,5 +22,3 @@ class MenuBar extends React.Component {
 MenuBar.propTypes = {
   selectTab: React.PropTypes.func,
 };
-
-export default MenuBar;

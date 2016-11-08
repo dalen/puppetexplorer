@@ -6,7 +6,7 @@ import NodeList from '../components/NodeList';
 
 // Takes care of feching nodes and passing it to node list
 //
-class NodeDetailContainer extends React.Component {
+export default class NodeListContainer extends React.Component {
   // FIXME useless?
   constructor(props) {
     super(props);
@@ -20,6 +20,10 @@ class NodeDetailContainer extends React.Component {
   componentWillReceiveProps() {
     this.fetchNodes();
   }
+
+  props: {
+    config: string,
+  };
 
   fetchNodes() {
     PuppetDB.query(this.props.config.serverUrl, 'nodes', this.props.queryParsed)
@@ -35,11 +39,9 @@ class NodeDetailContainer extends React.Component {
   }
 }
 
-NodeDetailContainer.propTypes = {
+NodeListContainer.propTypes = {
   config: React.PropTypes.shape({
     serverUrl: React.PropTypes.string,
   }),
   queryParsed: PropTypes.query,
 };
-
-export default NodeDetailContainer;

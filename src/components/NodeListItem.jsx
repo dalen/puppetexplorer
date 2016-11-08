@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 
 import PuppetDB from '../PuppetDB';
 
-class NodeListItem extends React.Component {
+export default class NodeListItem extends React.Component {
   static statusIcon(status) {
     switch (status) {
       case 'failed': return (<Glyphicon glyph="warning" className="text-danger" />);
@@ -75,5 +75,3 @@ NodeListItem.propTypes = {
     latest_report_hash: React.PropTypes.string,
   }).isRequired, // TODO: specify shape
 };
-
-export default NodeListItem;

@@ -3,7 +3,7 @@ import { Table, Label, Alert } from 'react-bootstrap';
 
 import NodeListItem from './NodeListItem';
 
-class NodeList extends React.Component {
+export default class NodeList extends React.Component {
   render() {
     if (this.props.nodes === undefined) { // FIXME: Move to container instead?
       return (<Label>Loading...</Label>);
@@ -42,5 +42,3 @@ NodeList.propTypes = {
   nodes: React.PropTypes.array, // TODO: specify
   serverUrl: React.PropTypes.string,
 };
-
-export default NodeList;
