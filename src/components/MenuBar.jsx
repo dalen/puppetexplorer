@@ -1,8 +1,13 @@
+// @flow
 import React from 'react';
 import { Navbar, Nav, NavItem, Glyphicon } from 'react-bootstrap';
 import { browserHistory as history } from 'react-router';
 
 export default class MenuBar extends React.Component {
+  props: {
+    selectTab: (id: string) => any,
+  };
+
   render() {
     return (
       <Navbar fluid>
@@ -18,7 +23,3 @@ export default class MenuBar extends React.Component {
     );
   }
 }
-
-MenuBar.propTypes = {
-  selectTab: React.PropTypes.func,
-};

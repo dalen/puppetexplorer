@@ -27,7 +27,7 @@ export default class PuppetDB {
   }
 
   // Get a URL from server
-  static get(serverUrl: string, path: string): Promise<mixed> {
+  static get(serverUrl: string, path: string): Promise<*> {
     return fetch(`${serverUrl}/${path}`, {
       headers: { Accept: 'application/json' },
     })
@@ -35,12 +35,12 @@ export default class PuppetDB {
   }
 
   // Get a bean value, returns a promise
-  static getBean(serverUrl: string, name: string): Promise<mixed> {
+  static getBean(serverUrl: string, name: string): Promise<*> {
     return this.get(serverUrl, `metrics/v1/mbeans/${name}`);
   }
 
   // Get PuppetDB version, returns a promise
-  static getVersion(serverUrl: string): Promise<mixed> {
+  static getVersion(serverUrl: string): Promise<*> {
     return this.get(serverUrl, 'pdb/meta/v1/version');
   }
 

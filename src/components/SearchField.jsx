@@ -1,14 +1,13 @@
+// @flow
 import React from 'react';
 import InputGroup from 'react-bootstrap/lib/InputGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 export default class SearchField extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state: {
+    queryString: string,
+  };
 
   componentWillMount() {
     this.state = {
@@ -16,11 +15,20 @@ export default class SearchField extends React.Component {
     };
   }
 
-  handleChange(event) {
-    this.setState({ queryString: event.target.value });
+  props: {
+    updateQuery: (query: string) => mixed,
+    queryString: string,
+  };
+
+  handleChange = (event: Event) => {
+    if (event.target instanceof HTMLInputElement) {
+      this.setState({ queryString: event.target.value });
+    } else {
+      throw new Error('SearchField.handleChange(): Unknown event target');
+    }
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event: Event) => {
     this.props.updateQuery(this.state.queryString);
     event.preventDefault();
   }
@@ -39,8 +47,3 @@ export default class SearchField extends React.Component {
     );
   }
 }
-
-SearchField.propTypes = {
-  updateQuery: React.PropTypes.func,
-  queryString: React.PropTypes.string,
-};

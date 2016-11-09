@@ -6,6 +6,7 @@
     "jasmine": true
   },
   "rules": {
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "react/no-unused-prop-types": [2, { "skipShapeProps": true }]
   }
 }

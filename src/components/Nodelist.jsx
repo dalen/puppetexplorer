@@ -1,9 +1,16 @@
+// @flow
 import React from 'react';
 import { Table, Label, Alert } from 'react-bootstrap';
 
 import NodeListItem from './NodeListItem';
+import { nodeT } from '../types';
 
 export default class NodeList extends React.Component {
+  props: {
+    nodes: nodeT[],
+    serverUrl: string,
+  };
+
   render() {
     if (this.props.nodes === undefined) { // FIXME: Move to container instead?
       return (<Label>Loading...</Label>);
@@ -37,8 +44,3 @@ export default class NodeList extends React.Component {
     );
   }
 }
-
-NodeList.propTypes = {
-  nodes: React.PropTypes.array, // TODO: specify
-  serverUrl: React.PropTypes.string,
-};
