@@ -1,31 +1,47 @@
+// @flow
 import React from 'react';
+import { browserHistory as history } from 'react-router';
+
 import SearchField from './SearchField';
 import MenuBar from './MenuBar';
 import Config from '../Config';
 import PuppetDB from '../PuppetDB';
+import type { queryT } from '../types';
 
 export default class App extends React.Component {
-  constructor() {
-    super();
-    this.updateQuery = this.updateQuery.bind(this);
+  static selectTab(id: string) {
+    history.push(id);
   }
 
-  componentWillMount() {
-    this.state = {
-      config: Config.defaults(),
-    };
+  state: {
+    config: mixed,
+    queryString: string,
+    queryParsed: ?queryT,
+  };
 
+  componentWillMount() {
     let queryString;
     if (this.props.location.query &&
-        this.props.location.query.query) {
+        this.props.location.query.query &&
+        this.props.location.query.query instanceof String
+      ) {
       queryString = this.props.location.query.query;
     } else {
       queryString = '';
     }
-    this.updateQuery(queryString);
+    this.setState({
+      config: Config.defaults(),
+      queryString,
+      queryParsed: PuppetDB.parse(queryString),
+    });
   }
 
-  updateQuery(query) {
+  props: {
+    children: React.Element<*>,
+    location: Location,
+  };
+
+  updateQuery = (query: string) => {
     this.setState({
       queryString: query,
       queryParsed: PuppetDB.parse(query),
@@ -41,14 +57,9 @@ export default class App extends React.Component {
     return (
       <div>
         <SearchField updateQuery={this.updateQuery} queryString={this.state.queryString} />
-        <MenuBar />
+        <MenuBar selectTab={App.selectTab} />
         {child}
       </div>
     );
   }
 }
-
-App.propTypes = {
-  children: React.PropTypes.node.isRequired,
-  location: React.PropTypes.object.isRequired,
-};

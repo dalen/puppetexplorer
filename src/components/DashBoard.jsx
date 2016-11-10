@@ -1,12 +1,24 @@
+// @flow
 import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import DashBoardMetric from './DashBoardMetric';
 import Usage from './Usage';
 
+import type { dashBoardPanelT } from '../types';
+
 export default class DashBoard extends React.Component {
+  static defaultProps = {
+    panels: [],
+  };
+
   static panelWidth(panelRow) {
     return Math.max(2, Math.floor(12 / panelRow.length));
   }
+
+  props: {
+    panels: Array<dashBoardPanelT[]>,
+    serverUrl: string,
+  };
 
   render() {
     return (
@@ -27,15 +39,3 @@ export default class DashBoard extends React.Component {
     );
   }
 }
-
-DashBoard.propTypes = {
-  panels: React.PropTypes.arrayOf(
-    React.PropTypes.arrayOf(
-      React.PropTypes.object,
-    )),
-  serverUrl: React.PropTypes.string.isRequired,
-};
-
-DashBoard.defaultProps = {
-  panels: [],
-};

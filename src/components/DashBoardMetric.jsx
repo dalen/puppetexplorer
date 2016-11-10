@@ -1,11 +1,19 @@
+// @flow
 import React from 'react';
 import { Panel, Glyphicon } from 'react-bootstrap';
 
+import type { dashBoardPanelT } from '../types';
+
 export default class DashBoardMetric extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  static defaultProps: {
+    multiply: 1,
+    unit: '',
+    beanValue: 'Value',
+  };
+
+  state: {
+    value: number,
+  };
 
   componentDidMount() {
     if (this.props.bean) {
@@ -15,10 +23,26 @@ export default class DashBoardMetric extends React.Component {
     }
   }
 
+  props: {
+    title: string,
+    style:
+      'default'
+      | 'primary'
+      | 'success'
+      | 'info'
+      | 'warning'
+      | 'danger',
+    bean: string,
+    beanValue: string,
+    multiply: number,
+    unit: string,
+    serverUrl: string,
+  };
+
   render() {
     let children;
     if ('value' in this.state) {
-      children = `${this.state.value} ${this.props.unit}`;
+      children = `${this.state.value * this.props.multiply} ${this.props.unit}`;
     } else {
       children = <Glyphicon glyph="refresh" className="spin" />;
     }
@@ -30,26 +54,3 @@ export default class DashBoardMetric extends React.Component {
     );
   }
 }
-
-DashBoardMetric.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  style: React.PropTypes.oneOf([
-    'default',
-    'primary',
-    'success',
-    'info',
-    'warning',
-    'danger',
-  ]).isRequired,
-  bean: React.PropTypes.string,
-  beanValue: React.PropTypes.string,
-  multiply: React.PropTypes.number,
-  unit: React.PropTypes.string,
-  serverUrl: React.PropTypes.string.isRequired,
-};
-
-DashBoardMetric.defaultProps = {
-  multiply: 1,
-  unit: '',
-  beanValue: 'Value',
-};

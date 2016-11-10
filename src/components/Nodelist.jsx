@@ -3,7 +3,7 @@ import React from 'react';
 import { Table, Label, Alert } from 'react-bootstrap';
 
 import NodeListItem from './NodeListItem';
-import { nodeT } from '../types';
+import type { nodeT } from '../types';
 
 export default class NodeList extends React.Component {
   props: {

@@ -5,7 +5,7 @@ import { Glyphicon } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 import PuppetDB from '../PuppetDB';
-import { nodeT } from '../types';
+import type { nodeT } from '../types';
 
 export default class NodeListItem extends React.Component {
   static statusIcon(status) {

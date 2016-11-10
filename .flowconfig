@@ -4,8 +4,6 @@
 .*/app
 
 [include]
-tests
-src/**/*.js
 
 [libs]
 

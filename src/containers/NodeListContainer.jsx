@@ -1,17 +1,16 @@
+// @flow
 import React from 'react';
 
 import PuppetDB from '../PuppetDB';
-import PropTypes from '../PropTypes';
+import type { nodeT, queryT } from '../types';
 import NodeList from '../components/NodeList';
 
 // Takes care of feching nodes and passing it to node list
 //
 export default class NodeListContainer extends React.Component {
-  // FIXME useless?
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state: {
+    nodes: nodeT[],
+  };
 
   componentDidMount() {
     this.fetchNodes();
@@ -22,10 +21,13 @@ export default class NodeListContainer extends React.Component {
   }
 
   props: {
-    config: string,
+    config: {
+      serverUrl: string,
+    },
+    queryParsed: queryT,
   };
 
-  fetchNodes() {
+  fetchNodes = () => {
     PuppetDB.query(this.props.config.serverUrl, 'nodes', this.props.queryParsed)
       .then(data => this.setState({ nodes: data }));
   }
@@ -38,10 +40,3 @@ export default class NodeListContainer extends React.Component {
       />);
   }
 }
-
-NodeListContainer.propTypes = {
-  config: React.PropTypes.shape({
-    serverUrl: React.PropTypes.string,
-  }),
-  queryParsed: PropTypes.query,
-};

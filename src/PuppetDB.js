@@ -2,13 +2,11 @@
 
 import puppetdbquery from 'node-puppetdbquery';
 
-// FIXME: improve type spec
-// The type of an API query
-type queryType = Array<mixed>;
+import type { queryT } from './types';
 
 export default class PuppetDB {
   // Combine queries together
-  static combine(...queries: queryType[]): queryType | null {
+  static combine(...queries: queryT[]): queryT | null {
     const actualQueries = queries.filter(q => q != null);
     if (actualQueries.length === 0) {
       return null;
@@ -19,7 +17,7 @@ export default class PuppetDB {
   }
 
   // Parse a query
-  static parse(query: string): queryType | null {
+  static parse(query: string): queryT | null {
     if (query) {
       return puppetdbquery.parse(query);
     }
@@ -45,7 +43,7 @@ export default class PuppetDB {
   }
 
   // Do a query against the server
-  static query(serverUrl: string, endpoint: string, query: null | queryType) {
+  static query(serverUrl: string, endpoint: string, query: null | queryT) {
     if (query) {
       return this.get(serverUrl, `pdb/query/v4/${endpoint}?query=${encodeURIComponent(JSON.stringify(query))}`);
     }

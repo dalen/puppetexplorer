@@ -1,3 +1,4 @@
+// @flow
 export default class Config {
   static defaults() {
     return {

@@ -1,22 +1,21 @@
 // @flow
 import React from 'react';
 import { Navbar, Nav, NavItem, Glyphicon } from 'react-bootstrap';
-import { browserHistory as history } from 'react-router';
 
 export default class MenuBar extends React.Component {
   props: {
-    selectTab: (id: string) => any,
+    selectTab: (id: string) => void,
   };
 
   render() {
     return (
       <Navbar fluid>
         <Nav>
-          <NavItem eventKey="/dashboard" onClick={history.push}>
+          <NavItem eventKey="/dashboard" onClick={this.props.selectTab}>
             <Glyphicon glyph="dashboard" /> Dashboard</NavItem>
-          <NavItem eventKey="/nodes" onSelect={history.push}>
+          <NavItem eventKey="/nodes" onSelect={this.props.selectTab}>
             <Glyphicon glyph="list" /> Nodes</NavItem>
-          <NavItem eventKey="/events" onSelect={history.push}>
+          <NavItem eventKey="/events" onSelect={this.props.selectTab}>
             <Glyphicon glyph="calendar" /> Events</NavItem>
         </Nav>
       </Navbar>
