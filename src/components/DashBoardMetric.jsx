@@ -5,7 +5,7 @@ import { Panel, Glyphicon } from 'react-bootstrap';
 import type { dashBoardPanelT } from '../types';
 
 export default class DashBoardMetric extends React.Component {
-  static defaultProps: {
+  static defaultProps = {
     multiply: 1,
     unit: '',
     beanValue: 'Value',
@@ -15,6 +15,8 @@ export default class DashBoardMetric extends React.Component {
     value: number,
   };
 
+  state = {};
+
   componentDidMount() {
     if (this.props.bean) {
       fetch(`${this.props.serverUrl}/metrics/v1/mbeans/${this.props.bean}`)
@@ -23,21 +25,7 @@ export default class DashBoardMetric extends React.Component {
     }
   }
 
-  props: {
-    title: string,
-    style:
-      'default'
-      | 'primary'
-      | 'success'
-      | 'info'
-      | 'warning'
-      | 'danger',
-    bean: string,
-    beanValue: string,
-    multiply: number,
-    unit: string,
-    serverUrl: string,
-  };
+  props: dashBoardPanelT;
 
   render() {
     let children;
