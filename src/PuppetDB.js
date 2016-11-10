@@ -6,7 +6,7 @@ import type { queryT } from './types';
 
 export default class PuppetDB {
   // Combine queries together
-  static combine(...queries: queryT[]): queryT | null {
+  static combine(...queries: queryT[]): ?queryT {
     const actualQueries = queries.filter(q => q != null);
     if (actualQueries.length === 0) {
       return null;
@@ -17,7 +17,7 @@ export default class PuppetDB {
   }
 
   // Parse a query
-  static parse(query: string): queryT | null {
+  static parse(query: string): ?queryT {
     if (query) {
       return puppetdbquery.parse(query);
     }
@@ -43,7 +43,7 @@ export default class PuppetDB {
   }
 
   // Do a query against the server
-  static query(serverUrl: string, endpoint: string, query: null | queryT) {
+  static query(serverUrl: string, endpoint: string, query: ?queryT) {
     if (query) {
       return this.get(serverUrl, `pdb/query/v4/${endpoint}?query=${encodeURIComponent(JSON.stringify(query))}`);
     }

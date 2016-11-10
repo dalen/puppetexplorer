@@ -31,7 +31,10 @@ module.exports = {
         loader: 'babel',
         query: {
           presets: ['react'], // ['es2015', 'react'] for release build
-          plugins: ['babel-plugin-transform-es2015-modules-commonjs'],
+          plugins: [
+            'babel-plugin-transform-es2015-modules-commonjs', // Full es2015 preset instead on release
+            'transform-class-properties',
+          ],
         },
       },
       {
