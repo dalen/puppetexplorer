@@ -1,20 +1,18 @@
-// @flow
 import React from 'react';
 import { Table, Label, Alert } from 'react-bootstrap';
 
-import NodeListItem from './NodeListItem';
-import type { nodeT } from '../types';
+import ReportListItem from './ReportListItem';
+import type { reportT } from '../types';
 
-export default class NodeList extends React.Component {
+export default class ReportList extends React.Component {
   props: {
-    nodes: nodeT[],
-    serverUrl: string,
+    reports: reportT[],
   };
 
   render() {
-    if (this.props.nodes.length === 0) {
+    if (this.props.reports.length === 0) {
       return (
-        <Alert bsStyle="warning">No nodes found</Alert>
+        <Alert bsStyle="warning">No reports found</Alert>
       );
     }
 
@@ -22,8 +20,8 @@ export default class NodeList extends React.Component {
       <Table striped>
         <thead><tr>
           <th><Label>
-            { this.props.nodes.length === 1 ?
-            '1 node found' : `${this.props.nodes.length} nodes found`}
+            { this.props.reports.length === 1 ?
+            '1 report found' : `${this.props.reports.length} reports found`}
           </Label></th>
           <th>Last run</th>
           <th style={{ textAlign: 'center' }}>Successes</th>
@@ -33,9 +31,9 @@ export default class NodeList extends React.Component {
           <th />
         </tr></thead>
         <tbody>
-          {this.props.nodes.map(node =>
-            <NodeListItem
-              node={node} serverUrl={this.props.serverUrl} key={node.certname}
+          {this.props.reports.map(report =>
+            <ReportListItem
+              report={report} key={report.certname}
             />)}
         </tbody>
       </Table>

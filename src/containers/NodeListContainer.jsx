@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { Label } from 'react-bootstrap';
 
 import PuppetDB from '../PuppetDB';
 import type { nodeT, queryT } from '../types';
@@ -11,6 +12,8 @@ export default class NodeListContainer extends React.Component {
   state: {
     nodes: nodeT[],
   };
+
+  state = {};
 
   componentDidMount() {
     this.fetchNodes();
@@ -33,10 +36,13 @@ export default class NodeListContainer extends React.Component {
   }
 
   render() {
-    return (
-      <NodeList
-        nodes={this.state.nodes}
-        serverUrl={this.props.config.serverUrl}
-      />);
+    if (this.state.nodes !== undefined) {
+      return (
+        <NodeList
+          nodes={this.state.nodes}
+          serverUrl={this.props.config.serverUrl}
+        />);
+    }
+    return (<Label>Loading...</Label>);
   }
 }

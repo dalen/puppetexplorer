@@ -4,19 +4,12 @@ import { Link } from 'react-router';
 import { Glyphicon } from 'react-bootstrap';
 import Moment from 'react-moment';
 
+import ReportsHelper from '../helpers/ReportsHelper';
 import PuppetDB from '../PuppetDB';
+
 import type { nodeT } from '../types';
 
 export default class NodeListItem extends React.Component {
-  static statusIcon(status) {
-    switch (status) {
-      case 'failed': return (<Glyphicon glyph="warning" className="text-danger" />);
-      case 'changed': return (<Glyphicon glyph="exclamation-sign" className="text-success" />);
-      case 'unchanged': return (<Glyphicon glyph="exclamation-sign" className="text-success" />);
-      default: return (<Glyphicon glyph="exclamation-sign" />);
-    }
-  }
-
   constructor(props: any) {
     super(props);
     this.state = {
@@ -78,7 +71,7 @@ export default class NodeListItem extends React.Component {
         <td className="text-center">{this.state.metrics.events.skip}</td>
         <td className="text-center">{this.state.metrics.events.failure}</td>
         <td className="text-right">
-          {NodeListItem.statusIcon(this.props.node.latest_report_status)}
+          {ReportsHelper.statusIcon(this.props.node.latest_report_status)}
         </td>
       </tr>
     );

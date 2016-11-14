@@ -7,12 +7,16 @@ export type nodeT = {
   report_timestamp: string,
 };
 
+export type reportT = {
+  certname: string,
+  status: string,
+};
+
 export type queryT = string | queryT[];
 
 export type dashBoardPanelT = {
   title: string,
-  style:
-    'default'
+  style: 'default'
     | 'primary'
     | 'success'
     | 'info'

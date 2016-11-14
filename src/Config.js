@@ -1,6 +1,6 @@
 // @flow
 export default class Config {
-  static defaults() {
+  static defaults(): { [id: string]: mixed } {
     return {
       serverUrl: '/api',
       nodeFacts: [
@@ -42,7 +42,7 @@ export default class Config {
     };
   }
 
-  static get(name) {
+  static get(name: string): mixed {
     return this.defaults()[name];
   }
 }

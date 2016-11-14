@@ -71,10 +71,12 @@ module.exports = {
     port: 4080,
     colors: true,
     inline: true,
-    historyApiFallback: true,
+    historyApiFallback: {
+      disableDotRule: true, // certnames usually contain dots
+    },
     proxy: {
       '/api': {
-        target: 'http://puppetdb.puppetexplorer.io',
+        target: process.env.PUPPETDB_URL || 'http://puppetdb.puppetexplorer.io',
         pathRewrite: { '^/api': '' },
       },
     },
