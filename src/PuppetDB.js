@@ -23,6 +23,7 @@ export default class PuppetDB {
   }
 
   // Get a URL from server
+  // params is converted into a query string automatically
   static get(serverUrl: string, path: string, params: {[id: string]: mixed } = {}): Promise<*> {
     let url = `${serverUrl}/${path}`;
     if (Object.keys(params).length > 0) {
@@ -42,12 +43,12 @@ export default class PuppetDB {
     .then(response => response.json());
   }
 
-  // Get a bean value, returns a promise
+  // Get a bean value
   static getBean(serverUrl: string, name: string): Promise<*> {
     return this.get(serverUrl, `metrics/v1/mbeans/${name}`);
   }
 
-  // Get PuppetDB version, returns a promise
+  // Get PuppetDB version
   static getVersion(serverUrl: string): Promise<*> {
     return this.get(serverUrl, 'pdb/meta/v1/version');
   }

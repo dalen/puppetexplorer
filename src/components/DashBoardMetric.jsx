@@ -2,6 +2,8 @@
 import React from 'react';
 import { Panel, Glyphicon } from 'react-bootstrap';
 
+import PuppetDB from '../PuppetDB';
+
 export default class DashBoardMetric extends React.Component {
   static defaultProps = {
     multiply: 1,
@@ -14,11 +16,8 @@ export default class DashBoardMetric extends React.Component {
   } = {};
 
   componentDidMount() {
-    if (this.props.bean) {
-      fetch(`${this.props.serverUrl}/metrics/v1/mbeans/${this.props.bean}`)
-      .then(response => response.json())
+    PuppetDB.getBean(this.props.serverUrl, this.props.bean)
       .then(data => this.setState({ value: data[this.props.beanValue] }));
-    }
   }
 
   props: {
@@ -38,7 +37,7 @@ export default class DashBoardMetric extends React.Component {
 
   render(): React$Element<*> {
     let children;
-    if (this.state.value instanceof Number) {
+    if (typeof this.state.value === 'number') {
       children = `${this.state.value * this.props.multiply} ${this.props.unit}`;
     } else {
       children = <Glyphicon glyph="refresh" className="spin" />;
