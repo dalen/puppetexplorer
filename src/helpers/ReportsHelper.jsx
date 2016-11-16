@@ -3,7 +3,7 @@ import React from 'react';
 import { Glyphicon } from 'react-bootstrap';
 
 export default class ReportsHelper {
-  static statusIcon(status) {
+  static statusIcon(status: string): React$Element<Glyphicon> {
     switch (status) {
       case 'failed': return (<Glyphicon glyph="warning" className="text-danger" />);
       case 'changed': return (<Glyphicon glyph="exclamation-sign" className="text-success" />);
@@ -12,12 +12,10 @@ export default class ReportsHelper {
     }
   }
 
-  // Create a nested hash out of all the metrics
-  static calculateMetrics(metrics: Array<*>) {
-    const result = {};
-    metrics.forEach((metric) => {
-      if (result[metric.category] == null) { result[metric.category] = {}; }
-      result[metric.category][metric.name] = metric.value;
-    });
+  // Create a nested map out of all the metrics
+  static metricValue(metrics: Array<*>, category: string, name: string): ?number {
+    const ret = metrics.find(metric => metric.category === category && metric.name === name);
+    if (ret) { return ret.value; }
+    return ret;
   }
 }

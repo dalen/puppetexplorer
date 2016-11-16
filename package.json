@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "grunt test",
-    "lint": "eslint src",
+    "lint": "find src -name '*.js' -or -name '*.jsx' | xargs node_modules/.bin/eslint",
     "build": "webpack",
     "build-watch": "webpack --watch",
     "start": "webpack-dev-server",
@@ -32,6 +32,7 @@
     "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.7",
     "babel-plugin-transform-class-properties": "^6.18.0",
+    "babel-polyfill": "^6.16.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "bootswatch": "^3.3.6",

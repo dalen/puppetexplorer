@@ -16,8 +16,13 @@
     "react/no-unused-prop-types": [2, { "skipShapeProps": true }],
     "flowtype/require-valid-file-annotation": [ 2, "always", { "annotationStyle": "line" }],
     "flowtype/require-parameter-type": [ 2, { "excludeArrowFunctions": "expressionsOnly" }],
-    "flowtype/require-return-type": [ 2, "always", { "excludeArrowFunctions": "expressionsOnly" }],
+    "flowtype/require-return-type": [ 2, "always",
+      {
+        "excludeArrowFunctions": "expressionsOnly",
+        "annotateUndefined":"never"
+      }],
     "flowtype/no-weak-types": [ 2 ],
-    "flowtype/delimiter-dangle": [ 2, "always-multiline" ]
+    "flowtype/delimiter-dangle": [ 2, "always-multiline" ],
+    "flowtype/semi": [ 2 ]
   }
 }

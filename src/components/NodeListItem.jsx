@@ -7,38 +7,32 @@ import Moment from 'react-moment';
 import ReportsHelper from '../helpers/ReportsHelper';
 import PuppetDB from '../PuppetDB';
 
-import type { nodeT } from '../types';
+type props = {
+  serverUrl: string,
+  node: nodeT,
+};
 
 export default class NodeListItem extends React.Component {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      metrics: {
-        events: {},
-      },
-    };
-  }
-
   state: {
-    metrics: {
-      [id:string]: {[id:string]: number}
-    },
+    metrics: Array<*>,
   };
+
+  state = { metrics: [] };
 
   componentDidMount() {
-    this.fetchNodes();
+    this.fetchMetrics();
   }
 
-  componentWillReceiveProps() {
-    this.fetchNodes();
+  componentWillReceiveProps(nextProps: props) {
+    if (nextProps.serverUrl !== this.props.serverUrl ||
+      nextProps.node !== this.props.node) {
+      this.fetchMetrics();
+    }
   }
 
-  props: {
-    serverUrl: string,
-    node: nodeT,
-  };
+  props: props;
 
-  fetchNodes() {
+  fetchMetrics() {
     type metricT = {
       category: string,
       name: string,
@@ -46,17 +40,11 @@ export default class NodeListItem extends React.Component {
     };
     PuppetDB.get(this.props.serverUrl, `pdb/query/v4/reports/${this.props.node.latest_report_hash}/metrics`)
       .then((data: metricT[]) => {
-        const metrics = {};
-        // Create a nested hash out of all the metrics
-        data.forEach((metric) => {
-          if (metrics[metric.category] == null) { metrics[metric.category] = {}; }
-          metrics[metric.category][metric.name] = metric.value;
-        });
-        this.setState({ metrics });
+        this.setState({ metrics: data });
       });
   }
 
-  render() {
+  render(): React$Element<*> {
     return (
       <tr>
         <td><Link to={`/node/${this.props.node.certname}`}>{this.props.node.certname}</Link></td>
@@ -66,10 +54,10 @@ export default class NodeListItem extends React.Component {
             fromNow ago title={this.props.node.report_timestamp}
           >{this.props.node.report_timestamp}</Moment>
         </td>
-        <td className="text-center">{this.state.metrics.events.success}</td>
-        <td className="text-center">{this.state.metrics.events.noop}</td>
-        <td className="text-center">{this.state.metrics.events.skip}</td>
-        <td className="text-center">{this.state.metrics.events.failure}</td>
+        <td className="text-center">{ReportsHelper.metricValue(this.state.metrics, 'events', 'success')}</td>
+        <td className="text-center">{ReportsHelper.metricValue(this.state.metrics, 'events', 'noop')}</td>
+        <td className="text-center">{ReportsHelper.metricValue(this.state.metrics, 'events', 'skip')}</td>
+        <td className="text-center">{ReportsHelper.metricValue(this.state.metrics, 'events', 'failure')}</td>
         <td className="text-right">
           {ReportsHelper.statusIcon(this.props.node.latest_report_status)}
         </td>

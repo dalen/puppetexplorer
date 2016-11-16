@@ -43,7 +43,7 @@ export default class PuppetDB {
   }
 
   // Do a query against the server
-  static query(serverUrl: string, endpoint: string, query: ?queryT) {
+  static query(serverUrl: string, endpoint: string, query: ?queryT): Promise<*> {
     if (query) {
       return this.get(serverUrl, `pdb/query/v4/${endpoint}?query=${encodeURIComponent(JSON.stringify(query))}`);
     }

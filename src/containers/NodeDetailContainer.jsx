@@ -13,7 +13,7 @@ export default class NodeDetailContainer extends React.Component {
     },
   };
 
-  render() {
+  render(): React$Element<*> {
     return (
       <NodeDetail node={this.props.params.node} serverUrl={this.props.config.serverUrl} />);
   }

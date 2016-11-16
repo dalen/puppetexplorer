@@ -36,7 +36,7 @@ export default class ReportListContainer extends React.Component {
       .then(data => this.setState({ reports: data }));
   }
 
-  render() {
+  render(): React$Element<*> {
     if (this.state.reports !== undefined) {
       return (
         <ReportList

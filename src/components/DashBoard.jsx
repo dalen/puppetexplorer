@@ -4,14 +4,12 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import DashBoardMetric from './DashBoardMetric';
 import Usage from './Usage';
 
-import type { dashBoardPanelT } from '../types';
-
 export default class DashBoard extends React.Component {
   static defaultProps = {
     panels: [],
   };
 
-  static panelWidth(panelRow) {
+  static panelWidth(panelRow: Array<*>): number {
     return Math.max(2, Math.floor(12 / panelRow.length));
   }
 
@@ -20,7 +18,7 @@ export default class DashBoard extends React.Component {
     serverUrl: string,
   };
 
-  render() {
+  render(): React$Element<*> {
     return (
       <div>
         <Grid>

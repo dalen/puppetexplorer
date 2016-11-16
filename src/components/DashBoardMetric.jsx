@@ -2,8 +2,6 @@
 import React from 'react';
 import { Panel, Glyphicon } from 'react-bootstrap';
 
-import type { dashBoardPanelT } from '../types';
-
 export default class DashBoardMetric extends React.Component {
   static defaultProps = {
     multiply: 1,
@@ -27,7 +25,7 @@ export default class DashBoardMetric extends React.Component {
 
   props: dashBoardPanelT;
 
-  render() {
+  render(): React$Element<*> {
     let children;
     if ('value' in this.state) {
       children = `${this.state.value * this.props.multiply} ${this.props.unit}`;

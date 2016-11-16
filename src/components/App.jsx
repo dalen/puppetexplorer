@@ -6,7 +6,6 @@ import SearchField from './SearchField';
 import MenuBar from './MenuBar';
 import Config from '../Config';
 import PuppetDB from '../PuppetDB';
-import type { queryT } from '../types';
 
 export default class App extends React.Component {
   static selectTab(id: string) {
@@ -21,10 +20,7 @@ export default class App extends React.Component {
 
   componentWillMount() {
     let queryString;
-    if (this.props.location.query &&
-        this.props.location.query.query &&
-        this.props.location.query.query instanceof String
-      ) {
+    if (this.props.location.query.query) {
       queryString = this.props.location.query.query;
     } else {
       queryString = '';
@@ -46,9 +42,13 @@ export default class App extends React.Component {
       queryString: query,
       queryParsed: PuppetDB.parse(query),
     });
+    history.push({
+      pathname: history.getCurrentLocation().pathname,
+      query: { query },
+    });
   }
 
-  render() {
+  render(): React$Element<*> {
     const child = React.cloneElement(this.props.children, {
       config: this.state.config,
       queryParsed: this.state.queryParsed,
@@ -56,7 +56,7 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <SearchField updateQuery={this.updateQuery} queryString={this.state.queryString} />
+        <SearchField updateQuery={this.updateQuery} queryString={this.props.location.query.query} />
         <MenuBar selectTab={App.selectTab} />
         {child}
       </div>

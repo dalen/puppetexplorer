@@ -10,14 +10,14 @@ export default class NodeDetail extends React.Component {
     node: string,
   };
 
-  render() {
+  render(): React$Element<*> {
     return (
       <div>
         <PageHeader>{this.props.node}</PageHeader>
         <Grid>
           <Row>
             <Col md={6}>
-              <ReportListContainer node={this.props.node} serverUrl={this.props.serverUrl}/>
+              <ReportListContainer node={this.props.node} serverUrl={this.props.serverUrl} />
             </Col>
             <Col md={6}>
               {/* <important-facts node="$ctrl.node"></important-facts> */}

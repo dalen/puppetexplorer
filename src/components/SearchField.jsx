@@ -9,10 +9,12 @@ export default class SearchField extends React.Component {
     queryString: string,
   };
 
+  state = { queryString: '' };
+
   componentWillMount() {
-    this.state = {
+    this.setState({
       queryString: this.props.queryString,
-    };
+    });
   }
 
   props: {
@@ -33,7 +35,7 @@ export default class SearchField extends React.Component {
     event.preventDefault();
   }
 
-  render() {
+  render(): React$Element<*> {
     return (
       <form id="node-query" onSubmit={this.handleSubmit}>
         <InputGroup>

@@ -1,5 +1,12 @@
 // @flow
-export type nodeT = {
+/* eslint no-undef: "off" */
+
+// Extend the Location type to include query obj from react-router
+declare class Location mixins Location {
+  query: {[id: string]: string};
+}
+
+declare type nodeT = {
   certname: string,
   catalog_timestamp: string,
   latest_report_status: string,
@@ -7,14 +14,16 @@ export type nodeT = {
   report_timestamp: string,
 };
 
-export type reportT = {
+declare type reportT = {
   certname: string,
   status: string,
+  end_time: string,
+  metrics: { data: Array<*> },
 };
 
-export type queryT = string | queryT[];
+declare type queryT = string | queryT[];
 
-export type dashBoardPanelT = {
+declare type dashBoardPanelT = {
   title: string,
   style: 'default'
     | 'primary'

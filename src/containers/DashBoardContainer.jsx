@@ -7,7 +7,7 @@ import DashBoard from '../components/DashBoard';
 //
 export default class DashBoardContainer extends React.Component {
 
-  render() {
+  render(): React$Element<*> {
     return (
       <DashBoard
         serverUrl={this.props.config.serverUrl}

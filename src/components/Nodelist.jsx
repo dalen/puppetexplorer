@@ -3,7 +3,6 @@ import React from 'react';
 import { Table, Label, Alert } from 'react-bootstrap';
 
 import NodeListItem from './NodeListItem';
-import type { nodeT } from '../types';
 
 export default class NodeList extends React.Component {
   props: {
@@ -11,7 +10,7 @@ export default class NodeList extends React.Component {
     serverUrl: string,
   };
 
-  render() {
+  render(): React$Element<*> {
     if (this.props.nodes.length === 0) {
       return (
         <Alert bsStyle="warning">No nodes found</Alert>

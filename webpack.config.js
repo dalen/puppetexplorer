@@ -6,6 +6,7 @@ module.exports = {
   watch: true,
   devtool: 'source-map',
   entry: [
+    'babel-polyfill',
     path.resolve(__dirname, 'src', 'main.jsx'),
     path.resolve(__dirname, 'src', 'config.js.example'),
     path.resolve(__dirname, 'src', 'index.html'),

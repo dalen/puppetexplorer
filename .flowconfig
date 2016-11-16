@@ -6,5 +6,6 @@
 [include]
 
 [libs]
+src/declarations/
 
 [options]

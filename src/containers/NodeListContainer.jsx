@@ -3,8 +3,14 @@ import React from 'react';
 import { Label } from 'react-bootstrap';
 
 import PuppetDB from '../PuppetDB';
-import type { nodeT, queryT } from '../types';
 import NodeList from '../components/NodeList';
+
+type props = {
+  config: {
+    serverUrl: string,
+  },
+  queryParsed: queryT,
+};
 
 // Takes care of feching nodes and passing it to node list
 //
@@ -13,30 +19,25 @@ export default class NodeListContainer extends React.Component {
     nodes: nodeT[],
   };
 
-  state = {};
-
   componentDidMount() {
-    this.fetchNodes();
+    this.fetchNodes(this.props.config.serverUrl, this.props.queryParsed);
   }
 
-  componentWillReceiveProps() {
-    this.fetchNodes();
+  componentWillReceiveProps(nextProps: props) {
+    if (nextProps.config.serverUrl !== this.props.config.serverUrl ||
+      nextProps.queryParsed !== this.props.queryParsed) {
+      this.fetchNodes(nextProps.config.serverUrl, nextProps.queryParsed);
+    }
   }
 
-  props: {
-    config: {
-      serverUrl: string,
-    },
-    queryParsed: queryT,
-  };
+  props: props;
 
-  fetchNodes = () => {
-    PuppetDB.query(this.props.config.serverUrl, 'nodes', this.props.queryParsed)
+  fetchNodes = (serverUrl: string, queryParsed: queryT) =>
+    PuppetDB.query(serverUrl, 'nodes', queryParsed)
       .then(data => this.setState({ nodes: data }));
-  }
 
-  render() {
-    if (this.state.nodes !== undefined) {
+  render(): React$Element<*> {
+    if (this.state && this.state.nodes !== undefined) {
       return (
         <NodeList
           nodes={this.state.nodes}

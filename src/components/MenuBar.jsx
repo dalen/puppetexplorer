@@ -7,7 +7,7 @@ export default class MenuBar extends React.Component {
     selectTab: (id: string) => void,
   };
 
-  render() {
+  render(): React$Element<*> {
     return (
       <Navbar fluid>
         <Nav>
