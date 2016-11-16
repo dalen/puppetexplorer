@@ -10,10 +10,8 @@ export default class DashBoardMetric extends React.Component {
   };
 
   state: {
-    value: number,
-  };
-
-  state = {};
+    value?: number,
+  } = {};
 
   componentDidMount() {
     if (this.props.bean) {
@@ -23,11 +21,24 @@ export default class DashBoardMetric extends React.Component {
     }
   }
 
-  props: dashBoardPanelT;
+  props: {
+    title: string,
+    style: 'default'
+      | 'primary'
+      | 'success'
+      | 'info'
+      | 'warning'
+      | 'danger',
+    bean: string,
+    beanValue: string,
+    multiply: number,
+    unit: string,
+    serverUrl: string,
+  };
 
   render(): React$Element<*> {
     let children;
-    if ('value' in this.state) {
+    if (this.state.value instanceof Number) {
       children = `${this.state.value * this.props.multiply} ${this.props.unit}`;
     } else {
       children = <Glyphicon glyph="refresh" className="spin" />;

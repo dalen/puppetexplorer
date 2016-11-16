@@ -2,8 +2,6 @@
 
 import puppetdbquery from 'node-puppetdbquery';
 
-import type { queryT } from './types';
-
 export default class PuppetDB {
   // Combine queries together
   static combine(...queries: queryT[]): ?queryT {
@@ -25,8 +23,20 @@ export default class PuppetDB {
   }
 
   // Get a URL from server
-  static get(serverUrl: string, path: string): Promise<*> {
-    return fetch(`${serverUrl}/${path}`, {
+  static get(serverUrl: string, path: string, params: {[id: string]: mixed } = {}): Promise<*> {
+    let url = `${serverUrl}/${path}`;
+    if (Object.keys(params).length > 0) {
+      url = `${url}?${Object.keys(params)
+        .map((k: string): string => {
+          const v = params[k]; // TODO: Use Object.enties in the future
+          if (v instanceof String) {
+            return `${encodeURIComponent(k)}=${encodeURIComponent(v)}`;
+          }
+          return `${encodeURIComponent(k)}=${encodeURIComponent(JSON.stringify(v))}`;
+        })
+        .join('&')}`;
+    }
+    return fetch(url, {
       headers: { Accept: 'application/json' },
     })
     .then(response => response.json());
@@ -43,10 +53,11 @@ export default class PuppetDB {
   }
 
   // Do a query against the server
-  static query(serverUrl: string, endpoint: string, query: ?queryT): Promise<*> {
-    if (query) {
-      return this.get(serverUrl, `pdb/query/v4/${endpoint}?query=${encodeURIComponent(JSON.stringify(query))}`);
-    }
-    return this.get(serverUrl, `pdb/query/v4/${endpoint}`);
+  static query(
+    serverUrl: string,
+    endpoint: string,
+    params: {[id: string]: mixed } = {},
+  ): Promise<*> {
+    return this.get(serverUrl, `pdb/query/v4/${endpoint}`, params);
   }
 }

@@ -7,9 +7,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 export default class SearchField extends React.Component {
   state: {
     queryString: string,
-  };
-
-  state = { queryString: '' };
+  } = { queryString: '' };
 
   componentWillMount() {
     this.setState({

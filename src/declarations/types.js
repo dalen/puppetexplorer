@@ -2,7 +2,7 @@
 /* eslint no-undef: "off" */
 
 // Extend the Location type to include query obj from react-router
-declare class Location mixins Location {
+declare class Location extends Location {
   query: {[id: string]: string};
 }
 
@@ -32,8 +32,8 @@ declare type dashBoardPanelT = {
     | 'warning'
     | 'danger',
   bean: string,
-  beanValue: string,
-  multiply: number,
-  unit: string,
-  serverUrl: string,
+  beanValue?: string,
+  multiply?: number,
+  unit?: string,
+  serverUrl?: string,
 };

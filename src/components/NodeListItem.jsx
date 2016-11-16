@@ -15,9 +15,7 @@ type props = {
 export default class NodeListItem extends React.Component {
   state: {
     metrics: Array<*>,
-  };
-
-  state = { metrics: [] };
+  } = { metrics: [] };
 
   componentDidMount() {
     this.fetchMetrics();
