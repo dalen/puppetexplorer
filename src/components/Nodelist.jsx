@@ -7,11 +7,12 @@ import NodeListItem from './NodeListItem';
 export default class NodeList extends React.Component {
   props: {
     nodes: nodeT[],
+    total: number,
     serverUrl: string,
   };
 
   render(): React$Element<*> {
-    if (this.props.nodes.length === 0) {
+    if (this.props.total === 0) {
       return (
         <Alert bsStyle="warning">No nodes found</Alert>
       );
@@ -21,8 +22,8 @@ export default class NodeList extends React.Component {
       <Table striped>
         <thead><tr>
           <th><Label>
-            { this.props.nodes.length === 1 ?
-            '1 node found' : `${this.props.nodes.length} nodes found`}
+            { this.props.total === 1 ?
+            '1 node found' : `${this.props.total} nodes found`}
           </Label></th>
           <th>Last run</th>
           <th style={{ textAlign: 'center' }}>Successes</th>

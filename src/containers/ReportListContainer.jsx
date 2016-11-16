@@ -10,14 +10,18 @@ import ReportList from '../components/ReportList';
 export default class ReportListContainer extends React.Component {
   state: {
     reports?: reportT[],
-  } = {};
+    count?: number,
+    page: number,
+  } = {
+    page: 1,
+  };
 
   componentDidMount() {
-    this.fetchReports();
+    this.fetchReports(this.props.config.serverUrl);
   }
 
   componentWillReceiveProps() {
-    this.fetchReports();
+    this.fetchReports(this.props.config.serverUrl);
   }
 
   props: {
@@ -25,20 +29,33 @@ export default class ReportListContainer extends React.Component {
     serverUrl: string,
   };
 
-  fetchReports = () => {
-    PuppetDB.query(this.props.serverUrl, 'reports', {
+  fetchReports(serverUrl: string, page: number) {
+    PuppetDB.query(serverUrl, 'reports', {
       query: ['extract',
         ['hash', 'end_time', 'status', 'metrics'],
         ['=', 'certname', this.props.node]],
     }).then(data => this.setState({ reports: data }));
   }
 
+  changePage = (page: number) => {
+    this.setState({ page, nodes: [] });
+    this.fetchReports(this.props.config.serverUrl, page);
+  }
+
   render(): React$Element<*> {
     if (this.state.reports !== undefined) {
       return (
-        <ReportList
-          reports={this.state.reports}
-        />);
+        <div>
+          <ReportList
+            reports={this.state.reports}
+          />
+          <Pagination
+            count={this.state.count}
+            perPage={this.props.perPage}
+            activePage={this.state.page}
+            onSelect={this.changePage}
+          />
+        </div>);
     }
     return (<Label>Loading...</Label>);
   }

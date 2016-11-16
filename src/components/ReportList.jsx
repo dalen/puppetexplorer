@@ -6,11 +6,12 @@ import ReportListItem from './ReportListItem';
 
 export default class ReportList extends React.Component {
   props: {
+    total: number,
     reports: reportT[],
   };
 
   render(): React$Element<*> {
-    if (this.props.reports.length === 0) {
+    if (this.props.total === 0) {
       return (
         <Alert bsStyle="warning">No reports found</Alert>
       );
@@ -20,8 +21,8 @@ export default class ReportList extends React.Component {
       <Table striped>
         <thead><tr>
           <th><Label>
-            { this.props.reports.length === 1 ?
-            '1 report found' : `${this.props.reports.length} reports found`}
+            { this.props.total === 1 ?
+            '1 report found' : `${this.props.total} reports found`}
           </Label></th>
           <th>Last run</th>
           <th style={{ textAlign: 'center' }}>Successes</th>
