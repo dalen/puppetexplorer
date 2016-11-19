@@ -20,7 +20,7 @@ export default (
 ) =>
   class PaginatedList extends React.Component {
     static defaultProps = {
-      perPage: 10,
+      perPage: 25,
     };
 
     state: {

@@ -6,6 +6,12 @@ import DashBoard from '../components/DashBoard';
 // Takes care of passing the panels configuration to DashBoard
 //
 export default class DashBoardContainer extends React.Component {
+  props: {
+    config: {
+      serverUrl: string,
+      dashBoardPanels: dashBoardPanelT[],
+    },
+  };
 
   render(): React$Element<*> {
     return (
@@ -15,11 +21,3 @@ export default class DashBoardContainer extends React.Component {
       />);
   }
 }
-
-
-DashBoardContainer.propTypes = {
-  config: React.PropTypes.shape({
-    serverUrl: React.PropTypes.string,
-    dashBoardPanels: React.PropTypes.array,
-  }),
-};

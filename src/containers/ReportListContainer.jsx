@@ -19,6 +19,7 @@ export default class ReportListContainer extends React.Component {
         ['hash', 'end_time', 'status', 'metrics'],
         ['=', 'certname', this.props.node]]}
       countQuery={['extract', [['function', 'count']], ['=', 'certname', this.props.node]]}
+      perPage={10}
     />);
   }
 }

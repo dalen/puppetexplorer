@@ -4,6 +4,7 @@ import { Table, Label, Alert } from 'react-bootstrap';
 
 import ReportListItem from './ReportListItem';
 
+// A list of reports, for a node typically
 export default class ReportList extends React.Component {
   props: {
     total: number,
