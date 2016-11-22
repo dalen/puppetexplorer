@@ -110,5 +110,9 @@
     <div class="well well-sm">
         <tt>#node.report_timestamp<@"now - 2 hours"</tt>
     </div>
+    Nodes that have failures in their latest report
+    <div class="well well-sm">
+        <tt>#event { status = failure and "latest_report?" = true }</tt>
+    </div>
   </div>
 </div>
