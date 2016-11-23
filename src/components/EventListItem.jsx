@@ -20,6 +20,18 @@ export default class EventListItem extends React.Component {
     }
   }
 
+  // Format the value column
+  static formatValue(event: eventT, value: string): React$Element<*> {
+    const matches = typeof value === 'string' ? value.match(/\{(\w{3,5})\}(\w+)/) : null;
+    // Check if it is a file checksum
+    if (event.resource_type === 'File' &&
+        event.property === 'content' &&
+        matches != null) {
+      return (<td><Label>{matches[1]}</Label><wbr />{matches[2]}</td>);
+    }
+    return (<td>{value}</td>);
+  }
+
   static defaultProps = {
     showNode: true,
   };
@@ -39,7 +51,6 @@ export default class EventListItem extends React.Component {
     console.log('selectReport', report);
   }
 
-  // {this.state.show ? 'triangle-right' : 'triangle-down'}
 
   render(): React$Element<*> {
     const event = this.props.event;
@@ -48,7 +59,7 @@ export default class EventListItem extends React.Component {
         { this.props.showNode ? <td>{event.certname}</td> : null }
         <td>
           <Glyphicon glyph={this.state.show ? 'triangle-bottom' : 'triangle-right'} onClick={this.toggle} />
-          {event.resource_type}[{event.resource_title}]
+          {event.resource_type}<wbr />[{event.resource_title}]
           <Collapse in={this.state.show}><div>
             <dl>
               <dt>Message:</dt>
@@ -58,68 +69,20 @@ export default class EventListItem extends React.Component {
               <dt>Containment path:</dt>
               <dd>{event.containment_path.join(' / ')}</dd>
               <dt>File:</dt>
-              <dd>{event.file}{event.file && event.line ? <span>:</span> : null}{event.line}</dd>
+              <dd>{event.file}{event.file && event.line ? <span><wbr />:</span> : null}
+                {event.line}</dd>
               <dt>Timestamp:</dt>
               <dd><Moment format="LLL" title={event.timestamp}>{event.timestamp}</Moment></dd>
               { event.report ? <div><dt>Report:</dt><dd>{event.report}</dd></div> : null }
             </dl>
-            <ListGroup>
-              <ListGroupItem header="Message">{event.message}</ListGroupItem>
-              <ListGroupItem header="Containing class">{event.containing_class}</ListGroupItem>
-              <ListGroupItem header="Containment path">
-                {event.containment_path.join(' / ')}
-              </ListGroupItem>
-              <ListGroupItem header="File">{event.file}{event.file && event.line ? <span>:</span> : null}{event.line}</ListGroupItem>
-              <ListGroupItem header="Timestamp">
-                <Moment format="LLL" title={event.timestamp}>{event.timestamp}</Moment>
-              </ListGroupItem>
-              { event.report ? <ListGroupItem header="Report">{event.report}
-              </ListGroupItem> : null }
-            </ListGroup>
-            <Table>
-              <tbody>
-                <tr>
-                  <th>Message</th>
-                  <td>{event.message}</td>
-                </tr>
-                <tr>
-                  <th>Containing class</th>
-                  <td>{event.containing_class}</td>
-                </tr>
-                <tr>
-                  <th>Containment path</th>
-                  <td>
-                    <Breadcrumb>
-                      {event.containment_path.map((container, i) =>
-                        <Breadcrumb.Item active key={i}>{container}</Breadcrumb.Item>)
-                      }
-                    </Breadcrumb>
-                  </td>
-                </tr>
-                <tr>
-                  <th>File</th>
-                  <td>
-                    {event.file}{event.file && event.line ? <span>:</span> : null}{event.line}
-                  </td>
-                </tr>
-                <tr>
-                  <th>Timestamp</th>
-                  <td><Moment format="LLL" title={event.timestamp}>{event.timestamp}</Moment></td>
-                </tr>
-                { event.report ? <tr>
-                  <th>Report</th>
-                  <td>{event.report}</td>
-                </tr> : null }
-              </tbody>
-            </Table>
           </div></Collapse>
         </td>
         <td><Label bsStyle={EventListItem.color(this.props.event.status)} style={{ textTransform: 'capitalize' }}>
           {event.status}
         </Label></td>
         <td>{event.property}</td>
-        <td>{event.old_value}</td>
-        <td>{event.new_value}</td>
+        {EventListItem.formatValue(event, event.old_value)}
+        {EventListItem.formatValue(event, event.new_value)}
       </tr>
     );
   }

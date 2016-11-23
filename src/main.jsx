@@ -9,6 +9,7 @@ import NodeDetailContainer from './containers/NodeDetailContainer';
 import NodeListContainer from './containers/NodeListContainer';
 import ReportContainer from './containers/ReportContainer';
 import EventsContainer from './containers/EventsContainer';
+import FactsContainer from './containers/FactsContainer';
 
 const history = browserHistory;
 
@@ -20,6 +21,7 @@ ReactDOM.render(
       <Route path="node/:node" component={NodeDetailContainer} />
       <Route path="report/:reportHash" component={ReportContainer} />
       <Route path="events" component={EventsContainer} />
+      <Route path="facts" component={FactsContainer} />
       <IndexRoute component={DashBoardContainer} />
     </Route>
   </Router>,

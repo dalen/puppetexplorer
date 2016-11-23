@@ -74,6 +74,14 @@ declare type reportT = {
   logs: { href: string, data: logT[] },
 };
 
+declare type factPathElementT = string | number;
+
+// Fact paths as returned by the API
+declare type factPathT = {
+  path: factPathElementT[],
+  type: 'string' | 'integer' | 'boolean' | 'float',
+};
+
 declare type queryT = string | queryT[];
 
 declare type dashBoardPanelT = {

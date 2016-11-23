@@ -17,6 +17,8 @@ export default class MenuBar extends React.Component {
             <Glyphicon glyph="list" /> Nodes</NavItem>
           <NavItem eventKey="/events" onSelect={this.props.selectTab}>
             <Glyphicon glyph="calendar" /> Events</NavItem>
+          <NavItem eventKey="/facts" onSelect={this.props.selectTab}>
+            <Glyphicon glyph="stats" /> Facts</NavItem>
         </Nav>
       </Navbar>
     );
