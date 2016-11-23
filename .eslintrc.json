@@ -9,7 +9,7 @@
   ],
   "env": {
     "browser": true,
-    "jasmine": true
+    "jest": true
   },
   "rules": {
     "react/prefer-stateless-function": "off",

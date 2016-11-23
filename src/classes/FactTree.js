@@ -57,4 +57,12 @@ export default class FactTree {
   addChild(child: FactTree) {
     this.children.push(child);
   }
+
+  toJSON() {
+    return ({
+      path: this.path,
+      type: this.type,
+      children: this.children.map(child => child.toJSON()),
+    });
+  }
 }

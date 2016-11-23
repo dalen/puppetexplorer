@@ -7,5 +7,6 @@
 
 [libs]
 src/declarations/
+flow-typed/
 
 [options]
