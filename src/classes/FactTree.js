@@ -1,7 +1,5 @@
 // @flow
 
-import * as Immutable from 'immutable';
-
 type typeT = 'string' | 'integer' | 'boolean' | 'float' | 'array' | 'hash';
 
 export default class FactTree {
@@ -36,6 +34,17 @@ export default class FactTree {
     });
 
     // Set node types
+    root.walk((node: FactTree) => {
+      if (node.type === undefined) {
+        if (node.children.length > 0) {
+          if (typeof node.children[0].path[node.children[0].path.length - 1] === 'number') {
+            node.setType('array');
+          } else {
+            node.setType('hash');
+          }
+        }
+      }
+    });
 
     return root;
   }
@@ -56,6 +65,18 @@ export default class FactTree {
 
   addChild(child: FactTree) {
     this.children.push(child);
+  }
+
+  // walk the tree and call callback function on each node
+  // return false to stop iteration
+  walk(callback: (ft: FactTree) => boolean | void) {
+    if (callback(this) !== false) {
+      this.children.forEach(child => child.walk(callback));
+    }
+  }
+
+  setType(type: typeT) {
+    this.type = type;
   }
 
   toJSON() {
