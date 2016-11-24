@@ -56,3 +56,12 @@ test('it sets types correctly', () => {
     ],
   });
 });
+
+test('numLeafs()', () => {
+  const tree = FactTree.fromFactPaths([
+    { type: 'string', path: ['networking', 'ipaddress'] },
+    { type: 'string', path: ['processors', 'models', 0] },
+  ]);
+
+  expect(tree.numLeafs()).toEqual(2);
+});

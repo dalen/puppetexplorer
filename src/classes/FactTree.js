@@ -46,6 +46,8 @@ export default class FactTree {
       }
     });
 
+    // Set counts
+
     return root;
   }
 
@@ -69,10 +71,19 @@ export default class FactTree {
 
   // walk the tree and call callback function on each node
   // return false to stop iteration
-  walk(callback: (ft: FactTree) => boolean | void) {
+  walk(callback: (node: FactTree) => boolean | void) {
     if (callback(this) !== false) {
       this.children.forEach(child => child.walk(callback));
     }
+  }
+
+  // Get total number of leafs below or at this node
+  numLeafs(): number {
+    if (this.children.length === 0) {
+      return 1;
+    }
+    return this.children.map(child => child.numLeafs())
+      .reduce((a, b) => a + b);
   }
 
   setType(type: typeT) {
