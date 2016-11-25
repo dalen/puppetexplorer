@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { List } from 'immutable';
+import { List, OrderedSet } from 'immutable';
 import { Label } from 'react-bootstrap';
 
 import PuppetDB from '../PuppetDB';
@@ -18,8 +18,8 @@ type Props = {
 export default class FactsContainer extends React.Component {
   state: {
     factTree?: FactTree,
-    graphFacts: List<List<factPathElementT>>,
-  } = { graphFacts: List.of() };
+    graphFacts: OrderedSet<List<factPathElementT>>,
+  } = { graphFacts: OrderedSet.of() };
 
   componentDidMount() {
     this.fetchFactPaths(this.props.config.serverUrl);
@@ -42,9 +42,12 @@ export default class FactsContainer extends React.Component {
     });
   }
 
-  addGraph = (graph: List<factPathElementT>) => {
-    this.setState({ graphFacts: this.state.graphFacts.push(graph) });
-    console.log(graph.toJSON());
+  toggleGraph = (graph: List<factPathElementT>) => {
+    if (this.state.graphFacts.find(f => f.equals(graph)) === undefined) {
+      this.setState({ graphFacts: this.state.graphFacts.add(graph) });
+    } else {
+      this.setState({ graphFacts: this.state.graphFacts.delete(graph) });
+    }
   }
 
   render(): React$Element<*> {
@@ -54,7 +57,7 @@ export default class FactsContainer extends React.Component {
           serverUrl={this.props.config.serverUrl}
           factTree={this.state.factTree}
           graphFacts={this.state.graphFacts}
-          addGraph={this.addGraph}
+          toggleGraph={this.toggleGraph}
         />);
     }
     return (<Label>Loading...</Label>);

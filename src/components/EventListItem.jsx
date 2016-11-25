@@ -56,7 +56,7 @@ export default class EventListItem extends React.Component {
     const event = this.props.event;
     return (
       <tr>
-        { this.props.showNode ? <td>{event.certname}</td> : null }
+        { this.props.showNode && <td>{event.certname}</td> }
         <td>
           <Glyphicon glyph={this.state.show ? 'triangle-bottom' : 'triangle-right'} onClick={this.toggle} />
           {event.resource_type}<wbr />[{event.resource_title}]

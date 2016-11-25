@@ -49,8 +49,8 @@ export default class LogListItem extends React.Component {
         <td><Label bsStyle={LogListItem.color(log.level)} style={{ textTransform: 'capitalize' }}>{log.level}</Label></td>
         <td>{LogListItem.message(log.message)}
           <span><strong>Source:</strong>&nbsp;{log.source}</span>
-          { log.file && log.line ?
-            <p><strong>File:</strong>&nbsp;{log.file}<strong>:</strong>{log.line}</p> : null }
+          { (log.file && log.line) &&
+            <p><strong>File:</strong>&nbsp;{log.file}<strong>:</strong>{log.line}</p> }
         </td>
       </tr>
     );

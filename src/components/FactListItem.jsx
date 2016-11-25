@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { List, Range } from 'immutable';
+import { OrderedSet, Range } from 'immutable';
 import { ListGroupItem, Glyphicon } from 'react-bootstrap';
 
 import FactList from './FactList';
@@ -11,8 +11,8 @@ export default class FactListItem extends React.Component {
 
   props: {
     factTreeItem: FactTree,
-    graphFacts: List<factPathElementT[]>,
-    addGraph: (graph: factPathElementT[]) => void,
+    graphFacts: OrderedSet<factPathElementT[]>,
+    toggleGraph: (graph: factPathElementT[]) => void,
     indent: number,
   };
 
@@ -20,7 +20,7 @@ export default class FactListItem extends React.Component {
     this.setState({ expanded: !this.state.expanded });
   }
 
-  addGraph = () => this.props.addGraph(this.props.factTreeItem.path);
+  toggleGraph = () => this.props.toggleGraph(this.props.factTreeItem.path);
 
   // Check if this graph is active or not
   isActive(): boolean {
@@ -39,23 +39,23 @@ export default class FactListItem extends React.Component {
     const factTree = this.props.factTreeItem;
     if (factTree.children.size === 0 || factTree.arrayLeaf()) {
       return (
-        <ListGroupItem onClick={this.addGraph} active={this.isActive()}>
+        <ListGroupItem onClick={this.toggleGraph} active={this.isActive()}>
           {this.indent()}<Glyphicon glyph="stats" /> {factTree.name()}
         </ListGroupItem>
       );
     }
     return (
-      <div>
-        <ListGroupItem disabled={this.state.expanded} onClick={this.toggle}>
+      <div style={{ marginBottom: '-1px' }}>
+        <ListGroupItem bsStyle={this.state.expanded ? 'info' : null} onClick={this.toggle}>
           {this.indent()}<Glyphicon glyph={this.state.expanded ? 'collapse-up' : 'expand'} /> {factTree.name()}
         </ListGroupItem>
-        { this.state.expanded ? factTree.children.map(child =>
+        { this.state.expanded && factTree.children.map(child =>
           <FactListItem
             factTreeItem={child} key={child.path.join('.')}
             graphFacts={this.props.graphFacts}
-            addGraph={this.props.addGraph}
+            toggleGraph={this.props.toggleGraph}
             indent={this.props.indent + 1}
-          />) : null }
+          />) }
       </div>
     );
   }

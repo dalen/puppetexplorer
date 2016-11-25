@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { List } from 'immutable';
+import { OrderedSet } from 'immutable';
 import { Grid, Row, Col } from 'react-bootstrap';
 
 import FactList from './FactList';
@@ -11,8 +11,8 @@ export default class Facts extends React.Component {
   props: {
     serverUrl: string,
     factTree: FactTree,
-    graphFacts: List<factPathElementT[]>,
-    addGraph: (graph: factPathElementT[]) => void,
+    graphFacts: OrderedSet<factPathElementT[]>,
+    toggleGraph: (graph: factPathElementT[]) => void,
   };
 
   render(): React$Element<*> {
@@ -23,7 +23,7 @@ export default class Facts extends React.Component {
             <FactList
               factTree={this.props.factTree}
               graphFacts={this.props.graphFacts}
-              addGraph={this.props.addGraph}
+              toggleGraph={this.props.toggleGraph}
             />
           </Col>
           <Col md={6}>

@@ -19,7 +19,7 @@ export default class EventList extends React.Component {
     return (
       <Table hover>
         <thead><tr>
-          { this.props.showNode ? <th>Node</th> : null }
+          { this.props.showNode && <th>Node</th> }
           <th>Resource</th>
           <th>Status</th>
           <th>Property</th>
