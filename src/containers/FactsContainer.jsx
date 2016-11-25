@@ -1,9 +1,11 @@
 // @flow
 import React from 'react';
+import { List } from 'immutable';
 import { Label } from 'react-bootstrap';
 
 import PuppetDB from '../PuppetDB';
 import Facts from '../components/Facts';
+import FactTree from '../classes/FactTree';
 
 type Props = {
   config: {
@@ -15,13 +17,11 @@ type Props = {
 // Fetch a report and pass it to the Report component
 export default class FactsContainer extends React.Component {
   state: {
-    factNames?: string[],
-    factPaths?: factPathT[],
-    factTree?: factTreeT,
-  } = {};
+    factTree?: FactTree,
+    graphFacts: List<List<factPathElementT>>,
+  } = { graphFacts: List.of() };
 
   componentDidMount() {
-    this.fetchFactNames(this.props.config.serverUrl);
     this.fetchFactPaths(this.props.config.serverUrl);
   }
 
@@ -32,25 +32,30 @@ export default class FactsContainer extends React.Component {
     }
   } */
 
-  props: Props;
-
-  fetchFactNames(serverUrl: string) {
-    PuppetDB.query(serverUrl, 'fact-names').then((data: string[]) => {
-      this.setState({ factNames: data });
-    });
-  }
+  props: Props
 
   fetchFactPaths(serverUrl: string) {
     PuppetDB.query(serverUrl, 'fact-paths', {
       order_by: [{ field: 'path', order: 'asc' }],
     }).then((data: factPathT[]) => {
-      this.setState({ factPaths: data });
+      this.setState({ factTree: FactTree.fromFactPaths(data) });
     });
   }
 
+  addGraph = (graph: List<factPathElementT>) => {
+    this.setState({ graphFacts: this.state.graphFacts.push(graph) });
+    console.log(graph.toJSON());
+  }
+
   render(): React$Element<*> {
-    if (this.state.factNames !== undefined) {
-      return (<Facts serverUrl={this.props.config.serverUrl} factNames={this.state.factNames} />);
+    if (this.state.factTree !== undefined) {
+      return (
+        <Facts
+          serverUrl={this.props.config.serverUrl}
+          factTree={this.state.factTree}
+          graphFacts={this.state.graphFacts}
+          addGraph={this.addGraph}
+        />);
     }
     return (<Label>Loading...</Label>);
   }

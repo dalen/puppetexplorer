@@ -1,31 +1,18 @@
 // @flow
 import React from 'react';
+import { List } from 'immutable';
 import { Grid, Row, Col } from 'react-bootstrap';
 
 import FactList from './FactList';
+import FactTree from '../classes/FactTree';
 
 // The facts view
 export default class Facts extends React.Component {
-  static parents(factPaths: factPathT[]): Array<string[]> {
-
-  }
-
-  // Add all the intermediate paths
-  //
-  // {
-  //   fact: 'test',
-  //
-  // }
-  static allPaths(factPaths: factPathT[]): factPathT[] {
-
-
-  }
-
   props: {
     serverUrl: string,
-    factNames: string[],
-    factPaths: factPathT[],
-    expandedFacts: Array<string[]>,
+    factTree: FactTree,
+    graphFacts: List<factPathElementT[]>,
+    addGraph: (graph: factPathElementT[]) => void,
   };
 
   render(): React$Element<*> {
@@ -33,7 +20,11 @@ export default class Facts extends React.Component {
       <Grid>
         <Row>
           <Col md={6}>
-            <FactList factNames={this.props.factNames} />
+            <FactList
+              factTree={this.props.factTree}
+              graphFacts={this.props.graphFacts}
+              addGraph={this.props.addGraph}
+            />
           </Col>
           <Col md={6}>
             {/* <important-facts node="$ctrl.node"></important-facts> */}

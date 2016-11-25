@@ -1,5 +1,7 @@
 // @flow
 
+import { List } from 'immutable';
+
 import FactTree from './FactTree';
 
 test('it adds intermediate nodes', () => {
@@ -7,7 +9,7 @@ test('it adds intermediate nodes', () => {
     { type: 'string', path: ['networking', 'ipaddress'] },
   ]);
 
-  expect(tree).toEqual({
+  expect(tree.toJSON()).toEqual({
     path: [],
     type: 'hash',
     children: [
@@ -27,7 +29,7 @@ test('it sets types correctly', () => {
     { type: 'string', path: ['processors', 'models', 0] },
   ]);
 
-  expect(tree).toEqual({
+  expect(tree.toJSON()).toEqual({
     path: [],
     type: 'hash',
     children: [
@@ -64,4 +66,8 @@ test('numLeafs()', () => {
   ]);
 
   expect(tree.numLeafs()).toEqual(2);
+});
+
+test('test', () => {
+  console.log(List.of(List.of(1, 2, 3), List.of(3, 2, 3)).find(v => v.equals(List.of(1,2,3))));
 });

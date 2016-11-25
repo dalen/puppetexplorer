@@ -1,16 +1,18 @@
 // @flow
 
+import { List } from 'immutable';
+
 type typeT = 'string' | 'integer' | 'boolean' | 'float' | 'array' | 'hash';
 
 export default class FactTree {
-  path: factPathElementT[];
+  path: List<factPathElementT>;
   type: ?typeT;
-  children: FactTree[];
+  children: List<FactTree>;
 
   constructor(path: factPathElementT[], children: FactTree[], type: ?typeT) {
-    this.path = path;
+    this.path = List(path);
     this.type = type;
-    this.children = children;
+    this.children = List(children);
   }
 
   static fromFactPaths(factPaths: factPathT[]): FactTree {
@@ -22,7 +24,7 @@ export default class FactTree {
       factPath.path.slice(0, -1).forEach((pathElement: factPathElementT) => {
         let child = node.getChild(pathElement);
         if (child === undefined || child === null) {
-          child = new FactTree(node.path.concat([pathElement]), []);
+          child = new FactTree(node.path.push(pathElement), List.of());
           node.addChild(child);
           node = child;
         } else {
@@ -36,8 +38,8 @@ export default class FactTree {
     // Set node types
     root.walk((node: FactTree) => {
       if (node.type === undefined) {
-        if (node.children.length > 0) {
-          if (typeof node.children[0].path[node.children[0].path.length - 1] === 'number') {
+        if (node.children.size > 0) {
+          if (typeof node.children.first().name() === 'number') {
             node.setType('array');
           } else {
             node.setType('hash');
@@ -53,7 +55,7 @@ export default class FactTree {
 
   // The last element of our path
   name(): factPathElementT {
-    return this.path[this.path.length];
+    return this.path.last();
   }
 
   isLeaf(): boolean {
@@ -66,7 +68,7 @@ export default class FactTree {
   }
 
   addChild(child: FactTree) {
-    this.children.push(child);
+    this.children = this.children.push(child);
   }
 
   // walk the tree and call callback function on each node
@@ -79,11 +81,17 @@ export default class FactTree {
 
   // Get total number of leafs below or at this node
   numLeafs(): number {
-    if (this.children.length === 0) {
+    if (this.children.size === 0) {
       return 1;
     }
     return this.children.map(child => child.numLeafs())
       .reduce((a, b) => a + b);
+  }
+
+  // Check if it is an array with no grand children
+  // FIXME: what if we area an array of single key hashes?
+  arrayLeaf(): boolean {
+    return (this.type === 'array' && this.numLeafs() === this.children.size);
   }
 
   setType(type: typeT) {
@@ -92,9 +100,9 @@ export default class FactTree {
 
   toJSON() {
     return ({
-      path: this.path,
+      path: this.path.toJS(),
       type: this.type,
-      children: this.children.map(child => child.toJSON()),
+      children: this.children.toJSON(),
     });
   }
 }
