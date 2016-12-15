@@ -12,14 +12,15 @@ type Props = {
     serverUrl: string,
   },
   location: Location,
+  queryParsed: queryT,
 };
 
 // Fetch a report and pass it to the Report component
 export default class FactsContainer extends React.Component {
   state: {
     factTree?: FactTree,
-    graphFacts: OrderedSet<List<factPathElementT>>,
-  } = { graphFacts: OrderedSet.of() };
+    activeFactCharts: OrderedSet<List<factPathElementT>>,
+  } = { activeFactCharts: OrderedSet.of() };
 
   componentDidMount() {
     this.fetchFactPaths(this.props.config.serverUrl);
@@ -42,11 +43,11 @@ export default class FactsContainer extends React.Component {
     });
   }
 
-  toggleGraph = (graph: List<factPathElementT>) => {
-    if (this.state.graphFacts.find(f => f.equals(graph)) === undefined) {
-      this.setState({ graphFacts: this.state.graphFacts.add(graph) });
+  toggleChart = (graph: List<factPathElementT>) => {
+    if (this.state.activeFactCharts.find(f => f.equals(graph)) === undefined) {
+      this.setState({ activeFactCharts: this.state.activeFactCharts.add(graph) });
     } else {
-      this.setState({ graphFacts: this.state.graphFacts.delete(graph) });
+      this.setState({ activeFactCharts: this.state.activeFactCharts.delete(graph) });
     }
   }
 
@@ -56,8 +57,9 @@ export default class FactsContainer extends React.Component {
         <Facts
           serverUrl={this.props.config.serverUrl}
           factTree={this.state.factTree}
-          graphFacts={this.state.graphFacts}
-          toggleGraph={this.toggleGraph}
+          activeFactCharts={this.state.activeFactCharts}
+          toggleChart={this.toggleChart}
+          queryParsed={this.props.queryParsed}
         />);
     }
     return (<Label>Loading...</Label>);

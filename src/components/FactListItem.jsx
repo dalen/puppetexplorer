@@ -11,8 +11,8 @@ export default class FactListItem extends React.Component {
 
   props: {
     factTreeItem: FactTree,
-    graphFacts: OrderedSet<factPathElementT[]>,
-    toggleGraph: (graph: factPathElementT[]) => void,
+    activeFactCharts: OrderedSet<factPathElementT[]>,
+    toggleChart: (graph: factPathElementT[]) => void,
     indent: number,
   };
 
@@ -20,11 +20,11 @@ export default class FactListItem extends React.Component {
     this.setState({ expanded: !this.state.expanded });
   }
 
-  toggleGraph = () => this.props.toggleGraph(this.props.factTreeItem.path);
+  toggleChart = () => this.props.toggleChart(this.props.factTreeItem.path);
 
   // Check if this graph is active or not
   isActive(): boolean {
-    return (this.props.graphFacts.find(f => f.equals(this.props.factTreeItem.path)) !== undefined);
+    return (this.props.activeFactCharts.find(f => f.equals(this.props.factTreeItem.path)) !== undefined);
   }
 
   indent(): ?React$Element<*> {
@@ -39,7 +39,7 @@ export default class FactListItem extends React.Component {
     const factTree = this.props.factTreeItem;
     if (factTree.children.size === 0 || factTree.arrayLeaf()) {
       return (
-        <ListGroupItem onClick={this.toggleGraph} active={this.isActive()}>
+        <ListGroupItem onClick={this.toggleChart} active={this.isActive()}>
           {this.indent()}<Glyphicon glyph="stats" /> {factTree.name()}
         </ListGroupItem>
       );
@@ -52,8 +52,8 @@ export default class FactListItem extends React.Component {
         { this.state.expanded && factTree.children.map(child =>
           <FactListItem
             factTreeItem={child} key={child.path.join('.')}
-            graphFacts={this.props.graphFacts}
-            toggleGraph={this.props.toggleGraph}
+            activeFactCharts={this.props.activeFactCharts}
+            toggleChart={this.props.toggleChart}
             indent={this.props.indent + 1}
           />) }
       </div>

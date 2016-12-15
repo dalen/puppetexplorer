@@ -13,8 +13,8 @@ export default class FactList extends React.Component {
 
   props: {
     factTree: FactTree,
-    graphFacts: OrderedSet<factPathElementT[]>,
-    toggleGraph: (graph: factPathElementT[]) => void,
+    activeFactCharts: OrderedSet<factPathElementT[]>,
+    toggleChart: (graph: factPathElementT[]) => void,
     indent: number,
   };
 
@@ -24,8 +24,8 @@ export default class FactList extends React.Component {
         {this.props.factTree.children.map(child =>
           <FactListItem
             factTreeItem={child} key={child.path.join('.')}
-            graphFacts={this.props.graphFacts}
-            toggleGraph={this.props.toggleGraph}
+            activeFactCharts={this.props.activeFactCharts}
+            toggleChart={this.props.toggleChart}
             indent={this.props.indent}
           />)}
       </ListGroup>

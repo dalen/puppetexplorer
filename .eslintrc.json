@@ -15,7 +15,7 @@
     "react/prefer-stateless-function": "off",
     "react/no-unused-prop-types": [2, { "skipShapeProps": true }],
     "flowtype/require-valid-file-annotation": [ 2, "always", { "annotationStyle": "line" }],
-    "flowtype/require-parameter-type": [ 2, { "excludeArrowFunctions": "expressionsOnly" }],
+    "flowtype/require-parameter-type": [ 2, { "excludeArrowFunctions": true }],
     "flowtype/require-return-type": [ 2, "always",
       {
         "excludeArrowFunctions": "expressionsOnly",
