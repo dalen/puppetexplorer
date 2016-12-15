@@ -995,9 +995,32 @@ chalk@~0.4.0:
     has-color "~0.1.0"
     strip-ansi "~0.1.0"
 
-chart.js@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-1.1.1.tgz#a9b17054220bd45cbdb176fd6bcb8783ef871a7d"
+chart.js@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-2.4.0.tgz#44198073f0f43e5e16662e108420d92652a3c9a3"
+  dependencies:
+    chartjs-color "^2.0.0"
+    moment "^2.10.6"
+
+chart.js@~2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-2.3.0.tgz#40460e48e2c417c05fc3325cd84f7b000dc7d7d6"
+  dependencies:
+    chartjs-color "^2.0.0"
+    moment "^2.10.6"
+
+chartjs-color-string@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/chartjs-color-string/-/chartjs-color-string-0.4.0.tgz#57748d4530ae28d8db0a5492182ba06dfdf2f468"
+  dependencies:
+    color-name "^1.0.0"
+
+chartjs-color@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/chartjs-color/-/chartjs-color-2.0.0.tgz#7f60c7256589b24914814ece757659117381e35b"
+  dependencies:
+    chartjs-color-string "^0.4.0"
+    color-convert "^0.5.3"
 
 chokidar@^1.0.0:
   version "1.6.1"
@@ -1117,7 +1140,7 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-color-convert@^0.5.0:
+color-convert@^0.5.0, color-convert@^0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-0.5.3.tgz#bdb6c69ce660fadffe0b0007cc447e1b9f7282bd"
 
@@ -3323,6 +3346,10 @@ lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
 
+lodash.isequal@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.4.0.tgz#6295768e98e14dc15ce8d362ef6340db82852031"
+
 lodash.keys@^3.0.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/lodash.keys/-/lodash.keys-3.1.2.tgz#4dbc0472b156be50a0b286855d1bd0b0c656098a"
@@ -3530,7 +3557,7 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
-moment@^2.17.0:
+moment@^2.10.6, moment@^2.17.0:
   version "2.17.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
 
@@ -4374,9 +4401,12 @@ react-bootstrap@^0.30.7:
     uncontrollable "^4.0.1"
     warning "^3.0.0"
 
-react-chartjs@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/react-chartjs/-/react-chartjs-0.8.0.tgz#d41386b3d3cbfef9003f5a655e7ea48a49fbfa19"
+react-chartjs-2@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/react-chartjs-2/-/react-chartjs-2-1.6.2.tgz#ce06dd1b1012d36e5ba134bd406b7626d4d9b7c5"
+  dependencies:
+    chart.js "~2.3.0"
+    lodash.isequal "^4.4.0"
 
 react-dom@^15.4.1:
   version "15.4.1"

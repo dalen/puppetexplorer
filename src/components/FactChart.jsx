@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { Pie } from 'react-chartjs';
+import { List } from 'immutable';
+import { Pie } from 'react-chartjs-2';
 
 import PuppetDB from '../PuppetDB';
 
@@ -26,7 +27,7 @@ export default class FactChart extends React.Component {
 
   props: Props;
 
-  fetchFactValue(fact: factPathElementT[], nodeQuery: queryT, serverUrl: string) {
+  fetchFactValue(fact: List<factPathElementT>, nodeQuery: queryT, serverUrl: string) {
     PuppetDB.query(serverUrl, 'fact-contents', {
       query: ['extract',
         [['function', 'count'], 'value'],
@@ -44,7 +45,7 @@ export default class FactChart extends React.Component {
     });
   }
 
-  render(): React$Element<*> {
+  render(): ?React$Element<*> {
     if (this.state.data) {
       return (<Pie data={this.state.data} />);
     }
