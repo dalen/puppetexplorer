@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { List } from 'immutable';
 import { Pie } from 'react-chartjs-2';
 
 import PuppetDB from '../PuppetDB';
@@ -27,11 +26,11 @@ export default class FactChart extends React.Component {
 
   props: Props;
 
-  fetchFactValue(fact: List<factPathElementT>, nodeQuery: queryT, serverUrl: string) {
+  fetchFactValue(fact: factPathElementT[], nodeQuery: queryT, serverUrl: string) {
     PuppetDB.query(serverUrl, 'fact-contents', {
       query: ['extract',
         [['function', 'count'], 'value'],
-        PuppetDB.combine(nodeQuery, ['=', 'path', fact.toJS()]),
+        PuppetDB.combine(nodeQuery, ['=', 'path', fact]),
         ['group_by', 'value'],
       ],
     }).then((data) => {
@@ -41,13 +40,27 @@ export default class FactChart extends React.Component {
         labels,
         datasets: [{
           data: dataset,
+          backgroundColor: [
+            '#a6cee3',
+            '#1f78b4',
+            '#b2df8a',
+            '#33a02c',
+            '#fb9a99',
+            '#e31a1c',
+            '#fdbf6f',
+            '#ff7f00',
+            '#cab2d6',
+            '#6a3d9a',
+            '#ffff99',
+            '#b15928',
+          ],
         }] } });
     });
   }
 
   render(): ?React$Element<*> {
     if (this.state.data) {
-      return (<Pie data={this.state.data} />);
+      return (<Pie data={this.state.data} options={{ legend: { position: 'right' } }} />);
     }
     return null;
   }

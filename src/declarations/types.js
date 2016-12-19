@@ -82,7 +82,7 @@ declare type factPathT = {
   type: 'string' | 'integer' | 'boolean' | 'float',
 };
 
-declare type queryElementT =string | boolean | number | queryElementT[];
+declare type queryElementT = string | number | boolean | queryElementT[];
 declare type queryT = queryElementT[];
 
 declare type dashBoardPanelT = {

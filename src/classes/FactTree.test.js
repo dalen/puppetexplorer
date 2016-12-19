@@ -69,5 +69,5 @@ test('numLeafs()', () => {
 });
 
 test('test', () => {
-  console.log(List.of(List.of(1, 2, 3), List.of(3, 2, 3)).find(v => v.equals(List.of(1,2,3))));
+  console.log(List.of(List.of(1, 2, 3), List.of(3, 2, 3)).find(v => v.equals(List.of(1, 2, 3))));
 });
