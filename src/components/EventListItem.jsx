@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Breadcrumb, Label, Collapse, Table, Glyphicon, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Label, Collapse, Glyphicon } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 export default class EventListItem extends React.Component {
