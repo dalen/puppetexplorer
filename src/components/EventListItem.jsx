@@ -2,6 +2,7 @@
 import React from 'react';
 import { Label, Collapse, Glyphicon } from 'react-bootstrap';
 import Moment from 'react-moment';
+import { Link } from 'react-router';
 
 export default class EventListItem extends React.Component {
   // Return the CSS class event states should correspond to
@@ -47,11 +48,6 @@ export default class EventListItem extends React.Component {
     this.setState({ show: !this.state.show });
   }
 
-  selectReport(report: string) {
-    console.log('selectReport', report);
-  }
-
-
   render(): React$Element<*> {
     const event = this.props.event;
     return (
@@ -69,11 +65,11 @@ export default class EventListItem extends React.Component {
               <dt>Containment path:</dt>
               <dd>{event.containment_path.join(' / ')}</dd>
               <dt>File:</dt>
-              <dd>{event.file}{event.file && event.line ? <span><wbr />:</span> : null}
+              <dd>{event.file}{event.file && event.line && <span><wbr />:</span>}
                 {event.line}</dd>
               <dt>Timestamp:</dt>
               <dd><Moment format="LLL" title={event.timestamp}>{event.timestamp}</Moment></dd>
-              { event.report ? <div><dt>Report:</dt><dd>{event.report}</dd></div> : null }
+              { event.report && <div><dt>Report:</dt><dd><Link to={`/report/${event.report}`}>{event.report}</Link></dd></div> }
             </dl>
           </div></Collapse>
         </td>

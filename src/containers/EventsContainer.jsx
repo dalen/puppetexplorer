@@ -20,8 +20,8 @@ export default class EventListContainer extends React.Component {
     return (
       <div>
         <Grid>
-          <Col md={4}>
-            <Row>
+          <Row>
+            <Col md={4}>
               <EventChart
                 title="Containing Class"
                 eventField="containing_class"
@@ -29,10 +29,8 @@ export default class EventListContainer extends React.Component {
                 serverUrl={this.props.config.serverUrl}
                 queryParsed={this.props.queryParsed}
               />
-            </Row>
-          </Col>
-          <Col md={4}>
-            <Row>
+            </Col>
+            <Col md={4}>
               <EventChart
                 title="Resource Type"
                 eventField="resource_type"
@@ -40,10 +38,8 @@ export default class EventListContainer extends React.Component {
                 serverUrl={this.props.config.serverUrl}
                 queryParsed={this.props.queryParsed}
               />
-            </Row>
-          </Col>
-          <Col md={4}>
-            <Row>
+            </Col>
+            <Col md={4}>
               <EventChart
                 title="Resource Status"
                 eventField="status"
@@ -51,8 +47,8 @@ export default class EventListContainer extends React.Component {
                 serverUrl={this.props.config.serverUrl}
                 queryParsed={this.props.queryParsed}
               />
-            </Row>
-          </Col>
+            </Col>
+          </Row>
         </Grid>
         <PaginatedNodeList
           serverUrl={this.props.config.serverUrl}
