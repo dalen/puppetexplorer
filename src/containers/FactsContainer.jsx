@@ -26,12 +26,11 @@ export default class FactsContainer extends React.Component {
     this.fetchFactPaths(this.props.config.serverUrl);
   }
 
-  /* componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.config.serverUrl !== this.props.config.serverUrl ||
-      nextProps.params.reportHash !== this.props.params.reportHash) {
-      this.fetchReport(nextProps.config.serverUrl, nextProps.params.reportHash);
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.config.serverUrl !== this.props.config.serverUrl) {
+      this.fetchFactPaths(nextProps.config.serverUrl);
     }
-  } */
+  }
 
   props: Props
 
@@ -44,6 +43,7 @@ export default class FactsContainer extends React.Component {
   }
 
   toggleChart = (chart: factPathT) => {
+    // FIXME: update URL
     if (this.state.activeFactCharts.has(chart)) {
       this.setState({ activeFactCharts: this.state.activeFactCharts.delete(chart) });
     } else {

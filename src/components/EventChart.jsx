@@ -7,25 +7,27 @@ import PuppetDB from '../PuppetDB';
 
 type Props = {
   serverUrl: string,
-  fact: factPathT,
+  eventField: string,
   queryParsed: queryT,
+  title: string,
+  id: string,
 };
 
-export default class FactChart extends React.Component {
+export default class EventChart extends React.Component {
   state: {
     data?: [string, number][],
     labels?: string[],
   } = {};
 
   componentDidMount() {
-    this.fetchFactValue(this.props.fact, this.props.queryParsed, this.props.serverUrl);
+    this.fetchEventValue(this.props.eventField, this.props.queryParsed, this.props.serverUrl);
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.serverUrl !== this.props.serverUrl ||
-      nextProps.fact !== this.props.fact ||
+      nextProps.eventField !== this.props.eventField ||
       nextProps.queryParsed !== this.props.queryParsed) {
-      this.fetchFactValue(nextProps.fact, nextProps.queryParsed, nextProps.serverUrl);
+      this.fetchEventValue(nextProps.eventField, nextProps.queryParsed, nextProps.serverUrl);
     }
   }
 
@@ -35,9 +37,12 @@ export default class FactChart extends React.Component {
   // FIXME: modify query
   select = (chart: Chart) => {
     if (this.state.data) {
-      console.log('Selected ', this.state.data[chart.chart.getSelection()[0].row][0]);
       console.log(chart);
       console.log(chart.chart.getSelection());
+      const selection = chart.chart.getSelection();
+      if (selection[0]) {
+        console.log('Selected ', this.state.data[selection[0].row][0]);
+      }
     }
   }
 
@@ -48,23 +53,22 @@ export default class FactChart extends React.Component {
     },
   ];
 
-  fetchFactValue(fact: factPathT, nodeQuery: queryT, serverUrl: string) {
-    PuppetDB.query(serverUrl, 'fact-contents', {
+  fetchEventValue(eventField: string, nodeQuery: queryT, serverUrl: string) {
+    PuppetDB.query(serverUrl, 'events', {
       query: ['extract',
-        [['function', 'count'], 'value'],
-        PuppetDB.combine(nodeQuery, (['=', 'path', fact]: queryT)),
-        ['group_by', 'value'],
+        [['function', 'count'], eventField],
+        nodeQuery,
+        ['group_by', eventField],
       ],
     }).then((data) => {
-      this.setState({ data: data.map(item => [item.value.toString(), item.count]) });
+      this.setState({ data: data.map(item => [item[eventField].toString(), item.count]) });
     });
   }
 
   render(): ?React$Element<*> {
     if (this.state.data) {
-      const factName = this.props.fact.join('.');
       return (
-        <Panel header={factName}>
+        <Panel header={this.props.title}>
           <Chart
             chartType="PieChart"
             data={[['Value', 'Number']].concat(this.state.data)}
@@ -85,15 +89,12 @@ export default class FactChart extends React.Component {
               ],
               chartArea: {
                 width: '100%',
-                height: '100%',
-                left: 10,
-                top: 20,
+                height: '85%',
               },
               pieSliceText: 'label',
             }}
-            graph_id={factName}
-            width="450px"
-            height="300px"
+            graph_id={this.props.id}
+            height="250px"
             legend_toggle
             chartEvents={this.chartEvents}
           />
