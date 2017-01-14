@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { OrderedSet } from 'immutable';
 import { ListGroup } from 'react-bootstrap';
+import { OrderedSet } from 'immutable';
 
 import FactListItem from './FactListItem';
 import FactTree from '../classes/FactTree';
@@ -13,8 +13,8 @@ export default class FactList extends React.Component {
 
   props: {
     factTree: FactTree,
-    activeFactCharts: OrderedSet<factPathElementT[]>,
-    toggleChart: (graph: factPathElementT[]) => void,
+    activeFactCharts: OrderedSet<factPathT>,
+    toggleChart: (graph: factPathT) => void,
     indent: number,
   };
 

@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
-import { OrderedSet, Range } from 'immutable';
 import { ListGroupItem, Glyphicon } from 'react-bootstrap';
+import { OrderedSet } from 'immutable';
 
-import FactList from './FactList';
 import FactTree from '../classes/FactTree';
 
 export default class FactListItem extends React.Component {
@@ -11,8 +10,8 @@ export default class FactListItem extends React.Component {
 
   props: {
     factTreeItem: FactTree,
-    activeFactCharts: OrderedSet<factPathElementT[]>,
-    toggleChart: (graph: factPathElementT[]) => void,
+    activeFactCharts: OrderedSet<factPathT>,
+    toggleChart: (graph: factPathT) => void,
     indent: number,
   };
 
@@ -24,20 +23,20 @@ export default class FactListItem extends React.Component {
 
   // Check if this graph is active or not
   isActive(): boolean {
-    return (this.props.activeFactCharts.find(f => f.equals(this.props.factTreeItem.path)) !== undefined);
+    return (this.props.activeFactCharts.has(this.props.factTreeItem.path));
   }
 
   indent(): ?React$Element<*> {
     if (this.props.indent > 0) {
       // \u00a0 is a non breaking space in unicode
-      return (<span>{Range(0, this.props.indent).map(() => '').join('\u00a0\u00a0\u00a0')}└ </span>);
+      return (<span>{new Array(this.props.indent).map(() => '').join('\u00a0\u00a0\u00a0')}└ </span>);
     }
     return null;
   }
 
   render(): React$Element<*> {
     const factTree = this.props.factTreeItem;
-    if (factTree.children.size === 0 || factTree.arrayLeaf()) {
+    if (factTree.children.length === 0 || factTree.arrayLeaf()) {
       return (
         <ListGroupItem onClick={this.toggleChart} active={this.isActive()}>
           {this.indent()}<Glyphicon glyph="stats" /> {factTree.name()}

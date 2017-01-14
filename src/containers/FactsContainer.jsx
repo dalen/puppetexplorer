@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { List, OrderedSet } from 'immutable';
 import { Label } from 'react-bootstrap';
+import { OrderedSet } from 'immutable';
 
 import PuppetDB from '../PuppetDB';
 import Facts from '../components/Facts';
@@ -19,7 +19,7 @@ type Props = {
 export default class FactsContainer extends React.Component {
   state: {
     factTree?: FactTree,
-    activeFactCharts: OrderedSet<List<factPathElementT>>,
+    activeFactCharts: OrderedSet<factPathT>,
   } = { activeFactCharts: OrderedSet.of() };
 
   componentDidMount() {
@@ -38,16 +38,16 @@ export default class FactsContainer extends React.Component {
   fetchFactPaths(serverUrl: string) {
     PuppetDB.query(serverUrl, 'fact-paths', {
       order_by: [{ field: 'path', order: 'asc' }],
-    }).then((data: factPathT[]) => {
+    }).then((data: factPathApiT[]) => {
       this.setState({ factTree: FactTree.fromFactPaths(data) });
     });
   }
 
-  toggleChart = (graph: List<factPathElementT>) => {
-    if (this.state.activeFactCharts.find(f => f.equals(graph)) === undefined) {
-      this.setState({ activeFactCharts: this.state.activeFactCharts.add(graph) });
+  toggleChart = (chart: factPathT) => {
+    if (this.state.activeFactCharts.has(chart)) {
+      this.setState({ activeFactCharts: this.state.activeFactCharts.delete(chart) });
     } else {
-      this.setState({ activeFactCharts: this.state.activeFactCharts.delete(graph) });
+      this.setState({ activeFactCharts: this.state.activeFactCharts.add(chart) });
     }
   }
 

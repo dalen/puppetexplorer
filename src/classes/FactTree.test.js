@@ -1,7 +1,5 @@
 // @flow
 
-import { List } from 'immutable';
-
 import FactTree from './FactTree';
 
 test('it adds intermediate nodes', () => {
@@ -66,8 +64,4 @@ test('numLeafs()', () => {
   ]);
 
   expect(tree.numLeafs()).toEqual(2);
-});
-
-test('test', () => {
-  console.log(List.of(List.of(1, 2, 3), List.of(3, 2, 3)).find(v => v.equals(List.of(1, 2, 3))));
 });

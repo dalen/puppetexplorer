@@ -75,14 +75,15 @@ declare type reportT = {
 };
 
 declare type factPathElementT = string | number;
+declare type factPathT = factPathElementT[];
 
 // Fact paths as returned by the API
-declare type factPathT = {
-  path: factPathElementT[],
+declare type factPathApiT = {
+  path: factPathT,
   type: 'string' | 'integer' | 'boolean' | 'float',
 };
 
-declare type queryElementT = string | number | boolean | queryElementT[];
+declare type queryElementT = string | number | boolean | factPathT | queryElementT[];
 declare type queryT = queryElementT[];
 
 declare type dashBoardPanelT = {

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
-import { OrderedSet } from 'immutable';
 import { Grid, Row, Col } from 'react-bootstrap';
+import { OrderedSet } from 'immutable';
 
 import FactList from './FactList';
 import FactChart from './FactChart';
@@ -13,8 +13,8 @@ export default class Facts extends React.Component {
     serverUrl: string,
     queryParsed: queryT,
     factTree: FactTree,
-    activeFactCharts: OrderedSet<factPathElementT[]>,
-    toggleChart: (graph: factPathElementT[]) => void,
+    activeFactCharts: OrderedSet<factPathT>,
+    toggleChart: (chart: factPathT) => void,
   };
 
   render(): React$Element<*> {
@@ -29,15 +29,13 @@ export default class Facts extends React.Component {
             />
           </Col>
           <Col md={6}>
-            {this.props.activeFactCharts.map((fact) =>
-              {
-                console.log(fact);
-              return (<FactChart
-                fact={fact.toJS()}
+            {this.props.activeFactCharts.map(fact =>
+              <FactChart
+                fact={fact}
                 serverUrl={this.props.serverUrl}
                 queryParsed={this.props.queryParsed}
                 key={fact.join('.')}
-              />); }) }
+              />) }
           </Col>
         </Row>
       </Grid>
