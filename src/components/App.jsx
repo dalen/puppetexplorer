@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { browserHistory as history } from 'react-router';
+import { Router, browserHistory as history } from 'react-router';
 
 import SearchField from './SearchField';
 import MenuBar from './MenuBar';
@@ -9,7 +9,10 @@ import PuppetDB from '../PuppetDB';
 
 export default class App extends React.Component {
   static selectTab(id: string) {
-    history.push(id);
+    history.push({
+      pathname: id,
+      search: history.getCurrentLocation().search,
+    });
   }
 
   state: {
@@ -35,6 +38,7 @@ export default class App extends React.Component {
   props: {
     children: React.Element<*>,
     location: Location,
+    router: Router,
   };
 
   updateQuery = (query: string) => {
@@ -57,7 +61,7 @@ export default class App extends React.Component {
     return (
       <div>
         <SearchField updateQuery={this.updateQuery} queryString={this.props.location.query.query} />
-        <MenuBar selectTab={App.selectTab} />
+        <MenuBar selectTab={App.selectTab} router={this.props.router} />
         {child}
       </div>
     );

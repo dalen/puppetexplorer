@@ -68,7 +68,7 @@ export default class EventChart extends React.Component {
   render(): ?React$Element<*> {
     if (this.state.data) {
       return (
-        <Panel header={this.props.title}>
+        <Panel header={this.props.title} style={{ overflow: 'hidden' }}>
           <Chart
             chartType="PieChart"
             data={[['Value', 'Number']].concat(this.state.data)}

@@ -64,7 +64,7 @@ export default class FactChart extends React.Component {
     if (this.state.data) {
       const factName = this.props.fact.join('.');
       return (
-        <Panel header={factName}>
+        <Panel header={factName} style={{ overflow: 'hidden' }}>
           <Chart
             chartType="PieChart"
             data={[['Value', 'Number']].concat(this.state.data)}

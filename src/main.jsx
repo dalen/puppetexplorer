@@ -20,7 +20,7 @@ ReactDOM.render(
       <Route path="nodes" component={NodeListContainer} />
       <Route path="node/:node" component={NodeDetailContainer} />
       <Route path="report/:reportHash" component={ReportContainer} />
-      <Route path="events" component={EventsContainer} />
+      <Route path="events(/:tab)" component={EventsContainer} />
       <Route path="facts" component={FactsContainer} />
       <IndexRoute component={DashBoardContainer} />
     </Route>
