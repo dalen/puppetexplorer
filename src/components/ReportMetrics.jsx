@@ -50,17 +50,18 @@ export default class ReportMetrics extends React.Component {
                 chartType="BarChart"
                 data={[['Metric', 'Value', { role: 'style' }, { role: 'annotation' }], ...data]}
                 options={{
-                  legend: false,
+                  legend: { position: 'none' },
                   chartArea: {
                     left: 200,
                     top: 0,
                     bottom: 30,
                   },
-                  width: 500,
+                  width: '100%',
                   height: (metrics.size * 30) + 30,
                   tooltip: { trigger: 'none' },
                   fontSize: 15,
                 }}
+                width="100%"
                 height={`${(metrics.size * 30) + 30}px`}
                 graph_id={categoryName}
               />
