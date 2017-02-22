@@ -14,9 +14,9 @@ type Props = {
 
 export default class FactChart extends React.Component {
   state: {
-    data?: [string, number][],
+    data: [string, number][],
     labels?: string[],
-  } = {};
+  } = { data: [] };
 
   componentDidMount() {
     this.fetchFactValue(this.props.fact, this.props.queryParsed, this.props.serverUrl);

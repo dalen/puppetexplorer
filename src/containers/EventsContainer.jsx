@@ -9,7 +9,7 @@ import Events from '../components/Events';
 
 export default class EventListContainer extends React.Component {
   // Compute an event query based on date range
-  static dateRangeEventQuery(query: queryT, dateFrom: string, dateTo: string): ?queryT {
+  static dateRangeEventQuery(query: ?queryT, dateFrom: string, dateTo: string): ?queryT {
     if (query || dateFrom || dateTo) {
       return (
       ['and']

@@ -8,7 +8,7 @@ import Pagination from './Pagination';
 type Props = {
   serverUrl: string,
   perPage: number,
-  listQuery: queryT,
+  listQuery: ?queryT,
   countQuery: queryT,
 };
 
@@ -56,7 +56,7 @@ export default (
 
     props: Props;
 
-    fetchItems(serverUrl: string, query: queryT, page: number) {
+    fetchItems(serverUrl: string, query: ?queryT, page: number) {
       PuppetDB.query(serverUrl, endpoint, {
         query,
         order_by: orderBy,
