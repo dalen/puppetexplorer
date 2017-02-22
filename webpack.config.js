@@ -94,7 +94,6 @@ module.exports = {
     ],
   },
   devServer: {
-    port: 4080,
     inline: true,
     historyApiFallback: {
       disableDotRule: true, // certnames usually contain dots
