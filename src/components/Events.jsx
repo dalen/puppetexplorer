@@ -14,7 +14,7 @@ export default class Events extends React.Component {
     queryParsed: queryT,
   };
 
-  render(): React$Element<*> {
+  render() {
     return (
       <div>
         <Grid fluid>

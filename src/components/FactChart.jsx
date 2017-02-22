@@ -60,7 +60,7 @@ export default class FactChart extends React.Component {
     });
   }
 
-  render(): ?React$Element<*> {
+  render() {
     if (this.state.data) {
       const factName = this.props.fact.join('.');
       return (

@@ -11,7 +11,7 @@ export default class ReportListItem extends React.Component {
     report: reportT,
   };
 
-  render(): React$Element<*> {
+  render() {
     return (
       <tr>
         <td><Link to={`/report/${this.props.report.hash}`}>

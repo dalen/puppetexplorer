@@ -11,7 +11,7 @@ export default class ReportList extends React.Component {
     reports: reportT[],
   };
 
-  render(): React$Element<*> {
+  render() {
     if (this.props.total === 0) {
       return (
         <Alert bsStyle="warning">No reports found</Alert>

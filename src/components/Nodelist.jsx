@@ -11,7 +11,7 @@ export default class NodeList extends React.Component {
     serverUrl: string,
   };
 
-  render(): React$Element<*> {
+  render() {
     if (this.props.total === 0) {
       return (
         <Alert bsStyle="warning">No nodes found</Alert>

@@ -42,7 +42,7 @@ export default class NodeListItem extends React.Component {
       });
   }
 
-  render(): React$Element<*> {
+  render() {
     return (
       <tr>
         <td><Link to={`/node/${this.props.node.certname}`}>{this.props.node.certname}</Link></td>

@@ -13,7 +13,7 @@ export default class EventList extends React.Component {
     logs: logT[],
   };
 
-  render(): React$Element<*> {
+  render() {
     return (
       <Table hover>
         <thead><tr>

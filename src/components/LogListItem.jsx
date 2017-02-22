@@ -30,7 +30,7 @@ export default class LogListItem extends React.Component {
     }
   }
 
-  static message(message: string): React$Element<*> {
+  static message(message: string) {
     if (/\r|\n/.exec(message)) {
       return (<pre>{message}</pre>);
     }
@@ -41,7 +41,7 @@ export default class LogListItem extends React.Component {
     log: logT,
   };
 
-  render(): React$Element<*> {
+  render() {
     const log = this.props.log;
     return (
       <tr>

@@ -16,7 +16,7 @@ export default class NodeListContainer extends React.Component {
     queryParsed: queryT,
   };
 
-  render(): React$Element<*> {
+  render() {
     return (<PaginatedNodeList
       serverUrl={this.props.config.serverUrl}
       listQuery={this.props.queryParsed}

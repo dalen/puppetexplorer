@@ -51,7 +51,7 @@ export default class FactsContainer extends React.Component {
     }
   }
 
-  render(): React$Element<*> {
+  render() {
     if (this.state.factTree !== undefined) {
       return (
         <Facts

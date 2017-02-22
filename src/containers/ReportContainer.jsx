@@ -43,7 +43,7 @@ export default class ReportContainer extends React.Component {
     });
   }
 
-  render(): React$Element<*> {
+  render() {
     if (this.state.report !== undefined) {
       return (<Report report={this.state.report} />);
     }

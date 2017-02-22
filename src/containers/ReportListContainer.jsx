@@ -12,7 +12,7 @@ export default class ReportListContainer extends React.Component {
     serverUrl: string,
   };
 
-  render(): React$Element<*> {
+  render() {
     return (<PaginatedReportList
       serverUrl={this.props.serverUrl}
       listQuery={['extract',

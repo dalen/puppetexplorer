@@ -15,7 +15,7 @@ export default class EventList extends React.Component {
     showNode: boolean,
   };
 
-  render(): React$Element<*> {
+  render() {
     return (
       <Table hover>
         <thead><tr>

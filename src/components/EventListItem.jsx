@@ -22,7 +22,7 @@ export default class EventListItem extends React.Component {
   }
 
   // Format the value column
-  static formatValue(event: eventT, value: string): React$Element<*> {
+  static formatValue(event: eventT, value: string) {
     const matches = typeof value === 'string' ? value.match(/\{(\w{3,5})\}(\w+)/) : null;
     // Check if it is a file checksum
     if (event.resource_type === 'File' &&
@@ -48,7 +48,7 @@ export default class EventListItem extends React.Component {
     this.setState({ show: !this.state.show });
   }
 
-  render(): React$Element<*> {
+  render() {
     const event = this.props.event;
     return (
       <tr>

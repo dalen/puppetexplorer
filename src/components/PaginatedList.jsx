@@ -76,7 +76,7 @@ export default (
       this.fetchItems(this.props.serverUrl, this.props.listQuery, page);
     }
 
-    render(): React$Element<*> {
+    render() {
       if (this.state.items !== undefined) {
         const props = {};
         props[itemsProp] = this.state.items;

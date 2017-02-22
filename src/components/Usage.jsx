@@ -3,7 +3,7 @@ import React from 'react';
 import { Grid, Row, Col, Table, Well } from 'react-bootstrap';
 
 export default class Usage extends React.Component {
-  render(): React$Element<*> {
+  render() {
     return (
       <Grid>
         <Row>

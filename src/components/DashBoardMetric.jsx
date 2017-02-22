@@ -35,7 +35,7 @@ export default class DashBoardMetric extends React.Component {
     serverUrl: string,
   };
 
-  render(): React$Element<*> {
+  render() {
     let children;
     if (typeof this.state.value === 'number') {
       children = `${this.state.value * this.props.multiply} ${this.props.unit}`;

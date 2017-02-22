@@ -14,7 +14,7 @@ export default class Report extends React.Component {
     report: reportT,
   };
 
-  render(): React$Element<*> {
+  render() {
     const report = this.props.report;
     let runTime = ReportsHelper.metricValue(report.metrics.data, 'time', 'total');
     if (typeof runTime === 'number') { runTime = runTime.toFixed(1); }

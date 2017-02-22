@@ -33,7 +33,7 @@ export default class SearchField extends React.Component {
     event.preventDefault();
   }
 
-  render(): React$Element<*> {
+  render() {
     return (
       <form id="node-query" onSubmit={this.handleSubmit}>
         <InputGroup>

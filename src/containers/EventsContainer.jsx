@@ -24,8 +24,7 @@ export default class EventListContainer extends React.Component {
     });
   }
 
-  render(): React$Element<*> {
-    console.log(this.props);
+  render() {
     return (
       <Tabs activeKey={this.props.params.tab || 'latest'} onSelect={this.selectTab} id="controlled-tab-example">
         <Tab eventKey={'latest'} title="Latest Report" style={{ paddingTop: 10 }}>

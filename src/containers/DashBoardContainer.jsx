@@ -13,7 +13,7 @@ export default class DashBoardContainer extends React.Component {
     },
   };
 
-  render(): React$Element<*> {
+  render() {
     return (
       <DashBoard
         serverUrl={this.props.config.serverUrl}

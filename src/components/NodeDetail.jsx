@@ -10,7 +10,7 @@ export default class NodeDetail extends React.Component {
     node: string,
   };
 
-  render(): React$Element<*> {
+  render() {
     return (
       <div>
         <PageHeader>{this.props.node}</PageHeader>

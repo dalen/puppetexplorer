@@ -17,7 +17,7 @@ export default class Facts extends React.Component {
     toggleChart: (chart: factPathT) => void,
   };
 
-  render(): React$Element<*> {
+  render() {
     return (
       <Grid>
         <Row>

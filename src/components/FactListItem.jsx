@@ -34,7 +34,7 @@ export default class FactListItem extends React.Component {
     return null;
   }
 
-  render(): React$Element<*> {
+  render() {
     const factTree = this.props.factTreeItem;
     if (factTree.children.length === 0 || factTree.arrayLeaf()) {
       return (

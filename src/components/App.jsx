@@ -52,7 +52,7 @@ export default class App extends React.Component {
     });
   }
 
-  render(): React$Element<*> {
+  render() {
     const child = React.cloneElement(this.props.children, {
       config: this.state.config,
       queryParsed: this.state.queryParsed,

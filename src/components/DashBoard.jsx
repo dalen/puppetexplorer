@@ -18,7 +18,7 @@ export default class DashBoard extends React.Component {
     serverUrl: string,
   };
 
-  render(): React$Element<*> {
+  render() {
     return (
       <div>
         <Grid>

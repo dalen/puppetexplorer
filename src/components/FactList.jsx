@@ -18,7 +18,7 @@ export default class FactList extends React.Component {
     indent: number,
   };
 
-  render(): React$Element<*> {
+  render() {
     return (
       <ListGroup>
         {this.props.factTree.children.map(child =>

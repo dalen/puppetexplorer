@@ -9,7 +9,7 @@ export default class MenuBar extends React.Component {
     router: Router,
   };
 
-  render(): React$Element<*> {
+  render() {
     return (
       <Navbar fluid>
         <Nav>
