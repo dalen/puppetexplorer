@@ -12,6 +12,7 @@ export default class Events extends React.Component {
   props: {
     serverUrl: string,
     queryParsed: queryT,
+    chartKey: string,
   };
 
   render() {
@@ -23,7 +24,7 @@ export default class Events extends React.Component {
               <EventChart
                 title="Containing Class"
                 eventField="containing_class"
-                id="containing-class"
+                id={`${this.props.chartKey}-containing-class`}
                 serverUrl={this.props.serverUrl}
                 queryParsed={this.props.queryParsed}
               />
@@ -32,7 +33,7 @@ export default class Events extends React.Component {
               <EventChart
                 title="Resource Type"
                 eventField="resource_type"
-                id="resource-type"
+                id={`${this.props.chartKey}-resource-type`}
                 serverUrl={this.props.serverUrl}
                 queryParsed={this.props.queryParsed}
               />
@@ -41,7 +42,7 @@ export default class Events extends React.Component {
               <EventChart
                 title="Resource Status"
                 eventField="status"
-                id="resource-status"
+                id={`${this.props.chartKey}-resource-status`}
                 serverUrl={this.props.serverUrl}
                 queryParsed={this.props.queryParsed}
               />

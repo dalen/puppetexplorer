@@ -31,6 +31,7 @@ export default class EventListContainer extends React.Component {
           <Events
             serverUrl={this.props.config.serverUrl}
             queryParsed={this.props.queryParsed}
+            chartKey={'latest'}
           />
         </Tab>
         <Tab eventKey={'daterange'} title="Date Range" style={{ paddingTop: 10 }}>
@@ -40,6 +41,7 @@ export default class EventListContainer extends React.Component {
           <Events
             serverUrl={this.props.config.serverUrl}
             queryParsed={this.props.queryParsed}
+            chartKey={'daterange'}
           />
         </Tab>
       </Tabs>
