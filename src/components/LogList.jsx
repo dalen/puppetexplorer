@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Alert, Table } from 'react-bootstrap';
 
 import LogListItem from './LogListItem';
 
@@ -10,24 +10,27 @@ export default class EventList extends React.Component {
   };
 
   props: {
-    logs: logT[],
+    logs: ?logT[],
   };
 
   render() {
-    return (
-      <Table hover>
-        <thead><tr>
-          <th>Time</th>
-          <th>Level</th>
-          <th>Message</th>
-        </tr></thead>
-        <tbody>
-          {this.props.logs.map((log, i) => <LogListItem
-            log={log}
-            key={i}
-          />)}
-        </tbody>
-      </Table>
-    );
+    if (this.props.logs) {
+      return (
+        <Table hover>
+          <thead><tr>
+            <th>Time</th>
+            <th>Level</th>
+            <th>Message</th>
+          </tr></thead>
+          <tbody>
+            {this.props.logs.map((log, i) => <LogListItem
+              log={log}
+              key={i}
+            />)}
+          </tbody>
+        </Table>
+      );
+    }
+    return (<Alert bsStyle="warning">No logs found</Alert>);
   }
 }
