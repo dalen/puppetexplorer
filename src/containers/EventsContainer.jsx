@@ -26,12 +26,11 @@ export default class EventListContainer extends React.Component {
 
   render() {
     return (
-      <Tabs activeKey={this.props.params.tab || 'latest'} onSelect={this.selectTab} id="controlled-tab-example">
+      <Tabs activeKey={this.props.params.tab || 'latest'} onSelect={this.selectTab} id="event-tabs" unmountOnExit>
         <Tab eventKey={'latest'} title="Latest Report" style={{ paddingTop: 10 }}>
           <Events
             serverUrl={this.props.config.serverUrl}
             queryParsed={this.props.queryParsed}
-            chartKey={'latest'}
           />
         </Tab>
         <Tab eventKey={'daterange'} title="Date Range" style={{ paddingTop: 10 }}>
@@ -41,7 +40,6 @@ export default class EventListContainer extends React.Component {
           <Events
             serverUrl={this.props.config.serverUrl}
             queryParsed={this.props.queryParsed}
-            chartKey={'daterange'}
           />
         </Tab>
       </Tabs>
