@@ -28,7 +28,7 @@ export default class EventListItem extends React.Component {
     if (event.resource_type === 'File' &&
         event.property === 'content' &&
         matches != null) {
-      return (<td><Label>{matches[1]}</Label><wbr />{matches[2]}</td>);
+      return (<td><Label title={matches[2]}>{matches[1]}</Label></td>);
     }
     return (<td>{value}</td>);
   }
