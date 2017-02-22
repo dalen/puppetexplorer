@@ -11,7 +11,7 @@ const PaginatedEventList = paginatedList(EventList, 'events', 'events');
 export default class Events extends React.Component {
   props: {
     serverUrl: string,
-    queryParsed: queryT,
+    queryParsed: ?queryT,
   };
 
   render() {
