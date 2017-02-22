@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
+import hash from 'object-hash';
+
 import DashBoardMetric from './DashBoardMetric';
 import Usage from './Usage';
 
@@ -22,10 +24,10 @@ export default class DashBoard extends React.Component {
     return (
       <div>
         <Grid>
-          {this.props.panels.map((panelRow, i) =>
-            <Row key={i}>
-              {panelRow.map((panel, j) =>
-                <Col key={j} md={DashBoard.panelWidth(panelRow)}>
+          {this.props.panels.map(panelRow =>
+            <Row key={hash(panelRow)}>
+              {panelRow.map(panel =>
+                <Col md={DashBoard.panelWidth(panelRow)} key={hash(panel)}>
                   <DashBoardMetric serverUrl={this.props.serverUrl} {...panel} />
                 </Col>,
               )}
