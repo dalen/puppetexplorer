@@ -1,5 +1,5 @@
-// flow-typed signature: 72f8059b10adb65fb2e3c41cccd0de9e
-// flow-typed version: a483128858/moment_v2.x.x/flow_>=v0.28.x
+// flow-typed signature: b7d5419a7f10309b2328eeaf6d58f528
+// flow-typed version: b96843401b/moment_v2.x.x/flow_>=v0.28.x
 
 type moment$MomentOptions = {
   y?: number|string,
@@ -96,6 +96,7 @@ declare class moment$MomentDuration {
   as(unit: string): number;
   get(unit: string): number;
   toJSON(): string;
+  toISOString(): string;
 }
 declare class moment$Moment {
   static ISO_8601: string;
@@ -206,8 +207,9 @@ declare class moment$Moment {
   isLeapYear(): bool;
   clone(): moment$Moment;
   static isMoment(obj: any): bool;
-  static isDatE(obj: any): bool;
+  static isDate(obj: any): bool;
   static locale(locale: string, localeData?: Object): string;
+  static updateLocale(locale: string, localeData?: ?Object): void;
   static locale(locales: Array<string>): string;
   locale(locale: string, customization?: Object|null): moment$Moment;
   locale(): string;
