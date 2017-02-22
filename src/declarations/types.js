@@ -83,8 +83,8 @@ declare type factPathApiT = {
   type: 'string' | 'integer' | 'boolean' | 'float',
 };
 
-declare type queryElementT = string | number | boolean | factPathT | queryElementT[];
-declare type queryT = queryElementT[];
+// declare type queryElementT = string | number | boolean | queryElementT[];
+declare type queryT = mixed[];
 
 declare type dashBoardPanelT = {
   title: string,
