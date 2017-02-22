@@ -2,6 +2,7 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
 import { Chart } from 'react-google-charts';
+import dig from 'object-dig';
 
 import PuppetDB from '../PuppetDB';
 
@@ -37,12 +38,8 @@ export default class EventChart extends React.Component {
   // FIXME: modify query
   select = (chart: Chart) => {
     if (this.state.data) {
-      console.log(chart);
-      console.log(chart.chart.getSelection());
       const selection = chart.chart.getSelection();
-      if (selection[0]) {
-        console.log('Selected ', this.state.data[selection[0].row][0]);
-      }
+      console.log('Selected', dig(this.state.data, dig(selection, 0, 'row'), 0));
     }
   }
 

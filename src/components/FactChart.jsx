@@ -2,6 +2,7 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
 import { Chart } from 'react-google-charts';
+import dig from 'object-dig';
 
 import PuppetDB from '../PuppetDB';
 
@@ -34,11 +35,7 @@ export default class FactChart extends React.Component {
   // When a slice is selected
   // FIXME: modify query
   select = (chart: Chart) => {
-    if (this.state.data) {
-      console.log('Selected ', this.state.data[chart.chart.getSelection()[0].row][0]);
-      console.log(chart);
-      console.log(chart.chart.getSelection());
-    }
+    console.log('Selected', dig(this.state.data, dig(chart.chart.getSelection(), 0, 'row'), 0));
   }
 
   chartEvents = [
