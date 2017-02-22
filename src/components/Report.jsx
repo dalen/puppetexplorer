@@ -3,9 +3,9 @@ import React from 'react';
 import { Grid, Col, Row, Tabs, Tab, ListGroup, ListGroupItem, PageHeader } from 'react-bootstrap';
 import Moment from 'react-moment';
 
-
 import EventList from './EventList';
 import LogList from './LogList';
+import ReportMetrics from './ReportMetrics';
 import ReportsHelper from '../helpers/ReportsHelper';
 
 // Given a report for a single node, render a page for it
@@ -53,15 +53,10 @@ export default class Report extends React.Component {
           </Row>
         </Grid>
 
-        <Tabs defaultActiveKey={'events'} id="report-tabs">
+        <Tabs defaultActiveKey={'events'} id="report-tabs" unmountOnExit>
           <Tab eventKey={'events'} title="Events"><EventList events={report.resource_events.data} showNode={false} /></Tab>
           <Tab eventKey={'logs'} title="Logs"><LogList logs={report.logs.data} /></Tab>
-          <Tab eventKey={'metrics'} title="Metrics">
-            {/* TODO: move to a separate component, make nicer or delete this */}
-            {report.metrics.data.map((metric, i) =>
-              <p key={i}>{metric.category}: {metric.name}: {metric.value}</p>,
-            )}
-          </Tab>
+          <Tab eventKey={'metrics'} title="Metrics"><ReportMetrics metrics={report.metrics.data} /></Tab>
         </Tabs>
       </div>
     );
