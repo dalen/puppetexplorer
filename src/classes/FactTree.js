@@ -23,7 +23,7 @@ export default class FactTree {
       factPath.path.slice(0, -1).forEach((pathElement: factPathElementT) => {
         let child = node.getChild(pathElement);
         if (child === undefined || child === null) {
-          child = new FactTree(node.path.concat([pathElement]), []);
+          child = new FactTree([...node.path, pathElement], []);
           node.addChild(child);
           node = child;
         } else {
@@ -67,7 +67,7 @@ export default class FactTree {
   }
 
   addChild(child: FactTree) {
-    this.children = this.children.concat([child]);
+    this.children = [...this.children, child];
   }
 
   // walk the tree and call callback function on each node

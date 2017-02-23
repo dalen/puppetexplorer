@@ -64,7 +64,7 @@ export default class FactChart extends React.Component {
         <Panel header={factName} style={{ overflow: 'hidden' }}>
           <Chart
             chartType="PieChart"
-            data={[['Value', 'Number']].concat(this.state.data)}
+            data={[['Value', 'Number'], ...this.state.data]}
             options={{
               colors: [
                 '#a6cee3',
