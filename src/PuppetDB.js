@@ -4,7 +4,7 @@ import puppetdbquery from 'node-puppetdbquery';
 
 export default class PuppetDB {
   // Combine queries together
-  static combine(...queries: queryT[]): ?queryT {
+  static combine(...queries: (queryT | null | void)[]): ?queryT {
     const actualQueries = queries.filter(q => q != null);
     if (actualQueries.length === 0) {
       return null;
