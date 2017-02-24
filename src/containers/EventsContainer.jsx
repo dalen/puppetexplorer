@@ -6,19 +6,16 @@ import { browserHistory as history } from 'react-router';
 import moment from 'moment';
 
 import Events from '../components/Events';
+import PuppetDB from '../PuppetDB';
 
 export default class EventListContainer extends React.Component {
   // Compute an event query based on date range
   static dateRangeEventQuery(query: ?queryT, dateFrom: string, dateTo: string): ?queryT {
-    if (query || dateFrom || dateTo) {
-      return (
-      ['and']
-        .concat(query ? [query] : [])
-        .concat(dateFrom ? [['>=', 'timestamp', moment.utc(dateFrom).startOf('day').toISOString()]] : [])
-        .concat(dateTo ? [['<=', 'timestamp', moment.utc(dateTo).endOf('day').toISOString()]] : [])
-      );
-    }
-    return null;
+    return (PuppetDB.combine(
+      query,
+      dateFrom ? ['>=', 'timestamp', moment.utc(dateFrom).startOf('day').toISOString()] : null,
+      dateTo ? ['<=', 'timestamp', moment.utc(dateTo).endOf('day').toISOString()] : null,
+    ));
   }
 
   state: {
