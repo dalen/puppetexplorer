@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Router, browserHistory as history } from 'react-router';
+import { Router } from 'react-router';
 
 import SearchField from './SearchField';
 import MenuBar from './MenuBar';
@@ -14,13 +14,6 @@ type Props ={
 };
 
 export default class App extends React.Component {
-  static selectTab(id: string) {
-    history.push({
-      pathname: id,
-      search: history.getCurrentLocation().search,
-    });
-  }
-
   state: {
     config: mixed,
     queryString: string,
@@ -49,13 +42,20 @@ export default class App extends React.Component {
 
   props: Props;
 
+  selectTab = (id: string) => {
+    this.props.router.push({
+      pathname: id,
+      search: this.props.location.search,
+    });
+  }
+
   updateQuery = (query: string) => {
     this.setState({
       queryString: query,
       queryParsed: PuppetDB.parse(query),
     });
-    history.push({
-      pathname: history.getCurrentLocation().pathname,
+    this.props.router.push({
+      pathname: this.props.location.pathname,
       query: { query },
     });
   }
@@ -71,7 +71,7 @@ export default class App extends React.Component {
     return (
       <div>
         <SearchField updateQuery={this.updateQuery} queryString={this.state.queryString} />
-        <MenuBar selectTab={App.selectTab} router={this.props.router} />
+        <MenuBar selectTab={this.selectTab} router={this.props.router} />
         {child}
       </div>
     );
