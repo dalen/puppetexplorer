@@ -7,6 +7,12 @@ import MenuBar from './MenuBar';
 import Config from '../Config';
 import PuppetDB from '../PuppetDB';
 
+type Props ={
+  children: React.Element<*>,
+  location: Location,
+  router: Router,
+};
+
 export default class App extends React.Component {
   static selectTab(id: string) {
     history.push({
@@ -35,11 +41,13 @@ export default class App extends React.Component {
     });
   }
 
-  props: {
-    children: React.Element<*>,
-    location: Location,
-    router: Router,
-  };
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.location.query.query !== this.props.location.query.query) {
+      this.updateQuery(nextProps.location.query.query);
+    }
+  }
+
+  props: Props;
 
   updateQuery = (query: string) => {
     this.setState({
