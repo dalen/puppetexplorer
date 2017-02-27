@@ -9,7 +9,8 @@ import PuppetDB from '../PuppetDB';
 type Props = {
   serverUrl: string,
   fact: factPathT,
-  queryParsed: queryT,
+  queryParsed: ?queryT,
+  onSelect: (value: string) => void,
 };
 
 export default class FactChart extends React.Component {
@@ -35,6 +36,7 @@ export default class FactChart extends React.Component {
   // When a slice is selected
   // FIXME: modify query
   select = (chart: Chart) => {
+    this.props.onSelect(dig(this.state.data, dig(chart.chart.getSelection(), 0, 'row'), 0));
     console.log('Selected', dig(this.state.data, dig(chart.chart.getSelection(), 0, 'row'), 0));
   }
 
@@ -45,11 +47,11 @@ export default class FactChart extends React.Component {
     },
   ];
 
-  fetchFactValue(fact: factPathT, nodeQuery: queryT, serverUrl: string) {
+  fetchFactValue(fact: factPathT, nodeQuery: ?queryT, serverUrl: string) {
     PuppetDB.query(serverUrl, 'fact-contents', {
       query: ['extract',
         [['function', 'count'], 'value'],
-        PuppetDB.combine(nodeQuery, (['=', 'path', fact]: queryT)),
+        PuppetDB.combine(nodeQuery, ['=', 'path', fact]),
         ['group_by', 'value'],
       ],
     }).then((data) => {

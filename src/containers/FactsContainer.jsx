@@ -12,7 +12,9 @@ type Props = {
     serverUrl: string,
   },
   location: Location,
-  queryParsed: queryT,
+  queryParsed: ?queryT,
+  queryString: ?string,
+  updateQuery: (query: string) => void,
 };
 
 // Fetch a report and pass it to the Report component
@@ -51,6 +53,23 @@ export default class FactsContainer extends React.Component {
     }
   }
 
+  // A fact value is selected, update query
+  factSelect = (fact: factPathT, value: mixed) => {
+    let quotedValue;
+    if (typeof value === 'number' || typeof value === 'boolean') {
+      quotedValue = value.toString();
+    } else if (typeof value === 'string') {
+      quotedValue = `"${value.replace('\\', '\\\\').replace('"', '\\"')}"`;
+    } else {
+      throw new TypeError(`Invalid fact value of type ${typeof value}`);
+    }
+    if (this.props.queryString) {
+      this.props.updateQuery(`(this.props.queryString) and ${fact.join('.')}=${quotedValue}`);
+    } else {
+      this.props.updateQuery(`${fact.join('.')}=${quotedValue}`);
+    }
+  }
+
   render() {
     if (this.state.factTree !== undefined) {
       return (
@@ -60,6 +79,7 @@ export default class FactsContainer extends React.Component {
           activeFactCharts={this.state.activeFactCharts}
           toggleChart={this.toggleChart}
           queryParsed={this.props.queryParsed}
+          factSelect={this.factSelect}
         />);
     }
     return (<Label>Loading...</Label>);

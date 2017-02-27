@@ -56,11 +56,13 @@ export default class App extends React.Component {
     const child = React.cloneElement(this.props.children, {
       config: this.state.config,
       queryParsed: this.state.queryParsed,
+      queryString: this.state.queryString,
+      updateQuery: this.updateQuery,
     });
 
     return (
       <div>
-        <SearchField updateQuery={this.updateQuery} queryString={this.props.location.query.query} />
+        <SearchField updateQuery={this.updateQuery} queryString={this.state.queryString} />
         <MenuBar selectTab={App.selectTab} router={this.props.router} />
         {child}
       </div>

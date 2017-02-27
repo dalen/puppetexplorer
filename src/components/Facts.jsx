@@ -11,10 +11,11 @@ import FactTree from '../classes/FactTree';
 export default class Facts extends React.Component {
   props: {
     serverUrl: string,
-    queryParsed: queryT,
+    queryParsed: ?queryT,
     factTree: FactTree,
     activeFactCharts: OrderedSet<factPathT>,
     toggleChart: (chart: factPathT) => void,
+    factSelect: (fact: factPathT, value: string) => void,
   };
 
   render() {
@@ -35,6 +36,7 @@ export default class Facts extends React.Component {
                 serverUrl={this.props.serverUrl}
                 queryParsed={this.props.queryParsed}
                 key={fact.join('.')}
+                onSelect={value => this.props.factSelect(fact, value)}
               />) }
           </Col>
         </Row>
