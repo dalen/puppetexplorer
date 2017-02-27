@@ -67,7 +67,7 @@
     "react-bootstrap": "^0.30.7",
     "react-bootstrap-date-picker": "^4.0.0",
     "react-dom": "^15.4.1",
-    "react-google-charts": "^1.2.1",
+    "react-google-charts": "1.4.2",
     "react-moment": "^0.2.2",
     "react-router": "^3.0.0",
     "serve-static": "^1.11.1",
