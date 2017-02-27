@@ -36,6 +36,7 @@ module.exports = {
             plugins: [
               'babel-plugin-transform-es2015-modules-commonjs', // Full es2015 preset instead on release
               'transform-class-properties',
+              'transform-object-rest-spread',
             ],
           },
         },

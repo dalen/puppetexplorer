@@ -1,12 +1,24 @@
 // @flow
 import React from 'react';
+import { Router } from 'react-router';
 import { Grid, Col, Row, ControlLabel, FormGroup, Tabs, Tab } from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
-import { browserHistory as history } from 'react-router';
 import moment from 'moment';
 
 import Events from '../components/Events';
 import PuppetDB from '../PuppetDB';
+
+type Props = {
+  config: {
+    serverUrl: string,
+  },
+  queryParsed: ?queryT,
+  location: Location,
+  params: {
+    tab: ?string,
+  },
+  router: Router,
+};
 
 export default class EventListContainer extends React.Component {
   // Compute an event query based on date range
@@ -26,26 +38,33 @@ export default class EventListContainer extends React.Component {
     dateTo: new Date().toISOString(),
   };
 
-  props: {
-    config: {
-      serverUrl: string,
-    },
-    queryParsed: ?queryT,
-    location: Location,
-    params: {
-      tab: ?string,
-    },
-  };
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.location.query.dateFrom !== this.props.location.query.dateFrom) {
+      this.setState({ dateFrom: moment.utc(nextProps.location.query.dateFrom).toISOString() });
+    }
+    if (nextProps.location.query.dateFrom !== this.props.location.query.dateFrom) {
+      this.setState({ dateTo: moment.utc(nextProps.location.query.dateTo).toISOString() });
+    }
+  }
+
+  props: Props;
 
   selectTab = (tab: string) => {
-    history.push({
+    this.props.router.push({
       pathname: tab === 'latest' ? '/events' : '/events/daterange',
       query: this.props.location.query,
     });
   }
 
-  changeDate = (which: string, value: string) => {
+  changeDate = (which: string, value: ?string) => {
     this.setState({ [which]: value });
+    this.props.router.push({
+      pathname: this.props.location.pathname,
+      query: {
+        ...this.props.location.query,
+        [which]: value ? moment(value).format('YYYY-MM-DD') : undefined,
+      },
+    });
   }
 
   render() {
