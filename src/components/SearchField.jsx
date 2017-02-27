@@ -4,6 +4,11 @@ import InputGroup from 'react-bootstrap/lib/InputGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
+type Props = {
+  updateQuery: (query: string) => mixed,
+  queryString: string,
+};
+
 export default class SearchField extends React.Component {
   state: {
     queryString: string,
@@ -15,10 +20,13 @@ export default class SearchField extends React.Component {
     });
   }
 
-  props: {
-    updateQuery: (query: string) => mixed,
-    queryString: string,
-  };
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.queryString !== this.props.queryString) {
+      this.setState({ queryString: nextProps.queryString });
+    }
+  }
+
+  props: Props;
 
   handleChange = (event: Event) => {
     if (event.target instanceof HTMLInputElement) {
