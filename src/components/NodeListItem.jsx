@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Glyphicon } from 'react-bootstrap';
 import Moment from 'react-moment';
 

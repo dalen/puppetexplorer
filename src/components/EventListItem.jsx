@@ -2,7 +2,7 @@
 import React from 'react';
 import { Label, Collapse, Glyphicon } from 'react-bootstrap';
 import Moment from 'react-moment';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export default class EventListItem extends React.Component {
   // Return the CSS class event states should correspond to

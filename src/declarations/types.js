@@ -2,9 +2,9 @@
 /* eslint no-undef: "off" */
 
 // Extend the Location type to include query obj from react-router
-declare class Location extends Location {
-  query: {[id: string]: string};
-}
+// declare class Location extends Location {
+//   query: {[id: string]: string};
+// }
 
 declare type nodeT = {
   certname: string,

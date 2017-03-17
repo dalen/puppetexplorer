@@ -1,9 +1,7 @@
 // @flow
 declare module 'node-puppetdbquery' {
-  declare type query = string | query[];
-
   declare class puppetdbquery {
-    static parse(query: string): ?query,
+    static parse(query: string): ?Array<mixed>,
   }
 
   declare module.exports: Class<puppetdbquery>;

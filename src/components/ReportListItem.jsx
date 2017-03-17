@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import Moment from 'react-moment';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import ReportsHelper from '../helpers/ReportsHelper';
 

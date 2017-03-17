@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { Router } from 'react-router';
+import type { Location, RouterHistory } from 'react-router-dom';
 import { Grid, Col, Row, ControlLabel, FormGroup, Tabs, Tab } from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
 import moment from 'moment';
@@ -14,10 +15,10 @@ type Props = {
   },
   queryParsed: ?queryT,
   location: Location,
+  history: RouterHistory,
   params: {
     tab: ?string,
   },
-  router: Router,
 };
 
 export default class EventListContainer extends React.Component {

@@ -1,5 +1,5 @@
-// flow-typed signature: b7d5419a7f10309b2328eeaf6d58f528
-// flow-typed version: b96843401b/moment_v2.x.x/flow_>=v0.28.x
+// flow-typed signature: 04c58f94bca162503cfab53fbd7bb06c
+// flow-typed version: cefd3ae547/moment_v2.x.x/flow_>=v0.34.x
 
 type moment$MomentOptions = {
   y?: number|string,
@@ -44,13 +44,15 @@ type moment$MomentCreationData = {
   strict: bool,
 };
 
+type moment$CalendarFormat = string | (moment$Moment) => string;
+
 type moment$CalendarFormats = {
-  sameDay?: string,
-  nextDay?: string,
-  nextWeek?: string,
-  lastDay?: string,
-  lastWeek?: string,
-  sameElse?: string,
+  sameDay?: moment$CalendarFormat,
+  nextDay?: moment$CalendarFormat,
+  nextWeek?: moment$CalendarFormat,
+  lastDay?: moment$CalendarFormat,
+  lastWeek?: moment$CalendarFormat,
+  sameElse?: moment$CalendarFormat,
 };
 
 declare class moment$LocaleData {

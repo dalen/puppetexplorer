@@ -13,7 +13,7 @@ export default class NodeListContainer extends React.Component {
     config: {
       serverUrl: string,
     },
-    queryParsed: queryT,
+    queryParsed: ?queryT,
   };
 
   render() {

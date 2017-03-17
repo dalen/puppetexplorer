@@ -1,26 +1,22 @@
 // @flow
 import React from 'react';
-import { Navbar, Nav, NavItem, Glyphicon } from 'react-bootstrap';
-import { Router } from 'react-router';
+import { Navbar, Nav, Glyphicon } from 'react-bootstrap';
+
+import RouterNavItem from './RouterNavItem';
 
 export default class MenuBar extends React.Component {
-  props: {
-    selectTab: (id: string) => void,
-    router: Router,
-  };
-
   render() {
     return (
       <Navbar fluid>
         <Nav>
-          <NavItem eventKey="/dashboard" active={this.props.router.isActive('/', true)} onSelect={this.props.selectTab}>
-            <Glyphicon glyph="dashboard" /> Dashboard</NavItem>
-          <NavItem eventKey="/nodes" active={this.props.router.isActive('/nodes')} onSelect={this.props.selectTab}>
-            <Glyphicon glyph="list" /> Nodes</NavItem>
-          <NavItem eventKey="/events" active={this.props.router.isActive('/events')} onSelect={this.props.selectTab}>
-            <Glyphicon glyph="calendar" /> Events</NavItem>
-          <NavItem eventKey="/facts" active={this.props.router.isActive('/facts')} onSelect={this.props.selectTab}>
-            <Glyphicon glyph="stats" /> Facts</NavItem>
+          <RouterNavItem to="/" eventKey="/" onSelect={this.props.selectTab}>
+            <Glyphicon glyph="dashboard" /> Dashboard</RouterNavItem>
+          <RouterNavItem to="/nodes" eventKey="/nodes" onSelect={this.props.selectTab}>
+            <Glyphicon glyph="list" /> Nodes</RouterNavItem>
+          <RouterNavItem to="/events" eventKey="/events" onSelect={this.props.selectTab}>
+            <Glyphicon glyph="calendar" /> Events</RouterNavItem>
+          <RouterNavItem to="/facts" eventKey="/facts" onSelect={this.props.selectTab}>
+            <Glyphicon glyph="stats" /> Facts</RouterNavItem>
         </Nav>
       </Navbar>
     );

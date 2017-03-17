@@ -1,49 +1,55 @@
 // @flow
 import React from 'react';
-import { Router } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
+import type { Location, RouterHistory } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import queryString from 'query-string';
 
+import DashBoardContainer from '../containers/DashBoardContainer';
+import NodeDetailContainer from '../containers/NodeDetailContainer';
+import NodeListContainer from '../containers/NodeListContainer';
+import ReportContainer from '../containers/ReportContainer';
+import EventsContainer from '../containers/EventsContainer';
+import FactsContainer from '../containers/FactsContainer';
 import SearchField from './SearchField';
 import MenuBar from './MenuBar';
 import Config from '../Config';
 import PuppetDB from '../PuppetDB';
 
-type Props ={
-  children: React.Element<*>,
+type Props = {
   location: Location,
-  router: Router,
+  history: RouterHistory,
 };
 
-export default class App extends React.Component {
+class App extends React.Component {
   state: {
-    config: mixed,
-    queryString: string,
+    config: object,
+    puppetQueryString: string,
     queryParsed: ?queryT,
   };
 
   componentWillMount() {
-    let queryString;
-    if (this.props.location.query.query) {
-      queryString = this.props.location.query.query;
-    } else {
-      queryString = '';
-    }
+    console.log('App.componentWillMount', this.props);
+    const puppetQueryString = queryString.parse(this.props.location.search).query || '';
     this.setState({
       config: Config.defaults(),
-      queryString,
-      queryParsed: PuppetDB.parse(queryString),
+      puppetQueryString,
+      queryParsed: PuppetDB.parse(puppetQueryString),
     });
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.location.query.query !== this.props.location.query.query) {
-      this.updateQuery(nextProps.location.query.query);
+    if (queryString.parse(nextProps.location.search).query !==
+      queryString.parse(this.props.location.search).query) {
+      this.updateQuery(queryString.parse(nextProps.location.search).query);
     }
   }
 
   props: Props;
 
   selectTab = (id: string) => {
-    this.props.router.push({
+    console.log('selectTab', )
+    this.props.history.push({
       pathname: id,
       search: this.props.location.search,
     });
@@ -51,29 +57,44 @@ export default class App extends React.Component {
 
   updateQuery = (query: string) => {
     this.setState({
-      queryString: query,
+      puppetQueryString: query,
       queryParsed: PuppetDB.parse(query),
     });
-    this.props.router.push({
+    this.props.history.push({
       pathname: this.props.location.pathname,
       query: { query },
     });
   }
 
   render() {
-    const child = React.cloneElement(this.props.children, {
-      config: this.state.config,
-      queryParsed: this.state.queryParsed,
-      queryString: this.state.queryString,
-      updateQuery: this.updateQuery,
-    });
-
     return (
       <div>
-        <SearchField updateQuery={this.updateQuery} queryString={this.state.queryString} />
-        <MenuBar selectTab={this.selectTab} router={this.props.router} />
-        {child}
+        <SearchField updateQuery={this.updateQuery} queryString={this.state.puppetQueryString} />
+        <MenuBar selectTab={this.selectTab} location={this.props.location} />
+
+        <Switch>
+          <Route
+            path="/nodes"
+            render={props => (<NodeListContainer
+              {...props}
+              queryParsed={this.state.queryParsed}
+              config={this.state.config}
+            />)}
+          />
+          <Route path="/node/:node" component={NodeDetailContainer} />
+          <Route path="/report/:reportHash" component={ReportContainer} />
+          <Route path="/events(/:tab)" component={EventsContainer} />
+          <Route path="/facts" component={FactsContainer} />
+          <Route
+            render={props => (<DashBoardContainer
+              {...props}
+              config={this.state.config}
+            />)}
+          />
+        </Switch>
       </div>
     );
   }
 }
+
+export default withRouter(App);

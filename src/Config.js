@@ -1,6 +1,6 @@
 // @flow
 export default class Config {
-  static defaults(): { [id: string]: mixed } {
+  static defaults() {
     return {
       serverUrl: '/api',
       nodeFacts: [
