@@ -4,9 +4,13 @@ import { NavItem } from 'react-bootstrap';
 import { Route } from 'react-router-dom';
 
 export default class RouterNavItem extends React.Component {
+  static defaultProps = {
+    children: [],
+  };
+
   props: {
     to: string,
-    children: React.Element<*>,
+    children?: React.Element<*>[],
   };
 
   render() {

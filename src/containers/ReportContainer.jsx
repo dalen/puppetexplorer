@@ -6,12 +6,8 @@ import PuppetDB from '../PuppetDB';
 import Report from '../components/Report';
 
 type Props = {
-  config: {
-    serverUrl: string,
-  },
-  params: {
-    reportHash: string,
-  },
+  serverUrl: string,
+  reportHash: string,
 };
 
 // Fetch a report and pass it to the Report component
@@ -19,13 +15,13 @@ export default class ReportContainer extends React.Component {
   state: { report?: reportT } = {};
 
   componentDidMount() {
-    this.fetchReport(this.props.config.serverUrl, this.props.params.reportHash);
+    this.fetchReport(this.props.serverUrl, this.props.reportHash);
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.config.serverUrl !== this.props.config.serverUrl ||
-      nextProps.params.reportHash !== this.props.params.reportHash) {
-      this.fetchReport(nextProps.config.serverUrl, nextProps.params.reportHash);
+    if (nextProps.serverUrl !== this.props.serverUrl ||
+      nextProps.reportHash !== this.props.reportHash) {
+      this.fetchReport(nextProps.serverUrl, nextProps.reportHash);
     }
   }
 

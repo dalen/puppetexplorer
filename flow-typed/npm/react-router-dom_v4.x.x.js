@@ -86,7 +86,9 @@ declare module 'react-router-dom' {
     url: string,
   }
 
-  declare export type ContextRouter = RouterHistory & {
+  declare export type ContextRouter = {
+    history: RouterHistory,
+    location: Location, 
     match: Match,
   }
 

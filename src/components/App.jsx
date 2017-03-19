@@ -2,11 +2,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import type { Location, RouterHistory } from 'react-router-dom';
-import { withRouter } from 'react-router';
 import queryString from 'query-string';
 
-import DashBoardContainer from '../containers/DashBoardContainer';
-import NodeDetailContainer from '../containers/NodeDetailContainer';
+import DashBoard from './DashBoard';
+import NodeDetail from './NodeDetail';
 import NodeListContainer from '../containers/NodeListContainer';
 import ReportContainer from '../containers/ReportContainer';
 import EventsContainer from '../containers/EventsContainer';
@@ -21,9 +20,12 @@ type Props = {
   history: RouterHistory,
 };
 
-class App extends React.Component {
+export default class App extends React.Component {
   state: {
-    config: object,
+    config: {
+      serverUrl: string,
+      dashBoardPanels: Array<dashBoardPanelT[]>,
+    },
     puppetQueryString: string,
     queryParsed: ?queryT,
   };
@@ -48,7 +50,6 @@ class App extends React.Component {
   props: Props;
 
   selectTab = (id: string) => {
-    console.log('selectTab', )
     this.props.history.push({
       pathname: id,
       search: this.props.location.search,
@@ -77,18 +78,39 @@ class App extends React.Component {
             path="/nodes"
             render={props => (<NodeListContainer
               {...props}
+              serverUrl={this.state.config.serverUrl}
               queryParsed={this.state.queryParsed}
-              config={this.state.config}
             />)}
           />
-          <Route path="/node/:node" component={NodeDetailContainer} />
-          <Route path="/report/:reportHash" component={ReportContainer} />
-          <Route path="/events(/:tab)" component={EventsContainer} />
+          <Route
+            path="/node/:node"
+            render={props => (<NodeDetail
+              serverUrl={this.state.config.serverUrl}
+              node={props.match.params.node}
+            />)}
+          />
+          <Route
+            path="/report/:reportHash"
+            render={props => (<ReportContainer
+              serverUrl={this.state.config.serverUrl}
+              reportHash={props.match.params.reportHash}
+            />)}
+          />
+          <Route
+            path="/events(/:tab)?"
+            render={props => (<EventsContainer
+              {...props}
+              serverUrl={this.state.config.serverUrl}
+              queryParsed={this.state.queryParsed}
+              tab={props.match.params.tab}
+            />)}
+          />
           <Route path="/facts" component={FactsContainer} />
           <Route
-            render={props => (<DashBoardContainer
+            render={props => (<DashBoard
               {...props}
-              config={this.state.config}
+              panels={this.state.config.dashBoardPanels}
+              serverUrl={this.state.config.serverUrl}
             />)}
           />
         </Switch>
@@ -96,5 +118,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default withRouter(App);

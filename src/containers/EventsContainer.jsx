@@ -1,24 +1,20 @@
 // @flow
 import React from 'react';
-import { Router } from 'react-router';
 import type { Location, RouterHistory } from 'react-router-dom';
 import { Grid, Col, Row, ControlLabel, FormGroup, Tabs, Tab } from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
 import moment from 'moment';
+import queryString from 'query-string';
 
 import Events from '../components/Events';
 import PuppetDB from '../PuppetDB';
 
 type Props = {
-  config: {
-    serverUrl: string,
-  },
+  serverUrl: string,
   queryParsed: ?queryT,
   location: Location,
   history: RouterHistory,
-  params: {
-    tab: ?string,
-  },
+  tab: ?string,
 };
 
 export default class EventListContainer extends React.Component {
@@ -40,40 +36,43 @@ export default class EventListContainer extends React.Component {
   };
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.location.query.dateFrom !== this.props.location.query.dateFrom) {
-      this.setState({ dateFrom: moment.utc(nextProps.location.query.dateFrom).toISOString() });
+    const query = queryString.parse(this.props.location.search);
+    const nextQuery = queryString.parse(nextProps.location.search);
+    if (nextQuery.dateFrom !== query.dateFrom) {
+      this.setState({ dateFrom: moment.utc(nextQuery.dateFrom).toISOString() });
     }
-    if (nextProps.location.query.dateFrom !== this.props.location.query.dateFrom) {
-      this.setState({ dateTo: moment.utc(nextProps.location.query.dateTo).toISOString() });
+    if (nextQuery.dateFrom !== query.dateFrom) {
+      this.setState({ dateTo: moment.utc(nextQuery.dateTo).toISOString() });
     }
   }
 
   props: Props;
 
   selectTab = (tab: string) => {
-    this.props.router.push({
+    this.props.history.push({
       pathname: tab === 'latest' ? '/events' : '/events/daterange',
-      query: this.props.location.query,
+      search: this.props.location.search,
     });
   }
 
   changeDate = (which: string, value: ?string) => {
     this.setState({ [which]: value });
-    this.props.router.push({
+    this.props.history.push({
       pathname: this.props.location.pathname,
       query: {
-        ...this.props.location.query,
+        ...queryString.parse(this.props.location.search),
         [which]: value ? moment(value).format('YYYY-MM-DD') : undefined,
       },
     });
   }
 
   render() {
+    console.debug('EventsContainer', this.props);
     return (
-      <Tabs activeKey={this.props.params.tab || 'latest'} onSelect={this.selectTab} id="event-tabs" unmountOnExit>
+      <Tabs activeKey={this.props.tab || 'latest'} onSelect={this.selectTab} id="event-tabs" unmountOnExit>
         <Tab eventKey={'latest'} title="Latest Report" style={{ paddingTop: 10 }}>
           <Events
-            serverUrl={this.props.config.serverUrl}
+            serverUrl={this.props.serverUrl}
             queryParsed={this.props.queryParsed}
           />
         </Tab>
@@ -107,7 +106,7 @@ export default class EventListContainer extends React.Component {
             </Row>
           </Grid>
           <Events
-            serverUrl={this.props.config.serverUrl}
+            serverUrl={this.props.serverUrl}
             queryParsed={EventListContainer.dateRangeEventQuery(
               this.props.queryParsed, this.state.dateFrom, this.state.dateTo)}
           />

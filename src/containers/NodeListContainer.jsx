@@ -6,19 +6,17 @@ import paginatedList from '../components/PaginatedList';
 
 const PaginatedNodeList = paginatedList(NodeList, 'nodes', 'nodes');
 
-// Takes care of feching nodes and passing it to node list
+// FIXME: Rename this to PaginatedNodeList
 //
 export default class NodeListContainer extends React.Component {
   props: {
-    config: {
-      serverUrl: string,
-    },
+    serverUrl: string,
     queryParsed: ?queryT,
   };
 
   render() {
     return (<PaginatedNodeList
-      serverUrl={this.props.config.serverUrl}
+      serverUrl={this.props.serverUrl}
       listQuery={this.props.queryParsed}
       countQuery={['extract', [['function', 'count']], this.props.queryParsed]}
     />);
