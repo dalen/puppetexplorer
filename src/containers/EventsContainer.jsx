@@ -59,10 +59,10 @@ export default class EventListContainer extends React.Component {
     this.setState({ [which]: value });
     this.props.history.push({
       pathname: this.props.location.pathname,
-      query: {
+      search: queryString.stringify({
         ...queryString.parse(this.props.location.search),
         [which]: value ? moment(value).format('YYYY-MM-DD') : undefined,
-      },
+      }),
     });
   }
 

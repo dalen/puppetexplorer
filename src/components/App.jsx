@@ -52,10 +52,13 @@ export default class App extends React.Component {
   selectTab = (id: string) => {
     this.props.history.push({
       pathname: id,
-      search: this.props.location.search,
+      search: queryString.stringify({
+        query: queryString.parse(this.props.location.search).query,
+      }),
     });
   }
 
+  // Update the puppet query
   updateQuery = (query: string) => {
     this.setState({
       puppetQueryString: query,
@@ -63,7 +66,10 @@ export default class App extends React.Component {
     });
     this.props.history.push({
       pathname: this.props.location.pathname,
-      query: { query },
+      search: queryString.stringify({
+        ...queryString.parse(this.props.location.search),
+        query,
+      }),
     });
   }
 
@@ -97,7 +103,7 @@ export default class App extends React.Component {
             />)}
           />
           <Route
-            path="/events(/:tab)?"
+            path="/events/:tab?"
             render={props => (<EventsContainer
               {...props}
               serverUrl={this.state.config.serverUrl}
