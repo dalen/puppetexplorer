@@ -8,10 +8,7 @@ import Facts from '../components/Facts';
 import FactTree from '../classes/FactTree';
 
 type Props = {
-  config: {
-    serverUrl: string,
-  },
-  location: Location,
+  serverUrl: string,
   queryParsed: ?queryT,
   queryString: ?string,
   updateQuery: (query: string) => void,
@@ -25,12 +22,12 @@ export default class FactsContainer extends React.Component {
   } = { activeFactCharts: OrderedSet.of() };
 
   componentDidMount() {
-    this.fetchFactPaths(this.props.config.serverUrl);
+    this.fetchFactPaths(this.props.serverUrl);
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.config.serverUrl !== this.props.config.serverUrl) {
-      this.fetchFactPaths(nextProps.config.serverUrl);
+    if (nextProps.serverUrl !== this.props.serverUrl) {
+      this.fetchFactPaths(nextProps.serverUrl);
     }
   }
 
@@ -74,7 +71,7 @@ export default class FactsContainer extends React.Component {
     if (this.state.factTree !== undefined) {
       return (
         <Facts
-          serverUrl={this.props.config.serverUrl}
+          serverUrl={this.props.serverUrl}
           factTree={this.state.factTree}
           activeFactCharts={this.state.activeFactCharts}
           toggleChart={this.toggleChart}

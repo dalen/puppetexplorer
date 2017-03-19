@@ -105,7 +105,16 @@ export default class App extends React.Component {
               tab={props.match.params.tab}
             />)}
           />
-          <Route path="/facts" component={FactsContainer} />
+          <Route
+            path="/facts"
+            render={props => (<FactsContainer
+              {...props}
+              serverUrl={this.state.config.serverUrl}
+              queryParsed={this.state.queryParsed}
+              queryString={this.state.puppetQueryString}
+              updateQuery={this.updateQuery}
+            />)}
+          />
           <Route
             render={props => (<DashBoard
               {...props}
