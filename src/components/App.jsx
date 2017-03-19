@@ -31,7 +31,6 @@ export default class App extends React.Component {
   };
 
   componentWillMount() {
-    console.log('App.componentWillMount', this.props);
     const puppetQueryString = queryString.parse(this.props.location.search).query || '';
     this.setState({
       config: Config.defaults(),
