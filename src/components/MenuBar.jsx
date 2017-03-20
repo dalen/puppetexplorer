@@ -5,6 +5,10 @@ import { Navbar, Nav, Glyphicon } from 'react-bootstrap';
 import RouterNavItem from './RouterNavItem';
 
 export default class MenuBar extends React.Component {
+  props: {
+    selectTab: (tab: string) => void,
+  };
+
   render() {
     return (
       <Navbar fluid>
