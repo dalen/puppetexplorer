@@ -2,7 +2,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import type { Location, RouterHistory } from 'react-router-dom';
-import queryString from 'query-string';
+import qs from 'qs';
 
 import DashBoard from './DashBoard';
 import NodeDetail from './NodeDetail';
@@ -21,61 +21,94 @@ type Props = {
 };
 
 export default class App extends React.Component {
+  static decodeSearch(search: string): {
+    search: { [id: string]: mixed },
+    queryParsed: ?queryT,
+  } {
+    const parsedSearch = qs.parse(search.slice(1), { strictNullHandling: true });
+    return ({
+      search: parsedSearch,
+      queryParsed: PuppetDB.parse(parsedSearch.query),
+    });
+  }
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      ...App.decodeSearch(props.location.search),
+      config: Config.defaults(),
+    };
+  }
+
   state: {
     config: {
       serverUrl: string,
       dashBoardPanels: Array<dashBoardPanelT[]>,
     },
-    puppetQueryString: string,
+    search: { [id: string]: mixed },
     queryParsed: ?queryT,
   };
 
-  componentWillMount() {
-    const puppetQueryString = queryString.parse(this.props.location.search).query || '';
-    this.setState({
-      config: Config.defaults(),
-      puppetQueryString,
-      queryParsed: PuppetDB.parse(puppetQueryString),
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.location.search !== this.props.location.search) {
+      this.setState(App.decodeSearch(nextProps.location.search));
+    }
+  }
+
+  // Get puppet query
+  getQuery(): string {
+    if (typeof this.state.search.query === 'string') {
+      return this.state.search.query;
+    }
+    return '';
+  }
+
+  // Update puppet query
+  // redirect to node list if we are currently on dashboard
+  setQuery = (query: string) => {
+    let pathname;
+    if (this.props.location.pathname === '/') {
+      pathname = '/nodes';
+    } else {
+      pathname = this.props.location.pathname;
+    }
+    this.props.history.push({
+      pathname,
+      search: qs.stringify({
+        ...this.state.search,
+        query,
+      }, { strictNullHandling: true }),
     });
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (queryString.parse(nextProps.location.search).query !==
-      queryString.parse(this.props.location.search).query) {
-      this.updateQuery(queryString.parse(nextProps.location.search).query);
-    }
+  selectTab = (id: string) => {
+    console.debug('selectTab', this.state);
+    this.props.history.push({
+      pathname: id,
+      search: qs.stringify({
+        query: this.state.search.query,
+      }),
+    });
+  }
+
+  // Update search string
+  updateSearch = (updates: { [id: string]: mixed }) => {
+    this.props.history.push({
+      pathname: this.props.location.pathname,
+      search: qs.stringify({
+        ...this.state.search,
+        ...updates,
+      }),
+    });
   }
 
   props: Props;
 
-  selectTab = (id: string) => {
-    this.props.history.push({
-      pathname: id,
-      search: queryString.stringify({
-        query: queryString.parse(this.props.location.search).query,
-      }),
-    });
-  }
-
-  // Update the puppet query
-  updateQuery = (query: string) => {
-    this.setState({
-      puppetQueryString: query,
-      queryParsed: PuppetDB.parse(query),
-    });
-    this.props.history.push({
-      pathname: this.props.location.pathname,
-      search: queryString.stringify({
-        ...queryString.parse(this.props.location.search),
-        query,
-      }),
-    });
-  }
-
   render() {
     return (
       <div>
-        <SearchField updateQuery={this.updateQuery} queryString={this.state.puppetQueryString} />
+        <SearchField updateQuery={this.setQuery} queryString={this.getQuery()} />
         <MenuBar selectTab={this.selectTab} location={this.props.location} />
 
         <Switch>
@@ -108,6 +141,8 @@ export default class App extends React.Component {
               serverUrl={this.state.config.serverUrl}
               queryParsed={this.state.queryParsed}
               tab={props.match.params.tab}
+              updateSearch={this.updateSearch}
+              search={this.state.search}
             />)}
           />
           <Route
@@ -116,8 +151,8 @@ export default class App extends React.Component {
               {...props}
               serverUrl={this.state.config.serverUrl}
               queryParsed={this.state.queryParsed}
-              queryString={this.state.puppetQueryString}
-              updateQuery={this.updateQuery}
+              queryString={this.getQuery()}
+              updateQuery={this.setQuery}
             />)}
           />
           <Route

@@ -4,7 +4,6 @@ import type { Location, RouterHistory } from 'react-router-dom';
 import { Grid, Col, Row, ControlLabel, FormGroup, Tabs, Tab } from 'react-bootstrap';
 import DatePicker from 'react-bootstrap-date-picker';
 import moment from 'moment';
-import queryString from 'query-string';
 
 import Events from '../components/Events';
 import PuppetDB from '../PuppetDB';
@@ -15,6 +14,8 @@ type Props = {
   location: Location,
   history: RouterHistory,
   tab: ?string,
+  updateSearch: (updates: { [id: string]: mixed }) => void,
+  search: { [id: string]: mixed },
 };
 
 export default class EventListContainer extends React.Component {
@@ -27,23 +28,11 @@ export default class EventListContainer extends React.Component {
     ));
   }
 
-  state: {
-    dateFrom: string,
-    dateTo: string,
-  } = {
-    dateFrom: new Date().toISOString(),
-    dateTo: new Date().toISOString(),
-  };
-
-  componentWillReceiveProps(nextProps: Props) {
-    const query = queryString.parse(this.props.location.search);
-    const nextQuery = queryString.parse(nextProps.location.search);
-    if (nextQuery.dateFrom !== query.dateFrom) {
-      this.setState({ dateFrom: moment.utc(nextQuery.dateFrom).toISOString() });
+  getDate(which: string): string {
+    if (typeof this.props.search[which] === 'string') {
+      return moment.utc(this.props.search[which]).toISOString();
     }
-    if (nextQuery.dateFrom !== query.dateFrom) {
-      this.setState({ dateTo: moment.utc(nextQuery.dateTo).toISOString() });
-    }
+    return new Date().toISOString();
   }
 
   props: Props;
@@ -56,18 +45,13 @@ export default class EventListContainer extends React.Component {
   }
 
   changeDate = (which: string, value: ?string) => {
-    this.setState({ [which]: value });
-    this.props.history.push({
-      pathname: this.props.location.pathname,
-      search: queryString.stringify({
-        ...queryString.parse(this.props.location.search),
-        [which]: value ? moment(value).format('YYYY-MM-DD') : undefined,
-      }),
-    });
+    this.props.updateSearch({ [which]: value ? moment(value).format('YYYY-MM-DD') : undefined });
   }
 
   render() {
-    console.debug('EventsContainer', this.props);
+    const dateFrom = this.getDate('dateFrom');
+    const dateTo = this.getDate('dateTo');
+
     return (
       <Tabs activeKey={this.props.tab || 'latest'} onSelect={this.selectTab} id="event-tabs" unmountOnExit>
         <Tab eventKey={'latest'} title="Latest Report" style={{ paddingTop: 10 }}>
@@ -84,7 +68,7 @@ export default class EventListContainer extends React.Component {
                   <ControlLabel>From:</ControlLabel>
                   <DatePicker
                     placeholder="Start Date"
-                    value={this.state.dateFrom}
+                    value={dateFrom}
                     onChange={value => this.changeDate('dateFrom', value)}
                     dateFormat="YYYY-MM-DD"
                     showTodayButton
@@ -96,7 +80,7 @@ export default class EventListContainer extends React.Component {
                   <ControlLabel>To:</ControlLabel>
                   <DatePicker
                     placeholder="End Date"
-                    value={this.state.dateTo}
+                    value={dateTo}
                     onChange={value => this.changeDate('dateTo', value)}
                     dateFormat="YYYY-MM-DD"
                     showTodayButton
@@ -108,7 +92,7 @@ export default class EventListContainer extends React.Component {
           <Events
             serverUrl={this.props.serverUrl}
             queryParsed={EventListContainer.dateRangeEventQuery(
-              this.props.queryParsed, this.state.dateFrom, this.state.dateTo)}
+              this.props.queryParsed, dateFrom, dateTo)}
           />
         </Tab>
       </Tabs>

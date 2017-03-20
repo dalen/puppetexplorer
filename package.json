@@ -36,7 +36,7 @@
     "node-puppetdbquery": "^1.1.1",
     "object-dig": "^0.1.0",
     "object-hash": "^1.1.5",
-    "query-string": "^4.3.2",
+    "qs": "^6.4.0",
     "react": "^15.4.1",
     "react-bootstrap": "^0.30.8",
     "react-bootstrap-date-picker": "^4.0.0",
