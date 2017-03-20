@@ -1,4 +1,4 @@
-/* eslint no-param-reassign: ["error", { "props": false }] */
+/* eslint flowtype/require-valid-file-annotation: "off" */
 const path = require('path');
 const webpack = require('webpack');
 
@@ -31,14 +31,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['react'], // ['es2015', 'react'] for release build
-            plugins: [
-              'babel-plugin-transform-es2015-modules-commonjs', // Full es2015 preset instead on release
-              'transform-class-properties',
-              'transform-object-rest-spread',
-            ],
-          },
         },
       },
       {
