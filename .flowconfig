@@ -1,13 +1,12 @@
 [ignore]
-<PROJECT_ROOT>/node_modules/jsonlint
+<PROJECT_ROOT>/node_modules/jsonlint/test/fails
 <PROJECT_ROOT>/node_modules/fbjs
 <PROJECT_ROOT>/dist
-<PROJECT_ROOT>/app
 
 [include]
 
 [libs]
-src/declarations/
+src/types.js
 flow-typed/
 node_modules/immutable/dist/immutable.js.flow
 
