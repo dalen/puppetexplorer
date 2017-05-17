@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "jest",
-    "lint": "find src -name '*.js' -or -name '*.jsx' | xargs node_modules/.bin/eslint",
+    "lint": "eslint --ext .js,.jsx src",
     "build": "webpack",
     "build-watch": "webpack --watch",
     "start": "webpack-dev-server --open",
