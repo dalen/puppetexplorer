@@ -1,5 +1,5 @@
-// flow-typed signature: c1fb1930bf3a412da2390e57a18abbcd
-// flow-typed version: fb2079e84e/react-router-dom_v4.x.x/flow_>=v0.38.x
+// flow-typed signature: 526619dd78c68b696ab6c1171d585334
+// flow-typed version: 8ab7b85670/react-router-dom_v4.x.x/flow_>=v0.38.x
 
 declare module 'react-router-dom' {
   declare export class BrowserRouter extends React$Component {
@@ -88,7 +88,7 @@ declare module 'react-router-dom' {
 
   declare export type ContextRouter = {
     history: RouterHistory,
-    location: Location, 
+    location: Location,
     match: Match,
   }
 
@@ -159,4 +159,11 @@ declare module 'react-router-dom' {
   declare type FunctionComponent<P> = (props: P) => ?React$Element<any>;
   declare type ClassComponent<D, P, S> = Class<React$Component<D, P, S>>;
   declare export function withRouter<P, S>(Component: ClassComponent<void, P, S> | FunctionComponent<P>): ClassComponent<void, $Diff<P, ContextRouter>, S>;
+
+  declare type MatchPathOptions = {
+    path: string,
+    exact?: boolean,
+    strict?: boolean,
+  }
+  declare export function matchPath(pathname: string, options: MatchPathOptions): null | Match
 }
