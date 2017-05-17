@@ -38,7 +38,7 @@ export default class SearchField extends React.Component {
 
   handleSubmit = (event: Event) => {
     this.props.updateQuery(this.state.queryString);
-    event.preventDefault();
+    return event.preventDefault();
   }
 
   render() {
@@ -47,7 +47,10 @@ export default class SearchField extends React.Component {
         <InputGroup>
           <InputGroup.Addon><Glyphicon glyph="search" /></InputGroup.Addon>
           <FormControl
-            type="search" placeholder="Search" id="node-query-field" value={this.state.queryString}
+            type="search"
+            placeholder="Search"
+            id="node-query-field"
+            value={this.state.queryString}
             onChange={this.handleChange}
           />
         </InputGroup>

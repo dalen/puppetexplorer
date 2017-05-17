@@ -28,11 +28,11 @@ export default class EventList extends React.Component {
             <th>To</th>
           </tr></thead>
           <tbody>
-            {this.props.events.map((event, i) => <EventListItem
+            {this.props.events.map((event, i) => (<EventListItem
               event={event}
               showNode={this.props.showNode}
               key={i}
-            />)}
+            />))}
           </tbody>
         </Table>
       );

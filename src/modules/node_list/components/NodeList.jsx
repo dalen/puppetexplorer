@@ -34,9 +34,9 @@ export default class NodeList extends React.Component {
         </tr></thead>
         <tbody>
           {this.props.nodes.map(node =>
-            <NodeListItem
+            (<NodeListItem
               node={node} serverUrl={this.props.serverUrl} key={node.certname}
-            />)}
+            />))}
         </tbody>
       </Table>
     );

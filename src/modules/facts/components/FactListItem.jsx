@@ -49,12 +49,12 @@ export default class FactListItem extends React.Component {
           {this.indent()}<Glyphicon glyph={this.state.expanded ? 'collapse-up' : 'expand'} /> {factTree.name()}
         </ListGroupItem>
         { this.state.expanded && factTree.children.map(child =>
-          <FactListItem
+          (<FactListItem
             factTreeItem={child} key={child.path.join('.')}
             activeFactCharts={this.props.activeFactCharts}
             toggleChart={this.props.toggleChart}
             indent={this.props.indent + 1}
-          />) }
+          />)) }
       </div>
     );
   }

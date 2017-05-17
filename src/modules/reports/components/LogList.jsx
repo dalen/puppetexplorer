@@ -23,10 +23,10 @@ export default class EventList extends React.Component {
             <th>Message</th>
           </tr></thead>
           <tbody>
-            {this.props.logs.map((log, i) => <LogListItem
+            {this.props.logs.map((log, i) => (<LogListItem
               log={log}
               key={i}
-            />)}
+            />))}
           </tbody>
         </Table>
       );

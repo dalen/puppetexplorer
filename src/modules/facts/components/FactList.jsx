@@ -22,12 +22,12 @@ export default class FactList extends React.Component {
     return (
       <ListGroup>
         {this.props.factTree.children.map(child =>
-          <FactListItem
+          (<FactListItem
             factTreeItem={child} key={child.path.join('.')}
             activeFactCharts={this.props.activeFactCharts}
             toggleChart={this.props.toggleChart}
             indent={this.props.indent}
-          />)}
+          />))}
       </ListGroup>
     );
   }

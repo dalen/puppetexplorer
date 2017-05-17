@@ -34,10 +34,10 @@ export default class ReportList extends React.Component {
         </tr></thead>
         <tbody>
           {this.props.reports.map((report, i) =>
-            <ReportListItem
+            (<ReportListItem
               key={i.toString()}
               report={report}
-            />)}
+            />))}
         </tbody>
       </Table>
     );
