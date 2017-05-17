@@ -2,6 +2,7 @@
   "parser": "babel-eslint",
   "extends": [
     "airbnb",
+    "cleanjs",
     "plugin:flowtype/recommended"
   ],
   "plugins": [
@@ -12,11 +13,14 @@
     "jest": true
   },
   "rules": {
-    "react/prefer-stateless-function": "off",
     "flowtype/require-valid-file-annotation": [ 2, "always", { "annotationStyle": "line" }],
     "flowtype/require-parameter-type": [ 2, { "excludeArrowFunctions": true }],
     "flowtype/no-weak-types": [ 2 ],
     "flowtype/delimiter-dangle": [ 2, "always-multiline" ],
-    "flowtype/semi": [ 2 ]
+    "flowtype/semi": [ 2 ],
+    "fp/no-this": [ 0 ],
+    "fp/no-class": [ 0 ],
+    "fp/no-rest-parameters": [ 0 ],
+    "fp/no-nil": [ 0 ]
   }
 }
