@@ -6,41 +6,43 @@ export default class PuppetDB {
   // Combine queries together
   static combine(...queries: (queryT | null | void)[]): ?queryT {
     const actualQueries = queries.filter(q => q != null);
-    if (actualQueries.length === 0) {
-      return null;
-    } else if (actualQueries.length === 1) {
-      return actualQueries[0];
+    switch (actualQueries.length) {
+      case 0:
+        return null;
+      case 1:
+        return actualQueries[0];
+      default:
+        return ['and', ...actualQueries];
     }
-    return ['and', ...actualQueries];
   }
 
   // Parse a query
   static parse(query: string): ?queryT {
-    if (query) {
-      return puppetdbquery.parse(query);
-    }
-    return null;
+    return (query ?
+      puppetdbquery.parse(query)
+    :
+      null);
   }
 
   // Get a URL from server
   // params is converted into a query string automatically
   static get(serverUrl: string, path: string, params: {[id: string]: mixed } = {}): Promise<*> {
-    let url = `${serverUrl}/${path}`;
-    if (Object.keys(params).length > 0) {
-      url = `${url}?${Object.keys(params)
+    const baseUrl = `${serverUrl}/${path}`;
+    const url = (Object.keys(params).length > 0) ?
+      `${baseUrl}?${Object.keys(params)
         .map((k: string): string => {
           const v = params[k]; // TODO: Use Object.enties in the future
-          if (v instanceof String) {
-            return `${encodeURIComponent(k)}=${encodeURIComponent(v)}`;
-          }
-          return `${encodeURIComponent(k)}=${encodeURIComponent(JSON.stringify(v))}`;
+          return (v instanceof String) ?
+            `${encodeURIComponent(k)}=${encodeURIComponent(v)}`
+          :
+            `${encodeURIComponent(k)}=${encodeURIComponent(JSON.stringify(v))}`;
         })
-        .join('&')}`;
-    }
+        .join('&')}`
+    : baseUrl;
+
     return fetch(url, {
       headers: { Accept: 'application/json' },
-    })
-    .then(response => response.json());
+    }).then(response => response.json());
   }
 
   // Get a bean value
