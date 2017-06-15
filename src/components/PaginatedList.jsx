@@ -78,8 +78,7 @@ export default (
 
     render() {
       if (this.state.items !== undefined) {
-        const props = {};
-        props[itemsProp] = this.state.items;
+        const props = { [itemsProp]: this.state.items };
         return (
           <div>
             <ListElement

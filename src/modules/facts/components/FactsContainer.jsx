@@ -68,17 +68,16 @@ export default class FactsContainer extends React.Component {
   }
 
   render() {
-    if (this.state.factTree !== undefined) {
-      return (
-        <Facts
-          serverUrl={this.props.serverUrl}
-          factTree={this.state.factTree}
-          activeFactCharts={this.state.activeFactCharts}
-          toggleChart={this.toggleChart}
-          queryParsed={this.props.queryParsed}
-          factSelect={this.factSelect}
-        />);
-    }
-    return (<Label>Loading...</Label>);
+    return ((this.state.factTree !== undefined) ?
+      <Facts
+        serverUrl={this.props.serverUrl}
+        factTree={this.state.factTree}
+        activeFactCharts={this.state.activeFactCharts}
+        toggleChart={this.toggleChart}
+        queryParsed={this.props.queryParsed}
+        factSelect={this.factSelect}
+      />
+    :
+      <Label>Loading...</Label>);
   }
 }

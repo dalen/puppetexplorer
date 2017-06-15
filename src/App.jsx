@@ -58,21 +58,20 @@ export default class App extends React.Component {
 
   // Get puppet query
   getQuery(): string {
-    if (typeof this.state.search.query === 'string') {
-      return this.state.search.query;
-    }
-    return '';
+    return ((typeof this.state.search.query === 'string') ?
+      this.state.search.query
+    :
+      '');
   }
 
   // Update puppet query
   // redirect to node list if we are currently on dashboard
   setQuery = (query: string) => {
-    let pathname;
-    if (this.props.location.pathname === '/') {
-      pathname = '/nodes';
-    } else {
-      pathname = this.props.location.pathname;
-    }
+    const pathname = (this.props.location.pathname === '/') ?
+      '/nodes'
+    :
+      this.props.location.pathname;
+
     this.props.history.push({
       pathname,
       search: qs.stringify({

@@ -13,14 +13,14 @@
     "jest": true
   },
   "rules": {
-    "flowtype/require-valid-file-annotation": [ 2, "always", { "annotationStyle": "line" }],
-    "flowtype/require-parameter-type": [ 2, { "excludeArrowFunctions": true }],
-    "flowtype/no-weak-types": [ 2 ],
-    "flowtype/delimiter-dangle": [ 2, "always-multiline" ],
-    "flowtype/semi": [ 2 ],
-    "fp/no-this": [ 0 ],
-    "fp/no-class": [ 0 ],
-    "fp/no-rest-parameters": [ 0 ],
+    "flowtype/require-valid-file-annotation": [ "error", "always", { "annotationStyle": "line" }],
+    "flowtype/require-parameter-type": [ "error", { "excludeArrowFunctions": true }],
+    "flowtype/no-weak-types": [ "error" ],
+    "flowtype/delimiter-dangle": [ "error", "always-multiline" ],
+    "flowtype/semi": [ "error" ],
+    "fp/no-this": [ "off" ],
+    "fp/no-class": [ "off" ],
+    "fp/no-rest-parameters": [ "off" ],
     "fp/no-nil": [ 0 ],
     "better/explicit-return": [ 0 ],
     "fp/no-unused-expression": [ 0 ]
