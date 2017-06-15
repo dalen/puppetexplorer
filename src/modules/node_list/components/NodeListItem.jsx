@@ -49,7 +49,9 @@ export default class NodeListItem extends React.Component {
         <td title={this.props.node.catalog_timestamp}>
           <Glyphicon glyph="warning-sign" bsClass="text-warning" />
           <Moment
-            fromNow ago title={this.props.node.report_timestamp}
+            fromNow
+            ago
+            title={this.props.node.report_timestamp}
           >{this.props.node.report_timestamp}</Moment>
         </td>
         <td className="text-center">{metricValue(this.state.metrics, 'events', 'success')}</td>

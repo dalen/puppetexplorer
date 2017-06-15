@@ -50,7 +50,8 @@ export default class FactListItem extends React.Component {
         </ListGroupItem>
         { this.state.expanded && factTree.children.map(child =>
           (<FactListItem
-            factTreeItem={child} key={child.path.join('.')}
+            factTreeItem={child}
+            key={child.path.join('.')}
             activeFactCharts={this.props.activeFactCharts}
             toggleChart={this.props.toggleChart}
             indent={this.props.indent + 1}

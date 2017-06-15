@@ -19,7 +19,10 @@ export default class Pagination extends React.Component {
       if (numPages === 1) { return null; }
 
       return (<RBPagination
-        first prev={numPages > 2} next={numPages > 2} last
+        first
+        prev={numPages > 2}
+        next={numPages > 2}
+        last
         items={Math.ceil(numPages)}
         activePage={this.props.activePage}
         onSelect={this.props.onSelect}
