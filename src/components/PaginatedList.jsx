@@ -37,10 +37,13 @@ export default (
     }
 
     componentWillReceiveProps(nextProps: Props) {
-      let page = this.state.page;
+      const page = (nextProps.listQuery !== this.props.listQuery) ?
+        1
+      :
+        this.state.page;
+
       // Reset pagination if query changes
       if (nextProps.listQuery !== this.props.listQuery) {
-        page = 1;
         this.setState({ page });
       }
 

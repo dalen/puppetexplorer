@@ -4,30 +4,31 @@ import { Pagination as RBPagination } from 'react-bootstrap';
 
 // Wrap react-bootstrap Pagination and calculate number of pages and
 // if we should show pagination at all automatically
-export default class Pagination extends React.Component {
-  props: {
+const Pagination = (props: {
     count: ?number,
     perPage: number,
     activePage: number,
     onSelect: (page: number) => void,
-  };
+  }): ?React$Element<*> => {
+  const numPages = Math.ceil(props.count / props.perPage);
 
-  render(): ?React$Element<*> {
-    if (this.props.count) {
-      const numPages = Math.ceil(this.props.count / this.props.perPage);
+  return ((numPages === 1) ?
+      null
+    :
+      ((props.count) ?
+        <RBPagination
+          first
+          prev={numPages > 2}
+          next={numPages > 2}
+          last
+          items={Math.ceil(numPages)}
+          activePage={props.activePage}
+          onSelect={props.onSelect}
+        />
+      :
+        null
+    )
+  );
+};
 
-      if (numPages === 1) { return null; }
-
-      return (<RBPagination
-        first
-        prev={numPages > 2}
-        next={numPages > 2}
-        last
-        items={Math.ceil(numPages)}
-        activePage={this.props.activePage}
-        onSelect={this.props.onSelect}
-      />);
-    }
-    return null;
-  }
-}
+export default Pagination;
