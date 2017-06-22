@@ -47,7 +47,7 @@
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "redux": "^3.6.0",
+    "redux": "^3.7.0",
     "union-type": "^0.4.0",
     "union-type-option": "^1.1.0",
     "whatwg-fetch": "^2.0.1"
@@ -56,7 +56,7 @@
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-loader": "^7.0.0",
+    "babel-loader": "^7.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-polyfill": "^6.16.0",
     "babel-preset-es2017": "^6.24.1",
@@ -86,7 +86,7 @@
     "npm2rpm": "^2.1.8",
     "protractor": "^5.1.2",
     "raw-loader": "^0.5.1",
-    "webpack": "^2.5.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
   }
 }
