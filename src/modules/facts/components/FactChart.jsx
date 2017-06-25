@@ -24,9 +24,11 @@ export default class FactChart extends React.Component {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.serverUrl !== this.props.serverUrl ||
+    if (
+      nextProps.serverUrl !== this.props.serverUrl ||
       nextProps.fact !== this.props.fact ||
-      nextProps.queryParsed !== this.props.queryParsed) {
+      nextProps.queryParsed !== this.props.queryParsed
+    ) {
       this.fetchFactValue(nextProps.fact, nextProps.queryParsed, nextProps.serverUrl);
     }
   }
@@ -38,7 +40,7 @@ export default class FactChart extends React.Component {
   select = (chart: Chart) => {
     this.props.onSelect(dig(this.state.data, dig(chart.chart.getSelection(), 0, 'row'), 0));
     console.log('Selected', dig(this.state.data, dig(chart.chart.getSelection(), 0, 'row'), 0));
-  }
+  };
 
   chartEvents = [
     {
@@ -49,7 +51,8 @@ export default class FactChart extends React.Component {
 
   fetchFactValue(fact: factPathT, nodeQuery: ?queryT, serverUrl: string) {
     PuppetDB.query(serverUrl, 'fact-contents', {
-      query: ['extract',
+      query: [
+        'extract',
         [['function', 'count'], 'value'],
         PuppetDB.combine(nodeQuery, ['=', 'path', fact]),
         ['group_by', 'value'],

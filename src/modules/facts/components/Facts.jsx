@@ -37,7 +37,8 @@ export default class Facts extends React.Component {
                 queryParsed={this.props.queryParsed}
                 key={fact.join('.')}
                 onSelect={value => this.props.factSelect(fact, value)}
-              />)) }
+              />),
+            )}
           </Col>
         </Row>
       </Grid>

@@ -1,6 +1,5 @@
 // @flow
 
-
 type typeT = 'string' | 'integer' | 'boolean' | 'float' | 'array' | 'hash';
 
 export default class FactTree {
@@ -83,14 +82,13 @@ export default class FactTree {
     if (this.children.length === 0) {
       return 1;
     }
-    return this.children.map(child => child.numLeafs())
-      .reduce((a, b) => a + b);
+    return this.children.map(child => child.numLeafs()).reduce((a, b) => a + b);
   }
 
   // Check if it is an array with no grand children
   // FIXME: what if we area an array of single key hashes?
   arrayLeaf(): boolean {
-    return (this.type === 'array' && this.numLeafs() === this.children.length);
+    return this.type === 'array' && this.numLeafs() === this.children.length;
   }
 
   setType(type: typeT) {
@@ -98,10 +96,10 @@ export default class FactTree {
   }
 
   toJSON() {
-    return ({
+    return {
       path: this.path,
       type: this.type,
       children: this.children.map(c => c.toJSON()),
-    });
+    };
   }
 }

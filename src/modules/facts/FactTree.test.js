@@ -3,9 +3,7 @@
 import FactTree from './FactTree';
 
 test('it adds intermediate nodes', () => {
-  const tree = FactTree.fromFactPaths([
-    { type: 'string', path: ['networking', 'ipaddress'] },
-  ]);
+  const tree = FactTree.fromFactPaths([{ type: 'string', path: ['networking', 'ipaddress'] }]);
 
   expect(tree.toJSON()).toEqual({
     path: [],
@@ -14,11 +12,16 @@ test('it adds intermediate nodes', () => {
       {
         path: ['networking'],
         type: 'hash',
-        children: [{
-          path: ['networking', 'ipaddress'],
-          type: 'string',
-          children: [],
-        }] }] });
+        children: [
+          {
+            path: ['networking', 'ipaddress'],
+            type: 'string',
+            children: [],
+          },
+        ],
+      },
+    ],
+  });
 });
 
 test('it sets types correctly', () => {
@@ -34,24 +37,30 @@ test('it sets types correctly', () => {
       {
         path: ['networking'],
         type: 'hash',
-        children: [{
-          path: ['networking', 'ipaddress'],
-          type: 'string',
-          children: [],
-        }],
+        children: [
+          {
+            path: ['networking', 'ipaddress'],
+            type: 'string',
+            children: [],
+          },
+        ],
       },
       {
         path: ['processors'],
         type: 'hash',
-        children: [{
-          path: ['processors', 'models'],
-          type: 'array',
-          children: [{
-            path: ['processors', 'models', 0],
-            type: 'string',
-            children: [],
-          }],
-        }],
+        children: [
+          {
+            path: ['processors', 'models'],
+            type: 'array',
+            children: [
+              {
+                path: ['processors', 'models', 0],
+                type: 'string',
+                children: [],
+              },
+            ],
+          },
+        ],
       },
     ],
   });

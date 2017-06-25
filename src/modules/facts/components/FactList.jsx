@@ -28,7 +28,8 @@ export default class FactList extends React.Component {
             activeFactCharts={this.props.activeFactCharts}
             toggleChart={this.props.toggleChart}
             indent={this.props.indent}
-          />))}
+          />),
+        )}
       </ListGroup>
     );
   }

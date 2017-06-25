@@ -1,4 +1,6 @@
-/* eslint flowtype/require-valid-file-annotation: "off" */
+/* eslint flowtype/require-valid-file-annotation: off */
+/* eslint import/no-commonjs: off */
+/* eslint fp/no-mutation: ["error", { "commonjs": true }] */
 const path = require('path');
 const webpack = require('webpack');
 
@@ -16,7 +18,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.re'],
   },
   // use imports loader to add whatwg-fetch polyfill
   plugins: [
@@ -32,6 +34,10 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
+      },
+      {
+        test: /\.(re|ml)$/,
+        use: 'bs-loader?module=es6',
       },
       {
         test: /\.html$/,

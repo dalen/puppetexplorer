@@ -31,7 +31,7 @@ export default class FactsContainer extends React.Component {
     }
   }
 
-  props: Props
+  props: Props;
 
   fetchFactPaths(serverUrl: string) {
     PuppetDB.query(serverUrl, 'fact-paths', {
@@ -48,7 +48,7 @@ export default class FactsContainer extends React.Component {
     } else {
       this.setState({ activeFactCharts: this.state.activeFactCharts.add(chart) });
     }
-  }
+  };
 
   // A fact value is selected, update query
   factSelect = (fact: factPathT, value: mixed) => {
@@ -65,11 +65,11 @@ export default class FactsContainer extends React.Component {
     } else {
       this.props.updateQuery(`${fact.join('.')}=${quotedValue}`);
     }
-  }
+  };
 
   render() {
-    return ((this.state.factTree !== undefined) ?
-      <Facts
+    return this.state.factTree !== undefined
+      ? <Facts
         serverUrl={this.props.serverUrl}
         factTree={this.state.factTree}
         activeFactCharts={this.state.activeFactCharts}
@@ -77,7 +77,6 @@ export default class FactsContainer extends React.Component {
         queryParsed={this.props.queryParsed}
         factSelect={this.factSelect}
       />
-    :
-      <Label>Loading...</Label>);
+      : <Label>Loading...</Label>;
   }
 }

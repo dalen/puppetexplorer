@@ -6,36 +6,20 @@ import hash from 'object-hash';
 import DashBoardMetric from './DashBoardMetric';
 import Usage from './Usage';
 
-const panelWidth = (panelRow: Array<*>): number =>
-  Math.max(2, Math.floor(12 / panelRow.length));
+const panelWidth = (panelRow: Array<*>): number => Math.max(2, Math.floor(12 / panelRow.length));
 
-
-export default class DashBoard extends React.Component {
-  static defaultProps = {
-    panels: [],
-  };
-
-  props: {
-    panels: Array<dashBoardPanelT[]>,
-    serverUrl: string,
-  };
-
-  render() {
-    return (
-      <div>
-        <Grid>
-          {this.props.panels.map(panelRow =>
-            (<Row key={hash(panelRow)}>
-              {panelRow.map(panel =>
-                (<Col md={panelWidth(panelRow)} key={hash(panel)}>
-                  <DashBoardMetric serverUrl={this.props.serverUrl} {...panel} />
-                </Col>),
-              )}
-            </Row>),
+export default (props: { panels: Array<dashBoardPanelT[]>, serverUrl: string }) =>
+  (<div>
+    <Grid>
+      {props.panels.map(panelRow =>
+        (<Row key={hash(panelRow)}>
+          {panelRow.map(panel =>
+            (<Col md={panelWidth(panelRow)} key={hash(panel)}>
+              <DashBoardMetric serverUrl={props.serverUrl} {...panel} />
+            </Col>),
           )}
-        </Grid>
-        <Usage />
-      </div>
-    );
-  }
-}
+        </Row>),
+      )}
+    </Grid>
+    <Usage />
+  </div>);

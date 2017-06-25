@@ -16,18 +16,14 @@ export default class DashBoardMetric extends React.Component {
   } = {};
 
   componentDidMount() {
-    PuppetDB.getBean(this.props.serverUrl, this.props.bean)
-      .then(data => this.setState({ value: data[this.props.beanValue] }));
+    PuppetDB.getBean(this.props.serverUrl, this.props.bean).then(data =>
+      this.setState({ value: data[this.props.beanValue] }),
+    );
   }
 
   props: {
     title: string,
-    style: 'default'
-      | 'primary'
-      | 'success'
-      | 'info'
-      | 'warning'
-      | 'danger',
+    style: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger',
     bean: string,
     beanValue: string,
     multiply: number,
@@ -42,11 +38,6 @@ export default class DashBoardMetric extends React.Component {
     } else {
       children = <Glyphicon glyph="refresh" className="spin" />;
     }
-    return (
-      <Panel
-        header={this.props.title}
-        bsStyle={this.props.style}
-      >{children}</Panel>
-    );
+    return <Panel header={this.props.title} bsStyle={this.props.style}>{children}</Panel>;
   }
 }

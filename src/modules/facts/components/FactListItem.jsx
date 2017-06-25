@@ -17,19 +17,19 @@ export default class FactListItem extends React.Component {
 
   toggle = () => {
     this.setState({ expanded: !this.state.expanded });
-  }
+  };
 
   toggleChart = () => this.props.toggleChart(this.props.factTreeItem.path);
 
   // Check if this graph is active or not
   isActive(): boolean {
-    return (this.props.activeFactCharts.has(this.props.factTreeItem.path));
+    return this.props.activeFactCharts.has(this.props.factTreeItem.path);
   }
 
   indent(): ?React$Element<*> {
     if (this.props.indent > 0) {
       // \u00a0 is a non breaking space in unicode
-      return (<span>{new Array(this.props.indent).map(() => '').join('\u00a0\u00a0\u00a0')}└ </span>);
+      return <span>{new Array(this.props.indent).map(() => '').join('\u00a0\u00a0\u00a0')}└ </span>;
     }
     return null;
   }
@@ -46,16 +46,19 @@ export default class FactListItem extends React.Component {
     return (
       <div style={{ marginBottom: '-1px' }}>
         <ListGroupItem bsStyle={this.state.expanded ? 'info' : null} onClick={this.toggle}>
-          {this.indent()}<Glyphicon glyph={this.state.expanded ? 'collapse-up' : 'expand'} /> {factTree.name()}
+          {this.indent()}<Glyphicon glyph={this.state.expanded ? 'collapse-up' : 'expand'} />{' '}
+          {factTree.name()}
         </ListGroupItem>
-        { this.state.expanded && factTree.children.map(child =>
-          (<FactListItem
-            factTreeItem={child}
-            key={child.path.join('.')}
-            activeFactCharts={this.props.activeFactCharts}
-            toggleChart={this.props.toggleChart}
-            indent={this.props.indent + 1}
-          />)) }
+        {this.state.expanded &&
+          factTree.children.map(child =>
+            (<FactListItem
+              factTreeItem={child}
+              key={child.path.join('.')}
+              activeFactCharts={this.props.activeFactCharts}
+              toggleChart={this.props.toggleChart}
+              indent={this.props.indent + 1}
+            />),
+          )}
       </div>
     );
   }
