@@ -13,6 +13,7 @@
     "jest": true
   },
   "rules": {
+    "no-nested-ternary": [ "off" ],
     "flowtype/require-valid-file-annotation": [ "error", "always", { "annotationStyle": "line" }],
     "flowtype/require-parameter-type": [ "error", { "excludeArrowFunctions": true }],
     "flowtype/no-weak-types": [ "error" ],

@@ -64,8 +64,6 @@
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
-    "bs-loader": "^1.5.2",
-    "bs-platform": "^1.7.5",
     "css-loader": "^0.28.1",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "^15.0.1",
