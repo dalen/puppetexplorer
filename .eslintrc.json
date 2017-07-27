@@ -1,29 +1,19 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "airbnb",
-    "cleanjs",
-    "plugin:flowtype/recommended"
-  ],
-  "plugins": [
-    "flowtype"
-  ],
+  "extends": ["airbnb", "plugin:flowtype/recommended"],
+  "plugins": ["flowtype", "fp", "better"],
   "env": {
     "browser": true,
     "jest": true
   },
   "rules": {
-    "no-nested-ternary": [ "off" ],
-    "flowtype/require-valid-file-annotation": [ "error", "always", { "annotationStyle": "line" }],
-    "flowtype/require-parameter-type": [ "error", { "excludeArrowFunctions": true }],
-    "flowtype/no-weak-types": [ "error" ],
-    "flowtype/delimiter-dangle": [ "error", "always-multiline" ],
-    "flowtype/semi": [ "error" ],
-    "fp/no-this": [ "off" ],
-    "fp/no-class": [ "off" ],
-    "fp/no-rest-parameters": [ "off" ],
-    "fp/no-nil": [ 0 ],
-    "better/explicit-return": [ 0 ],
-    "fp/no-unused-expression": [ 0 ]
+    "no-nested-ternary": ["off"],
+    "flowtype/require-valid-file-annotation": ["error", "always", { "annotationStyle": "line" }],
+    "flowtype/require-parameter-type": ["error", { "excludeArrowFunctions": true }],
+    "flowtype/no-weak-types": ["error"],
+    "flowtype/delimiter-dangle": ["error", "always-multiline"],
+    "flowtype/semi": ["error"],
+    "fp/no-mutation": ["error", { "allowThis": true }],
+    "better/no-deletes": ["error"]
   }
 }
