@@ -6,7 +6,7 @@ import ReportListItem from './ReportListItem';
 
 // A list of reports, for a node typically
 export default (props: { total: number, reports: reportT[] }) =>
-  props.total === 0
+  (props.total === 0
     ? <Alert bsStyle="warning">No reports found</Alert>
     : <Table striped>
       <thead>
@@ -27,4 +27,4 @@ export default (props: { total: number, reports: reportT[] }) =>
       <tbody>
         {props.reports.map((report, i) => <ReportListItem key={i.toString()} report={report} />)}
       </tbody>
-    </Table>;
+    </Table>);
