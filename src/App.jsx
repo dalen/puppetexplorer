@@ -21,15 +21,17 @@ type Props = {
 };
 
 export default class App extends React.Component {
-  static decodeSearch(search: string): {
+  static decodeSearch(
+    search: string,
+  ): {
     search: { [id: string]: mixed },
     queryParsed: ?queryT,
   } {
     const parsedSearch = qs.parse(search.slice(1), { strictNullHandling: true });
-    return ({
+    return {
       search: parsedSearch,
       queryParsed: PuppetDB.parse(parsedSearch.query),
-    });
+    };
   }
 
   constructor(props: Props) {
@@ -58,28 +60,25 @@ export default class App extends React.Component {
 
   // Get puppet query
   getQuery(): string {
-    return ((typeof this.state.search.query === 'string') ?
-      this.state.search.query
-    :
-      '');
+    return typeof this.state.search.query === 'string' ? this.state.search.query : '';
   }
 
   // Update puppet query
   // redirect to node list if we are currently on dashboard
   setQuery = (query: string) => {
-    const pathname = (this.props.location.pathname === '/') ?
-      '/nodes'
-    :
-      this.props.location.pathname;
+    const pathname = this.props.location.pathname === '/' ? '/nodes' : this.props.location.pathname;
 
     this.props.history.push({
       pathname,
-      search: qs.stringify({
-        ...this.state.search,
-        query,
-      }, { strictNullHandling: true }),
+      search: qs.stringify(
+        {
+          ...this.state.search,
+          query,
+        },
+        { strictNullHandling: true },
+      ),
     });
-  }
+  };
 
   selectTab = (id: string) => {
     console.debug('selectTab', this.state);
@@ -89,7 +88,7 @@ export default class App extends React.Component {
         query: this.state.search.query,
       }),
     });
-  }
+  };
 
   // Update search string
   updateSearch = (updates: { [id: string]: mixed }) => {
@@ -100,7 +99,7 @@ export default class App extends React.Component {
         ...updates,
       }),
     });
-  }
+  };
 
   props: Props;
 
@@ -113,53 +112,56 @@ export default class App extends React.Component {
         <Switch>
           <Route
             path="/nodes"
-            render={props => (<NodeListContainer
-              {...props}
-              serverUrl={this.state.config.serverUrl}
-              queryParsed={this.state.queryParsed}
-            />)}
+            render={props =>
+              (<NodeListContainer
+                {...props}
+                serverUrl={this.state.config.serverUrl}
+                queryParsed={this.state.queryParsed}
+              />)}
           />
           <Route
             path="/node/:node"
-            render={props => (<NodeDetail
-              serverUrl={this.state.config.serverUrl}
-              node={props.match.params.node}
-            />)}
+            render={props =>
+              <NodeDetail serverUrl={this.state.config.serverUrl} node={props.match.params.node} />}
           />
           <Route
             path="/report/:reportHash"
-            render={props => (<ReportContainer
-              serverUrl={this.state.config.serverUrl}
-              reportHash={props.match.params.reportHash}
-            />)}
+            render={props =>
+              (<ReportContainer
+                serverUrl={this.state.config.serverUrl}
+                reportHash={props.match.params.reportHash}
+              />)}
           />
           <Route
             path="/events/:tab?"
-            render={props => (<EventsContainer
-              {...props}
-              serverUrl={this.state.config.serverUrl}
-              queryParsed={this.state.queryParsed}
-              tab={props.match.params.tab}
-              updateSearch={this.updateSearch}
-              search={this.state.search}
-            />)}
+            render={props =>
+              (<EventsContainer
+                {...props}
+                serverUrl={this.state.config.serverUrl}
+                queryParsed={this.state.queryParsed}
+                tab={props.match.params.tab}
+                updateSearch={this.updateSearch}
+                search={this.state.search}
+              />)}
           />
           <Route
             path="/facts"
-            render={props => (<FactsContainer
-              {...props}
-              serverUrl={this.state.config.serverUrl}
-              queryParsed={this.state.queryParsed}
-              queryString={this.getQuery()}
-              updateQuery={this.setQuery}
-            />)}
+            render={props =>
+              (<FactsContainer
+                {...props}
+                serverUrl={this.state.config.serverUrl}
+                queryParsed={this.state.queryParsed}
+                queryString={this.getQuery()}
+                updateQuery={this.setQuery}
+              />)}
           />
           <Route
-            render={props => (<DashBoard
-              {...props}
-              panels={this.state.config.dashBoardPanels}
-              serverUrl={this.state.config.serverUrl}
-            />)}
+            render={props =>
+              (<DashBoard
+                {...props}
+                panels={this.state.config.dashBoardPanels}
+                serverUrl={this.state.config.serverUrl}
+              />)}
           />
         </Switch>
       </div>
