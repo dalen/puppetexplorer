@@ -18,27 +18,24 @@ export default class PuppetDB {
 
   // Parse a query
   static parse(query: string): ?queryT {
-    return (query ?
-      puppetdbquery.parse(query)
-    :
-      null);
+    return query ? puppetdbquery.parse(query) : null;
   }
 
   // Get a URL from server
   // params is converted into a query string automatically
-  static get(serverUrl: string, path: string, params: {[id: string]: mixed } = {}): Promise<*> {
+  static get(serverUrl: string, path: string, params: { [id: string]: mixed } = {}): Promise<*> {
     const baseUrl = `${serverUrl}/${path}`;
-    const url = (Object.keys(params).length > 0) ?
-      `${baseUrl}?${Object.keys(params)
-        .map((k: string): string => {
-          const v = params[k]; // TODO: Use Object.enties in the future
-          return (v instanceof String) ?
-            `${encodeURIComponent(k)}=${encodeURIComponent(v)}`
-          :
-            `${encodeURIComponent(k)}=${encodeURIComponent(JSON.stringify(v))}`;
-        })
-        .join('&')}`
-    : baseUrl;
+    const url =
+      Object.keys(params).length > 0
+        ? `${baseUrl}?${Object.keys(params)
+          .map((k: string): string => {
+            const v = params[k]; // TODO: Use Object.enties in the future
+            return v instanceof String
+              ? `${encodeURIComponent(k)}=${encodeURIComponent(v)}`
+              : `${encodeURIComponent(k)}=${encodeURIComponent(JSON.stringify(v))}`;
+          })
+          .join('&')}`
+        : baseUrl;
 
     return fetch(url, {
       headers: { Accept: 'application/json' },
@@ -59,7 +56,7 @@ export default class PuppetDB {
   static query(
     serverUrl: string,
     endpoint: string,
-    params: {[id: string]: mixed } = {},
+    params: { [id: string]: mixed } = {},
   ): Promise<*> {
     return this.get(serverUrl, `pdb/query/v4/${endpoint}`, params);
   }
