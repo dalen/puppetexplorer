@@ -1057,7 +1057,7 @@ blocking-proxy@0.0.5:
   dependencies:
     minimist "^1.2.0"
 
-bluebird@^3.3.1, bluebird@^3.3.4:
+bluebird@^3.3.1:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
@@ -4193,6 +4193,10 @@ loader-utils@^1.0.2, loader-utils@^1.1.0:
     emojis-list "^2.0.0"
     json5 "^0.5.0"
 
+loadjs@^3.3.1:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/loadjs/-/loadjs-3.5.0.tgz#1dd8934c064c5dad9c62c513875918e87db8e6e1"
+
 locate-path@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/locate-path/-/locate-path-2.0.0.tgz#2b568b265eec944c6d9c0de9c3dbbbca0354cd8e"
@@ -5610,15 +5614,15 @@ react-dom@^15.3.2, react-dom@^15.6.0:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react-google-charts@1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-1.4.2.tgz#e290e3b9eb2111c44c8e209fb8b7e4a314a1992e"
+react-google-charts@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/react-google-charts/-/react-google-charts-1.5.5.tgz#ffeaeca752a820a05029bd6a23516be2432d7df5"
   dependencies:
-    bluebird "^3.3.4"
     debug "^2.2.0"
+    loadjs "^3.3.1"
+    prop-types "^15.5.8"
     react "^15.3.2"
     react-dom "^15.3.2"
-    scriptjs "^2.5.8"
 
 react-moment@^0.6.0:
   version "0.6.0"
@@ -6114,10 +6118,6 @@ sax@0.6.x:
 sax@>=0.6.0, sax@^1.2.1, sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
-
-scriptjs@^2.5.8:
-  version "2.5.8"
-  resolved "https://registry.yarnpkg.com/scriptjs/-/scriptjs-2.5.8.tgz#d0c43955c2e6bad33b6e4edf7b53b8965aa7ca5f"
 
 select-hose@^2.0.0:
   version "2.0.0"
