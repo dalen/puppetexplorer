@@ -16,7 +16,7 @@ export default (
   ListElement: ReactClass<*>,
   endpoint: string,
   itemsProp: string,
-  orderBy: {[id: string]: string}[] = [{ field: 'certname', order: 'asc' }],
+  orderBy: { [id: string]: string }[] = [{ field: 'certname', order: 'asc' }],
 ) =>
   class PaginatedList extends React.Component {
     static defaultProps = {
@@ -37,22 +37,23 @@ export default (
     }
 
     componentWillReceiveProps(nextProps: Props) {
-      const page = (nextProps.listQuery !== this.props.listQuery) ?
-        1
-      :
-        this.state.page;
+      const page = nextProps.listQuery !== this.props.listQuery ? 1 : this.state.page;
 
       // Reset pagination if query changes
       if (nextProps.listQuery !== this.props.listQuery) {
         this.setState({ page });
       }
 
-      if (nextProps.serverUrl !== this.props.serverUrl ||
-        nextProps.listQuery !== this.props.listQuery) {
+      if (
+        nextProps.serverUrl !== this.props.serverUrl ||
+        nextProps.listQuery !== this.props.listQuery
+      ) {
         this.fetchItems(nextProps.serverUrl, nextProps.listQuery, page);
       }
-      if (nextProps.serverUrl !== this.props.serverUrl ||
-        nextProps.countQuery !== this.props.countQuery) {
+      if (
+        nextProps.serverUrl !== this.props.serverUrl ||
+        nextProps.countQuery !== this.props.countQuery
+      ) {
         this.fetchCount(nextProps.serverUrl, nextProps.countQuery);
       }
     }
@@ -77,26 +78,23 @@ export default (
     changePage = (page: number) => {
       this.setState({ page });
       this.fetchItems(this.props.serverUrl, this.props.listQuery, page);
-    }
+    };
 
     render() {
       if (this.state.items !== undefined) {
         const props = { [itemsProp]: this.state.items };
         return (
           <div>
-            <ListElement
-              total={this.state.count}
-              serverUrl={this.props.serverUrl}
-              {...props}
-            />
+            <ListElement total={this.state.count} serverUrl={this.props.serverUrl} {...props} />
             <Pagination
               count={this.state.count}
               perPage={this.props.perPage}
               activePage={this.state.page}
               onSelect={this.changePage}
             />
-          </div>);
+          </div>
+        );
       }
-      return (<Label>Loading...</Label>);
+      return <Label>Loading...</Label>;
     }
   };
