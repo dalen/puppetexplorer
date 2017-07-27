@@ -50,8 +50,7 @@
     "react-router-dom": "^4.1.2",
     "reason-react": "^0.2.3",
     "redux": "^3.7.2",
-    "union-type": "^0.4.0",
-    "union-type-option": "^1.1.0",
+    "results": "^0.14.1",
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {

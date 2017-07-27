@@ -16,16 +16,16 @@ export default (props: { report: reportT }) =>
       </Link>
     </td>
     <td className="text-center">
-      {metricValue(props.report.metrics.data, 'events', 'success')}
+      {metricValue(props.report.metrics.data, 'events', 'success').unwrapOr(null)}
     </td>
     <td className="text-center">
-      {metricValue(props.report.metrics.data, 'events', 'noop')}
+      {metricValue(props.report.metrics.data, 'events', 'noop').unwrapOr(null)}
     </td>
     <td className="text-center">
-      {metricValue(props.report.metrics.data, 'events', 'skip')}
+      {metricValue(props.report.metrics.data, 'events', 'skip').unwrapOr(null)}
     </td>
     <td className="text-center">
-      {metricValue(props.report.metrics.data, 'events', 'failure')}
+      {metricValue(props.report.metrics.data, 'events', 'failure').unwrapOr(null)}
     </td>
     <td className="text-right">
       {statusIcon(props.report.status)}

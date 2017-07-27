@@ -11,12 +11,13 @@ import { metricValue } from '../helpers';
 // Given a report for a single node, render a page for it
 export default (props: { report: reportT }) => {
   const report = props.report;
-  const maybeRunTime = metricValue(report.metrics.data, 'time', 'total');
-  const runTime = typeof maybeRunTime === 'number' ? maybeRunTime.toFixed(1) : maybeRunTime;
+  const runTime = metricValue(report.metrics.data, 'time', 'total')
+    .andThen(val => val.toFixed(1))
+    .unwrapOr(null);
 
-  const maybeConfigTime = metricValue(report.metrics.data, 'time', 'config_retrieval');
-  const configTime =
-    typeof maybeConfigTime === 'number' ? maybeConfigTime.toFixed(1) : maybeConfigTime;
+  const configTime = metricValue(report.metrics.data, 'time', 'config_retrieval')
+    .andThen(val => val.toFixed(1))
+    .unwrapOr(null);
 
   return (
     <div>
