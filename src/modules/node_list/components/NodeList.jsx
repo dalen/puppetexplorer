@@ -11,9 +11,11 @@ export default (props: { nodes: nodeT[], total: number, serverUrl: string }) =>
       <thead>
         <tr>
           <th>
-            <Label>
-              {props.total === 1 ? '1 node found' : `${props.total} nodes found`}
-            </Label>
+            {props.total === undefined
+              ? null
+              : <Label>
+                {props.total === 1 ? '1 node found' : `${props.total} nodes found`}
+              </Label>}
           </th>
           <th>Last run</th>
           <th style={{ textAlign: 'center' }}>Successes</th>

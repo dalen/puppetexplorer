@@ -32,12 +32,15 @@ export default class DashBoardMetric extends React.Component {
   };
 
   render() {
-    let children;
-    if (typeof this.state.value === 'number') {
-      children = `${this.state.value * this.props.multiply} ${this.props.unit}`;
-    } else {
-      children = <Glyphicon glyph="refresh" className="spin" />;
-    }
-    return <Panel header={this.props.title} bsStyle={this.props.style}>{children}</Panel>;
+    const children =
+      typeof this.state.value === 'number'
+        ? `${this.state.value * this.props.multiply} ${this.props.unit}`
+        : <Glyphicon glyph="refresh" className="spin" />;
+
+    return (
+      <Panel header={this.props.title} bsStyle={this.props.style}>
+        {children}
+      </Panel>
+    );
   }
 }
