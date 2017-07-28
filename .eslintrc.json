@@ -14,7 +14,6 @@
     "flowtype/delimiter-dangle": ["error", "always-multiline"],
     "flowtype/semi": ["error"],
     "fp/no-mutation": ["error", { "allowThis": true }],
-    "better/no-deletes": ["error"],
-    "better/no-ifs": ["warn"]
+    "better/no-deletes": ["error"]
   }
 }
