@@ -2674,11 +2674,11 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
-extract-loader@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/extract-loader/-/extract-loader-0.1.0.tgz#a1c146915241cc486d5292263c7555d5aa19766e"
+extract-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/extract-loader/-/extract-loader-1.0.0.tgz#a8e95fb1cf8992980932fd34ee350bdd3aa1fc77"
   dependencies:
-    loader-utils "^0.2.16"
+    loader-utils "^1.1.0"
 
 extsprintf@1.0.2:
   version "1.0.2"
@@ -5573,9 +5573,9 @@ rc@^1.0.1, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-bootstrap-date-picker@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-date-picker/-/react-bootstrap-date-picker-5.0.1.tgz#4d0cb33d93d5c2d92df1040b3509be8269a892ea"
+react-bootstrap-date-picker@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-date-picker/-/react-bootstrap-date-picker-5.1.0.tgz#5f87c6a875e411dbf46d2be74960756f113ebf23"
 
 react-bootstrap@^0.31.1:
   version "0.31.1"
