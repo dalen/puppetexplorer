@@ -4,32 +4,32 @@ import { Panel, Glyphicon } from 'react-bootstrap';
 
 import PuppetDB from '../../../PuppetDB';
 
-export default class DashBoardMetric extends React.Component {
+type Props = {
+  title: string,
+  style: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger',
+  bean: string,
+  beanValue: string,
+  multiply: number,
+  unit: string,
+  serverUrl: string,
+};
+
+type State = {
+  value?: number,
+};
+
+export default class DashBoardMetric extends React.Component<Props, State> {
   static defaultProps = {
     multiply: 1,
     unit: '',
     beanValue: 'Value',
   };
 
-  state: {
-    value?: number,
-  } = {};
-
   componentDidMount() {
     PuppetDB.getBean(this.props.serverUrl, this.props.bean).then(data =>
       this.setState({ value: data[this.props.beanValue] }),
     );
   }
-
-  props: {
-    title: string,
-    style: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger',
-    bean: string,
-    beanValue: string,
-    multiply: number,
-    unit: string,
-    serverUrl: string,
-  };
 
   render() {
     const children =

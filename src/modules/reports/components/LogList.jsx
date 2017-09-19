@@ -4,33 +4,32 @@ import { Alert, Table } from 'react-bootstrap';
 
 import LogListItem from './LogListItem';
 
-export default class EventList extends React.Component {
+type Props = {
+  logs: ?(logT[]),
+};
+
+export default class EventList extends React.Component<Props> {
   static defaultProps = {
     logs: [],
-  };
-
-  props: {
-    logs: ?logT[],
   };
 
   render() {
     if (this.props.logs) {
       return (
         <Table hover>
-          <thead><tr>
-            <th>Time</th>
-            <th>Level</th>
-            <th>Message</th>
-          </tr></thead>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Level</th>
+              <th>Message</th>
+            </tr>
+          </thead>
           <tbody>
-            {this.props.logs.map((log, i) => (<LogListItem
-              log={log}
-              key={i}
-            />))}
+            {this.props.logs.map((log, i) => <LogListItem log={log} key={i} />)}
           </tbody>
         </Table>
       );
     }
-    return (<Alert bsStyle="warning">No logs found</Alert>);
+    return <Alert bsStyle="warning">No logs found</Alert>;
   }
 }

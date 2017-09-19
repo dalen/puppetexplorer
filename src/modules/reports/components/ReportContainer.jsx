@@ -10,22 +10,22 @@ type Props = {
   reportHash: string,
 };
 
-// Fetch a report and pass it to the Report component
-export default class ReportContainer extends React.Component {
-  state: { report?: reportT } = {};
+type State = { report?: reportT };
 
+// Fetch a report and pass it to the Report component
+export default class ReportContainer extends React.Component<Props, State> {
   componentDidMount() {
     this.fetchReport(this.props.serverUrl, this.props.reportHash);
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.serverUrl !== this.props.serverUrl ||
-      nextProps.reportHash !== this.props.reportHash) {
+    if (
+      nextProps.serverUrl !== this.props.serverUrl ||
+      nextProps.reportHash !== this.props.reportHash
+    ) {
       this.fetchReport(nextProps.serverUrl, nextProps.reportHash);
     }
   }
-
-  props: Props;
 
   fetchReport(serverUrl: string, reportHash: string) {
     PuppetDB.query(serverUrl, 'reports', {
@@ -41,8 +41,8 @@ export default class ReportContainer extends React.Component {
 
   render() {
     if (this.state.report !== undefined) {
-      return (<Report report={this.state.report} />);
+      return <Report report={this.state.report} />;
     }
-    return (<Label>Loading...</Label>);
+    return <Label>Loading...</Label>;
   }
 }

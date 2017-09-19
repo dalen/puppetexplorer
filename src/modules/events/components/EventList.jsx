@@ -4,39 +4,39 @@ import { Alert, Table } from 'react-bootstrap';
 
 import EventListItem from './EventListItem';
 
-export default class EventList extends React.Component {
+type Props = {
+  events: ?(eventT[]),
+  showNode: boolean,
+};
+
+export default class EventList extends React.Component<Props> {
   static defaultProps = {
     events: [],
     showNode: true,
-  };
-
-  props: {
-    events: ?eventT[],
-    showNode: boolean,
   };
 
   render() {
     if (this.props.events) {
       return (
         <Table hover>
-          <thead><tr>
-            { this.props.showNode && <th>Node</th> }
-            <th>Resource</th>
-            <th>Status</th>
-            <th>Property</th>
-            <th>From</th>
-            <th>To</th>
-          </tr></thead>
+          <thead>
+            <tr>
+              {this.props.showNode && <th>Node</th>}
+              <th>Resource</th>
+              <th>Status</th>
+              <th>Property</th>
+              <th>From</th>
+              <th>To</th>
+            </tr>
+          </thead>
           <tbody>
-            {this.props.events.map((event, i) => (<EventListItem
-              event={event}
-              showNode={this.props.showNode}
-              key={i}
-            />))}
+            {this.props.events.map((event, i) =>
+              <EventListItem event={event} showNode={this.props.showNode} key={i} />,
+            )}
           </tbody>
         </Table>
       );
     }
-    return (<Alert bsStyle="warning">No events found</Alert>);
+    return <Alert bsStyle="warning">No events found</Alert>;
   }
 }

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { Label } from 'react-bootstrap';
 
 import PuppetDB from '../PuppetDB';
@@ -12,22 +12,24 @@ type Props = {
   countQuery: queryT,
 };
 
+type State = {
+  items?: mixed,
+  count?: number,
+  page: number,
+};
+
 export default (
-  ListElement: ReactClass<*>,
+  ListElement: React.ComponentType<*>,
   endpoint: string,
   itemsProp: string,
   orderBy: { [id: string]: string }[] = [{ field: 'certname', order: 'asc' }],
 ) =>
-  class PaginatedList extends React.Component {
+  class PaginatedList extends React.Component<Props, State> {
     static defaultProps = {
       perPage: 25,
     };
 
-    state: {
-      items?: mixed,
-      count?: number,
-      page: number,
-    } = {
+    state = {
       page: 1,
     };
 
@@ -57,8 +59,6 @@ export default (
         this.fetchCount(nextProps.serverUrl, nextProps.countQuery);
       }
     }
-
-    props: Props;
 
     fetchItems(serverUrl: string, query: ?queryT, page: number) {
       PuppetDB.query(serverUrl, endpoint, {

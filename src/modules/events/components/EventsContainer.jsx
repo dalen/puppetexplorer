@@ -18,14 +18,14 @@ type Props = {
   search: { [id: string]: mixed },
 };
 
-export default class EventListContainer extends React.Component {
+export default class EventListContainer extends React.Component<Props> {
   // Compute an event query based on date range
   static dateRangeEventQuery(query: ?queryT, dateFrom: string, dateTo: string): ?queryT {
-    return (PuppetDB.combine(
+    return PuppetDB.combine(
       query,
       dateFrom ? ['>=', 'timestamp', moment.utc(dateFrom).startOf('day').toISOString()] : null,
       dateTo ? ['<=', 'timestamp', moment.utc(dateTo).endOf('day').toISOString()] : null,
-    ));
+    );
   }
 
   getDate(which: string): string {
@@ -35,30 +35,30 @@ export default class EventListContainer extends React.Component {
     return new Date().toISOString();
   }
 
-  props: Props;
-
   selectTab = (tab: string) => {
     this.props.history.push({
       pathname: tab === 'latest' ? '/events' : '/events/daterange',
       search: this.props.location.search,
     });
-  }
+  };
 
   changeDate = (which: string, value: ?string) => {
     this.props.updateSearch({ [which]: value ? moment(value).format('YYYY-MM-DD') : undefined });
-  }
+  };
 
   render() {
     const dateFrom = this.getDate('dateFrom');
     const dateTo = this.getDate('dateTo');
 
     return (
-      <Tabs activeKey={this.props.tab || 'latest'} onSelect={this.selectTab} id="event-tabs" unmountOnExit>
+      <Tabs
+        activeKey={this.props.tab || 'latest'}
+        onSelect={this.selectTab}
+        id="event-tabs"
+        unmountOnExit
+      >
         <Tab eventKey={'latest'} title="Latest Report" style={{ paddingTop: 10 }}>
-          <Events
-            serverUrl={this.props.serverUrl}
-            queryParsed={this.props.queryParsed}
-          />
+          <Events serverUrl={this.props.serverUrl} queryParsed={this.props.queryParsed} />
         </Tab>
         <Tab eventKey={'daterange'} title="Date Range" style={{ paddingTop: 10 }}>
           <Grid fluid>
@@ -92,7 +92,10 @@ export default class EventListContainer extends React.Component {
           <Events
             serverUrl={this.props.serverUrl}
             queryParsed={EventListContainer.dateRangeEventQuery(
-              this.props.queryParsed, dateFrom, dateTo)}
+              this.props.queryParsed,
+              dateFrom,
+              dateTo,
+            )}
           />
         </Tab>
       </Tabs>

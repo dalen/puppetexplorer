@@ -1,10 +1,10 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { Navbar, Nav, Glyphicon } from 'react-bootstrap';
 
 import RouterNavItem from '../../../components/RouterNavItem';
 
-export default (props: { selectTab: (tab: string) => void }) =>
+export default (props: { selectTab: (tab: string) => void }): React.Node =>
   (<Navbar fluid>
     <Nav>
       <RouterNavItem to="/" eventKey="/" onSelect={props.selectTab}>

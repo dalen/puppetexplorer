@@ -14,12 +14,14 @@ type Props = {
   updateQuery: (query: string) => void,
 };
 
+type State = {
+  factTree?: FactTree,
+  activeFactCharts: OrderedSet<factPathT>,
+};
+
 // Fetch a report and pass it to the Report component
-export default class FactsContainer extends React.Component {
-  state: {
-    factTree?: FactTree,
-    activeFactCharts: OrderedSet<factPathT>,
-  } = { activeFactCharts: OrderedSet.of() };
+export default class FactsContainer extends React.Component<Props, State> {
+  state = { activeFactCharts: OrderedSet.of() };
 
   componentDidMount() {
     this.fetchFactPaths(this.props.serverUrl);
@@ -30,8 +32,6 @@ export default class FactsContainer extends React.Component {
       this.fetchFactPaths(nextProps.serverUrl);
     }
   }
-
-  props: Props;
 
   fetchFactPaths(serverUrl: string) {
     PuppetDB.query(serverUrl, 'fact-paths', {

@@ -3,7 +3,12 @@ import React from 'react';
 import { Alert, Panel } from 'react-bootstrap';
 import { Chart } from 'react-google-charts';
 
-export default class ReportMetrics extends React.Component {
+type Props = {
+  metrics: ?(metricT[]),
+  colors: string[],
+};
+
+export default class ReportMetrics extends React.Component<Props> {
   static defaultProps = {
     colors: [
       '#a6cee3',
@@ -19,11 +24,6 @@ export default class ReportMetrics extends React.Component {
       '#ffff99',
       '#b15928',
     ],
-  }
-
-  props: {
-    metrics: ?metricT[],
-    colors: string[],
   };
 
   render() {
@@ -42,35 +42,36 @@ export default class ReportMetrics extends React.Component {
           {Array.from(categories.entries()).map((metricCategory) => {
             const [categoryName, metrics] = metricCategory;
             // Add color and annotation to each data row, then sort them by value
-            const data = Array.from(metrics.entries()).map(
-              (item, i) => [...item, this.props.colors[i], item[1]]).sort(
-              (a, b) => a[1] - b[1]);
-            return (<Panel header={categoryName} key={categoryName}>
-              <Chart
-                chartType="BarChart"
-                data={[['Metric', 'Value', { role: 'style' }, { role: 'annotation' }], ...data]}
-                options={{
-                  legend: { position: 'none' },
-                  chartArea: {
-                    left: 200,
-                    top: 0,
-                    bottom: 30,
-                  },
-                  width: '100%',
-                  height: (metrics.size * 30) + 30,
-                  tooltip: { trigger: 'none' },
-                  fontSize: 15,
-                }}
-                width="100%"
-                height={`${(metrics.size * 30) + 30}px`}
-                graph_id={categoryName}
-              />
-            </Panel>);
-          })
-          }
+            const data = Array.from(metrics.entries())
+              .map((item, i) => [...item, this.props.colors[i], item[1]])
+              .sort((a, b) => a[1] - b[1]);
+            return (
+              <Panel header={categoryName} key={categoryName}>
+                <Chart
+                  chartType="BarChart"
+                  data={[['Metric', 'Value', { role: 'style' }, { role: 'annotation' }], ...data]}
+                  options={{
+                    legend: { position: 'none' },
+                    chartArea: {
+                      left: 200,
+                      top: 0,
+                      bottom: 30,
+                    },
+                    width: '100%',
+                    height: metrics.size * 30 + 30,
+                    tooltip: { trigger: 'none' },
+                    fontSize: 15,
+                  }}
+                  width="100%"
+                  height={`${metrics.size * 30 + 30}px`}
+                  graph_id={categoryName}
+                />
+              </Panel>
+            );
+          })}
         </div>
       );
     }
-    return (<Alert bsStyle="warning">No metrics found</Alert>);
+    return <Alert bsStyle="warning">No metrics found</Alert>;
   }
 }

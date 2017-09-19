@@ -20,7 +20,16 @@ type Props = {
   history: RouterHistory,
 };
 
-export default class App extends React.Component {
+type State = {
+  config: {
+    serverUrl: string,
+    dashBoardPanels: Array<dashBoardPanelT[]>,
+  },
+  search: { [id: string]: mixed },
+  queryParsed: ?queryT,
+};
+
+export default class App extends React.Component<Props, State> {
   static decodeSearch(
     search: string,
   ): {
@@ -42,15 +51,6 @@ export default class App extends React.Component {
       config: Config.defaults(),
     };
   }
-
-  state: {
-    config: {
-      serverUrl: string,
-      dashBoardPanels: Array<dashBoardPanelT[]>,
-    },
-    search: { [id: string]: mixed },
-    queryParsed: ?queryT,
-  };
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.location.search !== this.props.location.search) {

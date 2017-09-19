@@ -13,11 +13,13 @@ type Props = {
   onSelect: (value: string) => void,
 };
 
-export default class FactChart extends React.Component {
-  state: {
-    data: [string, number][],
-    labels?: string[],
-  } = { data: [] };
+type State = {
+  data: [string, number][],
+  labels?: string[],
+};
+
+export default class FactChart extends React.Component<Props, State> {
+  state = { data: [] };
 
   componentDidMount() {
     this.fetchFactValue(this.props.fact, this.props.queryParsed, this.props.serverUrl);
@@ -32,8 +34,6 @@ export default class FactChart extends React.Component {
       this.fetchFactValue(nextProps.fact, nextProps.queryParsed, nextProps.serverUrl);
     }
   }
-
-  props: Props;
 
   // When a slice is selected
   // FIXME: modify query

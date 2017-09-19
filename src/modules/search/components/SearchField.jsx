@@ -9,10 +9,12 @@ type Props = {
   queryString: string,
 };
 
-export default class SearchField extends React.Component {
-  state: {
-    queryString: string,
-  } = { queryString: '' };
+type State = {
+  queryString: string,
+};
+
+export default class SearchField extends React.Component<Props, State> {
+  state = { queryString: '' };
 
   componentWillMount() {
     this.setState({
@@ -26,26 +28,26 @@ export default class SearchField extends React.Component {
     }
   }
 
-  props: Props;
-
   handleChange = (event: Event) => {
     if (event.target instanceof HTMLInputElement) {
       this.setState({ queryString: event.target.value });
     } else {
       throw new Error('SearchField.handleChange(): Unknown event target');
     }
-  }
+  };
 
   handleSubmit = (event: Event) => {
     this.props.updateQuery(this.state.queryString);
     return event.preventDefault();
-  }
+  };
 
   render() {
     return (
       <form id="node-query" onSubmit={this.handleSubmit}>
         <InputGroup>
-          <InputGroup.Addon><Glyphicon glyph="search" /></InputGroup.Addon>
+          <InputGroup.Addon>
+            <Glyphicon glyph="search" />
+          </InputGroup.Addon>
           <FormControl
             type="search"
             placeholder="Search"

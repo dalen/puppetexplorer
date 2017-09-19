@@ -7,27 +7,27 @@ import Moment from 'react-moment';
 import { metricValue, statusIcon } from '../../reports';
 import PuppetDB from '../../../PuppetDB';
 
-type props = {
+type Props = {
   serverUrl: string,
   node: nodeT,
 };
 
-export default class NodeListItem extends React.Component {
-  state: {
-    metrics: Array<*>,
-  } = { metrics: [] };
+type State = {
+  metrics: Array<*>,
+};
+
+export default class NodeListItem extends React.Component<Props, State> {
+  state = { metrics: [] };
 
   componentDidMount() {
     this.fetchMetrics();
   }
 
-  componentWillReceiveProps(nextProps: props) {
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.serverUrl !== this.props.serverUrl || nextProps.node !== this.props.node) {
       this.fetchMetrics();
     }
   }
-
-  props: props;
 
   fetchMetrics() {
     type metricT = {

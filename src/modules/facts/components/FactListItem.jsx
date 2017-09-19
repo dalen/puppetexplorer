@@ -5,15 +5,17 @@ import { OrderedSet } from 'immutable';
 
 import FactTree from '../FactTree';
 
-export default class FactListItem extends React.Component {
-  state: { expanded: boolean } = { expanded: false };
+type Props = {
+  factTreeItem: FactTree,
+  activeFactCharts: OrderedSet<factPathT>,
+  toggleChart: (graph: factPathT) => void,
+  indent: number,
+};
 
-  props: {
-    factTreeItem: FactTree,
-    activeFactCharts: OrderedSet<factPathT>,
-    toggleChart: (graph: factPathT) => void,
-    indent: number,
-  };
+type State = { expanded: boolean };
+
+export default class FactListItem extends React.Component<Props, State> {
+  state = { expanded: false };
 
   toggle = () => {
     this.setState({ expanded: !this.state.expanded });
@@ -29,7 +31,11 @@ export default class FactListItem extends React.Component {
   indent(): ?React$Element<*> {
     if (this.props.indent > 0) {
       // \u00a0 is a non breaking space in unicode
-      return <span>{new Array(this.props.indent).map(() => '').join('\u00a0\u00a0\u00a0')}└ </span>;
+      return (
+        <span>
+          {new Array(this.props.indent).map(() => '').join('\u00a0\u00a0\u00a0')}└{' '}
+        </span>
+      );
     }
     return null;
   }
@@ -39,15 +45,16 @@ export default class FactListItem extends React.Component {
     if (factTree.children.length === 0 || factTree.arrayLeaf()) {
       return (
         <ListGroupItem onClick={this.toggleChart} active={this.isActive()}>
-          {this.indent()}<Glyphicon glyph="stats" /> {factTree.name()}
+          {this.indent()}
+          <Glyphicon glyph="stats" /> {factTree.name()}
         </ListGroupItem>
       );
     }
     return (
       <div style={{ marginBottom: '-1px' }}>
         <ListGroupItem bsStyle={this.state.expanded ? 'info' : null} onClick={this.toggle}>
-          {this.indent()}<Glyphicon glyph={this.state.expanded ? 'collapse-up' : 'expand'} />{' '}
-          {factTree.name()}
+          {this.indent()}
+          <Glyphicon glyph={this.state.expanded ? 'collapse-up' : 'expand'} /> {factTree.name()}
         </ListGroupItem>
         {this.state.expanded &&
           factTree.children.map(child =>

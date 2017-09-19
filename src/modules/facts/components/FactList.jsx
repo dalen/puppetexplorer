@@ -6,16 +6,16 @@ import { OrderedSet } from 'immutable';
 import FactListItem from './FactListItem';
 import FactTree from '../FactTree';
 
-export default class FactList extends React.Component {
+type Props = {
+  factTree: FactTree,
+  activeFactCharts: OrderedSet<factPathT>,
+  toggleChart: (graph: factPathT) => void,
+  indent: number,
+};
+
+export default class FactList extends React.Component<Props> {
   static defaultProps = {
     indent: 0,
-  };
-
-  props: {
-    factTree: FactTree,
-    activeFactCharts: OrderedSet<factPathT>,
-    toggleChart: (graph: factPathT) => void,
-    indent: number,
   };
 
   render() {

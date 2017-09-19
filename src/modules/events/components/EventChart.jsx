@@ -14,20 +14,22 @@ type Props = {
   id: string,
 };
 
-export default class EventChart extends React.Component {
-  state: {
-    data?: [string, number][],
-    labels?: string[],
-  } = {};
+type State = {
+  data?: [string, number][],
+  labels?: string[],
+};
 
+export default class EventChart extends React.Component<Props, State> {
   componentDidMount() {
     this.fetchEventValue(this.props.eventField, this.props.queryParsed, this.props.serverUrl);
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.serverUrl !== this.props.serverUrl ||
+    if (
+      nextProps.serverUrl !== this.props.serverUrl ||
       nextProps.eventField !== this.props.eventField ||
-      nextProps.queryParsed !== this.props.queryParsed) {
+      nextProps.queryParsed !== this.props.queryParsed
+    ) {
       this.fetchEventValue(nextProps.eventField, nextProps.queryParsed, nextProps.serverUrl);
     }
   }
@@ -41,7 +43,7 @@ export default class EventChart extends React.Component {
       const selection = chart.chart.getSelection();
       console.log('Selected', dig(this.state.data, dig(selection, 0, 'row'), 0));
     }
-  }
+  };
 
   chartEvents = [
     {
@@ -52,11 +54,7 @@ export default class EventChart extends React.Component {
 
   fetchEventValue(eventField: string, nodeQuery: ?queryT, serverUrl: string) {
     PuppetDB.query(serverUrl, 'events', {
-      query: ['extract',
-        [['function', 'count'], eventField],
-        nodeQuery,
-        ['group_by', eventField],
-      ],
+      query: ['extract', [['function', 'count'], eventField], nodeQuery, ['group_by', eventField]],
     }).then((data) => {
       this.setState({ data: data.map(item => [item[eventField].toString(), item.count]) });
     });
