@@ -81,7 +81,7 @@ export default (
     };
 
     render() {
-      if (this.state.items !== undefined) {
+      if (this.state.items !== undefined && this.state.count !== undefined) {
         const props = { [itemsProp]: this.state.items };
         return (
           <div>

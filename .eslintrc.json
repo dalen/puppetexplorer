@@ -7,6 +7,7 @@
     "jest": true
   },
   "rules": {
+    "no-mixed-operators": ["off"],
     "no-nested-ternary": ["off"],
     "flowtype/require-valid-file-annotation": ["error", "always", { "annotationStyle": "line" }],
     "flowtype/require-parameter-type": ["error", { "excludeArrowFunctions": true }],

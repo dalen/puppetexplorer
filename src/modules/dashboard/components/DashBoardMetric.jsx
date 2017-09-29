@@ -25,6 +25,8 @@ export default class DashBoardMetric extends React.Component<Props, State> {
     beanValue: 'Value',
   };
 
+  state = {};
+
   componentDidMount() {
     PuppetDB.getBean(this.props.serverUrl, this.props.bean).then(data =>
       this.setState({ value: data[this.props.beanValue] }),
@@ -33,9 +35,11 @@ export default class DashBoardMetric extends React.Component<Props, State> {
 
   render() {
     const children =
-      typeof this.state.value === 'number'
-        ? `${this.state.value * this.props.multiply} ${this.props.unit}`
-        : <Glyphicon glyph="refresh" className="spin" />;
+      typeof this.state.value === 'number' ? (
+        `${this.state.value * this.props.multiply} ${this.props.unit}`
+      ) : (
+        <Glyphicon glyph="refresh" className="spin" />
+      );
 
     return (
       <Panel header={this.props.title} bsStyle={this.props.style}>

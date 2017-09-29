@@ -23,8 +23,26 @@ export default class EventListContainer extends React.Component<Props> {
   static dateRangeEventQuery(query: ?queryT, dateFrom: string, dateTo: string): ?queryT {
     return PuppetDB.combine(
       query,
-      dateFrom ? ['>=', 'timestamp', moment.utc(dateFrom).startOf('day').toISOString()] : null,
-      dateTo ? ['<=', 'timestamp', moment.utc(dateTo).endOf('day').toISOString()] : null,
+      dateFrom
+        ? [
+          '>=',
+          'timestamp',
+          moment
+            .utc(dateFrom)
+            .startOf('day')
+            .toISOString(),
+        ]
+        : null,
+      dateTo
+        ? [
+          '<=',
+          'timestamp',
+          moment
+            .utc(dateTo)
+            .endOf('day')
+            .toISOString(),
+        ]
+        : null,
     );
   }
 

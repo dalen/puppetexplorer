@@ -1,5 +1,3 @@
-// @flow
-
 import FactTree from './FactTree';
 
 test('it adds intermediate nodes', () => {

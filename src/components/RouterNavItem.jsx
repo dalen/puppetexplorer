@@ -8,20 +8,11 @@ type Props = {
   children: React.Node,
 };
 
-export default class RouterNavItem extends React.Component<Props> {
-  static defaultProps = {
-    children: [],
-  };
-
-  render() {
-    const { to, ...rest } = this.props;
-    return (
-      <Route path={to}>
-        {({ match }) =>
-          (<NavItem {...{ ...rest, active: match != null }}>
-            {this.props.children}
-          </NavItem>)}
-      </Route>
-    );
-  }
-}
+export default (props: Props): React.Node => {
+  const { to, ...rest } = props;
+  return (
+    <Route path={to}>
+      {({ match }) => <NavItem {...{ ...rest, active: match != null }}>{props.children}</NavItem>}
+    </Route>
+  );
+};

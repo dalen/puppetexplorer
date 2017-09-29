@@ -101,8 +101,6 @@ export default class App extends React.Component<Props, State> {
     });
   };
 
-  props: Props;
-
   render() {
     return (
       <div>
@@ -112,56 +110,71 @@ export default class App extends React.Component<Props, State> {
         <Switch>
           <Route
             path="/nodes"
-            render={props =>
-              (<NodeListContainer
+            render={props => (
+              <NodeListContainer
                 {...props}
                 serverUrl={this.state.config.serverUrl}
                 queryParsed={this.state.queryParsed}
-              />)}
+              />
+            )}
           />
           <Route
             path="/node/:node"
             render={props =>
-              <NodeDetail serverUrl={this.state.config.serverUrl} node={props.match.params.node} />}
+              (typeof props.match.params.node === 'string' ? (
+                <NodeDetail
+                  serverUrl={this.state.config.serverUrl}
+                  node={props.match.params.node}
+                />
+              ) : (
+                <h1>No node specified</h1>
+              ))}
           />
           <Route
             path="/report/:reportHash"
             render={props =>
-              (<ReportContainer
-                serverUrl={this.state.config.serverUrl}
-                reportHash={props.match.params.reportHash}
-              />)}
+              (typeof props.match.params.reportHash === 'string' ? (
+                <ReportContainer
+                  serverUrl={this.state.config.serverUrl}
+                  reportHash={props.match.params.reportHash}
+                />
+              ) : (
+                <h1>No report specified</h1>
+              ))}
           />
           <Route
             path="/events/:tab?"
-            render={props =>
-              (<EventsContainer
+            render={props => (
+              <EventsContainer
                 {...props}
                 serverUrl={this.state.config.serverUrl}
                 queryParsed={this.state.queryParsed}
                 tab={props.match.params.tab}
                 updateSearch={this.updateSearch}
                 search={this.state.search}
-              />)}
+              />
+            )}
           />
           <Route
             path="/facts"
-            render={props =>
-              (<FactsContainer
+            render={props => (
+              <FactsContainer
                 {...props}
                 serverUrl={this.state.config.serverUrl}
                 queryParsed={this.state.queryParsed}
                 queryString={this.getQuery()}
                 updateQuery={this.setQuery}
-              />)}
+              />
+            )}
           />
           <Route
-            render={props =>
-              (<DashBoard
+            render={props => (
+              <DashBoard
                 {...props}
                 panels={this.state.config.dashBoardPanels}
                 serverUrl={this.state.config.serverUrl}
-              />)}
+              />
+            )}
           />
         </Switch>
       </div>

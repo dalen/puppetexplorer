@@ -30,10 +30,12 @@ export default class ReportMetrics extends React.Component<Props> {
     if (this.props.metrics) {
       // Create a nested Map with category -> name -> value for the metrics
       const categories = this.props.metrics.reduce((ret, metric) => {
-        if (!ret.has(metric.category)) {
+        const category = ret.get(metric.category);
+        if (category) {
+          category.set(metric.name, metric.value);
+        } else {
           ret.set(metric.category, new Map());
         }
-        ret.get(metric.category).set(metric.name, metric.value);
         return ret;
       }, new Map());
 

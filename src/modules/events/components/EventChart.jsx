@@ -20,6 +20,8 @@ type State = {
 };
 
 export default class EventChart extends React.Component<Props, State> {
+  state = {};
+
   componentDidMount() {
     this.fetchEventValue(this.props.eventField, this.props.queryParsed, this.props.serverUrl);
   }
