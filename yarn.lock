@@ -89,6 +89,15 @@ ajv@^4.7.0, ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
+ajv@^5.0.0:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.2.3.tgz#c06f598778c44c6b161abafe3466b81ad1814ed2"
+  dependencies:
+    co "^4.6.0"
+    fast-deep-equal "^1.0.0"
+    json-schema-traverse "^0.3.0"
+    json-stable-stringify "^1.0.1"
+
 ajv@^5.1.5, ajv@^5.2.0:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.2.2.tgz#47c68d69e86f5d953103b0074a9430dc63da5e39"
@@ -2355,8 +2364,8 @@ eslint-scope@^3.7.1:
     estraverse "^4.1.1"
 
 eslint@^4.7.2:
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.7.2.tgz#ff6f5f5193848a27ee9b627be3e73fb9cb5e662e"
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.8.0.tgz#229ef0e354e0e61d837c7a80fdfba825e199815e"
   dependencies:
     ajv "^5.2.0"
     babel-code-frame "^6.22.0"
@@ -2655,11 +2664,12 @@ file-entry-cache@^2.0.0:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
 
-file-loader@^0.11.2:
-  version "0.11.2"
-  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-0.11.2.tgz#4ff1df28af38719a6098093b88c82c71d1794a34"
+file-loader@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-1.1.4.tgz#5ca9384adfafe008077c3439a435b2781a889ef5"
   dependencies:
     loader-utils "^1.0.2"
+    schema-utils "^0.3.0"
 
 filename-regex@^2.0.0:
   version "2.0.1"
@@ -4291,9 +4301,9 @@ no-case@^2.2.0:
   dependencies:
     lower-case "^1.1.1"
 
-node-deb@^0.9.0:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/node-deb/-/node-deb-0.9.1.tgz#c2bd4be2adb8103def87498c328948107d9f1d07"
+node-deb@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/node-deb/-/node-deb-0.10.0.tgz#4fb96c85c57cbf7bc9d064f51bbd4afeabb18017"
 
 node-fetch@^1.0.1:
   version "1.7.2"
@@ -4444,8 +4454,8 @@ npm-run-path@^2.0.0:
     path-key "^2.0.0"
 
 npm2rpm@^2.1.8:
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/npm2rpm/-/npm2rpm-2.1.10.tgz#dfdb01055eb4e0b14ee783f2c1d1a258f992f5b8"
+  version "2.1.12"
+  resolved "https://registry.yarnpkg.com/npm2rpm/-/npm2rpm-2.1.12.tgz#1215a1283d81ca67c4f9578a2ad5bda14f52441d"
   dependencies:
     async "~1.5.2"
     colors "~1.1.2"
@@ -5214,9 +5224,9 @@ rc@^1.0.1, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-"react-bootstrap-date-picker@https://github.com/pushtell/react-bootstrap-date-picker":
-  version "5.1.1"
-  resolved "https://github.com/pushtell/react-bootstrap-date-picker#f622dc8872dd180324ba5d3c295d009848f5814b"
+react-bootstrap-date-picker@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-date-picker/-/react-bootstrap-date-picker-5.1.0.tgz#5f87c6a875e411dbf46d2be74960756f113ebf23"
 
 react-bootstrap@^0.31.1:
   version "0.31.3"
@@ -5659,6 +5669,12 @@ sax@0.6.x:
 sax@>=0.6.0, sax@^1.2.1, sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
+
+schema-utils@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.3.0.tgz#f5877222ce3e931edae039f17eb3716e7137f8cf"
+  dependencies:
+    ajv "^5.0.0"
 
 select-hose@^2.0.0:
   version "2.0.0"
