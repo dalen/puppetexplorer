@@ -1,5 +1,5 @@
-// flow-typed signature: 755e6768b884f63b111578306f711f4a
-// flow-typed version: 97d98ab83e/react-router_v4.x.x/flow_>=v0.53.x
+// flow-typed signature: 1e6728f0a649edac3689d6e2db7487a7
+// flow-typed version: 01716df816/react-router_v4.x.x/flow_>=v0.53.x
 
 declare module "react-router" {
   // NOTE: many of these are re-exported by react-router-dom and
@@ -61,9 +61,9 @@ declare module "react-router" {
     callback: (confirmed: boolean) => void
   ) => void;
 
-  declare type StaticRouterContext = {|
+  declare type StaticRouterContext = {
     url?: string
-  |};
+  };
 
   declare export class StaticRouter extends React$Component<{
     basename?: string,
