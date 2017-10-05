@@ -18,9 +18,7 @@ export default ({ events = [], showNode = true }: { events: eventT[], showNode: 
             <th>To</th>
           </tr>
         </thead>
-        <tbody>
-          {events.map((event, i) => <EventListItem event={event} showNode={showNode} key={i} />)}
-        </tbody>
+        <tbody>{events.map(event => <EventListItem event={event} showNode={showNode} />)}</tbody>
       </Table>
     );
   }

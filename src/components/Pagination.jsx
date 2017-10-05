@@ -9,22 +9,20 @@ const Pagination = (props: {
   perPage: number,
   activePage: number,
   onSelect: (page: number) => void,
-}): ?React$Element<*> => {
+}) => {
   const numPages = props.count == null ? 1 : Math.ceil(props.count / props.perPage);
 
-  return numPages === 1
-    ? null
-    : props.count
-      ? <RBPagination
-        first
-        prev={numPages > 2}
-        next={numPages > 2}
-        last
-        items={Math.ceil(numPages)}
-        activePage={props.activePage}
-        onSelect={props.onSelect}
-      />
-      : null;
+  return numPages === 1 ? null : props.count ? (
+    <RBPagination
+      first
+      prev={numPages > 2}
+      next={numPages > 2}
+      last
+      items={Math.ceil(numPages)}
+      activePage={props.activePage}
+      onSelect={props.onSelect}
+    />
+  ) : null;
 };
 
 export default Pagination;
