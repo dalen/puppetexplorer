@@ -3,7 +3,10 @@
   "version": "3.0.0",
   "description": "A web interface for exploring PuppetDB data",
   "license": "Apache-2.0",
-  "keywords": ["puppet", "puppetdb"],
+  "keywords": [
+    "puppet",
+    "puppetdb"
+  ],
   "homepage": "https://github.com/dalen/puppetexplorer",
   "bugs": {
     "url": "https://github.com/dalen/puppetexplorer/issues"
