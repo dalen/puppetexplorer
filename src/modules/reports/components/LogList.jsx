@@ -4,7 +4,7 @@ import { Alert, Table } from 'react-bootstrap';
 
 import LogListItem from './LogListItem';
 
-export default ({ logs = [] }: { logs: logT[] }) => {
+export default ({ logs = [] }: { logs?: logT[] }) => {
   if (logs) {
     return (
       <Table hover>
