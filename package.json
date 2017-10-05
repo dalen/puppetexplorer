@@ -56,6 +56,7 @@
     "react-router-dom": "^4.1.2",
     "reason-react": "^0.2.3",
     "redux": "^3.7.2",
+    "redux-loop": "^4.1.0",
     "results": "^0.14.1",
     "whatwg-fetch": "^2.0.1"
   },
