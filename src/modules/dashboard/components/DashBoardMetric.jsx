@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { Panel, Glyphicon } from 'react-bootstrap';
+import * as Maybe from 'flow-static-land/lib/Maybe';
 
 import PuppetDB from '../../../PuppetDB';
 
@@ -15,7 +16,7 @@ type Props = {
 };
 
 type State = {
-  value?: number,
+  value: Maybe.Maybe<number>,
 };
 
 export default class DashBoardMetric extends React.Component<Props, State> {
@@ -25,21 +26,22 @@ export default class DashBoardMetric extends React.Component<Props, State> {
     beanValue: 'Value',
   };
 
-  state = {};
+  state = {
+    value: Maybe.empty(),
+  };
 
   componentDidMount() {
     PuppetDB.getBean(this.props.serverUrl, this.props.bean).then(data =>
-      this.setState({ value: data[this.props.beanValue] }),
+      this.setState({ value: Maybe.of(data[this.props.beanValue]) }),
     );
   }
 
   render() {
-    const children =
-      typeof this.state.value === 'number' ? (
-        `${this.state.value * this.props.multiply} ${this.props.unit}`
-      ) : (
-        <Glyphicon glyph="refresh" className="spin" />
-      );
+    const children = Maybe.maybe(
+      <Glyphicon glyph="refresh" className="spin" />,
+      val => `${val * this.props.multiply} ${this.props.unit}`,
+      this.state.value,
+    );
 
     return (
       <Panel header={this.props.title} bsStyle={this.props.style}>
