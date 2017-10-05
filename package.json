@@ -3,10 +3,7 @@
   "version": "3.0.0",
   "description": "A web interface for exploring PuppetDB data",
   "license": "Apache-2.0",
-  "keywords": [
-    "puppet",
-    "puppetdb"
-  ],
+  "keywords": ["puppet", "puppetdb"],
   "homepage": "https://github.com/dalen/puppetexplorer",
   "bugs": {
     "url": "https://github.com/dalen/puppetexplorer/issues"
@@ -28,9 +25,14 @@
     "type": "git",
     "url": "https://github.com/dalen/puppetexplorer.git"
   },
+  "resolutions": {
+    "react": "15.6.2",
+    "react-dom": "15.6.2"
+  },
   "dependencies": {
     "bootswatch": "^3.3.6",
     "bs-fetch": "^0.1.1",
+    "flow-static-land": "^0.2.7",
     "immutability-helper": "^2.3.0",
     "immutable": "4.0.0-rc.2",
     "moment": "^2.17.0",
@@ -40,10 +42,10 @@
     "object-hash": "^1.1.8",
     "prop-types": "^15.6.0",
     "qs": "^6.4.0",
-    "react": "15.6.2",
+    "react": "^15.6.2",
     "react-bootstrap": "^0.31.1",
     "react-bootstrap-date-picker": "^5.1.0",
-    "react-dom": "15.6.2",
+    "react-dom": "^15.6.2",
     "react-google-charts": "^1.5.5",
     "react-moment": "^0.6.0",
     "react-redux": "^5.0.4",
