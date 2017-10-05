@@ -9,8 +9,7 @@ import ReportMetrics from './ReportMetrics';
 import { metricValue } from '../helpers';
 
 // Given a report for a single node, render a page for it
-export default (props: { report: reportT }) => {
-  const report = props.report;
+export default ({ report }: { report: reportT }) => {
   const runTime = metricValue(report.metrics.data, 'time', 'total')
     .andThen(val => val.toFixed(1))
     .unwrapOr(null);
@@ -31,22 +30,14 @@ export default (props: { report: reportT }) => {
         <Row>
           <Col md={3}>
             <ListGroup>
-              <ListGroupItem header="Environment">
-                {report.environment}
-              </ListGroupItem>
-              <ListGroupItem header="Puppet version">
-                {report.puppet_version}
-              </ListGroupItem>
+              <ListGroupItem header="Environment">{report.environment}</ListGroupItem>
+              <ListGroupItem header="Puppet version">{report.puppet_version}</ListGroupItem>
             </ListGroup>
           </Col>
           <Col md={3}>
             <ListGroup>
-              <ListGroupItem header="Run time">
-                {runTime} s
-              </ListGroupItem>
-              <ListGroupItem header="Catalog retrieval time">
-                {configTime} s
-              </ListGroupItem>
+              <ListGroupItem header="Run time">{runTime} s</ListGroupItem>
+              <ListGroupItem header="Catalog retrieval time">{configTime} s</ListGroupItem>
             </ListGroup>
           </Col>
           <Col md={3}>
@@ -54,9 +45,7 @@ export default (props: { report: reportT }) => {
               <ListGroupItem header="Configuration version">
                 {report.configuration_version}
               </ListGroupItem>
-              <ListGroupItem header="Catalog compiled by">
-                {report.producer}
-              </ListGroupItem>
+              <ListGroupItem header="Catalog compiled by">{report.producer}</ListGroupItem>
             </ListGroup>
           </Col>
           <Col md={3}>
