@@ -34,10 +34,9 @@
   },
   "dependencies": {
     "bootswatch": "^3.3.6",
-    "bs-fetch": "^0.1.1",
-    "flow-static-land": "^0.2.7",
     "immutability-helper": "^2.3.0",
     "immutable": "4.0.0-rc.2",
+    "maybe.ts": "^0.1.0",
     "moment": "^2.17.0",
     "moment-timezone": "^0.5.11",
     "node-puppetdbquery": "^1.1.1",
@@ -57,10 +56,17 @@
     "reason-react": "^0.2.3",
     "redux": "^3.7.2",
     "redux-loop": "^4.1.0",
-    "results": "^0.14.1",
+    "result.ts": "^0.3.1",
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
+    "@types/object-hash": "^1.1.0",
+    "@types/qs": "^6.5.1",
+    "@types/react": "^16.0.19",
+    "@types/react-bootstrap": "^0.31.6",
+    "@types/react-bootstrap-date-picker": "^4.0.4",
+    "@types/react-dom": "^16.0.2",
+    "@types/react-router-dom": "^4.2.0",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.0",
@@ -95,6 +101,11 @@
     "npm2rpm": "^2.1.8",
     "protractor": "^5.1.2",
     "raw-loader": "^0.5.1",
+    "ts-loader": "^3.1.1",
+    "tslint": "^5.8.0",
+    "tslint-config-airbnb": "^5.3.0",
+    "tslint-immutable": "^4.4.0",
+    "typescript": "^2.6.1",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
   }

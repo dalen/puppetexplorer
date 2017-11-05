@@ -3,3 +3,6 @@
 /.settings
 /node_modules
 /dist
+/.merlin
+/yarn-error.log
+/lib

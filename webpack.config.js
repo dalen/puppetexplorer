@@ -18,7 +18,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.re'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.re'],
   },
   // use imports loader to add whatwg-fetch polyfill
   plugins: [
@@ -28,6 +28,13 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader',
+        },
+      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
