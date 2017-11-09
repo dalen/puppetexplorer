@@ -1,21 +1,26 @@
 import * as React from 'react';
-import { Table, Label, Alert } from 'react-bootstrap';
+import * as Table from 'react-bootstrap/lib/Table';
+import * as Label from 'react-bootstrap/lib/Label';
+import * as Alert from 'react-bootstrap/lib/Alert';
 
 import NodeListItem from './NodeListItem';
 import * as PuppetDB from '../../../PuppetDB';
 
-export default (props: { nodes: PuppetDB.nodeT[], total: number, serverUrl: string }) =>
-  (props.total === 0
-    ? <Alert bsStyle="warning">No nodes found</Alert>
-    : <Table striped>
+export default (props: {
+  readonly nodes: ReadonlyArray<PuppetDB.nodeT>;
+  readonly total: number;
+  readonly serverUrl: string;
+}) =>
+  props.total === 0 ? (
+    <Alert bsStyle="warning">No nodes found</Alert>
+  ) : (
+    <Table striped>
       <thead>
         <tr>
           <th>
-            {props.total === undefined
-              ? null
-              : <Label>
-                {props.total === 1 ? '1 node found' : `${props.total} nodes found`}
-              </Label>}
+            {props.total === undefined ? null : (
+              <Label>{props.total === 1 ? '1 node found' : `${props.total} nodes found`}</Label>
+            )}
           </th>
           <th>Last run</th>
           <th style={{ textAlign: 'center' }}>Successes</th>
@@ -26,8 +31,9 @@ export default (props: { nodes: PuppetDB.nodeT[], total: number, serverUrl: stri
         </tr>
       </thead>
       <tbody>
-        {props.nodes.map(node =>
-          <NodeListItem node={node} serverUrl={props.serverUrl} key={node.certname} />,
-        )}
+        {props.nodes.map(node => (
+          <NodeListItem node={node} serverUrl={props.serverUrl} key={node.certname} />
+        ))}
       </tbody>
-    </Table>);
+    </Table>
+  );

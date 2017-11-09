@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { Alert, Table } from 'react-bootstrap';
+import * as Alert from 'react-bootstrap/lib/Alert';
+import * as Table from 'react-bootstrap/lib/Table';
 
 import * as PuppetDB from '../../../PuppetDB';
 import EventListItem from './EventListItem';
 
 export default ({
   events = [],
-  showNode = true,
+  showNode = true
 }: {
-  events: PuppetDB.eventT[];
-  showNode: boolean;
+  readonly events: ReadonlyArray<PuppetDB.eventT>;
+  readonly showNode: boolean;
 }) => {
   if (events) {
     return (
@@ -24,7 +25,11 @@ export default ({
             <th>To</th>
           </tr>
         </thead>
-        <tbody>{events.map(event => <EventListItem event={event} showNode={showNode} />)}</tbody>
+        <tbody>
+          {events.map(event => (
+            <EventListItem event={event} showNode={showNode} />
+          ))}
+        </tbody>
       </Table>
     );
   }

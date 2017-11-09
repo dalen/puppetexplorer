@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
+    "target": "ES5",
+    "lib": ["dom", "es6", "dom.iterable", "scripthost"],
     "sourceMap": true,
     "strict": true,
     "jsx": "react",
     "allowJs": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
-  }
+    "noUnusedParameters": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*"]
 }

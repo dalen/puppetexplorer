@@ -2,26 +2,25 @@ import * as PuppetDB from '../../PuppetDB';
 
 type typeT = 'string' | 'integer' | 'boolean' | 'float' | 'array' | 'hash';
 
-
 export default class FactTree {
-  path: PuppetDB.factPathT;
-  type: typeT | null;
-  children: FactTree[];
+  readonly path: PuppetDB.factPathT;
+  readonly type: typeT | null;
+  readonly children: ReadonlyArray<FactTree>;
 
-  constructor(path: PuppetDB.factPathT, children: FactTree[], type: typeT | null) {
+  constructor(path: PuppetDB.factPathT, children: ReadonlyArray<FactTree>, type: typeT | null) {
     this.path = path;
     this.type = type;
     this.children = children;
   }
 
-  static fromFactPaths(factPaths: PuppetDB.factPathApiT[]): FactTree {
+  static fromFactPaths(factPaths: ReadonlyArray<PuppetDB.factPathApiT>): FactTree {
     const root = new FactTree([], [], 'hash');
 
     // Create intermediate nodes
     factPaths.forEach((factPath: PuppetDB.factPathApiT) => {
-      let node: FactTree = root;
+      const node: FactTree = root;
       factPath.path.slice(0, -1).forEach((pathElement: PuppetDB.factPathElementT) => {
-        let child = node.getChild(pathElement);
+        const child = node.getChild(pathElement);
         if (child === undefined || child === null) {
           child = new FactTree([...node.path, pathElement], []);
           node.addChild(child);

@@ -1,23 +1,23 @@
 import * as React from 'react';
-import { Label } from 'react-bootstrap';
+import * as Label from 'react-bootstrap/lib/Label';
 
 import * as PuppetDB from '../../../PuppetDB';
 import Report from '../components/Report';
 
 type Props = {
-  serverUrl: string,
-  reportHash: string,
+  readonly serverUrl: string,
+  readonly reportHash: string,
 };
 
-type State = { report?: PuppetDB.reportT };
+type State = { readonly report?: PuppetDB.reportT };
 
 // Fetch a report and pass it to the Report component
 export default class ReportContainer extends React.Component<Props, State> {
-  componentDidMount() {
+  componentDidMount(): void {
     this.fetchReport(this.props.serverUrl, this.props.reportHash);
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: Props): void {
     if (
       nextProps.serverUrl !== this.props.serverUrl ||
       nextProps.reportHash !== this.props.reportHash
@@ -26,10 +26,10 @@ export default class ReportContainer extends React.Component<Props, State> {
     }
   }
 
-  fetchReport(serverUrl: string, reportHash: string) {
+  fetchReport(serverUrl: string, reportHash: string): void {
     PuppetDB.query(serverUrl, 'reports', {
       query: ['=', 'hash', reportHash],
-    }).then((data: PuppetDB.reportT[]) => {
+    }).then((data: ReadonlyArray<PuppetDB.reportT>) => {
       if (data.length === 1) {
         this.setState({ report: data[0] });
       } else {
@@ -38,7 +38,7 @@ export default class ReportContainer extends React.Component<Props, State> {
     });
   }
 
-  render() {
+  render(): JSX.Element {
     if (this.state && this.state.report !== undefined) {
       return <Report report={this.state.report} />;
     }

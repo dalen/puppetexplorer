@@ -8,8 +8,11 @@ import * as PuppetDB from '../../../PuppetDB';
 
 const PaginatedEventList = PaginatedList(EventList, 'events', 'events');
 
-export default (props: { serverUrl: string, queryParsed: PuppetDB.queryT }) =>
-  (<div>
+export default (props: {
+  readonly serverUrl: string;
+  readonly queryParsed: PuppetDB.queryT | null;
+}) => (
+  <div>
     <Grid fluid>
       <Row>
         <Col md={4}>
@@ -46,4 +49,5 @@ export default (props: { serverUrl: string, queryParsed: PuppetDB.queryT }) =>
       listQuery={props.queryParsed}
       countQuery={['extract', [['function', 'count']], props.queryParsed]}
     />
-  </div>);
+  </div>
+);

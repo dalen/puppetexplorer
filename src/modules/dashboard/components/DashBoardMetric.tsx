@@ -1,47 +1,62 @@
 // @flow
 import * as React from 'react';
-import { Panel, Glyphicon } from 'react-bootstrap';
+import * as Panel from 'react-bootstrap/lib/Panel';
+import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import * as Maybe from 'maybe.ts';
-
 
 import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
-  title: string,
-  style: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger',
-  bean: string,
-  beanValue: string,
-  multiply: number,
-  unit: string,
-  serverUrl: string,
+  readonly title: string;
+  readonly style:
+    | 'default'
+    | 'primary'
+    | 'success'
+    | 'info'
+    | 'warning'
+    | 'danger';
+  readonly bean: string;
+  readonly beanValue?: string;
+  readonly multiply?: number;
+  readonly unit?: string;
+  readonly serverUrl: string;
 };
 
 type State = {
-  value: Maybe.Maybe<number>,
+  readonly value: Maybe.Maybe<number>;
 };
 
 export default class DashBoardMetric extends React.Component<Props, State> {
-  static defaultProps = {
+  static readonly defaultProps = {
     multiply: 1,
     unit: '',
     beanValue: 'Value',
   };
 
-  state = {
+  readonly state = {
     value: Maybe.nothing,
   };
 
-  componentDidMount() {
+  componentDidMount(): void {
     PuppetDB.getBean(this.props.serverUrl, this.props.bean).then(data =>
-      this.setState({ value: data[this.props.beanValue] }),
+      this.setState({
+        value:
+          data[this.props.beanValue || DashBoardMetric.defaultProps.beanValue],
+      }),
     );
   }
 
-  render() {
+  render(): JSX.Element {
     const children = Maybe.toValue(
       <Glyphicon glyph="refresh" className="spin" />,
       Maybe.map(
-        val => <span>{`${val * this.props.multiply} ${this.props.unit}`}</span>,
+        val => (
+          <span>
+            {`${val *
+              (this.props.multiply ||
+                DashBoardMetric.defaultProps.multiply)} ${this.props.unit}`}
+          </span>
+        ),
         this.state.value,
       ),
     );

@@ -4,30 +4,30 @@ import * as FormControl from 'react-bootstrap/lib/FormControl';
 import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 type Props = {
-  updateQuery: (query: string) => any,
-  queryString: string,
+  readonly updateQuery: (query: string) => any,
+  readonly queryString: string,
 };
 
 type State = {
-  queryString: string,
+  readonly queryString: string,
 };
 
 export default class SearchField extends React.Component<Props, State> {
-  state = { queryString: '' };
+  readonly state = { queryString: '' };
 
-  componentWillMount() {
+  componentWillMount(): void {
     this.setState({
       queryString: this.props.queryString,
     });
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: Props): void {
     if (nextProps.queryString !== this.props.queryString) {
       this.setState({ queryString: nextProps.queryString });
     }
   }
 
-  handleChange = (event: Event) => {
+  readonly handleChange = (event: React.FormEvent<FormControl>) => {
     if (event.target instanceof HTMLInputElement) {
       this.setState({ queryString: event.target.value });
     } else {
@@ -35,12 +35,12 @@ export default class SearchField extends React.Component<Props, State> {
     }
   }
 
-  handleSubmit = (event: Event) => {
+  readonly handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     this.props.updateQuery(this.state.queryString);
     return event.preventDefault();
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <form id="node-query" onSubmit={this.handleSubmit}>
         <InputGroup>

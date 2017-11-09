@@ -1,16 +1,18 @@
 import * as React from 'react';
-import { Label, Collapse, Glyphicon } from 'react-bootstrap';
-import * as Moment from 'react-moment';
+import * as Label from 'react-bootstrap/lib/Label';
+import * as Collapse from 'react-bootstrap/lib/Collapse';
+import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 
 import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
-  event: PuppetDB.eventT,
-  showNode: boolean,
+  readonly event: PuppetDB.eventT;
+  readonly showNode: boolean;
 };
 
-type State = { show: boolean };
+type State = { readonly show: boolean };
 
 export default class EventListItem extends React.Component<Props, State> {
   // Return the CSS class event states should correspond to
@@ -30,43 +32,39 @@ export default class EventListItem extends React.Component<Props, State> {
   }
 
   // Format the value column
-  static formatValue(event: PuppetDB.eventT, value: string) {
-    const matches = typeof value === 'string' ? value.match(/\{(\w{3,5})\}(\w+)/) : null;
+  static formatValue(event: PuppetDB.eventT, value: string): JSX.Element {
+    const matches =
+      typeof value === 'string' ? value.match(/\{(\w{3,5})\}(\w+)/) : null;
     // Check if it is a file checksum
-    if (event.resource_type === 'File' && event.property === 'content' && matches != null) {
+    if (
+      event.resource_type === 'File' &&
+      event.property === 'content' &&
+      matches != null
+    ) {
       return (
         <td>
-          <Label title={matches[2]}>
-            {matches[1]}
-          </Label>
+          <Label title={matches[2]}>{matches[1]}</Label>
         </td>
       );
     }
-    return (
-      <td>
-        {value}
-      </td>
-    );
+    return <td>{value}</td>;
   }
 
-  static defaultProps = {
+  static readonly defaultProps = {
     showNode: true,
   };
 
-  state = { show: false };
+  readonly state = { show: false };
 
-  toggle = () => {
+  readonly toggle = () => {
     this.setState({ show: !this.state.show });
   }
 
-  render() {
+  render(): JSX.Element {
     const event = this.props.event;
     return (
       <tr>
-        {this.props.showNode &&
-          <td>
-            {event.certname}
-          </td>}
+        {this.props.showNode && <td>{event.certname}</td>}
         <td>
           <Glyphicon
             glyph={this.state.show ? 'triangle-bottom' : 'triangle-right'}
@@ -78,42 +76,38 @@ export default class EventListItem extends React.Component<Props, State> {
             <div>
               <dl>
                 <dt>Message:</dt>
-                <dd>
-                  {event.message}
-                </dd>
+                <dd>{event.message}</dd>
                 <dt>Containing class:</dt>
-                <dd>
-                  {event.containing_class}
-                </dd>
+                <dd>{event.containing_class}</dd>
                 <dt>Containment path:</dt>
-                <dd>
-                  {event.containment_path.join(' / ')}
-                </dd>
+                <dd>{event.containment_path.join(' / ')}</dd>
                 <dt>File:</dt>
                 <dd>
                   {event.file}
                   {event.file &&
-                    event.line &&
-                    <span>
-                      <wbr />:
-                    </span>}
+                    event.line && (
+                      <span>
+                        <wbr />:
+                      </span>
+                    )}
                   {event.line}
                 </dd>
                 <dt>Timestamp:</dt>
                 <dd>
-                  <Moment format="LLL" title={event.timestamp}>
-                    {event.timestamp}
-                  </Moment>
+                  <span title={event.timestamp}>
+                    <Moment format="LLL">
+                      {event.timestamp}
+                    </Moment>
+                  </span>
                 </dd>
-                {event.report &&
+                {event.report && (
                   <div>
                     <dt>Report:</dt>
                     <dd>
-                      <Link to={`/report/${event.report}`}>
-                        {event.report}
-                      </Link>
+                      <Link to={`/report/${event.report}`}>{event.report}</Link>
                     </dd>
-                  </div>}
+                  </div>
+                )}
               </dl>
             </div>
           </Collapse>
@@ -126,9 +120,7 @@ export default class EventListItem extends React.Component<Props, State> {
             {event.status}
           </Label>
         </td>
-        <td>
-          {event.property}
-        </td>
+        <td>{event.property}</td>
         {EventListItem.formatValue(event, event.old_value)}
         {EventListItem.formatValue(event, event.new_value)}
       </tr>

@@ -1,23 +1,23 @@
 export type DashBoardPanel = {
-  title: string,
-  style: 'default'
+  readonly title: string,
+  readonly style: 'default'
     | 'primary'
     | 'success'
     | 'info'
     | 'warning'
     | 'danger',
-  bean: string,
-  beanValue?: string,
-  multiply?: number,
-  unit?: string,
-  serverUrl?: string,
+  readonly bean: string,
+  readonly beanValue?: string,
+  readonly multiply?: number,
+  readonly unit?: string,
+  readonly serverUrl?: string,
 };
 
 export type Config = {
-  serverUrl: string,
-  nodeFacts: string[],
-  unresponsiveHours: number,
-  dashBoardPanels: DashBoardPanel[][],
+  readonly serverUrl: string,
+  readonly nodeFacts: string[],
+  readonly unresponsiveHours: number,
+  readonly dashBoardPanels: DashBoardPanel[][],
 };
 
 export const defaults = (): Config => {

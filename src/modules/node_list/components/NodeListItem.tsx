@@ -1,48 +1,52 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Glyphicon } from 'react-bootstrap';
+import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Moment from 'react-moment';
+import * as Maybe from 'maybe.ts';
 
-import { metricValue, statusIcon } from '../../reports';
+import { metricValue, statusIcon } from '../../reports/index';
 import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
-  serverUrl: string,
-  node: PuppetDB.nodeT,
+  readonly serverUrl: string;
+  readonly node: PuppetDB.nodeT;
 };
 
 type State = {
-  metrics: any[],
+  readonly metrics: ReadonlyArray<any>;
 };
 
 export default class NodeListItem extends React.Component<Props, State> {
-  state = { metrics: [] };
+  readonly state = { metrics: [] };
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.fetchMetrics();
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.serverUrl !== this.props.serverUrl || nextProps.node !== this.props.node) {
+  componentWillReceiveProps(nextProps: Props): void {
+    if (
+      nextProps.serverUrl !== this.props.serverUrl ||
+      nextProps.node !== this.props.node
+    ) {
       this.fetchMetrics();
     }
   }
 
-  fetchMetrics() {
+  fetchMetrics(): void {
     type metricT = {
-      category: string,
-      name: string,
-      value: number,
+      readonly category: string;
+      readonly name: string;
+      readonly value: number;
     };
     PuppetDB.get(
       this.props.serverUrl,
       `pdb/query/v4/reports/${this.props.node.latest_report_hash}/metrics`,
-    ).then((data: metricT[]) => {
+    ).then((data: ReadonlyArray<metricT>) => {
       this.setState({ metrics: data });
     });
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <tr>
         <td>
@@ -52,21 +56,35 @@ export default class NodeListItem extends React.Component<Props, State> {
         </td>
         <td title={this.props.node.catalog_timestamp}>
           <Glyphicon glyph="warning-sign" bsClass="text-warning" />
-          <Moment fromNow ago title={this.props.node.report_timestamp}>
-            {this.props.node.report_timestamp}
-          </Moment>
+          <span title={this.props.node.report_timestamp}>
+            <Moment fromNow ago>
+              {this.props.node.report_timestamp}
+            </Moment>
+          </span>
         </td>
         <td className="text-center">
-          {metricValue(this.state.metrics, 'events', 'success').unwrapOr(null)}
+          {Maybe.toValue(
+            null,
+            metricValue(this.state.metrics, 'events', 'success'),
+          )}
         </td>
         <td className="text-center">
-          {metricValue(this.state.metrics, 'events', 'noop').unwrapOr(null)}
+          {Maybe.toValue(
+            null,
+            metricValue(this.state.metrics, 'events', 'noop'),
+          )}
         </td>
         <td className="text-center">
-          {metricValue(this.state.metrics, 'events', 'skip').unwrapOr(null)}
+          {Maybe.toValue(
+            null,
+            metricValue(this.state.metrics, 'events', 'skip'),
+          )}
         </td>
         <td className="text-center">
-          {metricValue(this.state.metrics, 'events', 'failure').unwrapOr(null)}
+          {Maybe.toValue(
+            null,
+            metricValue(this.state.metrics, 'events', 'failure'),
+          )}
         </td>
         <td className="text-right">
           {statusIcon(this.props.node.latest_report_status)}

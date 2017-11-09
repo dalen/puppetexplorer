@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'babel-polyfill',
-    path.resolve(__dirname, 'src', 'main.jsx'),
+    path.resolve(__dirname, 'src', 'main.tsx'),
     path.resolve(__dirname, 'src', 'config.js.example'),
     path.resolve(__dirname, 'src', 'index.html'),
   ],
@@ -35,13 +35,13 @@ module.exports = {
           loader: 'ts-loader',
         },
       },
-      {
+      /* {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
         },
-      },
+      }, */
       {
         test: /\.(re|ml)$/,
         use: 'bs-loader?module=es6',

@@ -1,6 +1,12 @@
 import * as React from 'react';
-import { Location, RouterHistory } from 'react-router-dom';
-import { Grid, Col, Row, ControlLabel, FormGroup, Tabs, Tab } from 'react-bootstrap';
+import { History, Location } from 'history';
+import * as Grid from 'react-bootstrap/lib/Grid';
+import * as Row from 'react-bootstrap/lib/Row';
+import * as Col from 'react-bootstrap/lib/Col';
+import * as Tabs from 'react-bootstrap/lib/Tabs';
+import * as ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import * as FormGroup from 'react-bootstrap/lib/FormGroup';
+import * as Tab from 'react-bootstrap/lib/Tab';
 import * as DatePicker from 'react-bootstrap-date-picker';
 import * as moment from 'moment';
 
@@ -8,19 +14,19 @@ import Events from './Events';
 import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
-  serverUrl: string,
-  queryParsed: PuppetDB.queryT | null,
-  location: Location,
-  history: RouterHistory,
-  tab: string | null,
-  updateSearch: (updates: { [id: string]: any }) => void,
-  search: { [id: string]: any },
+  readonly serverUrl: string,
+  readonly queryParsed: PuppetDB.queryT | null,
+  readonly location: Location,
+  readonly history: History,
+  readonly tab: string | null,
+  readonly updateSearch: (updates: { readonly [id: string]: any }) => void,
+  readonly search: { readonly [id: string]: any },
 };
 
 export default class EventListContainer extends React.Component<Props> {
   // Compute an event query based on date range
   static dateRangeEventQuery(query:
-     PuppetDB.queryT | null, 
+     PuppetDB.queryT | null,
                              dateFrom: string, dateTo: string): PuppetDB.queryT |null {
     return PuppetDB.combine(
       query,
@@ -54,18 +60,18 @@ export default class EventListContainer extends React.Component<Props> {
     return new Date().toISOString();
   }
 
-  selectTab = (tab: string) => {
+  readonly selectTab = (tab: any) => {
     this.props.history.push({
       pathname: tab === 'latest' ? '/events' : '/events/daterange',
       search: this.props.location.search,
     });
   }
 
-  changeDate = (which: string, value: string | null) => {
+  readonly changeDate = (which: string, value: string | null) => {
     this.props.updateSearch({ [which]: value ? moment(value).format('YYYY-MM-DD') : undefined });
   }
 
-  render() {
+  render(): JSX.Element {
     const dateFrom = this.getDate('dateFrom');
     const dateTo = this.getDate('dateTo');
 
@@ -86,7 +92,6 @@ export default class EventListContainer extends React.Component<Props> {
                 <FormGroup>
                   <ControlLabel>From:</ControlLabel>
                   <DatePicker
-                    placeholder="Start Date"
                     value={dateFrom}
                     onChange={value => this.changeDate('dateFrom', value)}
                     dateFormat="YYYY-MM-DD"
@@ -98,7 +103,6 @@ export default class EventListContainer extends React.Component<Props> {
                 <FormGroup>
                   <ControlLabel>To:</ControlLabel>
                   <DatePicker
-                    placeholder="End Date"
                     value={dateTo}
                     onChange={value => this.changeDate('dateTo', value)}
                     dateFormat="YYYY-MM-DD"

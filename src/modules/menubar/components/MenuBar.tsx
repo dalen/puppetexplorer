@@ -4,7 +4,7 @@ import { Navbar, Nav, Glyphicon } from 'react-bootstrap';
 
 import RouterNavItem from '../../../components/RouterNavItem';
 
-export default (props: { selectTab: (tab: string) => void }): JSX.Element =>
+export default (props: { readonly selectTab: (tab: any) => void }): JSX.Element =>
   (<Navbar fluid>
     <Nav>
       <RouterNavItem to="/" eventKey="/" onSelect={props.selectTab}>

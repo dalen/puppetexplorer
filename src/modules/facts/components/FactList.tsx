@@ -1,36 +1,28 @@
 import * as React from 'react';
-import { ListGroup } from 'react-bootstrap';
+import * as ListGroup from 'react-bootstrap/lib/ListGroup';
 import { OrderedSet } from 'immutable';
 
 import FactListItem from './FactListItem';
 import FactTree from '../FactTree';
 import * as PuppetDB from '../../../PuppetDB';
 
-type Props = {
-  factTree: FactTree,
-  activeFactCharts: OrderedSet<PuppetDB.factPathT>,
-  toggleChart: (graph: PuppetDB.factPathT) => void,
-  indent: number,
+export default (props: {
+  readonly factTree: FactTree,
+  readonly activeFactCharts: OrderedSet<PuppetDB.factPathT>,
+  readonly toggleChart: (graph: PuppetDB.factPathT) => void,
+  readonly indent: number,
+}): JSX.Element =>  {
+  return (
+    <ListGroup>
+      {props.factTree.children.map(child =>
+        (<FactListItem
+          factTreeItem={child}
+          key={child.path.join('.')}
+          activeFactCharts={props.activeFactCharts}
+          toggleChart={props.toggleChart}
+          indent={props.indent}
+        />),
+      )}
+    </ListGroup>
+  );
 };
-
-export default class FactList extends React.Component<Props> {
-  static defaultProps = {
-    indent: 0,
-  };
-
-  render() {
-    return (
-      <ListGroup>
-        {this.props.factTree.children.map(child =>
-          (<FactListItem
-            factTreeItem={child}
-            key={child.path.join('.')}
-            activeFactCharts={this.props.activeFactCharts}
-            toggleChart={this.props.toggleChart}
-            indent={this.props.indent}
-          />),
-        )}
-      </ListGroup>
-    );
-  }
-}

@@ -1,5 +1,5 @@
 {
-  "extends": "tslint-config-airbnb",
+  "extends": ["tslint-config-airbnb", "tslint-immutable"],
   "rules": {
     "variable-name": [
       true,
@@ -7,6 +7,20 @@
       "check-format",
       "allow-pascal-case"
     ],
-    "import-name": [ false ]
+    "import-name": [
+      {
+        "react-moment": "Moment",
+        "object-dig": "dig"
+      }
+    ],
+
+    // Immutability rules
+    "no-var-keyword": true,
+    "no-parameter-reassignment": true,
+    "typedef": [true, "call-signature"],
+    "readonly-keyword": true,
+    // "readonly-array": true,
+    "no-let": true,
+    "no-object-mutation": true
   }
 }

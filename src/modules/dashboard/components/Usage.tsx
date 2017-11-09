@@ -1,6 +1,10 @@
 // @flow
 import * as React from 'react';
-import { Grid, Row, Col, Table, Well } from 'react-bootstrap';
+import * as Grid from 'react-bootstrap/lib/Grid';
+import * as Row from 'react-bootstrap/lib/Row';
+import * as Col from 'react-bootstrap/lib/Col';
+import * as Table from 'react-bootstrap/lib/Table';
+import * as Well from 'react-bootstrap/lib/Well';
 
 export default () =>
   (<Grid>

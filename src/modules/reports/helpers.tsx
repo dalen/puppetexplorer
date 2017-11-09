@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Glyphicon } from 'react-bootstrap';
 import * as Maybe from 'maybe.ts';
 
+import * as PuppetDB from '../../PuppetDB';
+
 export const statusIcon = (status: string): JSX.Element => {
   switch (status) {
     case 'failed':
@@ -16,7 +18,11 @@ export const statusIcon = (status: string): JSX.Element => {
 };
 
 // Create a nested map out of all the metrics
-export const metricValue = (metrics: any[], category: string, name: string): Maybe.Maybe<number> =>
+export const metricValue = (
+  metrics: ReadonlyArray<PuppetDB.metricT>,
+  category: string,
+  name: string,
+): Maybe.Maybe<number> =>
   Maybe.map(
     metric => metric.value,
     metrics.find(metric => metric.category === category && metric.name === name),

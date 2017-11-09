@@ -1,53 +1,59 @@
 import * as React from 'react';
-import { Route, Switch, Location, RouterHistory } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import * as qs from 'qs';
+import { History, Location } from 'history';
 
-import { DashBoard } from './modules/dashboard';
-import { NodeDetail } from './modules/node_detail';
-import { NodeListContainer } from './modules/node_list';
-import { ReportContainer } from './modules/reports';
-import { EventsContainer } from './modules/events';
-import { FactsContainer } from './modules/facts';
-import { SearchField } from './modules/search';
-import { MenuBar } from './modules/menubar';
+import DashBoard from './modules/dashboard/DashBoard';
+import NodeDetail from './modules/node_detail/components/NodeDetail';
+import NodeListContainer from './modules/node_list/components/NodeListContainer';
+import ReportContainer from './modules/reports/components/ReportContainer';
+import EventsContainer from './modules/events/components/EventsContainer';
+import FactsContainer from './modules/facts/components/FactsContainer';
+import SearchField from './modules/search/components/SearchField';
+import MenuBar from './modules/menubar/components/MenuBar';
 import * as Config from './Config';
 import * as PuppetDB from './PuppetDB';
 
 type Props = {
-  location: Location,
-  history: RouterHistory,
+  readonly location: Location;
+  readonly history: History;
 };
 
 type State = {
-  config: Config.Config,
-  search: { [id: string]: any },
-  queryParsed: PuppetDB.queryT | null,
+  readonly config: Config.Config;
+  readonly search: { readonly [id: string]: any };
+  readonly queryParsed: PuppetDB.queryT | null;
 };
 
 export default class App extends React.Component<Props, State> {
   static decodeSearch(
     search: string,
   ): {
-    search: { [id: string]: any },
-    queryParsed: PuppetDB.queryT | null,
+    readonly search: { readonly [id: string]: any };
+    readonly queryParsed: PuppetDB.queryT | null;
   } {
-    const parsedSearch = qs.parse(search.slice(1), { strictNullHandling: true });
+    const parsedSearch = qs.parse(search.slice(1), {
+      strictNullHandling: true,
+    });
     return {
       search: parsedSearch,
       queryParsed: PuppetDB.parse(parsedSearch.query),
     };
   }
 
+  static readonly state = {
+    config: Config.defaults(),
+  };
+
   constructor(props: Props) {
     super(props);
 
-    this.setState = {
+    this.setState({
       ...App.decodeSearch(props.location.search),
-      config: Config.defaults(),
-    };
+    });
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: Props): void {
     if (nextProps.location.search !== this.props.location.search) {
       this.setState(App.decodeSearch(nextProps.location.search));
     }
@@ -55,13 +61,18 @@ export default class App extends React.Component<Props, State> {
 
   // Get puppet query
   getQuery(): string {
-    return typeof this.state.search.query === 'string' ? this.state.search.query : '';
+    return typeof this.state.search.query === 'string'
+      ? this.state.search.query
+      : '';
   }
 
   // Update puppet query
   // redirect to node list if we are currently on dashboard
-  setQuery = (query: string) => {
-    const pathname = this.props.location.pathname === '/' ? '/nodes' : this.props.location.pathname;
+  readonly setQuery = (query: string) => {
+    const pathname =
+      this.props.location.pathname === '/'
+        ? '/nodes'
+        : this.props.location.pathname;
 
     this.props.history.push({
       pathname,
@@ -75,7 +86,7 @@ export default class App extends React.Component<Props, State> {
     });
   }
 
-  selectTab = (id: string) => {
+  readonly selectTab = (id: string) => {
     console.debug('selectTab', this.state);
     this.props.history.push({
       pathname: id,
@@ -86,7 +97,7 @@ export default class App extends React.Component<Props, State> {
   }
 
   // Update search string
-  updateSearch = (updates: { [id: string]: any }) => {
+  readonly updateSearch = (updates: { readonly [id: string]: any }) => {
     this.props.history.push({
       pathname: this.props.location.pathname,
       search: qs.stringify({
@@ -96,11 +107,14 @@ export default class App extends React.Component<Props, State> {
     });
   }
 
-  render() {
+  render(): React.ReactNode {
     return (
       <div>
-        <SearchField updateQuery={this.setQuery} queryString={this.getQuery()} />
-        <MenuBar selectTab={this.selectTab} location={this.props.location} />
+        <SearchField
+          updateQuery={this.setQuery}
+          queryString={this.getQuery()}
+        />
+        <MenuBar selectTab={this.selectTab} />
 
         <Switch>
           <Route
@@ -116,26 +130,26 @@ export default class App extends React.Component<Props, State> {
           <Route
             path="/node/:node"
             render={props =>
-              (typeof props.match.params.node === 'string' ? (
+              typeof props.match.params.node === 'string' ? (
                 <NodeDetail
                   serverUrl={this.state.config.serverUrl}
                   node={props.match.params.node}
                 />
               ) : (
                 <h1>No node specified</h1>
-              ))}
+              )}
           />
           <Route
             path="/report/:reportHash"
             render={props =>
-              (typeof props.match.params.reportHash === 'string' ? (
+              typeof props.match.params.reportHash === 'string' ? (
                 <ReportContainer
                   serverUrl={this.state.config.serverUrl}
                   reportHash={props.match.params.reportHash}
                 />
               ) : (
                 <h1>No report specified</h1>
-              ))}
+              )}
           />
           <Route
             path="/events/:tab?"

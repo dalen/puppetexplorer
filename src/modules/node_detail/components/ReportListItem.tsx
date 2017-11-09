@@ -1,11 +1,13 @@
 import * as React from 'react';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
-import { metricValue, statusIcon } from '../../reports';
+import * as Maybe from 'maybe.ts';
+
+import { metricValue, statusIcon } from '../../reports/helpers';
 import * as PuppetDB from '../../../PuppetDB';
 
 // Item of a ReportList
-export default (props: { report: PuppetDB.reportT }) => (
+export default (props: { readonly report: PuppetDB.reportT }) => (
   <tr>
     <td>
       <Link to={`/report/${props.report.hash}`}>
@@ -17,17 +19,18 @@ export default (props: { report: PuppetDB.reportT }) => (
       </Link>
     </td>
     <td className="text-center">
-      {metricValue(props.report.metrics.data, 'events', 'success').unwrapOr(null)}
+      {Maybe.toValue(null, metricValue(props.report.metrics.data, 'events', 'success'))}
     </td>
     <td className="text-center">
-      {metricValue(props.report.metrics.data, 'events', 'noop').unwrapOr(null)}
+      {Maybe.toValue(null, metricValue(props.report.metrics.data, 'events', 'noop'))}
     </td>
     <td className="text-center">
-      {metricValue(props.report.metrics.data, 'events', 'skip').unwrapOr(null)}
+      {Maybe.toValue(null, metricValue(props.report.metrics.data, 'events', 'skip'))}
     </td>
     <td className="text-center">
-      {metricValue(props.report.metrics.data, 'events', 'failure').unwrapOr(null)}
+      {Maybe.toValue(null, metricValue(props.report.metrics.data, 'events', 'failure'))}
     </td>
     <td className="text-right">{statusIcon(props.report.status)}</td>
   </tr>
 );
+

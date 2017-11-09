@@ -1,8 +1,21 @@
 import * as React from 'react';
-import { Alert, Panel } from 'react-bootstrap';
-import { Chart } from 'react-google-charts';
+import * as Alert from 'react-bootstrap/lib/Alert';
+import * as Panel from 'react-bootstrap/lib/Panel';
+import { BarChart, Bar, Legend, Cell } from 'recharts';
 
 import * as PuppetDB from './../../../PuppetDB';
+
+// Get all metrics for a category
+const categoryMetrics = (
+  category: string,
+  metrics: ReadonlyArray<PuppetDB.metricT>,
+): ReadonlyArray<PuppetDB.metricT> =>
+  metrics.filter(metric => metric.category === category);
+
+// Return array of category names
+const categories = (
+  metrics: ReadonlyArray<PuppetDB.metricT>,
+): ReadonlyArray<string> => Array.from(new Set(metrics.map(metric => metric.category)).values());
 
 export default ({
   metrics,
@@ -21,55 +34,31 @@ export default ({
     '#b15928',
   ],
 }: {
-  metrics: PuppetDB.metricT[] | null;
-  colors?: string[];
+  readonly metrics: ReadonlyArray<PuppetDB.metricT> | null;
+  readonly colors?: ReadonlyArray<string>;
 }) => {
-  if (metrics) {
-    // Create a nested Map with category -> name -> value for the metrics
-    const categories = metrics.reduce((ret, metric) => {
-      const category = ret.get(metric.category);
-      if (category) {
-        category.set(metric.name, metric.value);
-      } else {
-        ret.set(metric.category, new Map());
-      }
-      return ret;
-    },                                new Map());
-
-    return (
-      <div>
-        {Array.from(categories.entries()).map(metricCategory => {
-          const [categoryName, categoryMetrics] = metricCategory;
-          // Add color and annotation to each data row, then sort them by value
-          const data = Array.from(categoryMetrics.entries())
-            .map((item, i) => [...item, colors[i], item[1]])
-            .sort((a, b) => a[1] - b[1]);
-          return (
-            <Panel header={categoryName} key={categoryName}>
-              <Chart
-                chartType="BarChart"
-                data={[['Metric', 'Value', { role: 'style' }, { role: 'annotation' }], ...data]}
-                options={{
-                  legend: { position: 'none' },
-                  chartArea: {
-                    left: 200,
-                    top: 0,
-                    bottom: 30,
-                  },
-                  width: '100%',
-                  height: categoryMetrics.size * 30 + 30,
-                  tooltip: { trigger: 'none' },
-                  fontSize: 15,
-                }}
-                width="100%"
-                height={`${categoryMetrics.size * 30 + 30}px`}
-                graph_id={categoryName}
-              />
-            </Panel>
-          );
-        })}
-      </div>
-    );
+  if (metrics == null) {
+    return <Alert bsStyle="warning">No metrics found</Alert>;
   }
-  return <Alert bsStyle="warning">No metrics found</Alert>;
+
+  return (
+    <div>
+      {categories(metrics).map((categoryName) => {
+        // Sort the metrics (need to make clone as sort is in place in JS)
+        const data = [...categoryMetrics(categoryName, metrics)].sort(
+          (a, b) => a.value - b.value,
+        );
+        return (
+          <Panel header={categoryName} key={categoryName}>
+            <BarChart layout="horizontal" data={data}>
+              <Legend />
+              <Bar dataKey="value">
+                { data.map((_, index) => (<Cell fill={colors[index % colors.length]}/>)) }
+              </Bar>
+            </BarChart>
+          </Panel>
+        );
+      })}
+    </div>
+  );
 };

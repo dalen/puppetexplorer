@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Alert, Table } from 'react-bootstrap';
+import * as Table from 'react-bootstrap/lib/Table';
+import * as Alert from 'react-bootstrap/lib/Alert';
 
 import LogListItem from './LogListItem';
 import * as PuppetDB from '../../../PuppetDB';
 
-export default ({ logs = [] }: { logs?: PuppetDB.logT[] }) => {
+export default ({ logs = [] }: { readonly logs?: ReadonlyArray<PuppetDB.logT> }) => {
   if (logs) {
     return (
       <Table hover>

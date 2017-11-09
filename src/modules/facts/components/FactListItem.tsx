@@ -6,22 +6,22 @@ import FactTree from '../FactTree';
 import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
-  factTreeItem: FactTree,
-  activeFactCharts: OrderedSet<PuppetDB.factPathT>,
-  toggleChart: (graph: PuppetDB.factPathT) => void,
-  indent: number,
+  readonly factTreeItem: FactTree,
+  readonly activeFactCharts: OrderedSet<PuppetDB.factPathT>,
+  readonly toggleChart: (graph: PuppetDB.factPathT) => void,
+  readonly indent: number,
 };
 
-type State = { expanded: boolean };
+type State = { readonly expanded: boolean };
 
 export default class FactListItem extends React.Component<Props, State> {
-  state = { expanded: false };
+  readonly state = { expanded: false };
 
-  toggle = () => {
+  readonly toggle = () => {
     this.setState({ expanded: !this.state.expanded });
   }
 
-  toggleChart = () => this.props.toggleChart(this.props.factTreeItem.path);
+  readonly toggleChart = () => this.props.toggleChart(this.props.factTreeItem.path);
 
   // Check if this graph is active or not
   isActive(): boolean {
