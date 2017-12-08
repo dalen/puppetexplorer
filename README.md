@@ -94,6 +94,6 @@ package to be installed. The resulting RPM will be in `rpm/RPMS/noarch`.
 
 ### See also
 
- * [Puppetboard](https://github.com/nedap/puppetboard)
+ * [Puppetboard](https://github.com/voxpupuli/puppetboard)
  * [Foreman](http://theforeman.org/)
  * [Puppet Enterprise](http://puppetlabs.com/puppet/puppet-enterprise)
