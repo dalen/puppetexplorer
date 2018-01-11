@@ -6,21 +6,25 @@ import { BarChart, Bar, Legend, Cell } from 'recharts';
 import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
-  readonly serverUrl: string,
-  readonly eventField: string,
-  readonly queryParsed: PuppetDB.queryT | null,
-  readonly title: string,
-  readonly id: string,
+  readonly serverUrl: string;
+  readonly eventField: string;
+  readonly queryParsed: PuppetDB.queryT | null;
+  readonly title: string;
+  readonly id: string;
 };
 
 type State = {
-  readonly data?: { readonly name: string, readonly value: number}[],
-  readonly labels?: ReadonlyArray<string>,
+  readonly data?: { readonly name: string; readonly value: number }[];
+  readonly labels?: ReadonlyArray<string>;
 };
 
 export default class EventChart extends React.Component<Props, State> {
   componentDidMount(): void {
-    this.fetchEventValue(this.props.eventField, this.props.queryParsed, this.props.serverUrl);
+    this.fetchEventValue(
+      this.props.eventField,
+      this.props.queryParsed,
+      this.props.serverUrl,
+    );
   }
 
   componentWillReceiveProps(nextProps: Props): void {
@@ -29,7 +33,11 @@ export default class EventChart extends React.Component<Props, State> {
       nextProps.eventField !== this.props.eventField ||
       nextProps.queryParsed !== this.props.queryParsed
     ) {
-      this.fetchEventValue(nextProps.eventField, nextProps.queryParsed, nextProps.serverUrl);
+      this.fetchEventValue(
+        nextProps.eventField,
+        nextProps.queryParsed,
+        nextProps.serverUrl,
+      );
     }
   }
 
@@ -51,14 +59,25 @@ export default class EventChart extends React.Component<Props, State> {
   ];
   */
 
-  fetchEventValue(eventField: string, nodeQuery: PuppetDB.queryT | null , serverUrl: string): void {
+  fetchEventValue(
+    eventField: string,
+    nodeQuery: PuppetDB.queryT | null,
+    serverUrl: string,
+  ): void {
     PuppetDB.query(serverUrl, 'events', {
-      query: ['extract', [['function', 'count'], eventField], nodeQuery, ['group_by', eventField]],
+      query: [
+        'extract',
+        [['function', 'count'], eventField],
+        nodeQuery,
+        ['group_by', eventField],
+      ],
     }).then((data: ReadonlyArray<any>) => {
-      this.setState({ data: data.map(item  => ({
-        name: item[eventField].toString(),
-        value: item.count,
-      }))});
+      this.setState({
+        data: data.map(item => ({
+          name: item[eventField].toString(),
+          value: item.count,
+        })),
+      });
     });
   }
 
@@ -84,7 +103,9 @@ export default class EventChart extends React.Component<Props, State> {
           <BarChart layout="horizontal" data={this.state.data}>
             <Legend />
             <Bar dataKey="value">
-              { this.state.data.map((_, index) => (<Cell fill={colors[index % colors.length]}/>)) }
+              {this.state.data.map((_, index) => (
+                <Cell fill={colors[index % colors.length]} />
+              ))}
             </Bar>
           </BarChart>
         </Panel>

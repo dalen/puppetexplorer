@@ -19,7 +19,11 @@ export default (props: {
         <tr>
           <th>
             {props.total === undefined ? null : (
-              <Label>{props.total === 1 ? '1 node found' : `${props.total} nodes found`}</Label>
+              <Label>
+                {props.total === 1
+                  ? '1 node found'
+                  : `${props.total} nodes found`}
+              </Label>
             )}
           </th>
           <th>Last run</th>
@@ -32,7 +36,11 @@ export default (props: {
       </thead>
       <tbody>
         {props.nodes.map(node => (
-          <NodeListItem node={node} serverUrl={props.serverUrl} key={node.certname} />
+          <NodeListItem
+            node={node}
+            serverUrl={props.serverUrl}
+            key={node.certname}
+          />
         ))}
       </tbody>
     </Table>

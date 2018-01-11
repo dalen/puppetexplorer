@@ -7,7 +7,7 @@ import EventListItem from './EventListItem';
 
 export default ({
   events = [],
-  showNode = true
+  showNode = true,
 }: {
   readonly events: ReadonlyArray<PuppetDB.eventT>;
   readonly showNode: boolean;

@@ -53,8 +53,9 @@ export default class DashBoardMetric extends React.Component<Props, State> {
         val => (
           <span>
             {`${val *
-              (this.props.multiply ||
-                DashBoardMetric.defaultProps.multiply)} ${this.props.unit}`}
+              (this.props.multiply || DashBoardMetric.defaultProps.multiply)} ${
+              this.props.unit
+            }`}
           </span>
         ),
         this.state.value,

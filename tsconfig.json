@@ -11,5 +11,6 @@
     "noUnusedParameters": true,
     "outDir": "dist"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["**/__tests__/*"]
 }

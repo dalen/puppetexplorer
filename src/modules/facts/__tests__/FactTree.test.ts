@@ -1,7 +1,9 @@
-import FactTree from './FactTree';
+import * as FactTree from '../FactTree';
 
 test('it adds intermediate nodes', () => {
-  const tree = FactTree.fromFactPaths([{ type: 'string', path: ['networking', 'ipaddress'] }]);
+  const tree = FactTree.fromFactPaths([
+    { type: 'string', path: ['networking', 'ipaddress'] },
+  ]);
 
   expect(tree.toJSON()).toEqual({
     path: [],

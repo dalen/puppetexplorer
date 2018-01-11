@@ -4,7 +4,6 @@ import { OrderedSet } from 'immutable';
 
 import * as PuppetDB from '../../../PuppetDB';
 import Facts from './Facts';
-import FactTree from '../FactTree';
 
 type Props = {
   readonly serverUrl: string;
@@ -14,8 +13,8 @@ type Props = {
 };
 
 type State = {
-  readonly factTree?: FactTree;
-  readonly activeFactCharts: OrderedSet<PuppetDB.factPathT>;
+  readonly factPaths?: ReadonlyArray<PuppetDB.FactPath.FactPath>;
+  readonly activeFactCharts: OrderedSet<PuppetDB.FactPath.FactPath>;
 };
 
 // Fetch a report and pass it to the Report component
@@ -35,12 +34,12 @@ export default class FactsContainer extends React.Component<Props, State> {
   fetchFactPaths(serverUrl: string): void {
     PuppetDB.query(serverUrl, 'fact-paths', {
       order_by: [{ field: 'path', order: 'asc' }],
-    }).then((data: ReadonlyArray<PuppetDB.factPathApiT>) => {
-      this.setState({ factTree: FactTree.fromFactPaths(data) });
+    }).then((data: ReadonlyArray<PuppetDB.FactPath.FactPath>) => {
+      this.setState({ factPaths: data });
     });
   }
 
-  readonly toggleChart = (chart: PuppetDB.factPathT) => {
+  readonly toggleChart = (chart: PuppetDB.FactPath.FactPath) => {
     // FIXME: update URL
     if (this.state.activeFactCharts.has(chart)) {
       this.setState({
@@ -51,10 +50,10 @@ export default class FactsContainer extends React.Component<Props, State> {
         activeFactCharts: this.state.activeFactCharts.add(chart),
       });
     }
-  }
+  };
 
   // A fact value is selected, update query
-  readonly factSelect = (fact: PuppetDB.factPathT, value: any) => {
+  readonly factSelect = (fact: PuppetDB.FactPath.FactPath, value: any) => {
     const quotedValue =
       typeof value === 'number' || typeof value === 'boolean'
         ? value.toString()
@@ -68,18 +67,18 @@ export default class FactsContainer extends React.Component<Props, State> {
 
     if (this.props.queryString) {
       this.props.updateQuery(
-        `(this.props.queryString) and ${fact.join('.')}=${quotedValue}`,
+        `(this.props.queryString) and ${fact.path.join('.')}=${quotedValue}`,
       );
     } else {
-      this.props.updateQuery(`${fact.join('.')}=${quotedValue}`);
+      this.props.updateQuery(`${fact.path.join('.')}=${quotedValue}`);
     }
-  }
+  };
 
   render(): JSX.Element {
-    return this.state.factTree !== undefined ? (
+    return this.state.factPaths !== undefined ? (
       <Facts
         serverUrl={this.props.serverUrl}
-        factTree={this.state.factTree}
+        factPaths={this.state.factPaths}
         activeFactCharts={this.state.activeFactCharts}
         toggleChart={this.toggleChart}
         queryParsed={this.props.queryParsed}

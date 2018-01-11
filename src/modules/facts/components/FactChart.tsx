@@ -5,7 +5,7 @@ import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
   readonly serverUrl: string;
-  readonly fact: PuppetDB.factPathT;
+  readonly fact: PuppetDB.FactPath.FactPath;
   readonly queryParsed: PuppetDB.queryT | null;
   readonly onSelect: (value: string) => void;
 };
@@ -15,7 +15,7 @@ type State = {
     readonly value: string;
     readonly count: number;
   }>;
-  readonly labels ? : ReadonlyArray<string>;
+  readonly labels?: ReadonlyArray<string>;
 };
 
 export default class FactChart extends React.Component<Props, State> {
@@ -65,7 +65,7 @@ export default class FactChart extends React.Component<Props, State> {
   */
 
   fetchFactValue(
-    fact: PuppetDB.factPathT,
+    fact: PuppetDB.FactPath.FactPath,
     nodeQuery: PuppetDB.queryT | null,
     serverUrl: string,
   ): void {
@@ -73,7 +73,7 @@ export default class FactChart extends React.Component<Props, State> {
       query: [
         'extract',
         [['function', 'count'], 'value'],
-        PuppetDB.combine(nodeQuery, ['=', 'path', [...fact]]),
+        PuppetDB.combine(nodeQuery, ['=', 'path', [...fact.path]]),
         ['group_by', 'value'],
       ],
     }).then(
@@ -83,7 +83,9 @@ export default class FactChart extends React.Component<Props, State> {
           readonly count: number;
         }>,
       ) => {
-        this.setState({ data: data.map(item => ({ ...item, value: item.value.toString() })) });
+        this.setState({
+          data: data.map(item => ({ ...item, value: item.value.toString() })),
+        });
       },
     );
   }
@@ -104,13 +106,15 @@ export default class FactChart extends React.Component<Props, State> {
         '#ffff99',
         '#b15928',
       ];
-      const factName = this.props.fact.join('.');
+      const factName = this.props.fact.path.join('.');
       return (
         <Panel header={factName} style={{ overflow: 'hidden' }}>
           <BarChart layout="horizontal" data={this.state.data}>
             <Legend />
             <Bar dataKey="value">
-              { this.state.data.map((_, index) => (<Cell fill={colors[index % colors.length]}/>)) }
+              {this.state.data.map((_, index) => (
+                <Cell fill={colors[index % colors.length]} />
+              ))}
             </Bar>
           </BarChart>
         </Panel>

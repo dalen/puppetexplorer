@@ -3,10 +3,7 @@
   "version": "3.0.0",
   "description": "A web interface for exploring PuppetDB data",
   "license": "Apache-2.0",
-  "keywords": [
-    "puppet",
-    "puppetdb"
-  ],
+  "keywords": ["puppet", "puppetdb"],
   "homepage": "https://github.com/dalen/puppetexplorer",
   "bugs": {
     "url": "https://github.com/dalen/puppetexplorer/issues"
@@ -28,13 +25,10 @@
     "type": "git",
     "url": "https://github.com/dalen/puppetexplorer.git"
   },
-  "resolutions": {
-    "react": "15.6.2",
-    "react-dom": "15.6.2",
-    "@types/react": "16.0.21"
-  },
   "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
     "bootswatch": "^3.3.6",
+    "font-awesome": "^4.7.0",
     "immutable": "^3.8.2",
     "maybe.ts": "^0.1.0",
     "moment": "^2.17.0",
@@ -44,10 +38,10 @@
     "object-hash": "^1.1.8",
     "prop-types": "^15.6.0",
     "qs": "^6.4.0",
-    "react": "^15.6.2",
-    "react-bootstrap": "^0.31.1",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.0",
     "react-bootstrap-date-picker": "^5.1.0",
-    "react-dom": "^15.6.2",
+    "react-dom": "^16.2.0",
     "react-google-charts": "^1.5.5",
     "react-moment": "^0.6.0",
     "react-redux": "^5.0.4",
@@ -55,42 +49,66 @@
     "react-router-dom": "^4.1.2",
     "react-transition-group": "^2.2.1",
     "reactstrap": "^5.0.0-alpha.3",
-    "reason-react": "^0.2.3",
-    "recharts": "^1.0.0-beta.1",
+    "reason-react": "^0.3.0",
+    "recharts": "^1.0.0-beta.7",
     "redux": "^3.7.2",
     "redux-loop": "^4.1.0",
     "result.ts": "^0.3.1",
+    "type-safe-json-decoder": "^0.2.0",
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
+    "@types/jest": "^22.0.0",
     "@types/object-hash": "^1.1.0",
     "@types/qs": "^6.5.1",
-    "@types/react": "^16.0.19",
-    "@types/react-bootstrap": "^0.31.6",
+    "@types/react": "^16.0.33",
+    "@types/react-bootstrap": "^0.31.9",
     "@types/react-bootstrap-date-picker": "^4.0.4",
-    "@types/react-dom": "^16.0.2",
+    "@types/react-dom": "^16.0.3",
     "@types/react-router-dom": "^4.2.0",
-    "@types/reactstrap": "^5.0.1",
-    "@types/recharts": "^1.0.4",
+    "@types/reactstrap": "^5.0.3",
+    "@types/recharts": "^1.0.8",
     "css-loader": "^0.28.1",
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
     "exports-loader": "^0.6.3",
     "extract-loader": "^1.0.0",
     "file-loader": "^1.1.4",
     "html-loader": "^0.5.0",
     "html-minify-loader": "^1.1.0",
     "imports-loader": "^0.7.1",
-    "jest-cli": "^21.2.1",
+    "jest": "^22.0.4",
+    "jest-cli": "^22.0.4",
     "json-loader": "^0.5.7",
     "node-deb": "^0.10.0",
-    "npm2rpm": "^2.1.8",
+    "npm2rpm": "^2.3.0",
+    "prettier": "^1.8.2",
     "protractor": "^5.1.2",
     "raw-loader": "^0.5.1",
+    "ts-jest": "^22.0.0",
     "ts-loader": "^3.1.1",
     "tslint": "^5.8.0",
     "tslint-config-airbnb": "^5.3.0",
-    "tslint-immutable": "^4.4.0",
+    "tslint-config-prettier": "^1.6.0",
+    "tslint-immutable": "^4.5.0",
+    "tslint-plugin-prettier": "^1.3.0",
     "typescript": "^2.6.1",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "jest": {
+    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
+    "testPathIgnorePatterns": ["/node_modules/", "<rootDir>/dist/"]
   }
 }

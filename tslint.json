@@ -1,18 +1,19 @@
 {
-  "extends": ["tslint-config-airbnb", "tslint-immutable"],
+  "extends": [
+    "tslint-config-airbnb",
+    "tslint-immutable",
+    "tslint-config-prettier",
+    "tslint-plugin-prettier"
+  ],
   "rules": {
-    "variable-name": [
-      true,
-      "ban-keywords",
-      "check-format",
-      "allow-pascal-case"
-    ],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"],
     "import-name": [
       {
         "react-moment": "Moment",
         "object-dig": "dig"
       }
     ],
+    "prettier": true,
 
     // Immutability rules
     "no-var-keyword": true,

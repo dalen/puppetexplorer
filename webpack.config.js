@@ -1,6 +1,3 @@
-/* eslint flowtype/require-valid-file-annotation: off */
-/* eslint import/no-commonjs: off */
-/* eslint fp/no-mutation: ["error", { "commonjs": true }] */
 const path = require('path');
 const webpack = require('webpack');
 
@@ -8,7 +5,6 @@ module.exports = {
   watch: true,
   devtool: 'source-map',
   entry: [
-    'babel-polyfill',
     path.resolve(__dirname, 'src', 'main.tsx'),
     path.resolve(__dirname, 'src', 'config.js.example'),
     path.resolve(__dirname, 'src', 'index.html'),
@@ -69,11 +65,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'file-loader',
-          'extract-loader',
-          'css-loader',
-        ],
+        use: ['file-loader', 'extract-loader', 'css-loader'],
       },
       {
         test: /\.(svg|ttf|woff|woff2|eot)$/,

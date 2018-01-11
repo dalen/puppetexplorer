@@ -14,41 +14,43 @@ import Events from './Events';
 import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
-  readonly serverUrl: string,
-  readonly queryParsed: PuppetDB.queryT | null,
-  readonly location: Location,
-  readonly history: History,
-  readonly tab: string | null,
-  readonly updateSearch: (updates: { readonly [id: string]: any }) => void,
-  readonly search: { readonly [id: string]: any },
+  readonly serverUrl: string;
+  readonly queryParsed: PuppetDB.queryT | null;
+  readonly location: Location;
+  readonly history: History;
+  readonly tab: string | null;
+  readonly updateSearch: (updates: { readonly [id: string]: any }) => void;
+  readonly search: { readonly [id: string]: any };
 };
 
 export default class EventListContainer extends React.Component<Props> {
   // Compute an event query based on date range
-  static dateRangeEventQuery(query:
-     PuppetDB.queryT | null,
-                             dateFrom: string, dateTo: string): PuppetDB.queryT |null {
+  static dateRangeEventQuery(
+    query: PuppetDB.queryT | null,
+    dateFrom: string,
+    dateTo: string,
+  ): PuppetDB.queryT | null {
     return PuppetDB.combine(
       query,
       dateFrom
         ? [
-          '>=',
-          'timestamp',
-          moment
-            .utc(dateFrom)
-            .startOf('day')
-            .toISOString(),
-        ]
+            '>=',
+            'timestamp',
+            moment
+              .utc(dateFrom)
+              .startOf('day')
+              .toISOString(),
+          ]
         : null,
       dateTo
         ? [
-          '<=' ,
-          'timestamp',
-          moment
-            .utc(dateTo)
-            .endOf('day')
-            .toISOString(),
-        ]
+            '<=',
+            'timestamp',
+            moment
+              .utc(dateTo)
+              .endOf('day')
+              .toISOString(),
+          ]
         : null,
     );
   }
@@ -65,11 +67,13 @@ export default class EventListContainer extends React.Component<Props> {
       pathname: tab === 'latest' ? '/events' : '/events/daterange',
       search: this.props.location.search,
     });
-  }
+  };
 
   readonly changeDate = (which: string, value: string | null) => {
-    this.props.updateSearch({ [which]: value ? moment(value).format('YYYY-MM-DD') : undefined });
-  }
+    this.props.updateSearch({
+      [which]: value ? moment(value).format('YYYY-MM-DD') : undefined,
+    });
+  };
 
   render(): JSX.Element {
     const dateFrom = this.getDate('dateFrom');
@@ -82,10 +86,21 @@ export default class EventListContainer extends React.Component<Props> {
         id="event-tabs"
         unmountOnExit
       >
-        <Tab eventKey={'latest'} title="Latest Report" style={{ paddingTop: 10 }}>
-          <Events serverUrl={this.props.serverUrl} queryParsed={this.props.queryParsed} />
+        <Tab
+          eventKey={'latest'}
+          title="Latest Report"
+          style={{ paddingTop: 10 }}
+        >
+          <Events
+            serverUrl={this.props.serverUrl}
+            queryParsed={this.props.queryParsed}
+          />
         </Tab>
-        <Tab eventKey={'daterange'} title="Date Range" style={{ paddingTop: 10 }}>
+        <Tab
+          eventKey={'daterange'}
+          title="Date Range"
+          style={{ paddingTop: 10 }}
+        >
           <Grid fluid>
             <Row>
               <Col md={6}>

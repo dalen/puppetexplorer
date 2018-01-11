@@ -2,14 +2,14 @@ import * as React from 'react';
 import { ListGroupItem, Glyphicon } from 'react-bootstrap';
 import { OrderedSet } from 'immutable';
 
-import FactTree from '../FactTree';
 import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
-  readonly factTreeItem: FactTree,
-  readonly activeFactCharts: OrderedSet<PuppetDB.factPathT>,
-  readonly toggleChart: (graph: PuppetDB.factPathT) => void,
-  readonly indent: number,
+  readonly fact: PuppetDB.FactPath.FactPath;
+  readonly factPaths: ReadonlyArray<PuppetDB.FactPath.FactPath>;
+  readonly activeFactCharts: OrderedSet<PuppetDB.FactPath.FactPath>;
+  readonly toggleChart: (graph: PuppetDB.FactPath.FactPath) => void;
+  readonly indent: number;
 };
 
 type State = { readonly expanded: boolean };
@@ -19,13 +19,13 @@ export default class FactListItem extends React.Component<Props, State> {
 
   readonly toggle = () => {
     this.setState({ expanded: !this.state.expanded });
-  }
+  };
 
-  readonly toggleChart = () => this.props.toggleChart(this.props.factTreeItem.path);
+  readonly toggleChart = () => this.props.toggleChart(this.props.fact);
 
   // Check if this graph is active or not
   isActive(): boolean {
-    return this.props.activeFactCharts.has(this.props.factTreeItem.path);
+    return this.props.activeFactCharts.has(this.props.fact);
   }
 
   indent(): JSX.Element | null {
@@ -41,31 +41,39 @@ export default class FactListItem extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const factTree = this.props.factTreeItem;
-    if (factTree.children.length === 0 || factTree.arrayLeaf()) {
+    const { fact, factPaths } = this.props;
+    if (
+      PuppetDB.FactPath.isLeaf(fact, factPaths) ||
+      PuppetDB.FactPath.isArrayLeaf(fact, factPaths)
+    ) {
       return (
         <ListGroupItem onClick={this.toggleChart} active={this.isActive()}>
           {this.indent()}
-          <Glyphicon glyph="stats" /> {factTree.name()}
+          <Glyphicon glyph="stats" /> {PuppetDB.FactPath.name(fact)}
         </ListGroupItem>
       );
     }
     return (
       <div style={{ marginBottom: '-1px' }}>
-        <ListGroupItem bsStyle={this.state.expanded ? 'info' : ''} onClick={this.toggle}>
+        <ListGroupItem
+          bsStyle={this.state.expanded ? 'info' : ''}
+          onClick={this.toggle}
+        >
           {this.indent()}
-          <Glyphicon glyph={this.state.expanded ? 'collapse-up' : 'expand'} /> {factTree.name()}
+          <Glyphicon glyph={this.state.expanded ? 'collapse-up' : 'expand'} />
+          {PuppetDB.FactPath.name(fact)}
         </ListGroupItem>
         {this.state.expanded &&
-          factTree.children.map(child =>
-            (<FactListItem
-              factTreeItem={child}
+          PuppetDB.FactPath.directChildren(fact, factPaths).map(child => (
+            <FactListItem
+              fact={child}
+              factPaths={factPaths}
               key={child.path.join('.')}
               activeFactCharts={this.props.activeFactCharts}
               toggleChart={this.props.toggleChart}
               indent={this.props.indent + 1}
-            />),
-          )}
+            />
+          ))}
       </div>
     );
   }

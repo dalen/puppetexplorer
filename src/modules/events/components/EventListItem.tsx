@@ -95,9 +95,7 @@ export default class EventListItem extends React.Component<Props, State> {
                 <dt>Timestamp:</dt>
                 <dd>
                   <span title={event.timestamp}>
-                    <Moment format="LLL">
-                      {event.timestamp}
-                    </Moment>
+                    <Moment format="LLL">{event.timestamp}</Moment>
                   </span>
                 </dd>
                 {event.report && (
