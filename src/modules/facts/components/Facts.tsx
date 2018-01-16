@@ -29,15 +29,17 @@ export default (props: {
         />
       </Col>
       <Col md={6}>
-        {props.activeFactCharts.map((fact: PuppetDB.FactPath.FactPath) => (
-          <FactChart
-            fact={fact}
-            serverUrl={props.serverUrl}
-            queryParsed={props.queryParsed}
-            key={fact.path.join('.')}
-            onSelect={value => props.factSelect(fact, value)}
-          />
-        ))}
+        {props.activeFactCharts
+          .toJS()
+          .map((fact: PuppetDB.FactPath.FactPath) => (
+            <FactChart
+              fact={fact}
+              serverUrl={props.serverUrl}
+              queryParsed={props.queryParsed}
+              key={fact.path.join('.')}
+              onSelect={value => props.factSelect(fact, value)}
+            />
+          ))}
       </Col>
     </Row>
   </Grid>

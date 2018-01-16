@@ -41,16 +41,13 @@ export default class App extends React.Component<Props, State> {
     };
   }
 
-  static readonly state = {
-    config: Config.defaults(),
-  };
-
   constructor(props: Props) {
     super(props);
 
-    this.setState({
+    this.state = {
+      config: Config.defaults(),
       ...App.decodeSearch(props.location.search),
-    });
+    };
   }
 
   componentWillReceiveProps(nextProps: Props): void {
@@ -84,7 +81,7 @@ export default class App extends React.Component<Props, State> {
         { strictNullHandling: true },
       ),
     });
-  }
+  };
 
   readonly selectTab = (id: string) => {
     console.debug('selectTab', this.state);
@@ -94,7 +91,7 @@ export default class App extends React.Component<Props, State> {
         query: this.state.search.query,
       }),
     });
-  }
+  };
 
   // Update search string
   readonly updateSearch = (updates: { readonly [id: string]: any }) => {
@@ -105,7 +102,7 @@ export default class App extends React.Component<Props, State> {
         ...updates,
       }),
     });
-  }
+  };
 
   render(): React.ReactNode {
     return (
@@ -137,7 +134,8 @@ export default class App extends React.Component<Props, State> {
                 />
               ) : (
                 <h1>No node specified</h1>
-              )}
+              )
+            }
           />
           <Route
             path="/report/:reportHash"
@@ -149,7 +147,8 @@ export default class App extends React.Component<Props, State> {
                 />
               ) : (
                 <h1>No report specified</h1>
-              )}
+              )
+            }
           />
           <Route
             path="/events/:tab?"

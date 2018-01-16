@@ -829,6 +829,18 @@ browserslist@^1.3.6, browserslist@^1.5.2, browserslist@^1.7.6:
     caniuse-db "^1.0.30000639"
     electron-to-chromium "^1.2.7"
 
+bs-fetch@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/bs-fetch/-/bs-fetch-0.2.0.tgz#0537d70169c5746b16eeba8639df7442057db7cf"
+
+bs-moment@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/bs-moment/-/bs-moment-0.1.8.tgz#0588398ec8ba7e349879b1fcce5d4abfff426098"
+
+bs-platform@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-2.1.0.tgz#63560ff8f7142c9c0631559df1c35590b9f6d8b2"
+
 bser@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/bser/-/bser-2.0.0.tgz#9ac78d3ed5d915804fd87acb158bc797147a1719"
@@ -1350,7 +1362,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.6.0:
+create-react-class@^15.5.2, create-react-class@^15.6.0:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.2.tgz#cf1ed15f12aad7f14ef5f2dfe05e6c42f91ef02a"
   dependencies:
@@ -4425,9 +4437,9 @@ no-case@^2.2.0:
   dependencies:
     lower-case "^1.1.1"
 
-node-deb@^0.10.0:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/node-deb/-/node-deb-0.10.1.tgz#e2e6364a95163b1c029f922a06fa5af19c5742db"
+node-deb@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/node-deb/-/node-deb-0.10.2.tgz#231d7e65e505c08f6d580bf6989d1f2e1e76a2d3"
 
 node-fetch@^1.0.1:
   version "1.7.3"
@@ -5416,9 +5428,11 @@ rc@^1.0.1, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-bootstrap-date-picker@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-date-picker/-/react-bootstrap-date-picker-5.1.0.tgz#5f87c6a875e411dbf46d2be74960756f113ebf23"
+"react-bootstrap-date-picker@github:maxaggedon/react-bootstrap-date-picker":
+  version "5.1.1"
+  resolved "https://codeload.github.com/maxaggedon/react-bootstrap-date-picker/tar.gz/ae4b8afeb669e7deae1aa8e156d2332fd9b0f6b9"
+  dependencies:
+    create-react-class "^15.5.2"
 
 react-bootstrap@^0.32.0:
   version "0.32.0"
@@ -5465,9 +5479,9 @@ react-google-charts@^1.5.5:
     react "^15.3.2"
     react-dom "^15.3.2"
 
-react-moment@^0.6.0:
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.6.8.tgz#8612a90f3c8afec26fef6844806d84b9d9e3b212"
+react-moment@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.7.0.tgz#9ccb5c87be683d08c253b48469167443f09c3d89"
 
 react-overlays@^0.8.0:
   version "0.8.3"
@@ -5652,7 +5666,7 @@ realpath-native@^1.0.0:
   dependencies:
     util.promisify "^1.0.0"
 
-reason-react@^0.3.0:
+reason-react@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/reason-react/-/reason-react-0.3.1.tgz#55d5fcd07825299ce5d04f99e763bf2af1f9e0f2"
   dependencies:
@@ -7060,9 +7074,9 @@ webpack-dev-middleware@1.12.2:
     range-parser "^1.0.3"
     time-stamp "^2.0.0"
 
-webpack-dev-server@^2.6.1:
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-2.10.1.tgz#a9768375346e62155860fe3cef3d4d641b24273e"
+webpack-dev-server@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-2.11.0.tgz#e9d4830ab7eb16c6f92ed68b92f6089027960e1b"
   dependencies:
     ansi-html "0.0.7"
     array-includes "^3.0.3"

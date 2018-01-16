@@ -93,21 +93,20 @@ export const isArrayLeaf = (
   factPath: FactPath,
   factPaths: ReadonlyArray<FactPath>,
 ): boolean => {
-  return (
-    factPath.type === 'array' &&
-    directChildren(factPath, factPaths).every(
-      child =>
-        isLeaf(child, factPaths) && typeof child.path.slice(-1)[0] === 'number',
-    )
+  return directChildren(factPath, factPaths).every(
+    child =>
+      isLeaf(child, factPaths) && typeof child.path.slice(-1)[0] === 'number',
   );
 };
 
 export const get = (serverUrl: string): Promise<ReadonlyArray<FactPath>> => {
-  const url = ``;
+  const url = `${serverUrl}/pdb/query/v4/fact-paths`;
 
   return fetch(url, {
     headers: new Headers({ Accept: 'application/json' }),
-  }).then(response => factPathDecoder(response));
+  }).then(response =>
+    response.text().then(text => factPathDecoder.decodeJSON(text)),
+  );
 };
 
 // The last element of our path
