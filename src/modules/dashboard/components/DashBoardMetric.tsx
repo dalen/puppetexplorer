@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import * as Panel from 'react-bootstrap/lib/Panel';
+import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import * as Maybe from 'maybe.ts';
 
@@ -63,9 +63,12 @@ export default class DashBoardMetric extends React.Component<Props, State> {
     );
 
     return (
-      <Panel header={this.props.title} bsStyle={this.props.style}>
-        {children}
-      </Panel>
+      <Card color={this.props.style}>
+        <CardBody className="p-2">
+          <CardTitle>{this.props.title}</CardTitle>
+          <CardText>{children}</CardText>
+        </CardBody>
+      </Card>
     );
   }
 }

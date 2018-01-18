@@ -58,7 +58,7 @@ export default class EventListItem extends React.Component<Props, State> {
 
   readonly toggle = () => {
     this.setState({ show: !this.state.show });
-  }
+  };
 
   render(): JSX.Element {
     const event = this.props.event;

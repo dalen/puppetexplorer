@@ -1,15 +1,14 @@
 import * as React from 'react';
-import * as InputGroup from 'react-bootstrap/lib/InputGroup';
-import * as FormControl from 'react-bootstrap/lib/FormControl';
-import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import * as Icon from 'react-fontawesome';
+import { InputGroup, InputGroupAddon, Input, Form } from 'reactstrap';
 
 type Props = {
-  readonly updateQuery: (query: string) => any,
-  readonly queryString: string,
+  readonly updateQuery: (query: string) => any;
+  readonly queryString: string;
 };
 
 type State = {
-  readonly queryString: string,
+  readonly queryString: string;
 };
 
 export default class SearchField extends React.Component<Props, State> {
@@ -27,27 +26,27 @@ export default class SearchField extends React.Component<Props, State> {
     }
   }
 
-  readonly handleChange = (event: React.FormEvent<FormControl>) => {
+  readonly handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target instanceof HTMLInputElement) {
       this.setState({ queryString: event.target.value });
     } else {
       throw new Error('SearchField.handleChange(): Unknown event target');
     }
-  }
+  };
 
   readonly handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     this.props.updateQuery(this.state.queryString);
     return event.preventDefault();
-  }
+  };
 
   render(): JSX.Element {
     return (
-      <form id="node-query" onSubmit={this.handleSubmit}>
+      <Form id="node-query" onSubmit={this.handleSubmit}>
         <InputGroup>
-          <InputGroup.Addon>
-            <Glyphicon glyph="search" />
-          </InputGroup.Addon>
-          <FormControl
+          <InputGroupAddon>
+            <Icon name="search" />
+          </InputGroupAddon>
+          <Input
             type="search"
             placeholder="Search"
             id="node-query-field"
@@ -55,7 +54,7 @@ export default class SearchField extends React.Component<Props, State> {
             onChange={this.handleChange}
           />
         </InputGroup>
-      </form>
+      </Form>
     );
   }
 }

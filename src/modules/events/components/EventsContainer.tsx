@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { History, Location } from 'history';
-import * as Grid from 'react-bootstrap/lib/Grid';
-import * as Row from 'react-bootstrap/lib/Row';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Tabs from 'react-bootstrap/lib/Tabs';
-import * as ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import * as FormGroup from 'react-bootstrap/lib/FormGroup';
-import * as Tab from 'react-bootstrap/lib/Tab';
+import {
+  Container,
+  Row,
+  Col,
+  Nav,
+  NavItem,
+  NavLink,
+  FormGroup,
+  Label,
+} from 'reactstrap';
 import * as DatePicker from 'react-bootstrap-date-picker';
 import * as moment from 'moment';
 
@@ -80,63 +83,60 @@ export default class EventListContainer extends React.Component<Props> {
     const dateTo = this.getDate('dateTo');
 
     return (
-      <Tabs
-        activeKey={this.props.tab || 'latest'}
-        onSelect={this.selectTab}
-        id="event-tabs"
-        unmountOnExit
-      >
-        <Tab
-          eventKey={'latest'}
-          title="Latest Report"
-          style={{ paddingTop: 10 }}
-        >
-          <Events
-            serverUrl={this.props.serverUrl}
-            queryParsed={this.props.queryParsed}
-          />
-        </Tab>
-        <Tab
-          eventKey={'daterange'}
-          title="Date Range"
-          style={{ paddingTop: 10 }}
-        >
-          <Grid fluid>
-            <Row>
-              <Col md={6}>
-                <FormGroup>
-                  <ControlLabel>From:</ControlLabel>
-                  <DatePicker
-                    value={dateFrom}
-                    onChange={value => this.changeDate('dateFrom', value)}
-                    dateFormat="YYYY-MM-DD"
-                    showTodayButton
-                  />
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <ControlLabel>To:</ControlLabel>
-                  <DatePicker
-                    value={dateTo}
-                    onChange={value => this.changeDate('dateTo', value)}
-                    dateFormat="YYYY-MM-DD"
-                    showTodayButton
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-          </Grid>
-          <Events
-            serverUrl={this.props.serverUrl}
-            queryParsed={EventListContainer.dateRangeEventQuery(
-              this.props.queryParsed,
-              dateFrom,
-              dateTo,
-            )}
-          />
-        </Tab>
-      </Tabs>
+      <Container fluid>
+        <Nav tabs>
+          <NavItem>
+            <NavLink
+              active={this.props.tab === 'latest'}
+              onClick={() => this.selectTab('latest')}
+            >
+              Latest Report
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              active={this.props.tab === 'daterange'}
+              onClick={() => this.selectTab('latest')}
+            >
+              Date Range
+            </NavLink>
+          </NavItem>
+        </Nav>
+        <Container fluid>
+          <Row>
+            <Col md={6}>
+              <FormGroup>
+                <Label>From:</Label>
+                <DatePicker
+                  value={dateFrom}
+                  onChange={value => this.changeDate('dateFrom', value)}
+                  dateFormat="YYYY-MM-DD"
+                  showTodayButton
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Label>To:</Label>
+                <DatePicker
+                  value={dateTo}
+                  onChange={value => this.changeDate('dateTo', value)}
+                  dateFormat="YYYY-MM-DD"
+                  showTodayButton
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+        </Container>
+        <Events
+          serverUrl={this.props.serverUrl}
+          queryParsed={EventListContainer.dateRangeEventQuery(
+            this.props.queryParsed,
+            dateFrom,
+            dateTo,
+          )}
+        />
+      </Container>
     );
   }
 }

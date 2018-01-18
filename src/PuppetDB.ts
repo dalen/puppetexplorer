@@ -1,5 +1,6 @@
 import * as puppetdbquery from 'node-puppetdbquery';
 import * as FactPath from './PuppetDB/FactPath';
+import * as queryString from 'query-string';
 
 export { FactPath };
 
@@ -113,18 +114,17 @@ export const get = (
   params: { readonly [id: string]: any } = {},
 ): Promise<any> => {
   const baseUrl = `${serverUrl}/${path}`;
+  const jsonParams = Object.assign(
+    {},
+    ...Object.entries(params).map(
+      ([k, v]: [string, any]) =>
+        v instanceof Array ? { [k]: JSON.stringify(v) } : { [k]: v },
+    ),
+  );
+
   const url =
     Object.keys(params).length > 0
-      ? `${baseUrl}?${Object.keys(params)
-          .map((k: string): string => {
-            const v = params[k]; // TODO: Use Object.enties in the future
-            return typeof v === 'string'
-              ? `${encodeURIComponent(k)}=${encodeURIComponent(v)}`
-              : `${encodeURIComponent(k)}=${encodeURIComponent(
-                  JSON.stringify(v),
-                )}`;
-          })
-          .join('&')}`
+      ? `${baseUrl}?${queryString.stringify(jsonParams)}`
       : baseUrl;
 
   return fetch(url, {

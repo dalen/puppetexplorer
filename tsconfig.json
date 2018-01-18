@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES5",
-    "lib": ["dom", "es6", "dom.iterable", "scripthost"],
+    "lib": ["dom", "es6", "es2017", "dom.iterable", "scripthost"],
     "sourceMap": true,
     "strict": true,
     "jsx": "react",

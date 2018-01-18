@@ -41,14 +41,10 @@ export default class App extends React.Component<Props, State> {
     };
   }
 
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      config: Config.defaults(),
-      ...App.decodeSearch(props.location.search),
-    };
-  }
+  readonly state = {
+    config: Config.defaults(),
+    ...App.decodeSearch(this.props.location.search),
+  };
 
   componentWillReceiveProps(nextProps: Props): void {
     if (nextProps.location.search !== this.props.location.search) {
@@ -111,7 +107,7 @@ export default class App extends React.Component<Props, State> {
           updateQuery={this.setQuery}
           queryString={this.getQuery()}
         />
-        <MenuBar selectTab={this.selectTab} />
+        <MenuBar />
 
         <Switch>
           <Route

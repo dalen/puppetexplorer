@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Panel } from 'react-bootstrap';
+import { Card, CardHeader } from 'reactstrap';
 import { BarChart, Bar, Legend, Cell } from 'recharts';
 
 import * as PuppetDB from '../../../PuppetDB';
@@ -19,6 +19,8 @@ type State = {
 };
 
 export default class EventChart extends React.Component<Props, State> {
+  readonly state: State = {};
+
   componentDidMount(): void {
     this.fetchEventValue(
       this.props.eventField,
@@ -99,7 +101,8 @@ export default class EventChart extends React.Component<Props, State> {
       ];
 
       return (
-        <Panel header={this.props.title} style={{ overflow: 'hidden' }}>
+        <Card style={{ overflow: 'hidden' }}>
+          <CardHeader>{this.props.title}</CardHeader>
           <BarChart layout="horizontal" data={this.state.data}>
             <Legend />
             <Bar dataKey="value">
@@ -108,7 +111,7 @@ export default class EventChart extends React.Component<Props, State> {
               ))}
             </Bar>
           </BarChart>
-        </Panel>
+        </Card>
       );
     }
     return null;

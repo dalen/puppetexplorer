@@ -1,7 +1,5 @@
 import * as React from 'react';
-import * as Table from 'react-bootstrap/lib/Table';
-import * as Label from 'react-bootstrap/lib/Label';
-import * as Alert from 'react-bootstrap/lib/Alert';
+import { Table, Alert, Label } from 'reactstrap';
 
 import NodeListItem from './NodeListItem';
 import * as PuppetDB from '../../../PuppetDB';
@@ -12,7 +10,7 @@ export default (props: {
   readonly serverUrl: string;
 }) =>
   props.total === 0 ? (
-    <Alert bsStyle="warning">No nodes found</Alert>
+    <Alert color="warning">No nodes found</Alert>
   ) : (
     <Table striped>
       <thead>

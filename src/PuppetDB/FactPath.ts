@@ -29,20 +29,26 @@ export const intermediatePaths = (factPaths: ReadonlyArray<FactPath>) =>
     // Go through paths and add any missing parents
     .reduce((ret: ReadonlyArray<FactPath>, path: FactPath) => {
       // For each path element, see if that parent path exists
-      const extraPaths: ReadonlyArray<FactPath> = path.path.reduce(
-        (extra: ReadonlyArray<FactPath>, _: string | number, index: number) => {
-          // The path we are looking for
-          const curPath = path.path.slice(0, index);
-          // See if the current path we are looking for exists
-          if (ret.find(p => p.path === curPath)) {
-            // We found it, so add no extra path
-            return extra;
-          }
-          // We didn't find it, so add it
-          return [...extraPaths, create(curPath, 'parent')];
-        },
-        [],
-      );
+      const extraPaths: ReadonlyArray<FactPath> = path.path
+        .slice(0, -1)
+        .reduce(
+          (
+            extra: ReadonlyArray<FactPath>,
+            _: string | number,
+            index: number,
+          ) => {
+            // The path we are looking for
+            const curPath = path.path.slice(0, index + 1);
+            // See if the current path we are looking for exists
+            if (ret.find(p => p.path.join('.') === curPath.join('.'))) {
+              // We found it, so add no extra path
+              return extra;
+            }
+            // We didn't find it, so add it
+            return [...extra, create(curPath, 'parent')];
+          },
+          [],
+        );
       return [...ret, ...extraPaths, path];
     }, []);
 

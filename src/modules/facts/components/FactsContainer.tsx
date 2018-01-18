@@ -19,7 +19,7 @@ type State = {
 
 // Fetch a report and pass it to the Report component
 export default class FactsContainer extends React.Component<Props, State> {
-  static readonly state: Partial<State> = { activeFactCharts: OrderedSet.of() };
+  readonly state: State = { activeFactCharts: OrderedSet.of() };
 
   componentDidMount(): void {
     this.fetchFactPaths(this.props.serverUrl);

@@ -1,13 +1,9 @@
 // @flow
 import * as React from 'react';
-import * as Grid from 'react-bootstrap/lib/Grid';
-import * as Row from 'react-bootstrap/lib/Row';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Table from 'react-bootstrap/lib/Table';
-import * as Well from 'react-bootstrap/lib/Well';
+import { Container, Row, Col, Card, Table } from 'reactstrap';
 
 export default () => (
-  <Grid>
+  <Container>
     <Row>
       <Col md={4}>
         <h3>Syntax</h3>
@@ -78,7 +74,7 @@ export default () => (
       <Col md={4}>
         <h4>Comparison operators</h4>
 
-        <Table condensed striped>
+        <Table striped size="sm">
           <tbody>
             <tr>
               <td>=</td>
@@ -116,7 +112,7 @@ export default () => (
         </Table>
 
         <h4>Logical operators</h4>
-        <Table condensed striped>
+        <Table striped size="sm">
           <tbody>
             <tr>
               <td>not</td>
@@ -141,24 +137,30 @@ export default () => (
       <Col md={4}>
         <h3>Query Examples</h3>
         Nodes with package mysql-server and amd64 arcitecture
-        <Well bsSize="sm">
-          <code>package[&quot;mysql-server&quot;] and architecture=amd64</code>
-        </Well>
+        <Card className="my-1 bg-light">
+          <code className="m-1">
+            package[&quot;mysql-server&quot;] and architecture=amd64
+          </code>
+        </Card>
         Nodes with the class Postgresql::Server and a version set to 9.3
-        <Well bsSize="sm">
-          <code>
+        <Card className="my-1 bg-light">
+          <code className="m-1">
             class[postgresql::server]{'{'} version=&quot;9.3&quot; {'}'}
           </code>
-        </Well>
+        </Card>
         Nodes with 4 or 8 processors running Linux
-        <Well bsSize="sm">
-          <code>(processorcount=4 or processorcount=8) and kernel=Linux</code>
-        </Well>
+        <Card className="my-1 bg-light">
+          <code className="m-1">
+            (processorcount=4 or processorcount=8) and kernel=Linux
+          </code>
+        </Card>
         Nodes that haven&apos;t reported in the last 2 hours
-        <Well bsSize="sm">
-          <code>#node.report_timestamp &lt; @&quot;now - 2 hours&quot;</code>
-        </Well>
+        <Card className="my-1 bg-light">
+          <code className="m-1">
+            #node.report_timestamp &lt; @&quot;now - 2 hours&quot;
+          </code>
+        </Card>
       </Col>
     </Row>
-  </Grid>
+  </Container>
 );
