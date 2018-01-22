@@ -1,20 +1,26 @@
 import * as React from 'react';
-import { Table, Label, Alert } from 'react-bootstrap';
+import { Table, Label, Alert } from 'reactstrap';
 
 import ReportListItem from './ReportListItem';
 
 import * as PuppetDB from '../../../PuppetDB';
 
 // A list of reports, for a node typically
-export default (props: { total: number, reports: PuppetDB.reportT[] }) =>
-  (props.total === 0
-    ? <Alert bsStyle="warning">No reports found</Alert>
-    : <Table striped>
+export default (props: {
+  readonly total: number;
+  readonly reports: PuppetDB.reportT[];
+}) =>
+  props.total === 0 ? (
+    <Alert color="warning">No reports found</Alert>
+  ) : (
+    <Table striped>
       <thead>
         <tr>
           <th>
             <Label>
-              {props.total === 1 ? '1 report found' : `${props.total} reports found`}
+              {props.total === 1
+                ? '1 report found'
+                : `${props.total} reports found`}
             </Label>
           </th>
           <th>Last run</th>
@@ -26,6 +32,9 @@ export default (props: { total: number, reports: PuppetDB.reportT[] }) =>
         </tr>
       </thead>
       <tbody>
-        {props.reports.map((report, i) => <ReportListItem key={i.toString()} report={report} />)}
+        {props.reports.map((report, i) => (
+          <ReportListItem key={i.toString()} report={report} />
+        ))}
       </tbody>
-    </Table>);
+    </Table>
+  );

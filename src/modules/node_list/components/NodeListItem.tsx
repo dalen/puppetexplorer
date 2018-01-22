@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import * as Icon from 'react-fontawesome';
 import Moment from 'react-moment';
 import * as Maybe from 'maybe.ts';
 
@@ -55,7 +55,7 @@ export default class NodeListItem extends React.Component<Props, State> {
           </Link>
         </td>
         <td title={this.props.node.catalog_timestamp}>
-          <Glyphicon glyph="warning-sign" bsClass="text-warning" />
+          <Icon name="warning-sign" className="text-warning" />
           <span title={this.props.node.report_timestamp}>
             <Moment fromNow ago>
               {this.props.node.report_timestamp}

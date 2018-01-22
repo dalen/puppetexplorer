@@ -1,14 +1,20 @@
 import * as React from 'react';
-import * as Grid from 'react-bootstrap/lib/Grid';
-import * as Row from 'react-bootstrap/lib/Row';
-import * as Col from 'react-bootstrap/lib/Col';
-import * as Tabs from 'react-bootstrap/lib/Tabs';
-import * as Tab from 'react-bootstrap/lib/Tab';
-import * as ListGroup from 'react-bootstrap/lib/ListGroup';
-import * as ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
-import * as PageHeader from 'react-bootstrap/lib/PageHeader';
 import Moment from 'react-moment';
 import * as Maybe from 'maybe.ts';
+import {
+  Container,
+  Row,
+  Col,
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  ListGroup,
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText,
+} from 'reactstrap';
 
 import EventList from '../../events/components/EventList';
 import LogList from './LogList';
@@ -30,70 +36,102 @@ export default ({ report }: { readonly report: PuppetDB.reportT }) => {
 
   return (
     <div>
-      <PageHeader>
+      <h1>
         {report.certname}:{' '}
         <span title={report.receive_time}>
           <Moment format="LLL">{report.receive_time}</Moment>
         </span>
-      </PageHeader>
-      <Grid>
+      </h1>
+      <Container>
         <Row>
           <Col md={3}>
             <ListGroup>
-              <ListGroupItem header="Environment">
-                {report.environment}
+              <ListGroupItem>
+                <ListGroupItemHeading>Environment</ListGroupItemHeading>
+                <ListGroupItemText>{report.environment}</ListGroupItemText>
               </ListGroupItem>
-              <ListGroupItem header="Puppet version">
-                {report.puppet_version}
-              </ListGroupItem>
-            </ListGroup>
-          </Col>
-          <Col md={3}>
-            <ListGroup>
-              <ListGroupItem header="Run time">{runTime} s</ListGroupItem>
-              <ListGroupItem header="Catalog retrieval time">
-                {configTime} s
+              <ListGroupItem>
+                <ListGroupItemHeading>Puppet version</ListGroupItemHeading>
+                <ListGroupItemText>{report.puppet_version}</ListGroupItemText>
               </ListGroupItem>
             </ListGroup>
           </Col>
           <Col md={3}>
             <ListGroup>
-              <ListGroupItem header="Configuration version">
-                {report.configuration_version}
+              <ListGroupItem>
+                <ListGroupItemHeading>Run time</ListGroupItemHeading>
+                <ListGroupItemText>{runTime} s</ListGroupItemText>
               </ListGroupItem>
-              <ListGroupItem header="Catalog compiled by">
-                {report.producer}
+              <ListGroupItem>
+                <ListGroupItemHeading>
+                  Catalog retrieval time
+                </ListGroupItemHeading>
+                <ListGroupItemText>{configTime} s</ListGroupItemText>
               </ListGroupItem>
             </ListGroup>
           </Col>
           <Col md={3}>
             <ListGroup>
-              <ListGroupItem header="Start time">
-                <span title={report.start_time}>
-                  <Moment format="LLL">{report.start_time}</Moment>
-                </span>
+              <ListGroupItem>
+                <ListGroupItemHeading>
+                  Configuration version
+                </ListGroupItemHeading>
+                <ListGroupItemText>
+                  {report.configuration_version}
+                </ListGroupItemText>
               </ListGroupItem>
-              <ListGroupItem header="End time">
-                <span title={report.end_time}>
-                  <Moment format="LLL">{report.end_time}</Moment>
-                </span>
+              <ListGroupItem>
+                <ListGroupItemHeading>Catalog compiled by</ListGroupItemHeading>
+                <ListGroupItemText>{report.producer}</ListGroupItemText>
+              </ListGroupItem>
+            </ListGroup>
+          </Col>
+          <Col md={3}>
+            <ListGroup>
+              <ListGroupItem>
+                <ListGroupItemHeading>Start time</ListGroupItemHeading>
+                <ListGroupItemText>
+                  <span title={report.start_time}>
+                    <Moment format="LLL">{report.start_time}</Moment>
+                  </span>
+                </ListGroupItemText>
+              </ListGroupItem>
+              <ListGroupItem>
+                <ListGroupItemHeading>End time</ListGroupItemHeading>
+                <ListGroupItemText>
+                  <span title={report.end_time}>
+                    <Moment format="LLL">{report.end_time}</Moment>
+                  </span>
+                </ListGroupItemText>
               </ListGroupItem>
             </ListGroup>
           </Col>
         </Row>
-      </Grid>
+      </Container>
 
-      <Tabs defaultActiveKey={'events'} id="report-tabs" unmountOnExit>
-        <Tab eventKey={'events'} title="Events">
+      <Nav tabs>
+        <NavItem>
+          <NavLink active>Events</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink>Logs</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink>Metrics</NavLink>
+        </NavItem>
+      </Nav>
+
+      <TabContent activeTab={'events'}>
+        <TabPane tabId={'events'}>
           <EventList events={report.resource_events.data} showNode={false} />
-        </Tab>
-        <Tab eventKey={'logs'} title="Logs">
+        </TabPane>
+        <TabPane tabId={'logs'}>
           <LogList logs={report.logs.data} />
-        </Tab>
-        <Tab eventKey={'metrics'} title="Metrics">
+        </TabPane>
+        <TabPane tabId={'metrics'}>
           <ReportMetrics metrics={report.metrics.data} />
-        </Tab>
-      </Tabs>
+        </TabPane>
+      </TabContent>
     </div>
   );
 };

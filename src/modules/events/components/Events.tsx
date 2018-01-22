@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 import EventChart from './EventChart';
 import EventList from './EventList';
@@ -13,9 +13,9 @@ export default (props: {
   readonly queryParsed: PuppetDB.queryT | null;
 }) => (
   <div>
-    <Grid fluid>
+    <Container fluid>
       <Row>
-        <Col md={4}>
+        <Col>
           <EventChart
             title="Containing Class"
             eventField="containing_class"
@@ -24,7 +24,7 @@ export default (props: {
             queryParsed={props.queryParsed}
           />
         </Col>
-        <Col md={4}>
+        <Col>
           <EventChart
             title="Resource Type"
             eventField="resource_type"
@@ -33,7 +33,7 @@ export default (props: {
             queryParsed={props.queryParsed}
           />
         </Col>
-        <Col md={4}>
+        <Col>
           <EventChart
             title="Resource Status"
             eventField="status"
@@ -43,7 +43,7 @@ export default (props: {
           />
         </Col>
       </Row>
-    </Grid>
+    </Container>
     <PaginatedEventList
       serverUrl={props.serverUrl}
       listQuery={props.queryParsed}

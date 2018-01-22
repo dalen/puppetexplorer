@@ -1,6 +1,14 @@
 import * as React from 'react';
-import * as Panel from 'react-bootstrap/lib/Panel';
-import { BarChart, Bar, Legend, Cell } from 'recharts';
+import { Card, CardHeader, CardBody } from 'reactstrap';
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  Tooltip,
+  Cell,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
@@ -11,7 +19,7 @@ type Props = {
 };
 
 type State = {
-  readonly data: ReadonlyArray<{
+  readonly data?: ReadonlyArray<{
     readonly value: string;
     readonly count: number;
   }>;
@@ -19,7 +27,7 @@ type State = {
 };
 
 export default class FactChart extends React.Component<Props, State> {
-  readonly state = { data: [] };
+  readonly state: State = {};
 
   componentDidMount(): void {
     this.fetchFactValue(
@@ -108,18 +116,40 @@ export default class FactChart extends React.Component<Props, State> {
       ];
       const factName = this.props.fact.path.join('.');
       return (
-        <Panel header={factName} style={{ overflow: 'hidden' }}>
-          <BarChart layout="horizontal" data={this.state.data}>
-            <Legend />
-            <Bar dataKey="value">
-              {this.state.data.map((_, index) => (
-                <Cell fill={colors[index % colors.length]} />
-              ))}
-            </Bar>
-          </BarChart>
-        </Panel>
+        <Card style={{ overflow: 'hidden' }}>
+          <CardHeader>{factName}</CardHeader>
+          <CardBody>
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart data={[...this.state.data]}>
+                <XAxis dataKey="value" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="count" label>
+                  {this.state.data.map((_, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={colors[index % colors.length]}
+                    />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardBody>
+        </Card>
       );
     }
     return null;
   }
 }
+
+/*
+
+              <Bar dataKey="value" label>
+                {this.state.data.map((_, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={colors[index % colors.length]}
+                  />
+                ))}
+              </Bar>
+*/

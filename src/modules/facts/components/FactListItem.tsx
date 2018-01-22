@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ListGroupItem, Glyphicon } from 'react-bootstrap';
+import { ListGroupItem } from 'reactstrap';
+import * as Icon from 'react-fontawesome';
 import { OrderedSet } from 'immutable';
 
 import * as PuppetDB from '../../../PuppetDB';
@@ -49,18 +50,18 @@ export default class FactListItem extends React.Component<Props, State> {
       return (
         <ListGroupItem onClick={this.toggleChart} active={this.isActive()}>
           {this.indent()}
-          <Glyphicon glyph="stats" /> {PuppetDB.FactPath.name(fact)}
+          <Icon name="stats" /> {PuppetDB.FactPath.name(fact)}
         </ListGroupItem>
       );
     }
     return (
       <div style={{ marginBottom: '-1px' }}>
         <ListGroupItem
-          bsStyle={this.state.expanded ? 'info' : ''}
+          color={this.state.expanded ? 'info' : ''}
           onClick={this.toggle}
         >
           {this.indent()}
-          <Glyphicon glyph={this.state.expanded ? 'collapse-up' : 'expand'} />
+          <Icon name={this.state.expanded ? 'collapse-up' : 'expand'} />
           {PuppetDB.FactPath.name(fact)}
         </ListGroupItem>
         {this.state.expanded &&

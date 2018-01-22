@@ -1,9 +1,9 @@
 import * as React from 'react';
-import * as Alert from 'react-bootstrap/lib/Alert';
-import * as Panel from 'react-bootstrap/lib/Panel';
+import { Alert, Card, CardHeader } from 'reactstrap';
 import { BarChart, Bar, Legend, Cell } from 'recharts';
 
 import * as PuppetDB from './../../../PuppetDB';
+import * as hash from 'object-hash';
 
 // Get all metrics for a category
 const categoryMetrics = (
@@ -15,7 +15,8 @@ const categoryMetrics = (
 // Return array of category names
 const categories = (
   metrics: ReadonlyArray<PuppetDB.metricT>,
-): ReadonlyArray<string> => Array.from(new Set(metrics.map(metric => metric.category)).values());
+): ReadonlyArray<string> =>
+  Array.from(new Set(metrics.map(metric => metric.category)).values());
 
 export default ({
   metrics,
@@ -38,25 +39,31 @@ export default ({
   readonly colors?: ReadonlyArray<string>;
 }) => {
   if (metrics == null) {
-    return <Alert bsStyle="warning">No metrics found</Alert>;
+    return <Alert color="warning">No metrics found</Alert>;
   }
 
   return (
     <div>
-      {categories(metrics).map((categoryName) => {
+      {categories(metrics).map(categoryName => {
         // Sort the metrics (need to make clone as sort is in place in JS)
         const data = [...categoryMetrics(categoryName, metrics)].sort(
           (a, b) => a.value - b.value,
         );
         return (
-          <Panel header={categoryName} key={categoryName}>
+          <Card key={categoryName}>
+            <CardHeader>{categoryName}</CardHeader>
             <BarChart layout="horizontal" data={data}>
               <Legend />
               <Bar dataKey="value">
-                { data.map((_, index) => (<Cell fill={colors[index % colors.length]}/>)) }
+                {data.map((metric, index) => (
+                  <Cell
+                    key={hash(metric)}
+                    fill={colors[index % colors.length]}
+                  />
+                ))}
               </Bar>
             </BarChart>
-          </Panel>
+          </Card>
         );
       })}
     </div>

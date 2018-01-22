@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
-import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import * as Icon from 'react-fontawesome';
 import * as Maybe from 'maybe.ts';
 
 import * as PuppetDB from '../../../PuppetDB';
@@ -48,7 +48,7 @@ export default class DashBoardMetric extends React.Component<Props, State> {
 
   render(): JSX.Element {
     const children = Maybe.toValue(
-      <Glyphicon glyph="refresh" className="spin" />,
+      <Icon name="refresh" className="spin" />,
       Maybe.map(
         val => (
           <span>

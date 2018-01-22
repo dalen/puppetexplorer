@@ -9,8 +9,8 @@ import {
   NavLink,
   FormGroup,
   Label,
+  Input,
 } from 'reactstrap';
-import * as DatePicker from 'react-bootstrap-date-picker';
 import * as moment from 'moment';
 
 import Events from './Events';
@@ -60,9 +60,9 @@ export default class EventListContainer extends React.Component<Props> {
 
   getDate(which: string): string {
     if (typeof this.props.search[which] === 'string') {
-      return moment.utc(this.props.search[which]).toISOString();
+      return moment.utc(this.props.search[which]).format('YYYY-MM-DD');
     }
-    return new Date().toISOString();
+    return moment().format('YYYY-MM-DD');
   }
 
   readonly selectTab = (tab: any) => {
@@ -72,9 +72,10 @@ export default class EventListContainer extends React.Component<Props> {
     });
   };
 
-  readonly changeDate = (which: string, value: string | null) => {
+  readonly changeDate = (which: string, value: string) => {
+    console.log(event);
     this.props.updateSearch({
-      [which]: value ? moment(value).format('YYYY-MM-DD') : undefined,
+      [which]: moment(value).format('YYYY-MM-DD'),
     });
   };
 
@@ -107,22 +108,24 @@ export default class EventListContainer extends React.Component<Props> {
             <Col md={6}>
               <FormGroup>
                 <Label>From:</Label>
-                <DatePicker
+                <Input
                   value={dateFrom}
-                  onChange={value => this.changeDate('dateFrom', value)}
-                  dateFormat="YYYY-MM-DD"
-                  showTodayButton
+                  onChange={event =>
+                    this.changeDate('dateFrom', event.target.value)
+                  }
+                  type="date"
                 />
               </FormGroup>
             </Col>
             <Col md={6}>
               <FormGroup>
                 <Label>To:</Label>
-                <DatePicker
+                <Input
                   value={dateTo}
-                  onChange={value => this.changeDate('dateTo', value)}
-                  dateFormat="YYYY-MM-DD"
-                  showTodayButton
+                  type="date"
+                  onChange={event =>
+                    this.changeDate('dateTo', event.target.value)
+                  }
                 />
               </FormGroup>
             </Col>

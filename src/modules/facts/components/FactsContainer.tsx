@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Label from 'react-bootstrap/lib/Label';
+import { Progress } from 'reactstrap';
 import { OrderedSet } from 'immutable';
 
 import * as PuppetDB from '../../../PuppetDB';
@@ -85,7 +85,9 @@ export default class FactsContainer extends React.Component<Props, State> {
         factSelect={this.factSelect}
       />
     ) : (
-      <Label>Loading...</Label>
+      <Progress animated value={100}>
+        Loading...
+      </Progress>
     );
   }
 }

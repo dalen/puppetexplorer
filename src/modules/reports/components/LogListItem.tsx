@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Label from 'react-bootstrap/lib/Label';
+import { Badge } from 'reactstrap';
 import Moment from 'react-moment';
 
 import * as PuppetDB from '../../../PuppetDB';
@@ -41,15 +41,11 @@ export default ({ log }: { readonly log: PuppetDB.logT }) => (
   <tr>
     <td>
       <span title={log.time}>
-        <Moment format="LLL">
-          {log.time}
-        </Moment>
+        <Moment format="LLL">{log.time}</Moment>
       </span>
     </td>
     <td>
-      <Label bsStyle={color(log.level)} style={{ textTransform: 'capitalize' }}>
-        {log.level}
-      </Label>
+      <Badge color={color(log.level)}>{log.level.toUpperCase()}</Badge>
     </td>
     <td>
       {message(log.message)}

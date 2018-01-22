@@ -1,11 +1,15 @@
 import * as React from 'react';
-import * as Table from 'react-bootstrap/lib/Table';
-import * as Alert from 'react-bootstrap/lib/Alert';
+import { Table, Alert } from 'reactstrap';
 
 import LogListItem from './LogListItem';
 import * as PuppetDB from '../../../PuppetDB';
+import * as hash from 'object-hash';
 
-export default ({ logs = [] }: { readonly logs?: ReadonlyArray<PuppetDB.logT> }) => {
+export default ({
+  logs = [],
+}: {
+  readonly logs?: ReadonlyArray<PuppetDB.logT>;
+}) => {
   if (logs) {
     return (
       <Table hover>
@@ -16,9 +20,11 @@ export default ({ logs = [] }: { readonly logs?: ReadonlyArray<PuppetDB.logT> })
             <th>Message</th>
           </tr>
         </thead>
-        <tbody>{logs.map(log => <LogListItem log={log} />)}</tbody>
+        <tbody>
+          {logs.map(log => <LogListItem key={hash(log)} log={log} />)}
+        </tbody>
       </Table>
     );
   }
-  return <Alert bsStyle="warning">No logs found</Alert>;
+  return <Alert color="warning">No logs found</Alert>;
 };

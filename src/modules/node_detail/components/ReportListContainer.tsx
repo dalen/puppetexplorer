@@ -6,15 +6,21 @@ import PaginatedList from '../../../components/PaginatedList';
 const PaginatedReportList = PaginatedList(ReportList, 'reports', 'reports');
 
 export default (props: {
-  node: string,
-  serverUrl: string,
+  readonly node: string;
+  readonly serverUrl: string;
 }) => (
   <PaginatedReportList
     serverUrl={props.serverUrl}
-    listQuery={['extract',
+    listQuery={[
+      'extract',
       ['hash', 'end_time', 'status', 'metrics'],
-      ['=', 'certname', props.node]]}
-    countQuery={['extract', [['function', 'count']], ['=', 'certname', props.node]]}
+      ['=', 'certname', props.node],
+    ]}
+    countQuery={[
+      'extract',
+      [['function', 'count']],
+      ['=', 'certname', props.node],
+    ]}
     perPage={10}
   />
 );

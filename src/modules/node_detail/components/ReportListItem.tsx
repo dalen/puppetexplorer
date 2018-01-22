@@ -19,18 +19,29 @@ export default (props: { readonly report: PuppetDB.reportT }) => (
       </Link>
     </td>
     <td className="text-center">
-      {Maybe.toValue(null, metricValue(props.report.metrics.data, 'events', 'success'))}
+      {Maybe.toValue(
+        null,
+        metricValue(props.report.metrics.data, 'events', 'success'),
+      )}
     </td>
     <td className="text-center">
-      {Maybe.toValue(null, metricValue(props.report.metrics.data, 'events', 'noop'))}
+      {Maybe.toValue(
+        null,
+        metricValue(props.report.metrics.data, 'events', 'noop'),
+      )}
     </td>
     <td className="text-center">
-      {Maybe.toValue(null, metricValue(props.report.metrics.data, 'events', 'skip'))}
+      {Maybe.toValue(
+        null,
+        metricValue(props.report.metrics.data, 'events', 'skip'),
+      )}
     </td>
     <td className="text-center">
-      {Maybe.toValue(null, metricValue(props.report.metrics.data, 'events', 'failure'))}
+      {Maybe.toValue(
+        null,
+        metricValue(props.report.metrics.data, 'events', 'failure'),
+      )}
     </td>
     <td className="text-right">{statusIcon(props.report.status)}</td>
   </tr>
 );
-

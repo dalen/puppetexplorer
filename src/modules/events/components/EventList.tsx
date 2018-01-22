@@ -1,9 +1,9 @@
 import * as React from 'react';
-import * as Alert from 'react-bootstrap/lib/Alert';
-import * as Table from 'react-bootstrap/lib/Table';
+import { Table, Alert } from 'reactstrap';
 
 import * as PuppetDB from '../../../PuppetDB';
 import EventListItem from './EventListItem';
+import * as hash from 'object-hash';
 
 export default ({
   events = [],
@@ -27,11 +27,15 @@ export default ({
         </thead>
         <tbody>
           {events.map(event => (
-            <EventListItem event={event} showNode={showNode} />
+            <EventListItem
+              key={hash(event)}
+              event={event}
+              showNode={showNode}
+            />
           ))}
         </tbody>
       </Table>
     );
   }
-  return <Alert bsStyle="warning">No events found</Alert>;
+  return <Alert color="warning">No events found</Alert>;
 };

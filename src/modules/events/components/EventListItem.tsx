@@ -1,9 +1,9 @@
 import * as React from 'react';
-import * as Label from 'react-bootstrap/lib/Label';
-import * as Collapse from 'react-bootstrap/lib/Collapse';
-import * as Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import * as Icon from 'react-fontawesome';
+import { Collapse, Badge } from 'reactstrap';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import * as hash from 'object-hash';
 
 import * as PuppetDB from '../../../PuppetDB';
 
@@ -41,9 +41,10 @@ export default class EventListItem extends React.Component<Props, State> {
       event.property === 'content' &&
       matches != null
     ) {
+      // TODO: checksum tooltip
       return (
         <td>
-          <Label title={matches[2]}>{matches[1]}</Label>
+          <Badge>{matches[1]}</Badge>
         </td>
       );
     }
@@ -66,13 +67,13 @@ export default class EventListItem extends React.Component<Props, State> {
       <tr>
         {this.props.showNode && <td>{event.certname}</td>}
         <td>
-          <Glyphicon
-            glyph={this.state.show ? 'triangle-bottom' : 'triangle-right'}
+          <Icon
+            name={this.state.show ? 'triangle-bottom' : 'triangle-right'}
             onClick={this.toggle}
           />
           {event.resource_type}
           <wbr />[{event.resource_title}]
-          <Collapse in={this.state.show}>
+          <Collapse isOpen={this.state.show}>
             <div>
               <dl>
                 <dt>Message:</dt>
@@ -111,12 +112,9 @@ export default class EventListItem extends React.Component<Props, State> {
           </Collapse>
         </td>
         <td>
-          <Label
-            bsStyle={EventListItem.color(this.props.event.status)}
-            style={{ textTransform: 'capitalize' }}
-          >
-            {event.status}
-          </Label>
+          <Badge color={EventListItem.color(this.props.event.status)}>
+            {event.status.toUpperCase()}
+          </Badge>
         </td>
         <td>{event.property}</td>
         {EventListItem.formatValue(event, event.old_value)}

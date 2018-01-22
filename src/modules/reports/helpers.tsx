@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Glyphicon } from 'react-bootstrap';
+import * as Icon from 'react-fontawesome';
 import * as Maybe from 'maybe.ts';
 
 import * as PuppetDB from '../../PuppetDB';
@@ -7,13 +7,13 @@ import * as PuppetDB from '../../PuppetDB';
 export const statusIcon = (status: string): JSX.Element => {
   switch (status) {
     case 'failed':
-      return <Glyphicon glyph="warning" className="text-danger" />;
+      return <Icon name="warning" className="text-danger" />;
     case 'changed':
-      return <Glyphicon glyph="exclamation-sign" className="text-success" />;
+      return <Icon name="exclamation-sign" className="text-success" />;
     case 'unchanged':
-      return <Glyphicon glyph="exclamation-sign" className="text-success" />;
+      return <Icon name="exclamation-sign" className="text-success" />;
     default:
-      return <Glyphicon glyph="exclamation-sign" />;
+      return <Icon name="exclamation-sign" />;
   }
 };
 
@@ -25,5 +25,7 @@ export const metricValue = (
 ): Maybe.Maybe<number> =>
   Maybe.map(
     metric => metric.value,
-    metrics.find(metric => metric.category === category && metric.name === name),
+    metrics.find(
+      metric => metric.category === category && metric.name === name,
+    ),
   );

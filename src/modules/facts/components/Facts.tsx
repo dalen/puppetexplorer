@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { OrderedSet } from 'immutable';
 
 import FactList from './FactList';
@@ -18,7 +18,7 @@ export default (props: {
     value: string,
   ) => void;
 }) => (
-  <Grid>
+  <Container>
     <Row>
       <Col md={6}>
         <FactList
@@ -42,5 +42,5 @@ export default (props: {
           ))}
       </Col>
     </Row>
-  </Grid>
+  </Container>
 );

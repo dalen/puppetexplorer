@@ -1,12 +1,12 @@
 import * as React from 'react';
-import * as Label from 'react-bootstrap/lib/Label';
+import { Progress } from 'reactstrap';
 
 import * as PuppetDB from '../../../PuppetDB';
 import Report from '../components/Report';
 
 type Props = {
-  readonly serverUrl: string,
-  readonly reportHash: string,
+  readonly serverUrl: string;
+  readonly reportHash: string;
 };
 
 type State = { readonly report?: PuppetDB.reportT };
@@ -42,6 +42,10 @@ export default class ReportContainer extends React.Component<Props, State> {
     if (this.state && this.state.report !== undefined) {
       return <Report report={this.state.report} />;
     }
-    return <Label>Loading...</Label>;
+    return (
+      <Progress animated value={100}>
+        Loading...
+      </Progress>
+    );
   }
 }

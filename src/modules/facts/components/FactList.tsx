@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ListGroup from 'react-bootstrap/lib/ListGroup';
+import { ListGroup } from 'reactstrap';
 import { OrderedSet } from 'immutable';
 
 import FactListItem from './FactListItem';
