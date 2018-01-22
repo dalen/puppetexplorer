@@ -19,7 +19,8 @@ module.exports = {
   // use imports loader to add whatwg-fetch polyfill
   plugins: [
     new webpack.ProvidePlugin({
-      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
+      fetch:
+        'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
     }),
   ],
   module: {
@@ -31,13 +32,6 @@ module.exports = {
           loader: 'ts-loader',
         },
       },
-      /* {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      }, */
       {
         test: /\.(re|ml)$/,
         use: 'bs-loader?module=es6',

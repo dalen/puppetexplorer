@@ -22,7 +22,7 @@ type Props = {
 type State = {
   readonly config: Config.Config;
   readonly search: { readonly [id: string]: any };
-  readonly queryParsed: PuppetDB.queryT | null;
+  readonly queryParsed: PuppetDB.Query | null;
 };
 
 export default class App extends React.Component<Props, State> {
@@ -30,7 +30,7 @@ export default class App extends React.Component<Props, State> {
     search: string,
   ): {
     readonly search: { readonly [id: string]: any };
-    readonly queryParsed: PuppetDB.queryT | null;
+    readonly queryParsed: PuppetDB.Query | null;
   } {
     const parsedSearch = qs.parse(search.slice(1), {
       strictNullHandling: true,

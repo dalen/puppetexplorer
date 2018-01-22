@@ -8,7 +8,7 @@ const PaginatedNodeList = PaginatedList(NodeList, 'nodes', 'nodes');
 
 export default (props: {
   readonly serverUrl: string;
-  readonly queryParsed: PuppetDB.queryT | null;
+  readonly queryParsed: PuppetDB.Query | null;
 }) => (
   <PaginatedNodeList
     serverUrl={props.serverUrl}

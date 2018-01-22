@@ -7,7 +7,7 @@ import { metricValue, statusIcon } from '../../reports/helpers';
 import * as PuppetDB from '../../../PuppetDB';
 
 // Item of a ReportList
-export default (props: { readonly report: PuppetDB.reportT }) => (
+export default (props: { readonly report: PuppetDB.Report }) => (
   <tr>
     <td>
       <Link to={`/report/${props.report.hash}`}>

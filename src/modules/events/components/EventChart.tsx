@@ -8,7 +8,7 @@ import * as PuppetDB from '../../../PuppetDB';
 type Props = {
   readonly serverUrl: string;
   readonly eventField: string;
-  readonly queryParsed: PuppetDB.queryT | null;
+  readonly queryParsed: PuppetDB.Query | null;
   readonly title: string;
   readonly id: string;
 };
@@ -63,7 +63,7 @@ export default class EventChart extends React.Component<Props, State> {
 
   fetchEventValue(
     eventField: string,
-    nodeQuery: PuppetDB.queryT | null,
+    nodeQuery: PuppetDB.Query | null,
     serverUrl: string,
   ): void {
     PuppetDB.query(serverUrl, 'events', {

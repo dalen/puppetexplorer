@@ -8,7 +8,7 @@ import * as hash from 'object-hash';
 import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
-  readonly event: PuppetDB.eventT;
+  readonly event: PuppetDB.Event;
   readonly showNode: boolean;
 };
 
@@ -32,7 +32,7 @@ export default class EventListItem extends React.Component<Props, State> {
   }
 
   // Format the value column
-  static formatValue(event: PuppetDB.eventT, value: string): JSX.Element {
+  static formatValue(event: PuppetDB.Event, value: string): JSX.Element {
     const matches =
       typeof value === 'string' ? value.match(/\{(\w{3,5})\}(\w+)/) : null;
     // Check if it is a file checksum

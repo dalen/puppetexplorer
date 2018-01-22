@@ -8,13 +8,13 @@ import * as hash from 'object-hash';
 // Get all metrics for a category
 const categoryMetrics = (
   category: string,
-  metrics: ReadonlyArray<PuppetDB.metricT>,
-): ReadonlyArray<PuppetDB.metricT> =>
+  metrics: ReadonlyArray<PuppetDB.Metric>,
+): ReadonlyArray<PuppetDB.Metric> =>
   metrics.filter(metric => metric.category === category);
 
 // Return array of category names
 const categories = (
-  metrics: ReadonlyArray<PuppetDB.metricT>,
+  metrics: ReadonlyArray<PuppetDB.Metric>,
 ): ReadonlyArray<string> =>
   Array.from(new Set(metrics.map(metric => metric.category)).values());
 
@@ -35,7 +35,7 @@ export default ({
     '#b15928',
   ],
 }: {
-  readonly metrics: ReadonlyArray<PuppetDB.metricT> | null;
+  readonly metrics: ReadonlyArray<PuppetDB.Metric> | null;
   readonly colors?: ReadonlyArray<string>;
 }) => {
   if (metrics == null) {

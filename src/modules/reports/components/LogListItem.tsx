@@ -37,7 +37,7 @@ const message = (msg: string) => {
   return <p>message</p>;
 };
 
-export default ({ log }: { readonly log: PuppetDB.logT }) => (
+export default ({ log }: { readonly log: PuppetDB.Log }) => (
   <tr>
     <td>
       <span title={log.time}>

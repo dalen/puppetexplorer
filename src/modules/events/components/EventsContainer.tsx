@@ -18,7 +18,7 @@ import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
   readonly serverUrl: string;
-  readonly queryParsed: PuppetDB.queryT | null;
+  readonly queryParsed: PuppetDB.Query | null;
   readonly location: Location;
   readonly history: History;
   readonly tab: string | null;
@@ -29,10 +29,10 @@ type Props = {
 export default class EventListContainer extends React.Component<Props> {
   // Compute an event query based on date range
   static dateRangeEventQuery(
-    query: PuppetDB.queryT | null,
+    query: PuppetDB.Query | null,
     dateFrom: string,
     dateTo: string,
-  ): PuppetDB.queryT | null {
+  ): PuppetDB.Query | null {
     return PuppetDB.combine(
       query,
       dateFrom

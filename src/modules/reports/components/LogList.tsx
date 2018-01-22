@@ -8,7 +8,7 @@ import * as hash from 'object-hash';
 export default ({
   logs = [],
 }: {
-  readonly logs?: ReadonlyArray<PuppetDB.logT>;
+  readonly logs?: ReadonlyArray<PuppetDB.Log>;
 }) => {
   if (logs) {
     return (

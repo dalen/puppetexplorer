@@ -19,7 +19,7 @@ export const statusIcon = (status: string): JSX.Element => {
 
 // Create a nested map out of all the metrics
 export const metricValue = (
-  metrics: ReadonlyArray<PuppetDB.metricT>,
+  metrics: ReadonlyArray<PuppetDB.Metric>,
   category: string,
   name: string,
 ): Maybe.Maybe<number> =>

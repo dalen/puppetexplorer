@@ -34,6 +34,7 @@
     "bootswatch": "^4.0.0-beta.3",
     "bs-fetch": "^0.2.0",
     "bs-moment": "^0.2.1",
+    "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
     "immutable": "^3.8.2",
     "maybe.ts": "^0.1.0",
@@ -64,6 +65,7 @@
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.3",
     "@types/jest": "^22.0.0",
     "@types/object-hash": "^1.1.0",
     "@types/qs": "^6.5.1",

@@ -4,9 +4,9 @@ import * as queryString from 'query-string';
 
 export { FactPath };
 
-export type queryT = puppetdbquery.Query;
+export type Query = puppetdbquery.Query;
 
-export type nodeT = {
+export type Node = {
   readonly certname: string;
   readonly catalog_timestamp: string;
   readonly latest_report_status: 'failed' | 'changed' | 'unchanged';
@@ -14,7 +14,7 @@ export type nodeT = {
   readonly report_timestamp: string;
 };
 
-export type eventT = {
+export type Event = {
   readonly certname: string;
   readonly old_value: string;
   readonly property: string;
@@ -34,7 +34,7 @@ export type eventT = {
   readonly report_receive_time: string;
 };
 
-export type logT = {
+export type Log = {
   readonly file: string | null;
   readonly line: number | null;
   readonly level: string;
@@ -44,7 +44,7 @@ export type logT = {
   readonly time: string;
 };
 
-export type metricT = {
+export type Metric = {
   readonly category: string;
   readonly name: string;
   readonly value: number;
@@ -58,7 +58,7 @@ export type FactContent = {
   readonly facts: boolean | string | number;
 };
 
-export type reportT = {
+export type Report = {
   readonly hash: string;
   readonly puppet_version: string;
   readonly receive_time: string;
@@ -79,17 +79,17 @@ export type reportT = {
   readonly cached_catalog_status: string;
   readonly resource_events: {
     readonly href: string;
-    readonly data: ReadonlyArray<eventT>;
+    readonly data: ReadonlyArray<Event>;
   };
   readonly metrics: {
     readonly href: string;
-    readonly data: ReadonlyArray<metricT>;
+    readonly data: ReadonlyArray<Metric>;
   };
-  readonly logs: { readonly href: string; readonly data: ReadonlyArray<logT> };
+  readonly logs: { readonly href: string; readonly data: ReadonlyArray<Log> };
 };
 
 // Combine queries together
-export const combine = (...queries: (queryT | null)[]): queryT | null => {
+export const combine = (...queries: (Query | null)[]): Query | null => {
   const actualQueries = queries.filter(q => q != null);
   switch (actualQueries.length) {
     case 0:
@@ -102,7 +102,7 @@ export const combine = (...queries: (queryT | null)[]): queryT | null => {
 };
 
 // Parse a query
-export const parse = (query: string): queryT | null => {
+export const parse = (query: string): Query | null => {
   return query ? puppetdbquery.parse(query) : null;
 };
 

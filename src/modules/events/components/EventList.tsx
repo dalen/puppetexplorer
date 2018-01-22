@@ -9,7 +9,7 @@ export default ({
   events = [],
   showNode = true,
 }: {
-  readonly events: ReadonlyArray<PuppetDB.eventT>;
+  readonly events: ReadonlyArray<PuppetDB.Event>;
   readonly showNode: boolean;
 }) => {
   if (events) {

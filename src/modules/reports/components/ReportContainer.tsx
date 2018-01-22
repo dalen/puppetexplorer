@@ -9,7 +9,9 @@ type Props = {
   readonly reportHash: string;
 };
 
-type State = { readonly report?: PuppetDB.reportT };
+type State = {
+  readonly report?: PuppetDB.Report;
+};
 
 // Fetch a report and pass it to the Report component
 export default class ReportContainer extends React.Component<Props, State> {
@@ -29,7 +31,7 @@ export default class ReportContainer extends React.Component<Props, State> {
   fetchReport(serverUrl: string, reportHash: string): void {
     PuppetDB.query(serverUrl, 'reports', {
       query: ['=', 'hash', reportHash],
-    }).then((data: ReadonlyArray<PuppetDB.reportT>) => {
+    }).then((data: ReadonlyArray<PuppetDB.Report>) => {
       if (data.length === 1) {
         this.setState({ report: data[0] });
       } else {
@@ -40,7 +42,13 @@ export default class ReportContainer extends React.Component<Props, State> {
 
   render(): JSX.Element {
     if (this.state && this.state.report !== undefined) {
-      return <Report report={this.state.report} />;
+      return (
+        <Report
+          report={this.state.report}
+          tab={'events'}
+          changeTab={tab => console.log(tab)}
+        />
+      );
     }
     return (
       <Progress animated value={100}>

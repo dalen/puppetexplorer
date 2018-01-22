@@ -10,7 +10,7 @@ const PaginatedEventList = PaginatedList(EventList, 'events', 'events');
 
 export default (props: {
   readonly serverUrl: string;
-  readonly queryParsed: PuppetDB.queryT | null;
+  readonly queryParsed: PuppetDB.Query | null;
 }) => (
   <div>
     <Container fluid>

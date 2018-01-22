@@ -8,7 +8,7 @@ import * as PuppetDB from '../../../PuppetDB';
 // A list of reports, for a node typically
 export default (props: {
   readonly total: number;
-  readonly reports: PuppetDB.reportT[];
+  readonly reports: PuppetDB.Report[];
 }) =>
   props.total === 0 ? (
     <Alert color="warning">No reports found</Alert>

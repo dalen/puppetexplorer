@@ -9,7 +9,7 @@ import * as PuppetDB from '../../../PuppetDB';
 // The facts view
 export default (props: {
   readonly serverUrl: string;
-  readonly queryParsed: PuppetDB.queryT | null;
+  readonly queryParsed: PuppetDB.Query | null;
   readonly factPaths: ReadonlyArray<PuppetDB.FactPath.FactPath>;
   readonly activeFactCharts: OrderedSet<PuppetDB.FactPath.FactPath>;
   readonly toggleChart: (chart: PuppetDB.FactPath.FactPath) => void;

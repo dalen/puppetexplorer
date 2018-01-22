@@ -9,7 +9,7 @@ import * as PuppetDB from '../../../PuppetDB';
 
 type Props = {
   readonly serverUrl: string;
-  readonly node: PuppetDB.nodeT;
+  readonly node: PuppetDB.Node;
 };
 
 type State = {

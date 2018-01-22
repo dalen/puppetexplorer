@@ -10,8 +10,8 @@ const PER_PAGE = 25;
 interface Props {
   readonly serverUrl: string;
   readonly perPage?: number;
-  readonly listQuery: PuppetDB.queryT | null;
-  readonly countQuery: PuppetDB.queryT;
+  readonly listQuery: PuppetDB.Query | null;
+  readonly countQuery: PuppetDB.Query;
 }
 
 type State = {
@@ -72,7 +72,7 @@ export default <OriginalProps extends {}>(
 
     fetchItems(
       serverUrl: string,
-      query: PuppetDB.queryT | null,
+      query: PuppetDB.Query | null,
       page: number,
     ): void {
       PuppetDB.query(serverUrl, endpoint, {
@@ -83,7 +83,7 @@ export default <OriginalProps extends {}>(
       }).then(data => this.setState({ items: data }));
     }
 
-    fetchCount(serverUrl: string, query: PuppetDB.queryT): void {
+    fetchCount(serverUrl: string, query: PuppetDB.Query): void {
       PuppetDB.query(serverUrl, endpoint, {
         query,
       }).then(data => this.setState({ count: data[0].count }));

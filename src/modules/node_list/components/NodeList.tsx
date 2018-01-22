@@ -5,7 +5,7 @@ import NodeListItem from './NodeListItem';
 import * as PuppetDB from '../../../PuppetDB';
 
 export default (props: {
-  readonly nodes: ReadonlyArray<PuppetDB.nodeT>;
+  readonly nodes: ReadonlyArray<PuppetDB.Node>;
   readonly total: number;
   readonly serverUrl: string;
 }) =>

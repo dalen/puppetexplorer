@@ -14,7 +14,7 @@ import * as PuppetDB from '../../../PuppetDB';
 type Props = {
   readonly serverUrl: string;
   readonly fact: PuppetDB.FactPath.FactPath;
-  readonly queryParsed: PuppetDB.queryT | null;
+  readonly queryParsed: PuppetDB.Query | null;
   readonly onSelect: (value: string) => void;
 };
 
@@ -74,7 +74,7 @@ export default class FactChart extends React.Component<Props, State> {
 
   fetchFactValue(
     fact: PuppetDB.FactPath.FactPath,
-    nodeQuery: PuppetDB.queryT | null,
+    nodeQuery: PuppetDB.Query | null,
     serverUrl: string,
   ): void {
     PuppetDB.query(serverUrl, 'fact-contents', {

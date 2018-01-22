@@ -7,7 +7,7 @@ import Facts from './Facts';
 
 type Props = {
   readonly serverUrl: string;
-  readonly queryParsed: PuppetDB.queryT | null;
+  readonly queryParsed: PuppetDB.Query | null;
   readonly queryString: string | null;
   readonly updateQuery: (query: string) => void;
 };

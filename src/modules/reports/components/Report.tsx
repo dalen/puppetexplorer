@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Moment from 'react-moment';
 import * as Maybe from 'maybe.ts';
+import { NavLink } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -9,21 +10,31 @@ import {
   TabPane,
   Nav,
   NavItem,
-  NavLink,
   ListGroup,
   ListGroupItem,
   ListGroupItemHeading,
   ListGroupItemText,
 } from 'reactstrap';
 
+import RouterNavLink from '../../../components/RouterNavLink';
 import EventList from '../../events/components/EventList';
 import LogList from './LogList';
 import ReportMetrics from './ReportMetrics';
 import { metricValue } from '../helpers';
 import * as PuppetDB from '../../../PuppetDB';
 
+type Tab = 'events' | 'logs' | 'metrics';
+
 // Given a report for a single node, render a page for it
-export default ({ report }: { readonly report: PuppetDB.reportT }) => {
+export default ({
+  report,
+  tab,
+  changeTab,
+}: {
+  readonly report: PuppetDB.Report;
+  readonly tab: Tab;
+  readonly changeTab: (tab: Tab) => void;
+}) => {
   const runTime = Maybe.map(
     val => val.toFixed(1),
     metricValue(report.metrics.data, 'time', 'total'),
@@ -111,13 +122,17 @@ export default ({ report }: { readonly report: PuppetDB.reportT }) => {
 
       <Nav tabs>
         <NavItem>
-          <NavLink active>Events</NavLink>
+          <RouterNavLink to={`/report/${report.hash}/events`}>
+            Events
+          </RouterNavLink>
         </NavItem>
         <NavItem>
-          <NavLink>Logs</NavLink>
+          <RouterNavLink to={`/report/${report.hash}/logs`}>Logs</RouterNavLink>
         </NavItem>
         <NavItem>
-          <NavLink>Metrics</NavLink>
+          <RouterNavLink to={`/report/${report.hash}/metrics`}>
+            Metrics
+          </RouterNavLink>
         </NavItem>
       </Nav>
 
