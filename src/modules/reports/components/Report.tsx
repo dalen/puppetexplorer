@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Moment from 'react-moment';
 import * as Maybe from 'maybe.ts';
-import { NavLink } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -23,18 +22,10 @@ import ReportMetrics from './ReportMetrics';
 import { metricValue } from '../helpers';
 import * as PuppetDB from '../../../PuppetDB';
 
-type Tab = 'events' | 'logs' | 'metrics';
+// type Tab = 'events' | 'logs' | 'metrics';
 
 // Given a report for a single node, render a page for it
-export default ({
-  report,
-  tab,
-  changeTab,
-}: {
-  readonly report: PuppetDB.Report;
-  readonly tab: Tab;
-  readonly changeTab: (tab: Tab) => void;
-}) => {
+export default ({ report }: { readonly report: PuppetDB.Report }) => {
   const runTime = Maybe.map(
     val => val.toFixed(1),
     metricValue(report.metrics.data, 'time', 'total'),

@@ -42,13 +42,7 @@ export default class ReportContainer extends React.Component<Props, State> {
 
   render(): JSX.Element {
     if (this.state && this.state.report !== undefined) {
-      return (
-        <Report
-          report={this.state.report}
-          tab={'events'}
-          changeTab={tab => console.log(tab)}
-        />
-      );
+      return <Report report={this.state.report} />;
     }
     return (
       <Progress animated value={100}>

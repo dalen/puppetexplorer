@@ -30,7 +30,7 @@ const color = (status: string): string => {
   }
 };
 
-const message = (msg: string) => {
+const message = (msg: string): JSX.Element => {
   if (/\r|\n/.exec(msg)) {
     return <pre>{msg}</pre>;
   }

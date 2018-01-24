@@ -1,6 +1,6 @@
 import * as puppetdbquery from 'node-puppetdbquery';
 import * as FactPath from './PuppetDB/FactPath';
-import * as queryString from 'query-string';
+import * as qs from 'qs';
 
 export { FactPath };
 
@@ -103,7 +103,7 @@ export const combine = (...queries: (Query | null)[]): Query | null => {
 
 // Parse a query
 export const parse = (query: string): Query | null => {
-  return query ? puppetdbquery.parse(query) : null;
+  return query != null ? puppetdbquery.parse(query) : null;
 };
 
 // Get a URL from server
@@ -124,7 +124,7 @@ export const get = (
 
   const url =
     Object.keys(params).length > 0
-      ? `${baseUrl}?${queryString.stringify(jsonParams)}`
+      ? `${baseUrl}?${qs.stringify(jsonParams)}`
       : baseUrl;
 
   return fetch(url, {

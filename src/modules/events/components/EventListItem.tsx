@@ -3,7 +3,6 @@ import * as Icon from 'react-fontawesome';
 import { Collapse, Badge } from 'reactstrap';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
-import * as hash from 'object-hash';
 
 import * as PuppetDB from '../../../PuppetDB';
 

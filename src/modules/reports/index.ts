@@ -1,8 +1,4 @@
 import ReportContainer from './components/ReportContainer';
 import { metricValue, statusIcon } from './helpers';
 
-export {
-  ReportContainer,
-  metricValue,
-  statusIcon,
-};
+export { ReportContainer, metricValue, statusIcon };
