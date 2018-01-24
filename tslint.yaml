@@ -6,7 +6,6 @@ extends:
   - tslint-config-prettier
   - tslint-plugin-prettier
 rules:
-  no-var-self: false # To avoid deprecation warning
   variable-name:
     - true
     - ban-keywords
