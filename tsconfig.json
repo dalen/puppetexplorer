@@ -7,8 +7,9 @@
     "jsx": "react",
     "allowJs": true,
     "noFallthroughCasesInSwitch": true,
-    //"noUnusedLocals": true,
-    //"noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
     "outDir": "dist"
   },
   "include": ["src/**/*"],
