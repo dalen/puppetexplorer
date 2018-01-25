@@ -31,3 +31,5 @@ rules:
   jsx-boolean-value:
     - never
   jsx-no-lambda: false
+  react-unused-props-and-state:
+    - true
