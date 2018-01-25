@@ -15,6 +15,8 @@ type State = {
 
 // Fetch a report and pass it to the Report component
 export default class ReportContainer extends React.Component<Props, State> {
+  readonly state: State = {};
+
   componentDidMount(): void {
     this.fetchReport(this.props.serverUrl, this.props.reportHash);
   }
@@ -41,7 +43,7 @@ export default class ReportContainer extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    if (this.state && this.state.report !== undefined) {
+    if (this.state.report !== undefined) {
       return <Report report={this.state.report} />;
     }
     return (

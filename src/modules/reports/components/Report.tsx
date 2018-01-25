@@ -1,12 +1,11 @@
 import * as React from 'react';
 import Moment from 'react-moment';
 import * as Maybe from 'maybe.ts';
+import { Route, Switch } from 'react-router-dom';
 import {
   Container,
   Row,
   Col,
-  TabContent,
-  TabPane,
   Nav,
   NavItem,
   ListGroup,
@@ -127,17 +126,22 @@ export default ({ report }: { readonly report: PuppetDB.Report }) => {
         </NavItem>
       </Nav>
 
-      <TabContent activeTab={'events'}>
-        <TabPane tabId={'events'}>
-          <EventList events={report.resource_events.data} showNode={false} />
-        </TabPane>
-        <TabPane tabId={'logs'}>
-          <LogList logs={report.logs.data} />
-        </TabPane>
-        <TabPane tabId={'metrics'}>
-          <ReportMetrics metrics={report.metrics.data} />
-        </TabPane>
-      </TabContent>
+      <Switch>
+        <Route
+          path="/report/:report/events"
+          render={({}) => (
+            <EventList events={report.resource_events.data} showNode={false} />
+          )}
+        />
+        <Route
+          path="/report/:report/logs"
+          render={({}) => <LogList logs={report.logs.data} />}
+        />
+        <Route
+          path="/report/:report/metrics"
+          render={({}) => <ReportMetrics metrics={report.metrics.data} />}
+        />
+      </Switch>
     </div>
   );
 };

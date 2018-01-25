@@ -154,7 +154,6 @@ export default class App extends React.Component<Props, State> {
                 serverUrl={this.state.config.serverUrl}
                 queryParsed={this.state.queryParsed}
                 tab={props.match.params.tab}
-                updateSearch={this.updateSearch}
                 search={this.state.search}
               />
             )}

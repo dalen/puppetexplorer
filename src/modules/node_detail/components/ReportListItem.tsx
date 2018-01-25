@@ -10,7 +10,7 @@ import * as PuppetDB from '../../../PuppetDB';
 export default (props: { readonly report: PuppetDB.Report }) => (
   <tr>
     <td>
-      <Link to={`/report/${props.report.hash}`}>
+      <Link to={`/report/${props.report.hash}/events`}>
         <span title={props.report.end_time}>
           <Moment fromNow ago>
             {props.report.end_time}

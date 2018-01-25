@@ -40,7 +40,10 @@ export const intermediatePaths = (factPaths: ReadonlyArray<FactPath>) =>
             // The path we are looking for
             const curPath = path.path.slice(0, index + 1);
             // See if the current path we are looking for exists
-            if (ret.find(p => p.path.join('.') === curPath.join('.'))) {
+            if (
+              ret.find(p => p.path.join('.') === curPath.join('.')) !==
+              undefined
+            ) {
               // We found it, so add no extra path
               return extra;
             }

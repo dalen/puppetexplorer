@@ -65,7 +65,7 @@ export default class FactsContainer extends React.Component<Props, State> {
       throw new TypeError(`Invalid fact value of type ${typeof value}`);
     }
 
-    if (this.props.queryString) {
+    if (this.props.queryString != null) {
       this.props.updateQuery(
         `(this.props.queryString) and ${fact.path.join('.')}=${quotedValue}`,
       );

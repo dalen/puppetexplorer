@@ -1,18 +1,21 @@
 import * as React from 'react';
 import { History, Location } from 'history';
+import { Switch, Route } from 'react-router-dom';
 import {
   Container,
   Row,
   Col,
   Nav,
   NavItem,
-  NavLink,
   FormGroup,
   Label,
   Input,
 } from 'reactstrap';
 import * as moment from 'moment';
+import * as qs from 'qs';
 
+import { updateSearch } from '../../../util';
+import RouterNavLink from '../../../components/RouterNavLink';
 import Events from './Events';
 import * as PuppetDB from '../../../PuppetDB';
 
@@ -22,124 +25,109 @@ type Props = {
   readonly location: Location;
   readonly history: History;
   readonly tab: string | null;
-  readonly updateSearch: (updates: { readonly [id: string]: any }) => void;
   readonly search: { readonly [id: string]: any };
 };
 
-export default class EventListContainer extends React.Component<Props> {
-  // Compute an event query based on date range
-  static dateRangeEventQuery(
-    query: PuppetDB.Query | null,
-    dateFrom: string,
-    dateTo: string,
-  ): PuppetDB.Query | null {
-    return PuppetDB.combine(
-      query,
-      dateFrom
-        ? [
-            '>=',
-            'timestamp',
-            moment
-              .utc(dateFrom)
-              .startOf('day')
-              .toISOString(),
-          ]
-        : null,
-      dateTo
-        ? [
-            '<=',
-            'timestamp',
-            moment
-              .utc(dateTo)
-              .endOf('day')
-              .toISOString(),
-          ]
-        : null,
-    );
+const changeDate = (history: History, which: string, value: string) => {
+  updateSearch(history, {
+    [which]: moment(value).format('YYYY-MM-DD'),
+  });
+};
+
+const dateRangeEventQuery = (
+  query: PuppetDB.Query | null,
+  dateFrom: string,
+  dateTo: string,
+): PuppetDB.Query | null => {
+  return PuppetDB.combine(
+    query,
+    dateFrom
+      ? [
+          '>=',
+          'timestamp',
+          moment
+            .utc(dateFrom)
+            .startOf('day')
+            .toISOString(),
+        ]
+      : null,
+    dateTo
+      ? [
+          '<=',
+          'timestamp',
+          moment
+            .utc(dateTo)
+            .endOf('day')
+            .toISOString(),
+        ]
+      : null,
+  );
+};
+
+// Compute an event query based on date range
+const getDate = (search: string, which: string): string => {
+  const searchParsed = qs.parse(search);
+  if (typeof searchParsed[which] === 'string') {
+    return moment.utc(searchParsed[which]).format('YYYY-MM-DD');
   }
+  return moment().format('YYYY-MM-DD');
+};
 
-  getDate(which: string): string {
-    if (typeof this.props.search[which] === 'string') {
-      return moment.utc(this.props.search[which]).format('YYYY-MM-DD');
-    }
-    return moment().format('YYYY-MM-DD');
-  }
+export default (props: Props) => {
+  const dateFrom = getDate(props.history.location.search, 'dateFrom');
+  const dateTo = getDate(props.history.location.search, 'dateTo');
 
-  readonly selectTab = (tab: any) => {
-    this.props.history.push({
-      pathname: tab === 'latest' ? '/events' : '/events/daterange',
-      search: this.props.location.search,
-    });
-  };
-
-  readonly changeDate = (which: string, value: string) => {
-    console.log(event);
-    this.props.updateSearch({
-      [which]: moment(value).format('YYYY-MM-DD'),
-    });
-  };
-
-  render(): JSX.Element {
-    const dateFrom = this.getDate('dateFrom');
-    const dateTo = this.getDate('dateTo');
-
-    return (
-      <Container fluid>
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              active={this.props.tab === 'latest'}
-              onClick={() => this.selectTab('latest')}
-            >
-              Latest Report
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              active={this.props.tab === 'daterange'}
-              onClick={() => this.selectTab('latest')}
-            >
-              Date Range
-            </NavLink>
-          </NavItem>
-        </Nav>
-        <Container fluid>
-          <Row>
-            <Col md={6}>
-              <FormGroup>
-                <Label>From:</Label>
-                <Input
-                  value={dateFrom}
-                  onChange={event =>
-                    this.changeDate('dateFrom', event.target.value)
-                  }
-                  type="date"
-                />
-              </FormGroup>
-            </Col>
-            <Col md={6}>
-              <FormGroup>
-                <Label>To:</Label>
-                <Input
-                  value={dateTo}
-                  type="date"
-                  onChange={event =>
-                    this.changeDate('dateTo', event.target.value)
-                  }
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-        </Container>
-        <Events
-          serverUrl={this.props.serverUrl}
-          queryParsed={EventListContainer.dateRangeEventQuery(
-            this.props.queryParsed,
-            dateFrom,
-            dateTo,
+  return (
+    <Container fluid>
+      <Nav tabs>
+        <NavItem>
+          <RouterNavLink exact to={`/events`}>
+            Latest Report
+          </RouterNavLink>
+        </NavItem>
+        <NavItem>
+          <RouterNavLink to={`/events/daterange`}>Date Range</RouterNavLink>
+        </NavItem>
+      </Nav>
+      <Switch>
+        <Route
+          path="/events/daterange"
+          render={({ history }) => (
+            <Container fluid>
+              <Row>
+                <Col md={6}>
+                  <FormGroup>
+                    <Label>From:</Label>
+                    <Input
+                      value={dateFrom}
+                      onChange={event =>
+                        changeDate(history, 'dateFrom', event.target.value)
+                      }
+                      type="date"
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={6}>
+                  <FormGroup>
+                    <Label>To:</Label>
+                    <Input
+                      value={dateTo}
+                      type="date"
+                      onChange={event =>
+                        changeDate(history, 'dateTo', event.target.value)
+                      }
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+            </Container>
           )}
         />
-      </Container>
-    );
-  }
-}
+      </Switch>
+      <Events
+        serverUrl={props.serverUrl}
+        queryParsed={dateRangeEventQuery(props.queryParsed, dateFrom, dateTo)}
+      />
+    </Container>
+  );
+};
