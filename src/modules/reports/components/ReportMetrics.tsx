@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Alert, Card, CardHeader } from 'reactstrap';
 import { BarChart, Bar, Legend, Cell } from 'recharts';
+import { List, Set } from 'immutable';
 
 import * as PuppetDB from './../../../PuppetDB';
 import * as hash from 'object-hash';
@@ -8,19 +9,17 @@ import * as hash from 'object-hash';
 // Get all metrics for a category
 const categoryMetrics = (
   category: string,
-  metrics: ReadonlyArray<PuppetDB.Metric>,
-): ReadonlyArray<PuppetDB.Metric> =>
-  metrics.filter(metric => metric.category === category);
+  metrics: List<PuppetDB.Metric>,
+): List<PuppetDB.Metric> =>
+  metrics.filter(metric => metric.category === category).toList();
 
 // Return array of category names
-const categories = (
-  metrics: ReadonlyArray<PuppetDB.Metric>,
-): ReadonlyArray<string> =>
-  Array.from(new Set(metrics.map(metric => metric.category)).values());
+const categories = (metrics: List<PuppetDB.Metric>): List<string> =>
+  Set(metrics.map(metric => metric.category).values()).toList();
 
 export default ({
   metrics,
-  colors = [
+  colors = List([
     '#a6cee3',
     '#1f78b4',
     '#b2df8a',
@@ -33,10 +32,10 @@ export default ({
     '#6a3d9a',
     '#ffff99',
     '#b15928',
-  ],
+  ]),
 }: {
-  readonly metrics: ReadonlyArray<PuppetDB.Metric> | null;
-  readonly colors?: ReadonlyArray<string>;
+  readonly metrics: List<PuppetDB.Metric> | null;
+  readonly colors?: List<string>;
 }) => {
   if (metrics == null) {
     return <Alert color="warning">No metrics found</Alert>;
@@ -44,21 +43,21 @@ export default ({
 
   return (
     <div>
-      {categories(metrics).map(categoryName => {
+      {categories(List(metrics)).map(categoryName => {
         // Sort the metrics (need to make clone as sort is in place in JS)
-        const data = [...categoryMetrics(categoryName, metrics)].sort(
+        const data = categoryMetrics(categoryName, metrics).sort(
           (a, b) => a.value - b.value,
         );
         return (
           <Card key={categoryName}>
             <CardHeader>{categoryName}</CardHeader>
-            <BarChart layout="horizontal" data={data}>
+            <BarChart layout="horizontal" data={data.toArray()}>
               <Legend />
               <Bar dataKey="value">
                 {data.map((metric, index) => (
                   <Cell
                     key={hash(metric)}
-                    fill={colors[index % colors.length]}
+                    fill={colors.get(index % colors.size)}
                   />
                 ))}
               </Bar>

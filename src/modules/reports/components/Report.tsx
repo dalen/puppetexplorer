@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Moment from 'react-moment';
 import * as Maybe from 'maybe.ts';
+import { List } from 'immutable';
 import { Route, Switch } from 'react-router-dom';
 import {
   Container,
@@ -139,7 +140,7 @@ export default ({ report }: { readonly report: PuppetDB.Report }) => {
         />
         <Route
           path="/report/:report/metrics"
-          render={({}) => <ReportMetrics metrics={report.metrics.data} />}
+          render={({}) => <ReportMetrics metrics={List(report.metrics.data)} />}
         />
       </Switch>
     </div>
