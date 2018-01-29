@@ -6,3 +6,4 @@
 /.merlin
 /yarn-error.log
 /lib
+/.cache

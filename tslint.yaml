@@ -17,6 +17,7 @@ rules:
   prettier: true
   no-var-keyword: true
   no-parameter-reassignment: true
+  no-require-imports: true
   typedef:
     - true
     - call-signature
