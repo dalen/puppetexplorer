@@ -12,8 +12,7 @@ rules:
     - check-format
     - allow-pascal-case
   import-name:
-    - react-moment: Moment
-      object-dig: dig
+    - object-dig: dig
   prettier: true
   no-var-keyword: true
   no-parameter-reassignment: true

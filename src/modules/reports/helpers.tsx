@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Icon from 'react-fontawesome';
+import { FaExclamationTriangle, FaExclamationCircle } from 'react-icons/lib/fa';
 import * as Maybe from 'maybe.ts';
 
 import * as PuppetDB from '../../PuppetDB';
@@ -7,13 +7,13 @@ import * as PuppetDB from '../../PuppetDB';
 export const statusIcon = (status: string): JSX.Element => {
   switch (status) {
     case 'failed':
-      return <Icon name="warning" className="text-danger" />;
+      return <FaExclamationCircle className="text-danger" />;
     case 'changed':
-      return <Icon name="exclamation-sign" className="text-success" />;
+      return <FaExclamationTriangle className="text-success" />;
     case 'unchanged':
-      return <Icon name="exclamation-sign" className="text-success" />;
+      return <FaExclamationTriangle className="text-success" />;
     default:
-      return <Icon name="exclamation-sign" />;
+      return <FaExclamationTriangle />;
   }
 };
 

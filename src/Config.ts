@@ -23,7 +23,7 @@ export type Config = {
 
 export const defaults = (): Config => {
   return {
-    serverUrl: '/api',
+    serverUrl: 'http://puppetdb.puppetexplorer.io/',
     nodeFacts: [
       'operatingsystem',
       'operatingsystemrelease',

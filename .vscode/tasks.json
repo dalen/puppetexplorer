@@ -6,7 +6,7 @@
     {
       "type": "npm",
       "script": "start",
-      "problemMatcher": ["$ts-loader-1", "$ts-loader-2"]
+      "problemMatcher": ["$ts-loader-1", "$ts-loader-2", "$tsc"]
     }
   ]
 }

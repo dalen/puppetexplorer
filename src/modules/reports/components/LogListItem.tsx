@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Badge } from 'reactstrap';
-import Moment from 'react-moment';
+import * as date from 'date-fns';
 
 import * as PuppetDB from '../../../PuppetDB';
 
@@ -31,17 +31,17 @@ const color = (status: string): string => {
 };
 
 const message = (msg: string): JSX.Element => {
-  if (/\r|\n/.exec(msg)) {
+  if (/\r|\n/.exec(msg) != null) {
     return <pre>{msg}</pre>;
   }
-  return <p>message</p>;
+  return <p>{msg}</p>;
 };
 
 export default ({ log }: { readonly log: PuppetDB.Log }) => (
   <tr>
     <td>
-      <span title={log.time}>
-        <Moment format="LLL">{log.time}</Moment>
+      <span style={{ whiteSpace: 'nowrap' }} title={log.time}>
+        {date.parse(log.time).toLocaleTimeString()}
       </span>
     </td>
     <td>

@@ -11,7 +11,8 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-import * as moment from 'moment';
+import * as dateFns from 'date-fns';
+
 import * as qs from 'qs';
 
 import { updateSearch } from '../../../util';
@@ -30,7 +31,7 @@ type Props = {
 
 const changeDate = (history: History, which: string, value: string) => {
   updateSearch(history, {
-    [which]: moment(value).format('YYYY-MM-DD'),
+    [which]: dateFns.format(dateFns.parse(value), 'YYYY-MM-DD'),
   });
 };
 
@@ -45,20 +46,14 @@ const dateRangeEventQuery = (
       ? [
           '>=',
           'timestamp',
-          moment
-            .utc(dateFrom)
-            .startOf('day')
-            .toISOString(),
+          dateFns.startOfDay(dateFns.parse(dateFrom)).toISOString(),
         ]
       : null,
     dateTo
       ? [
           '<=',
           'timestamp',
-          moment
-            .utc(dateTo)
-            .endOf('day')
-            .toISOString(),
+          dateFns.endOfDay(dateFns.parse(dateFrom)).toISOString(),
         ]
       : null,
   );
@@ -68,9 +63,9 @@ const dateRangeEventQuery = (
 const getDate = (search: string, which: string): string => {
   const searchParsed = qs.parse(search);
   if (typeof searchParsed[which] === 'string') {
-    return moment.utc(searchParsed[which]).format('YYYY-MM-DD');
+    return dateFns.parse(searchParsed[which]).toLocaleDateString();
   }
-  return moment().format('YYYY-MM-DD');
+  return new Date().toLocaleDateString();
 };
 
 export default (props: Props) => {

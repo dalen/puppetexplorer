@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Icon from 'react-fontawesome';
+import { FaSearch } from 'react-icons/lib/fa';
 import { InputGroup, InputGroupAddon, Input, Form } from 'reactstrap';
 
 type Props = {
@@ -44,7 +44,7 @@ export default class SearchField extends React.Component<Props, State> {
       <Form id="node-query" onSubmit={this.handleSubmit}>
         <InputGroup>
           <InputGroupAddon>
-            <Icon name="search" />
+            <FaSearch />
           </InputGroupAddon>
           <Input
             type="search"

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import * as Icon from 'react-fontawesome';
+import { FaDashboard, FaList, FaCalendar, FaTags } from 'react-icons/lib/fa';
 import { Navbar, Nav, NavItem } from 'reactstrap';
 
 import RouterNavLink from '../../../components/RouterNavLink';
@@ -10,22 +10,22 @@ export default (): JSX.Element => (
     <Nav navbar>
       <NavItem>
         <RouterNavLink exact to="/">
-          <Icon name="dashboard" /> Dashboard
+          <FaDashboard /> Dashboard
         </RouterNavLink>
       </NavItem>
       <NavItem>
         <RouterNavLink exact to="/nodes">
-          <Icon name="list" /> Nodes
+          <FaList /> Nodes
         </RouterNavLink>
       </NavItem>
       <NavItem>
         <RouterNavLink exact to="/events">
-          <Icon name="calendar" /> Events
+          <FaCalendar /> Events
         </RouterNavLink>
       </NavItem>
       <NavItem>
         <RouterNavLink exact to="/facts">
-          <Icon name="tags" /> Facts
+          <FaTags /> Facts
         </RouterNavLink>
       </NavItem>
     </Nav>

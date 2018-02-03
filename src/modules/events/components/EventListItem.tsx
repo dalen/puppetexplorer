@@ -1,8 +1,8 @@
 import * as React from 'react';
-import * as Icon from 'react-fontawesome';
+import { FaCaretDown, FaCaretRight } from 'react-icons/lib/fa';
 import { Collapse, Badge } from 'reactstrap';
-import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import * as date from 'date-fns';
 
 import * as PuppetDB from '../../../PuppetDB';
 
@@ -66,10 +66,11 @@ export default class EventListItem extends React.Component<Props, State> {
       <tr>
         {this.props.showNode && <td>{event.certname}</td>}
         <td>
-          <Icon
-            name={this.state.show ? 'triangle-bottom' : 'triangle-right'}
-            onClick={this.toggle}
-          />
+          {this.state.show ? (
+            <FaCaretDown onClick={this.toggle} />
+          ) : (
+            <FaCaretRight onClick={this.toggle} />
+          )}
           {event.resource_type}
           <wbr />[{event.resource_title}]
           <Collapse isOpen={this.state.show}>
@@ -95,7 +96,7 @@ export default class EventListItem extends React.Component<Props, State> {
                 <dt>Timestamp:</dt>
                 <dd>
                   <span title={event.timestamp}>
-                    <Moment format="LLL">{event.timestamp}</Moment>
+                    {date.parse(event.timestamp).toLocaleString()}
                   </span>
                 </dd>
                 {event.report && (

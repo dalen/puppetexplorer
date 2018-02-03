@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Moment from 'react-moment';
+import * as date from 'date-fns';
 import { Link } from 'react-router-dom';
 import * as Maybe from 'maybe.ts';
 
@@ -12,9 +12,7 @@ export default (props: { readonly report: PuppetDB.Report }) => (
     <td>
       <Link to={`/report/${props.report.hash}/events`}>
         <span title={props.report.end_time}>
-          <Moment fromNow ago>
-            {props.report.end_time}
-          </Moment>
+          {date.distanceInWordsToNow(date.parse(props.report.end_time))} ago
         </span>
       </Link>
     </td>

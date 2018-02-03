@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import * as Icon from 'react-fontawesome';
-import Moment from 'react-moment';
+import { FaExclamationTriangle } from 'react-icons/lib/fa';
+import * as date from 'date-fns';
 import * as Maybe from 'maybe.ts';
 
 import { metricValue, statusIcon } from '../../reports/index';
@@ -55,11 +55,12 @@ export default class NodeListItem extends React.Component<Props, State> {
           </Link>
         </td>
         <td title={this.props.node.catalog_timestamp}>
-          <Icon name="warning-sign" className="text-warning" />
+          <FaExclamationTriangle className="text-warning" />
           <span title={this.props.node.report_timestamp}>
-            <Moment fromNow ago>
-              {this.props.node.report_timestamp}
-            </Moment>
+            {date.distanceInWordsToNow(
+              date.parse(this.props.node.report_timestamp),
+            )}{' '}
+            ago
           </span>
         </td>
         <td className="text-center">

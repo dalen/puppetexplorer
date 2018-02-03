@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ListGroupItem } from 'reactstrap';
-import * as Icon from 'react-fontawesome';
+import { FaBarChart, FaCaretRight, FaCaretDown } from 'react-icons/lib/fa';
 import { OrderedSet } from 'immutable';
 
 import * as PuppetDB from '../../../PuppetDB';
@@ -50,7 +50,7 @@ export default class FactListItem extends React.Component<Props, State> {
       return (
         <ListGroupItem onClick={this.toggleChart} active={this.isActive()}>
           {this.indent()}
-          <Icon name="stats" /> {PuppetDB.FactPath.name(fact)}
+          <FaBarChart /> {PuppetDB.FactPath.name(fact)}
         </ListGroupItem>
       );
     }
@@ -61,7 +61,7 @@ export default class FactListItem extends React.Component<Props, State> {
           onClick={this.toggle}
         >
           {this.indent()}
-          <Icon name={this.state.expanded ? 'collapse-up' : 'expand'} />
+          {this.state.expanded ? <FaCaretDown /> : <FaCaretRight />}
           {PuppetDB.FactPath.name(fact)}
         </ListGroupItem>
         {this.state.expanded &&

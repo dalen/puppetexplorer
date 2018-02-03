@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Moment from 'react-moment';
 import * as Maybe from 'maybe.ts';
 import { List } from 'immutable';
 import { Route, Switch } from 'react-router-dom';
@@ -14,6 +13,7 @@ import {
   ListGroupItemHeading,
   ListGroupItemText,
 } from 'reactstrap';
+import * as date from 'date-fns';
 
 import RouterNavLink from '../../../components/RouterNavLink';
 import EventList from '../../events/components/EventList';
@@ -38,13 +38,8 @@ export default ({ report }: { readonly report: PuppetDB.Report }) => {
 
   return (
     <div>
-      <h1>
-        {report.certname}:{' '}
-        <span title={report.receive_time}>
-          <Moment format="LLL">{report.receive_time}</Moment>
-        </span>
-      </h1>
-      <Container>
+      <h1 className="m-2">{report.certname}</h1>
+      <Container className="pb-2">
         <Row>
           <Col md={3}>
             <ListGroup>
@@ -94,7 +89,7 @@ export default ({ report }: { readonly report: PuppetDB.Report }) => {
                 <ListGroupItemHeading>Start time</ListGroupItemHeading>
                 <ListGroupItemText>
                   <span title={report.start_time}>
-                    <Moment format="LLL">{report.start_time}</Moment>
+                    {date.parse(report.start_time).toLocaleString()}
                   </span>
                 </ListGroupItemText>
               </ListGroupItem>
@@ -102,7 +97,7 @@ export default ({ report }: { readonly report: PuppetDB.Report }) => {
                 <ListGroupItemHeading>End time</ListGroupItemHeading>
                 <ListGroupItemText>
                   <span title={report.end_time}>
-                    <Moment format="LLL">{report.end_time}</Moment>
+                    {date.parse(report.end_time).toLocaleString()}
                   </span>
                 </ListGroupItemText>
               </ListGroupItem>
