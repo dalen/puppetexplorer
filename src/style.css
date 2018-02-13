@@ -1,0 +1,29 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont,
+  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+  "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+}
+
+.table-hover, .nav, .pagination, .carousel, .panel-title { cursor: pointer; }
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.spin{
+     -webkit-transform-origin: 50% 50%;
+     transform-origin: 50% 50%;
+     -webkit-animation: spin 1s infinite linear;
+     -moz-animation: spin 1s infinite linear;
+     -o-animation: spin 1s infinite linear;
+     animation: spin 1s infinite linear;
+}
+@-webkit-keyframes spin {
+    from {-webkit-transform: rotate(0deg);}
+    to   {-webkit-transform: rotate(359deg);}
+}
+@keyframes spin {
+    from {transform: rotate(0deg);}
+    to   {transform: rotate(359deg);}
+}

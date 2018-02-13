@@ -1,0 +1,35 @@
+---
+extends:
+  - tslint-react
+  - tslint-config-airbnb
+  - tslint-immutable
+  - tslint-config-prettier
+  - tslint-plugin-prettier
+rules:
+  variable-name:
+    - true
+    - ban-keywords
+    - check-format
+    - allow-pascal-case
+  import-name:
+    - object-dig: dig
+  prettier: true
+  no-var-keyword: true
+  no-parameter-reassignment: true
+  no-require-imports: true
+  typedef:
+    - true
+    - call-signature
+  readonly-keyword: true
+  no-let: true
+  no-object-mutation: true
+  no-delete: true
+  #readonly-array: false
+  no-this-assignment: true
+  no-loop-statement: true
+  #no-unsafe-any: true
+  jsx-boolean-value:
+    - never
+  jsx-no-lambda: false
+  react-unused-props-and-state:
+    - true

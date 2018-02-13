@@ -1,66 +1,125 @@
 {
   "name": "puppetexplorer",
-  "version": "2.0.0",
-  "description": "web frontend for PuppetDB\n\nA web interface made in AngularJS and CoffeeScript for exploring PuppetDB data.",
+  "version": "3.0.0",
+  "description": "A web interface for exploring PuppetDB data",
   "license": "Apache-2.0",
   "keywords": [
     "puppet",
     "puppetdb"
   ],
-  "homepage": "https://github.com/spotify/puppetexplorer",
+  "homepage": "https://github.com/dalen/puppetexplorer",
   "bugs": {
-    "url": "https://github.com/spotify/puppetexplorer/issues"
+    "url": "https://github.com/dalen/puppetexplorer/issues"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "jest",
+    "lint": "tslint --project .",
+    "build": "parcel build src/index.html",
+    "start": "parcel --no-hmr -o src/index.html"
   },
   "author": {
     "name": "Erik Dalén",
-    "email": "dalen@spotify.com"
+    "email": "erik.gustav.dalen@gmail.com"
   },
-  "contributors": [
-    {
-      "name": "Johan Haals",
-      "email": "jhaals@spotify.com"
-    }
-  ],
   "repository": {
     "type": "git",
-    "url": "https://spotify/puppetexplorer.git"
+    "url": "https://github.com/dalen/puppetexplorer.git"
   },
   "dependencies": {
-    "angular": "^1.5.5",
-    "angular-animate": "^1.5.5",
-    "angular-route": "^1.4.7",
-    "angular-bootstrap": "^0.12.2",
-    "angular-google-chart": "0.1.0",
-    "angular-moment": "^1.0.0-beta.6",
-    "bootswatch": "^3.3.6",
-    "moment": "^2.13.0",
-    "node-puppetdbquery": "^1.0.1"
+    "bootstrap": "^4.0.0",
+    "bootswatch": "^4.0.0-beta.3",
+    "bs-fetch": "^0.2.0",
+    "classnames": "^2.2.5",
+    "date-fns": "^1.29.0",
+    "font-awesome": "^4.7.0",
+    "immutable": "^4.0.0-rc.9",
+    "maybe.ts": "^0.1.0",
+    "node-puppetdbquery": "^1.1.3",
+    "object-dig": "^0.1.1",
+    "object-hash": "^1.1.8",
+    "popper.js": "^1.12.9",
+    "prop-types": "^15.6.0",
+    "qs": "^6.4.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-icons": "^2.2.7",
+    "react-popper": "^0.8.0",
+    "react-redux": "^5.0.4",
+    "react-router": "^4.1.2",
+    "react-router-dom": "^4.1.2",
+    "react-transition-group": "^2.2.1",
+    "reactstrap": "^5.0.0-beta",
+    "reason-react": "^0.3.1",
+    "recharts": "^1.0.0-beta.10",
+    "redux": "^3.7.2",
+    "redux-loop": "^4.1.0",
+    "result.ts": "^0.3.1",
+    "type-safe-json-decoder": "^0.2.0",
+    "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.10.3",
-    "babel-preset-es2015": "^6.9.0",
-    "babelify": "^7.3.0",
-    "eslint-config-airbnb-base": "^3.0.1",
-    "eslint-plugin-import": "^1.9.2",
-    "grunt": "^1.0.1",
-    "grunt-bower-installer": "^0.3.6",
-    "grunt-browserify": "^5.0.0",
-    "grunt-connect-proxy": "^0.2.0",
-    "grunt-connect-rewrite": "^0.2.1",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-debian-package": "^0.1.10",
-    "grunt-eslint": "^18.1.0",
-    "grunt-protractor-runner": "^3.2.0",
-    "grunt-rpm": "^0.1.12",
-    "load-grunt-tasks": "^3.5.0",
-    "serve-index": "^1.7.2",
-    "serve-static": "^1.10.0",
-    "uglifyify": "^3.0.1"
+    "@types/classnames": "^2.2.3",
+    "@types/express": "^4.11.0",
+    "@types/jest": "^22.0.0",
+    "@types/object-hash": "^1.1.0",
+    "@types/qs": "^6.5.1",
+    "@types/react": "^16.0.33",
+    "@types/react-dom": "^16.0.3",
+    "@types/react-fa": "^4.1.3",
+    "@types/react-fontawesome": "^1.6.1",
+    "@types/react-icons": "^2.2.4",
+    "@types/react-router-dom": "^4.2.0",
+    "@types/reactstrap": "^5.0.3",
+    "@types/recharts": "^1.0.8",
+    "bs-platform": "^2.1.0",
+    "css-loader": "^0.28.9",
+    "exports-loader": "^0.7.0",
+    "express": "^4.16.2",
+    "extract-loader": "^1.0.2",
+    "file-loader": "^1.1.6",
+    "get-port": "^3.2.0",
+    "html-loader": "^0.5.5",
+    "http-proxy-middleware": "^0.17.4",
+    "imports-loader": "^0.7.1",
+    "jest": "^22.0.4",
+    "jest-cli": "^22.0.4",
+    "node-deb": "^0.10.2",
+    "npm2rpm": "^2.3.0",
+    "open": "^0.0.5",
+    "parcel-bundler": "^1.5.1",
+    "parcel-plugin-typescript": "^0.6.0",
+    "prettier": "^1.8.2",
+    "protractor": "^5.1.2",
+    "ts-jest": "^22.0.0",
+    "ts-loader": "^3.4.0",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.8.0",
+    "tslint-config-airbnb": "^5.6.0",
+    "tslint-config-prettier": "^1.7.0",
+    "tslint-immutable": "^4.5.0",
+    "tslint-plugin-prettier": "^1.3.0",
+    "tslint-react": "^3.4.0",
+    "typescript": "^2.7.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/dist/"
+    ]
   }
 }

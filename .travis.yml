@@ -1,19 +1,16 @@
 language: node_js
 node_js:
-  - '6'
+  - '7'
 sudo: required
 dist: trusty
 addons:
   apt:
     packages:
       - google-chrome-stable
-before_install:
-  - npm install -g grunt-cli
 before_script:
   - 'export DISPLAY=:99.0'
   - 'sh -e /etc/init.d/xvfb start'
   - 'node_modules/.bin/webdriver-manager update'
-  - 'grunt build'
 after_success:
   # Install dependencies for releasing
   - '[ -n "$TRAVIS_TAG" ] && sudo apt-get update -qq'
@@ -52,7 +49,8 @@ deploy:
     local-dir: dist
     acl: public_read
     on:
-      branch: master
+      tags: true
+      all_branches: true
       repo: spotify/puppetexplorer
   - provider: s3
     access_key_id: AKIAJEZEAAG2CU6PZHTQ
