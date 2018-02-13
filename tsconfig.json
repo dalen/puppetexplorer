@@ -10,7 +10,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "pretty": true
   },
   "include": ["src/**/*"],
   "exclude": ["**/__tests__/*"]
