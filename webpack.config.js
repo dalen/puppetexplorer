@@ -4,14 +4,9 @@ const webpack = require('webpack');
 module.exports = {
   watch: true,
   devtool: 'source-map',
-  entry: [
-    path.resolve(__dirname, 'src', 'main.tsx'),
-    path.resolve(__dirname, 'src', 'config.js.example'),
-    path.resolve(__dirname, 'src', 'index.html'),
-  ],
+  entry: [path.resolve(__dirname, 'src', 'index.html')],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.re'],
@@ -51,8 +46,7 @@ module.exports = {
           {
             loader: 'html-loader',
             options: {
-              attrs: 'img:src',
-              link: 'href',
+              attrs: ['img:src', 'link:href', 'script:src'],
             },
           },
         ],
