@@ -1,7 +1,15 @@
 // @flow
 import * as React from 'react';
 import { Card, CardHeader } from 'reactstrap';
-import { BarChart, Bar, Legend, Cell } from 'recharts';
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  Tooltip,
+  Cell,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 import * as PuppetDB from '../../../PuppetDB';
 
@@ -100,11 +108,26 @@ export default class EventChart extends React.Component<Props, State> {
         '#b15928',
       ];
 
+      console.log(this.state.data);
       return (
         <Card style={{ overflow: 'hidden' }}>
           <CardHeader>{this.props.title}</CardHeader>
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart data={[...this.state.data]}>
+              <XAxis dataKey="value" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="count" label>
+                {this.state.data.map((_, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={colors[index % colors.length]}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
           <BarChart layout="horizontal" data={this.state.data}>
-            <Legend />
             <Bar dataKey="value">
               {this.state.data.map((_, index) => (
                 <Cell fill={colors[index % colors.length]} />
