@@ -11,7 +11,7 @@ import {
   Label,
   Input,
 } from 'reactstrap';
-import * as dateFns from 'date-fns';
+import * as date from 'date-fns';
 
 import * as qs from 'qs';
 
@@ -30,11 +30,15 @@ type Props = {
 };
 
 const changeDate = (history: History, which: string, value: string) => {
-  updateSearch(history, {
-    [which]: dateFns.format(dateFns.parse(value), 'YYYY-MM-DD'),
-  });
+  const parsedDate = date.parse(value);
+  if (date.isValid(parsedDate)) {
+    updateSearch(history, {
+      [which]: date.format(parsedDate, 'YYYY-MM-DD'),
+    });
+  }
 };
 
+// Compute an event query based on date range
 const dateRangeEventQuery = (
   query: PuppetDB.Query | null,
   dateFrom: string,
@@ -43,29 +47,21 @@ const dateRangeEventQuery = (
   return PuppetDB.combine(
     query,
     dateFrom
-      ? [
-          '>=',
-          'timestamp',
-          dateFns.startOfDay(dateFns.parse(dateFrom)).toISOString(),
-        ]
+      ? ['>=', 'timestamp', date.startOfDay(date.parse(dateFrom)).toISOString()]
       : null,
     dateTo
-      ? [
-          '<=',
-          'timestamp',
-          dateFns.endOfDay(dateFns.parse(dateFrom)).toISOString(),
-        ]
+      ? ['<=', 'timestamp', date.endOfDay(date.parse(dateFrom)).toISOString()]
       : null,
   );
 };
 
-// Compute an event query based on date range
 const getDate = (search: string, which: string): string => {
   const searchParsed = qs.parse(search);
+  console.log(searchParsed);
   if (typeof searchParsed[which] === 'string') {
-    return dateFns.parse(searchParsed[which]).toLocaleDateString();
+    return date.format(date.parse(searchParsed[which]), 'YYYY-MM-DD');
   }
-  return new Date().toLocaleDateString();
+  return date.format(new Date(), 'YYYY-MM-DD');
 };
 
 export default (props: Props) => {
