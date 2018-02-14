@@ -892,9 +892,9 @@ bs-fetch@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/bs-fetch/-/bs-fetch-0.2.1.tgz#165bed867009f2e91efb959ca1c0ff940d8cd19a"
 
-bs-platform@^2.1.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-2.2.0.tgz#ec9eb579f54f5c4f3fc4b4109ee845004b67169d"
+bs-platform@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-2.2.1.tgz#e22b82143a43a10630d7b2040aab87648b12190c"
 
 bser@^2.0.0:
   version "2.0.0"
