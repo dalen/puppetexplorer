@@ -6594,9 +6594,9 @@ type-safe-json-decoder@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/type-safe-json-decoder/-/type-safe-json-decoder-0.2.0.tgz#0d96b1f60bd293a55cb263d6ec670fc1fff0e026"
 
-typescript@^2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.1.tgz#bb3682c2c791ac90e7c6210b26478a8da085c359"
+typescript@^2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
 
 ua-parser-js@^0.7.9:
   version "0.7.17"
