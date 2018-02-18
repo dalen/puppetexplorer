@@ -15,7 +15,7 @@
     "test": "jest",
     "lint": "tslint --project .",
     "build": "parcel build src/index.html",
-    "start": "parcel --no-hmr -o src/index.html"
+    "start": "parcel --open src/index.html"
   },
   "author": {
     "name": "Erik Dalén",
@@ -26,10 +26,9 @@
     "url": "https://github.com/dalen/puppetexplorer.git"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0",
     "bootswatch": "^4.0.0-beta.3",
     "bs-fetch": "^0.2.0",
-    "classnames": "^2.2.5",
+    "classjoin": "^0.2.1",
     "date-fns": "^1.29.0",
     "font-awesome": "^4.7.0",
     "immutable": "^4.0.0-rc.9",
@@ -58,7 +57,6 @@
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.3",
     "@types/express": "^4.11.0",
     "@types/jest": "^22.0.0",
     "@types/object-hash": "^1.1.0",

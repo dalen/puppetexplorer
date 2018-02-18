@@ -23,10 +23,6 @@
     "@types/express" "*"
     "@types/node" "*"
 
-"@types/classnames@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.3.tgz#3f0ff6873da793870e20a260cada55982f38a9e5"
-
 "@types/d3-path@*":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@types/d3-path/-/d3-path-1.0.6.tgz#c1a7d2dc07b295fdd1c84dabe4404df991b48693"
@@ -1471,6 +1467,10 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+classjoin@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/classjoin/-/classjoin-0.2.1.tgz#98a711de0517ef3916596afa2ee20feece030f26"
 
 classnames@2.2.5, classnames@^2.2.3, classnames@^2.2.5:
   version "2.2.5"

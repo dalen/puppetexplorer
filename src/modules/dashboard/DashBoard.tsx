@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { Container, CardDeck } from 'reactstrap';
-import * as hash from 'object-hash';
 import * as Config from '../../Config';
 
 import DashBoardMetric from './components/DashBoardMetric';
@@ -14,13 +13,9 @@ export default (props: {
   <div>
     <Container className="my-1">
       {props.panels.map(panelRow => (
-        <CardDeck key={hash(panelRow)}>
+        <CardDeck>
           {panelRow.map(panel => (
-            <DashBoardMetric
-              key={hash(panel)}
-              serverUrl={props.serverUrl}
-              {...panel}
-            />
+            <DashBoardMetric serverUrl={props.serverUrl} {...panel} />
           ))}
         </CardDeck>
       ))}

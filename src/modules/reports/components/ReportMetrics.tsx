@@ -4,7 +4,6 @@ import { BarChart, Bar, Legend, Cell } from 'recharts';
 import { List, Set } from 'immutable';
 
 import * as PuppetDB from './../../../PuppetDB';
-import * as hash from 'object-hash';
 
 // Get all metrics for a category
 const categoryMetrics = (
@@ -54,11 +53,8 @@ export default ({
             <BarChart layout="horizontal" data={data.toArray()}>
               <Legend />
               <Bar dataKey="value">
-                {data.map((metric, index) => (
-                  <Cell
-                    key={hash(metric)}
-                    fill={colors.get(index % colors.size)}
-                  />
+                {data.map((_metric, index) => (
+                  <Cell fill={colors.get(index % colors.size)} />
                 ))}
               </Bar>
             </BarChart>

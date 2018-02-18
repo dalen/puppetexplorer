@@ -42,7 +42,7 @@ export default class App extends React.Component<Props, State> {
   }
 
   readonly state = {
-    config: Config.defaults(),
+    config: Object.freeze(Config.defaults()),
     ...App.decodeSearch(this.props.location.search),
   };
 

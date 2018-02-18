@@ -3,7 +3,6 @@ import { Table, Alert } from 'reactstrap';
 
 import LogListItem from './LogListItem';
 import * as PuppetDB from '../../../PuppetDB';
-import * as hash from 'object-hash';
 
 export default ({
   logs = [],
@@ -20,9 +19,7 @@ export default ({
             <th>Message</th>
           </tr>
         </thead>
-        <tbody>
-          {logs.map(log => <LogListItem key={hash(log)} log={log} />)}
-        </tbody>
+        <tbody>{logs.map(log => <LogListItem log={log} />)}</tbody>
       </Table>
     );
   }

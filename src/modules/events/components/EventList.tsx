@@ -3,7 +3,6 @@ import { Table, Alert } from 'reactstrap';
 
 import * as PuppetDB from '../../../PuppetDB';
 import EventListItem from './EventListItem';
-import * as hash from 'object-hash';
 
 export default ({
   events = [],
@@ -27,11 +26,7 @@ export default ({
         </thead>
         <tbody>
           {events.map(event => (
-            <EventListItem
-              key={hash(event)}
-              event={event}
-              showNode={showNode}
-            />
+            <EventListItem event={event} showNode={showNode} />
           ))}
         </tbody>
       </Table>
