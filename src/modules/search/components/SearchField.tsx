@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { FaSearch } from 'react-icons/lib/fa';
-import { InputGroup, InputGroupAddon, Input, Form } from 'reactstrap';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input,
+  Form,
+} from 'reactstrap';
 
 type Props = {
   readonly updateQuery: (query: string) => any;
@@ -43,8 +49,10 @@ export default class SearchField extends React.Component<Props, State> {
     return (
       <Form id="node-query" onSubmit={this.handleSubmit}>
         <InputGroup>
-          <InputGroupAddon>
-            <FaSearch />
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText>
+              <FaSearch />
+            </InputGroupText>
           </InputGroupAddon>
           <Input
             type="search"
