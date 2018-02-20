@@ -68,7 +68,7 @@
     "@types/react-icons": "^2.2.4",
     "@types/react-router-dom": "^4.2.0",
     "@types/reactstrap": "^5.0.16",
-    "@types/recharts": "^1.0.8",
+    "@types/recharts": "^1.0.15",
     "bs-platform": "^2.2.1",
     "css-loader": "^0.28.9",
     "exports-loader": "^0.7.0",
