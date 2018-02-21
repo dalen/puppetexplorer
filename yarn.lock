@@ -4574,9 +4574,9 @@ no-case@^2.2.0:
   dependencies:
     lower-case "^1.1.1"
 
-node-deb@^0.10.2:
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/node-deb/-/node-deb-0.10.3.tgz#b30df68663806d75f2c6f16e55c2d19de8a05e07"
+node-deb@^0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/node-deb/-/node-deb-0.10.4.tgz#5b8e8dab6314d01055a0b69485add71646802160"
 
 node-fetch@^1.0.1:
   version "1.7.3"
