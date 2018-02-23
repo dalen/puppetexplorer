@@ -70,7 +70,7 @@
     "@types/reactstrap": "^5.0.16",
     "@types/recharts": "^1.0.15",
     "bs-platform": "^2.2.1",
-    "css-loader": "^0.28.9",
+    "css-loader": "^0.28.10",
     "exports-loader": "^0.7.0",
     "express": "^4.16.2",
     "extract-loader": "^1.0.2",
