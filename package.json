@@ -99,7 +99,7 @@
     "tslint-react": "^3.5.1",
     "typescript": "^2.7.2",
     "webpack": "^4.0.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack-dev-server": "^3.0.0"
   },
   "prettier": {
     "singleQuote": true,
