@@ -37,7 +37,7 @@
     "object-dig": "^0.1.1",
     "object-hash": "^1.1.8",
     "popper.js": "^1.12.9",
-    "prop-types": "^15.6.0",
+    "prop-types": "^15.6.1",
     "qs": "^6.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
