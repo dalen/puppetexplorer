@@ -3,10 +3,7 @@
   "version": "3.0.0",
   "description": "A web interface for exploring PuppetDB data",
   "license": "Apache-2.0",
-  "keywords": [
-    "puppet",
-    "puppetdb"
-  ],
+  "keywords": ["puppet", "puppetdb"],
   "homepage": "https://github.com/dalen/puppetexplorer",
   "bugs": {
     "url": "https://github.com/dalen/puppetexplorer/issues"
@@ -14,8 +11,10 @@
   "scripts": {
     "test": "jest",
     "lint": "tslint --project .",
-    "build": "parcel build src/index.html",
-    "start": "parcel --open src/index.html"
+    "build": "webpack --mode=production",
+    "start": "webpack-dev-server --mode=development --open",
+    "build-parcel": "parcel build src/index.html",
+    "start-parcel": "parcel --open src/index.html"
   },
   "author": {
     "name": "Erik Dalén",
@@ -76,7 +75,7 @@
     "extract-loader": "^1.0.2",
     "file-loader": "^1.1.10",
     "get-port": "^3.2.0",
-    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
     "http-proxy-middleware": "^0.17.4",
     "imports-loader": "^0.8.0",
     "jest": "^22.4.2",
@@ -99,6 +98,7 @@
     "tslint-react": "^3.5.1",
     "typescript": "^2.7.2",
     "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9",
     "webpack-dev-server": "^3.0.0"
   },
   "prettier": {
@@ -106,18 +106,11 @@
     "trailingComma": "all"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
+    "moduleFileExtensions": ["ts", "tsx", "js"],
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "<rootDir>/dist/"
-    ]
+    "testPathIgnorePatterns": ["/node_modules/", "<rootDir>/dist/"]
   }
 }

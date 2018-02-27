@@ -1,23 +1,17 @@
-const path = require('path');
-const webpack = require('webpack');
+const HTMLPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  watch: true,
-  devtool: 'source-map',
-  entry: [path.resolve(__dirname, 'src', 'index.html')],
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.re'],
-  },
-  // use imports loader to add whatwg-fetch polyfill
   plugins: [
-    new webpack.ProvidePlugin({
-      fetch:
-        'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch',
+    new HTMLPlugin({
+      title: 'Puppet Explorer',
+      favicon: 'src/favicon.ico',
+      template: 'src/index.html',
     }),
   ],
+  resolve: {
+    // Add `.ts` and `.tsx` as a resolvable extension.
+    extensions: ['.ts', '.tsx', '.js'],
+  },
   module: {
     rules: [
       {
@@ -25,56 +19,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'ts-loader',
-        },
-      },
-      {
-        test: /\.(re|ml)$/,
-        use: 'bs-loader?module=es6',
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-            },
-          },
-          {
-            loader: 'extract-loader',
-          },
-          {
-            loader: 'html-loader',
-            options: {
-              attrs: ['img:src', 'link:href', 'script:src'],
-            },
-          },
-        ],
-      },
-      {
-        test: /\.css$/,
-        use: ['file-loader', 'extract-loader', 'css-loader'],
-      },
-      {
-        test: /\.(svg|ttf|woff|woff2|eot)$/,
-        use: 'file-loader',
-      },
-      {
-        test: /\.ico$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-          },
-        },
-      },
-      {
-        test: /config\.js\.example$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-          },
         },
       },
     ],
