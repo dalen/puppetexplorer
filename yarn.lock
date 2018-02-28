@@ -3683,17 +3683,6 @@ html-minifier@^3.2.3:
     relateurl "0.2.x"
     uglify-js "3.3.x"
 
-html-webpack-plugin@^2.30.1:
-  version "2.30.1"
-  resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-2.30.1.tgz#7f9c421b7ea91ec460f56527d78df484ee7537d5"
-  dependencies:
-    bluebird "^3.4.7"
-    html-minifier "^3.2.3"
-    loader-utils "^0.2.16"
-    lodash "^4.17.3"
-    pretty-error "^2.0.2"
-    toposort "^1.0.0"
-
 html-webpack-plugin@webpack-contrib/html-webpack-plugin:
   version "2.30.1"
   resolved "https://codeload.github.com/webpack-contrib/html-webpack-plugin/tar.gz/1dee37e2696fd3990fe9be0a2945e465c0bb9a64"
@@ -8593,9 +8582,9 @@ webpack-dev-middleware@2.0.6:
     url-join "^2.0.2"
     webpack-log "^1.0.1"
 
-webpack-dev-server@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-3.0.0.tgz#0ca2d293dc7a7b1a94fc5fd62cfca2a9fa61bcf7"
+webpack-dev-server@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-3.1.0.tgz#5d2365514d9dfa0d415502742d2cc28afc4a32d8"
   dependencies:
     ansi-html "0.0.7"
     array-includes "^3.0.3"
@@ -8623,6 +8612,7 @@ webpack-dev-server@^3.0.0:
     strip-ansi "^3.0.0"
     supports-color "^5.1.0"
     webpack-dev-middleware "2.0.6"
+    webpack-log "^1.1.2"
     yargs "9.0.1"
 
 webpack-fork-yeoman-generator@^1.1.1:
@@ -8655,7 +8645,7 @@ webpack-fork-yeoman-generator@^1.1.1:
     through2 "^2.0.0"
     yeoman-environment "^1.1.0"
 
-webpack-log@^1.0.1:
+webpack-log@^1.0.1, webpack-log@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/webpack-log/-/webpack-log-1.1.2.tgz#cdc76016537eed24708dc6aa3d1e52189efee107"
   dependencies:
