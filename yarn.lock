@@ -127,9 +127,9 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.0.38":
-  version "16.0.38"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.38.tgz#76617433ea10274505f60bb86eddfdd0476ffdc2"
+"@types/react@*", "@types/react@^16.0.39":
+  version "16.0.39"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.39.tgz#6aef052209521cd76f62cd7286abdc8fd787e39d"
 
 "@types/reactstrap@^5.0.16":
   version "5.0.17"
