@@ -135,9 +135,9 @@
   version "16.0.40"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.40.tgz#caabc2296886f40b67f6fc80f0f3464476461df9"
 
-"@types/reactstrap@^5.0.16":
-  version "5.0.17"
-  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-5.0.17.tgz#3d85b7d373b310b554436d95a01b5369d4d7fbc4"
+"@types/reactstrap@^5.0.18":
+  version "5.0.18"
+  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-5.0.18.tgz#22dc66856ea906b0ed49ac8a00c27380a84760e0"
   dependencies:
     "@types/react" "*"
 
