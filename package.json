@@ -47,7 +47,7 @@
     "react-router-dom": "^4.1.2",
     "react-transition-group": "^2.2.1",
     "reactstrap": "^5.0.0-beta.2",
-    "reason-react": "^0.3.1",
+    "reason-react": "^0.3.3",
     "recharts": "^1.0.0-beta.10",
     "redux": "^3.7.2",
     "redux-loop": "^4.1.0",
