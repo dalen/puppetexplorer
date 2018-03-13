@@ -76,7 +76,7 @@
     "file-loader": "^1.1.11",
     "get-port": "^3.2.0",
     "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
-    "http-proxy-middleware": "^0.17.4",
+    "http-proxy-middleware": "^0.18.0",
     "imports-loader": "^0.8.0",
     "jest": "^22.4.2",
     "jest-cli": "^22.4.0",
