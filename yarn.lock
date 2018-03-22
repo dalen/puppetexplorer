@@ -6838,13 +6838,6 @@ react-icons@^2.2.7:
   dependencies:
     react-icon-base "2.1.0"
 
-react-popper@^0.8.2:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.8.2.tgz#092095ff13933211d3856d9f325511ec3a42f12c"
-  dependencies:
-    popper.js "^1.12.9"
-    prop-types "^15.6.0"
-
 react-popper@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.8.3.tgz#0f73333137c9fb0af6ec4074d2d0585a0a0461e1"
