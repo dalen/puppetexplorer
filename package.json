@@ -78,7 +78,7 @@
     "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
     "http-proxy-middleware": "^0.18.0",
     "imports-loader": "^0.8.0",
-    "jest": "^22.4.2",
+    "jest": "^22.4.3",
     "jest-cli": "^22.4.3",
     "node-deb": "^0.10.4",
     "npm2rpm": "^2.3.0",
