@@ -83,7 +83,7 @@
     "node-deb": "^0.10.4",
     "npm2rpm": "^2.3.0",
     "open": "^0.0.5",
-    "parcel-bundler": "^1.6.2",
+    "parcel-bundler": "^1.7.0",
     "parcel-plugin-typescript": "^0.7.0",
     "prettier": "^1.11.1",
     "protractor": "^5.1.2",
