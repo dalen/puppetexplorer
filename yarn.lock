@@ -6908,19 +6908,19 @@ react-icons@^2.2.7:
   dependencies:
     react-icon-base "2.1.0"
 
+react-popper@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.10.1.tgz#6a1f2595faffda77105bed4e89ecf22607a4c452"
+  dependencies:
+    popper.js "^1.14.1"
+    prop-types "^15.6.1"
+
 react-popper@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.8.3.tgz#0f73333137c9fb0af6ec4074d2d0585a0a0461e1"
   dependencies:
     popper.js "^1.12.9"
     prop-types "^15.6.0"
-
-react-popper@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.9.2.tgz#27a198e421e45e53261734dca28c6e57dd2c1604"
-  dependencies:
-    popper.js "^1.14.1"
-    prop-types "^15.6.1"
 
 react-redux@^5.0.4:
   version "5.0.7"
