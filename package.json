@@ -76,7 +76,7 @@
     "exports-loader": "^0.7.0",
     "extract-loader": "^2.0.1",
     "file-loader": "^1.1.11",
-    "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
+    "html-webpack-plugin": "^3.2.0",
     "imports-loader": "^0.8.0",
     "jest": "^22.4.3",
     "jest-cli": "^22.4.3",
