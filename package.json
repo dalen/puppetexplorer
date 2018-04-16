@@ -71,7 +71,7 @@
     "@types/react-router-dom": "^4.2.6",
     "@types/reactstrap": "^5.0.21",
     "@types/recharts": "^1.0.18",
-    "bs-platform": "^2.2.3",
+    "bs-platform": "^3.0.0",
     "css-loader": "^0.28.11",
     "exports-loader": "^0.7.0",
     "extract-loader": "^2.0.1",
