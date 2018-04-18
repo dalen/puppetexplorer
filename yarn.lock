@@ -8405,9 +8405,9 @@ tslint-eslint-rules@^4.1.1:
     tslib "^1.0.0"
     tsutils "^1.4.0"
 
-tslint-immutable@^4.5.3:
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/tslint-immutable/-/tslint-immutable-4.5.3.tgz#5ebd97b2a931d7e69f82847f8d79bf8a7e7e86fc"
+tslint-immutable@^4.5.4:
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/tslint-immutable/-/tslint-immutable-4.5.4.tgz#17b0d825c1067fa6d125a8010d9b22feb12e5d32"
 
 tslint-microsoft-contrib@~5.0.1:
   version "5.0.3"
