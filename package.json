@@ -69,7 +69,7 @@
     "@types/react-fontawesome": "^1.6.1",
     "@types/react-icons": "^2.2.4",
     "@types/react-router-dom": "^4.2.6",
-    "@types/reactstrap": "^5.0.21",
+    "@types/reactstrap": "^5.0.23",
     "@types/recharts": "^1.0.18",
     "bs-platform": "^3.0.0",
     "css-loader": "^0.28.11",
