@@ -1310,17 +1310,15 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
-bootstrap@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0.tgz#ceb03842c145fcc1b9b4e15da2a05656ba68469a"
+bootstrap@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.0.tgz#110b05c31a236d56dbc9adcda6dd16f53738a28a"
 
-bootswatch@^4.0.0-beta.3:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/bootswatch/-/bootswatch-4.0.0.tgz#dfcab028c03c09a58888d37d7ce9f6c8c33498cc"
+bootswatch@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/bootswatch/-/bootswatch-4.1.0.tgz#77d26d6b47a6882c85624d3c3ba2d8e07556384a"
   dependencies:
-    bootstrap "^4.0.0"
-    jquery ">=1.9.1"
-    popper.js "^1.12.9"
+    bootstrap "^4.1.0"
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -4806,10 +4804,6 @@ jest@^22.4.3:
   dependencies:
     import-local "^1.0.0"
     jest-cli "^22.4.3"
-
-jquery@>=1.9.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
 js-base64@^2.1.9:
   version "2.4.3"
