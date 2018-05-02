@@ -28,7 +28,7 @@
     "url": "https://github.com/dalen/puppetexplorer.git"
   },
   "dependencies": {
-    "bootswatch": "^4.1.0",
+    "bootswatch": "^4.1.1",
     "bs-fetch": "^0.2.0",
     "classjoin": "^0.2.1",
     "date-fns": "^1.29.0",
