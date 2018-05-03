@@ -150,9 +150,9 @@
   dependencies:
     "@types/react" "*"
 
-"@types/recharts@^1.0.18":
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.18.tgz#d5749ea4e47e175325a6526eb2caec619f181126"
+"@types/recharts@^1.0.19":
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.19.tgz#060d0021bc4586e977739abbee551aa6f996eef0"
   dependencies:
     "@types/d3-shape" "*"
     "@types/react" "*"
@@ -6981,13 +6981,6 @@ react-icons@^2.2.7:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-2.2.7.tgz#d7860826b258557510dac10680abea5ca23cf650"
   dependencies:
     react-icon-base "2.1.0"
-
-react-popper@^0.10.4:
-  version "0.10.4"
-  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.10.4.tgz#af2a415ea22291edd504678d7afda8a6ee3295aa"
-  dependencies:
-    popper.js "^1.14.1"
-    prop-types "^15.6.1"
 
 react-popper@^0.10.4:
   version "0.10.4"
