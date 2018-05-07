@@ -7327,9 +7327,9 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux-loop@^4.1.0:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/redux-loop/-/redux-loop-4.2.4.tgz#d497ddf79ebdfc16b3aa9006f5d0a7a442e6bd6c"
+redux-loop@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/redux-loop/-/redux-loop-4.2.6.tgz#1c282e037ef9b754c39227ea3b53bf878ae92304"
 
 redux@^4.0.0:
   version "4.0.0"
