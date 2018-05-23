@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "bootswatch": "^4.1.1",
-    "bs-fetch": "^0.2.0",
+    "bs-fetch": "^0.3.0",
     "classjoin": "^0.2.1",
     "date-fns": "^1.29.0",
     "font-awesome": "^4.7.0",
