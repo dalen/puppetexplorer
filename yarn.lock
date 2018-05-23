@@ -1622,9 +1622,9 @@ bs-fetch@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/bs-fetch/-/bs-fetch-0.2.1.tgz#165bed867009f2e91efb959ca1c0ff940d8cd19a"
 
-bs-platform@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-3.1.0.tgz#2e2065c32a9b8b41843bf7ae54bd6a5929521173"
+bs-platform@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-3.1.3.tgz#95c70584735e2b50922f5347159d6d89180231f6"
 
 bser@^2.0.0:
   version "2.0.0"
