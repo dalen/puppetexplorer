@@ -164,9 +164,9 @@
   dependencies:
     csstype "^2.2.0"
 
-"@types/reactstrap@^5.0.25":
-  version "5.0.25"
-  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-5.0.25.tgz#59d43a71fa7dd853adb60007a35162561130e527"
+"@types/reactstrap@^5.0.26":
+  version "5.0.26"
+  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-5.0.26.tgz#102455239b095dca348a441ce9039d3cb2b30792"
   dependencies:
     "@types/react" "*"
 
