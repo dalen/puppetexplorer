@@ -78,7 +78,7 @@
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "imports-loader": "^0.8.0",
-    "jest": "^22.4.4",
+    "jest": "^23.0.0",
     "jest-cli": "^22.4.4",
     "node-deb": "^0.10.4",
     "npm2rpm": "^3.0.0",
