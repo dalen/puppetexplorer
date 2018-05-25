@@ -8804,9 +8804,9 @@ ts-loader@^4.3.0:
     micromatch "^3.1.4"
     semver "^5.0.1"
 
-ts-node@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-6.0.3.tgz#28bf74bcad134fad17f7469dad04638ece03f0f4"
+ts-node@^6.0.5:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-6.0.5.tgz#977c1c931da7a2b09ae2930101f0104a5c2271e9"
   dependencies:
     arrify "^1.0.0"
     chalk "^2.3.0"
