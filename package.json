@@ -80,7 +80,7 @@
     "imports-loader": "^0.8.0",
     "jest": "^23.1.0",
     "jest-cli": "^23.1.0",
-    "node-deb": "^0.10.4",
+    "node-deb": "^0.10.5",
     "npm2rpm": "^3.0.0",
     "parcel-bundler": "^1.8.1",
     "parcel-plugin-typescript": "^0.7.1",
