@@ -59,7 +59,7 @@
     "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
-    "@types/express": "^4.11.0",
+    "@types/express": "^4.16.0",
     "@types/jest": "^22.2.3",
     "@types/object-hash": "^1.1.0",
     "@types/qs": "^6.5.1",
