@@ -153,9 +153,9 @@
   dependencies:
     "@types/react" "*"
 
-"@types/recharts@^1.0.21":
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.21.tgz#256bd0e496248a00f769560d83fbb2de3d75dafa"
+"@types/recharts@^1.0.22":
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.22.tgz#99a8d83c028561b1e35b3205001ba43a5cd1f4bb"
   dependencies:
     "@types/d3-shape" "*"
     "@types/react" "*"

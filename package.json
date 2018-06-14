@@ -70,7 +70,7 @@
     "@types/react-icons": "^2.2.4",
     "@types/react-router-dom": "^4.2.7",
     "@types/reactstrap": "^5.0.27",
-    "@types/recharts": "^1.0.21",
+    "@types/recharts": "^1.0.22",
     "bs-platform": "^3.1.5",
     "css-loader": "^0.28.11",
     "exports-loader": "^0.7.0",
