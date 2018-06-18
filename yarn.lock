@@ -147,11 +147,12 @@
   dependencies:
     csstype "^2.2.0"
 
-"@types/reactstrap@^5.0.27":
-  version "5.0.27"
-  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-5.0.27.tgz#0973e83ac5db1ef70aedec73b8e2c2f51f97373d"
+"@types/reactstrap@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-6.0.0.tgz#76224f7de991767414e9edd68101ac64967938cb"
   dependencies:
     "@types/react" "*"
+    popper.js "^1.14.1"
 
 "@types/recharts@^1.0.22":
   version "1.0.22"
