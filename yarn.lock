@@ -154,9 +154,9 @@
     "@types/react" "*"
     popper.js "^1.14.1"
 
-"@types/recharts@^1.0.22":
-  version "1.0.22"
-  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.22.tgz#99a8d83c028561b1e35b3205001ba43a5cd1f4bb"
+"@types/recharts@^1.0.23":
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.23.tgz#16919e056cdf7bedbabd764c89bd4a83ca2daed5"
   dependencies:
     "@types/d3-shape" "*"
     "@types/react" "*"
