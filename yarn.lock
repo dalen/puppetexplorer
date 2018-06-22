@@ -5616,9 +5616,9 @@ npm-run-path@^2.0.0:
   dependencies:
     path-key "^2.0.0"
 
-npm2rpm@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/npm2rpm/-/npm2rpm-3.0.0.tgz#ac94f26390f4de784b8f85845f6bd8499688f688"
+npm2rpm@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/npm2rpm/-/npm2rpm-3.1.0.tgz#b57888d9d05f18453a41fe92167cf0f9a90055c2"
   dependencies:
     async "~1.5.2"
     colors "~1.1.2"
