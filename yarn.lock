@@ -6678,6 +6678,10 @@ react-icons@^2.2.7:
   dependencies:
     react-icon-base "2.1.0"
 
+react-lifecycles-compat@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+
 react-popper@^0.10.4:
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.10.4.tgz#af2a415ea22291edd504678d7afda8a6ee3295aa"
@@ -6762,15 +6766,16 @@ react-transition-group@^2.2.1, react-transition-group@^2.3.1:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-reactstrap@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/reactstrap/-/reactstrap-6.1.0.tgz#7fe70db4c9804cd364bf6fd137172443d67636d9"
+reactstrap@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/reactstrap/-/reactstrap-6.3.0.tgz#99c790f7293dc74e01b5907d62db675b63866e9c"
   dependencies:
     classnames "^2.2.3"
     lodash.isfunction "^3.0.9"
     lodash.isobject "^3.0.2"
     lodash.tonumber "^4.0.3"
     prop-types "^15.5.8"
+    react-lifecycles-compat "^3.0.4"
     react-popper "^0.10.4"
     react-transition-group "^2.3.1"
 
