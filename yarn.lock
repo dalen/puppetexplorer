@@ -1302,15 +1302,9 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
-bootstrap@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.1.tgz#3aec85000fa619085da8d2e4983dfd67cf2114cb"
-
-bootswatch@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/bootswatch/-/bootswatch-4.1.1.tgz#eb4e053c469d4dc8cdaff11ff4ddbef63e86a56d"
-  dependencies:
-    bootstrap "^4.1.1"
+bootswatch@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/bootswatch/-/bootswatch-4.1.2.tgz#b4dfa68cdeafe711e513c500db903e8ef400e202"
 
 brace-expansion@^1.1.7:
   version "1.1.11"
