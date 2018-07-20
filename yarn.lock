@@ -158,9 +158,9 @@
   dependencies:
     csstype "^2.2.0"
 
-"@types/reactstrap@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-6.0.0.tgz#76224f7de991767414e9edd68101ac64967938cb"
+"@types/reactstrap@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-6.0.1.tgz#72616e6f6ef985b9d5bda748c084db4025f5ecaf"
   dependencies:
     "@types/react" "*"
     popper.js "^1.14.1"
