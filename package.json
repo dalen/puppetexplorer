@@ -84,7 +84,7 @@
     "npm2rpm": "^3.1.0",
     "parcel-bundler": "^1.9.7",
     "parcel-plugin-typescript": "^1.0.0",
-    "prettier": "^1.13.7",
+    "prettier": "^1.14.0",
     "protractor": "^5.4.0",
     "ts-jest": "^23.0.1",
     "ts-loader": "^4.4.2",
