@@ -130,9 +130,9 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-icons@^2.2.4":
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/@types/react-icons/-/react-icons-2.2.5.tgz#fc6e78d113415ecc5602f56550a8e3022f5fdf11"
+"@types/react-icons@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@types/react-icons/-/react-icons-2.2.6.tgz#02efde5582f4bbfe94e9dc277d48778289d66390"
   dependencies:
     "@types/react" "*"
     "@types/react-icon-base" "*"
