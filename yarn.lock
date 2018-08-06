@@ -118,9 +118,9 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-fontawesome@^1.6.3":
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/@types/react-fontawesome/-/react-fontawesome-1.6.3.tgz#03d00dd940d2eb9dc3f21f4b9a972789a95dc8cf"
+"@types/react-fontawesome@^1.6.4":
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/@types/react-fontawesome/-/react-fontawesome-1.6.4.tgz#95884bd8df906b423a254e00d5050f7fe75b3e76"
   dependencies:
     "@types/react" "*"
 
