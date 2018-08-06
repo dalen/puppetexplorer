@@ -38,7 +38,7 @@
     "node-puppetdbquery": "^1.1.3",
     "object-dig": "^0.1.3",
     "object-hash": "^1.3.0",
-    "popper.js": "^1.14.3",
+    "popper.js": "^1.14.4",
     "prop-types": "^15.6.2",
     "qs": "^6.5.2",
     "react": "^16.4.1",
