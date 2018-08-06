@@ -42,7 +42,7 @@
     "prop-types": "^15.6.2",
     "qs": "^6.5.2",
     "react": "^16.4.2",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.4.2",
     "react-icons": "^3.0.4",
     "react-popper": "^1.0.0",
     "react-redux": "^5.0.4",
