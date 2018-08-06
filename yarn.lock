@@ -7263,9 +7263,9 @@ react-transition-group@^2.2.1, react-transition-group@^2.3.1, react-transition-g
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-reactstrap@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/reactstrap/-/reactstrap-6.3.0.tgz#99c790f7293dc74e01b5907d62db675b63866e9c"
+reactstrap@^6.3.1:
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/reactstrap/-/reactstrap-6.3.1.tgz#263924e4c73ee239f446180d40d9f09cc40607e9"
   dependencies:
     classnames "^2.2.3"
     lodash.isfunction "^3.0.9"
