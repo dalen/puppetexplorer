@@ -69,7 +69,7 @@
     "@types/react-icons": "^2.2.6",
     "@types/react-router-dom": "^4.3.0",
     "@types/reactstrap": "^6.0.2",
-    "@types/recharts": "^1.0.25",
+    "@types/recharts": "^1.0.26",
     "css-loader": "^1.0.0",
     "exports-loader": "^0.7.0",
     "extract-loader": "^2.0.1",
