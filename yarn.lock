@@ -190,9 +190,9 @@
     "@types/react" "*"
     popper.js "^1.14.1"
 
-"@types/recharts@^1.0.27":
-  version "1.0.27"
-  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.27.tgz#2db3328bba85f7ad1950fbca3b6fc692860be89b"
+"@types/recharts@^1.0.28":
+  version "1.0.28"
+  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.28.tgz#48819bcb99b7301f149d13467da5f37a3c3ad39d"
   dependencies:
     "@types/d3-shape" "*"
     "@types/react" "*"
