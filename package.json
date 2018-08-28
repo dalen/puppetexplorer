@@ -52,7 +52,7 @@
     "reason-react": "^0.5.3",
     "recharts": "^1.1.0",
     "redux": "^4.0.0",
-    "redux-loop": "^4.4.0",
+    "redux-loop": "^4.4.1",
     "result.ts": "^0.3.1",
     "type-safe-json-decoder": "^0.2.0",
     "whatwg-fetch": "^2.0.4"
