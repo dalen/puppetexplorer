@@ -83,7 +83,7 @@
     "parcel-bundler": "^1.9.7",
     "parcel-plugin-typescript": "^1.0.0",
     "prettier": "^1.14.2",
-    "protractor": "^5.4.0",
+    "protractor": "^5.4.1",
     "ts-jest": "^23.1.4",
     "ts-loader": "^5.0.0",
     "ts-node": "^7.0.1",
