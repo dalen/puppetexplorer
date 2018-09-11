@@ -183,9 +183,9 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/reactstrap@^6.0.2":
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-6.0.2.tgz#4684f42bb4d0ba11f98bf5fb2699280a09a95d3b"
+"@types/reactstrap@^6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@types/reactstrap/-/reactstrap-6.0.3.tgz#df05daa9cdf21119d000389ad02bd5547b2e9498"
   dependencies:
     "@types/react" "*"
     popper.js "^1.14.1"
