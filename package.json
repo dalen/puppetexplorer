@@ -55,7 +55,7 @@
     "redux-loop": "^4.4.1",
     "result.ts": "^0.3.1",
     "type-safe-json-decoder": "^0.2.0",
-    "whatwg-fetch": "^2.0.4"
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@types/express": "^4.16.0",
