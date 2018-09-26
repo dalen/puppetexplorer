@@ -80,7 +80,7 @@
     "jest-cli": "^23.6.0",
     "node-deb": "^0.10.7",
     "npm2rpm": "^3.1.0",
-    "parcel-bundler": "^1.9.7",
+    "parcel-bundler": "^1.10.0",
     "parcel-plugin-typescript": "^1.0.0",
     "prettier": "^1.14.3",
     "protractor": "^5.4.1",
