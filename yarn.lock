@@ -8006,10 +8006,10 @@ rc@^1.0.1, rc@^1.2.7:
     prop-types "^15.6.2"
     schedule "^0.5.0"
 
-react-icons@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.0.5.tgz#9f22a319a48b562e052af2255a3dda8ded363d1c"
-  integrity sha512-gNOTMhB3QCFsDnBkO0psdcz84BjprjT95pX6SSJ9pNARQozTsBqOKeVl+uw8zMIBGGDX9GpdY9TflnRjiX4z1A==
+react-icons@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.1.0.tgz#004bc8d8b64a5480cdebd86ccb72ba5930b0e434"
+  integrity sha512-kz0Dg1pEY+Ln0zcHYmBfx75pWz4U1kvCGku+QdwZkaIrCK+UQhPd69oLwik0KW5KpNhWHed0aMtAx6DnBhfIxQ==
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
