@@ -849,13 +849,19 @@
     "@types/react" "*"
     popper.js "^1.14.1"
 
-"@types/recharts@^1.0.28":
-  version "1.0.28"
-  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.28.tgz#48819bcb99b7301f149d13467da5f37a3c3ad39d"
-  integrity sha512-+B5pYMdnriHx3PVbLxOM9zg+e9XnpKhZ1TCQ/xz5fB06vpH1jOHb9CAU5Q4+1v5OYL3DtrepBX/ZWcFuIHUfUA==
+"@types/recharts-scale@*":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/recharts-scale/-/recharts-scale-1.0.0.tgz#348c9220d6d9062c44a9d585d686644a97f7e25d"
+  integrity sha512-HR/PrCcxYb2YHviTqH7CMdL1TUhUZLTUKzfrkMhxm1HTa5mg/QtP8XMiuSPz6dZ6wecazAOu8aYZ5DqkNlgHHQ==
+
+"@types/recharts@^1.0.29":
+  version "1.0.29"
+  resolved "https://registry.yarnpkg.com/@types/recharts/-/recharts-1.0.29.tgz#654630b2222cb7dcd03bf6c59a93db37475e8d2c"
+  integrity sha512-bvrAh6G1yRgOHQKBy2HmUDn9fV/MiLWCWXhjqLJOZRkL4/F7ea/+CbuIzmlbfgfVoJAUtB3HDIfbdVjrv5cWfw==
   dependencies:
     "@types/d3-shape" "*"
     "@types/react" "*"
+    "@types/recharts-scale" "*"
 
 "@types/selenium-webdriver@^3.0.0":
   version "3.0.10"
