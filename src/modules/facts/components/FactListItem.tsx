@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ListGroupItem } from 'reactstrap';
-import { FaBarChart, FaCaretRight, FaCaretDown } from 'react-icons/lib/fa';
+import { FaChartBar, FaCaretRight, FaCaretDown } from 'react-icons/fa';
 import { OrderedSet } from 'immutable';
 
 import * as PuppetDB from '../../../PuppetDB';
@@ -50,7 +50,7 @@ export default class FactListItem extends React.Component<Props, State> {
       return (
         <ListGroupItem onClick={this.toggleChart} active={this.isActive()}>
           {this.indent()}
-          <FaBarChart /> {PuppetDB.FactPath.name(fact)}
+          <FaChartBar /> {PuppetDB.FactPath.name(fact)}
         </ListGroupItem>
       );
     }

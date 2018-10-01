@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FaDashboard, FaList, FaCalendar, FaTags } from 'react-icons/lib/fa';
+import { FaTachometerAlt, FaList, FaCalendar, FaTags } from 'react-icons/fa';
 import { Navbar, Nav, NavItem } from 'reactstrap';
 
 import RouterNavLink from '../../../components/RouterNavLink';
@@ -10,7 +10,7 @@ export default (): JSX.Element => (
     <Nav navbar>
       <NavItem>
         <RouterNavLink exact to="/">
-          <FaDashboard /> Dashboard
+          <FaTachometerAlt /> Dashboard
         </RouterNavLink>
       </NavItem>
       <NavItem>

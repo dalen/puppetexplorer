@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { FaExclamationTriangle } from 'react-icons/lib/fa';
+import { FaExclamationTriangle } from 'react-icons/fa';
 import * as date from 'date-fns';
 import * as Maybe from 'maybe.ts';
 

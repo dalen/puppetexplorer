@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FaCaretDown, FaCaretRight } from 'react-icons/lib/fa';
+import { FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { Collapse, Badge } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import * as date from 'date-fns';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FaSearch } from 'react-icons/lib/fa';
+import { FaSearch } from 'react-icons/fa';
 import {
   InputGroup,
   InputGroupAddon,

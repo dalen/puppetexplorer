@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FaExclamationTriangle, FaExclamationCircle } from 'react-icons/lib/fa';
+import { FaExclamationTriangle, FaExclamationCircle } from 'react-icons/fa';
 import * as Maybe from 'maybe.ts';
 
 import * as PuppetDB from '../../PuppetDB';
