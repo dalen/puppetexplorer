@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  puppetdb:
+    image: puppet/puppetdb
+    entrypoint: /opt/puppetlabs/server/bin/puppetdb
+    command: foreground
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    volumes:
+      - ./data:/data
+
+  postgres:
+    image: puppet/puppetdb-postgres
+    environment:
+      POSTGRES_PASSWORD: puppetdb
+      POSTGRES_USER: puppetdb
+    expose:
+      - 5432
