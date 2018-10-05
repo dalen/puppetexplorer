@@ -23,7 +23,7 @@ export type Config = {
 
 export const defaults = (): Config => {
   return {
-    serverUrl: 'http://localhost:8080/',
+    serverUrl: 'http://localhost:8080',
     nodeFacts: [
       'operatingsystem',
       'operatingsystemrelease',
