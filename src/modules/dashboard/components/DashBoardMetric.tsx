@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
-import { FaRefresh } from 'react-icons/lib/fa';
+import { FaSync } from 'react-icons/fa';
 import * as Maybe from 'maybe.ts';
 
 import * as PuppetDB from '../../../PuppetDB';
@@ -48,7 +48,7 @@ export default class DashBoardMetric extends React.Component<Props, State> {
 
   render(): JSX.Element {
     const children = Maybe.toValue(
-      <FaRefresh className="spin" />,
+      <FaSync className="spin" />,
       Maybe.map(
         val => (
           <span>
