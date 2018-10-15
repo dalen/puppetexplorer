@@ -8012,10 +8012,10 @@ rc@^1.0.1, rc@^1.2.7:
     prop-types "^15.6.2"
     schedule "^0.5.0"
 
-react-icons@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.1.0.tgz#004bc8d8b64a5480cdebd86ccb72ba5930b0e434"
-  integrity sha512-kz0Dg1pEY+Ln0zcHYmBfx75pWz4U1kvCGku+QdwZkaIrCK+UQhPd69oLwik0KW5KpNhWHed0aMtAx6DnBhfIxQ==
+react-icons@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.2.0.tgz#fc1bf36cb4d231d61d1aa1de3a6ba773d07e47d2"
+  integrity sha512-ZWqIiOr5wTqtE6NNM9JgWBgNbq2JRi79rmqf2j50V1ewC6LiwKFhq7J/AjaVKBi5oPE4/9JN/jMKaVrJlIQoiw==
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
