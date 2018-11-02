@@ -9635,10 +9635,10 @@ tslint-eslint-rules@^5.4.0:
     tslib "1.9.0"
     tsutils "^3.0.0"
 
-tslint-immutable@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/tslint-immutable/-/tslint-immutable-4.8.0.tgz#1e378daeb7e01ef37f5e6ba7e291887e973936cd"
-  integrity sha512-/T1iIwSYRfrJXIbFfDA9BnMKgp7o+7dpCx03Ce4KVA9fYfDBUdXXhCRfeZY782VLzHBCAQMygDSJMyCDX9yP6w==
+tslint-immutable@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/tslint-immutable/-/tslint-immutable-4.9.0.tgz#dcb3b7ea9173ddcc524d35f3c0adfa21516c75cf"
+  integrity sha512-dOnyEVfiNK2fz+iet9FhzxJ4T4aOjK670fS/dnV1F1dtQSm4y3mdrGNocK8lDNJfAggJi6CY9kmb2w7XdooYWQ==
 
 tslint-microsoft-contrib@~5.2.0:
   version "5.2.0"
