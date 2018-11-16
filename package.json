@@ -88,7 +88,7 @@
     "ts-loader": "^5.3.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "tslint-config-airbnb": "^5.11.0",
+    "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.16.0",
     "tslint-immutable": "^4.9.1",
     "tslint-plugin-prettier": "^2.0.1",
