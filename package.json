@@ -68,7 +68,7 @@
     "@types/react-fontawesome": "^1.6.4",
     "@types/react-icons": "^2.2.6",
     "@types/react-router-dom": "^4.3.1",
-    "@types/reactstrap": "^6.4.2",
+    "@types/reactstrap": "^6.4.3",
     "@types/recharts": "^1.1.1",
     "css-loader": "^1.0.1",
     "exports-loader": "^0.7.0",
