@@ -8339,12 +8339,12 @@ redux-loop@^4.4.1:
   resolved "https://registry.yarnpkg.com/redux-loop/-/redux-loop-4.4.1.tgz#5c8abec6fd08bc66ce486d0c63810a2db80504dc"
   integrity sha512-Xvjmna50hBpQajUg5Ej7XBkCbEg7twgCKNeGWUIKQSqT3H2RjlHkDOjTnA3urQBc7Ff5JcAqxgsMr9sgJacDBQ==
 
-redux@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.0.tgz#aa698a92b729315d22b34a0553d7e6533555cc03"
-  integrity sha512-NnnHF0h0WVE/hXyrB6OlX67LYRuaf/rJcbWvnHHEPCF/Xa/AZpwhs/20WyqzQae5x4SD2F9nPObgBh2rxAgLiA==
+redux@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.3.tgz#0ca18be085e6cf6ed50e445a125f85e8b26b266b"
+  integrity sha512-v/Iaw67Pe+na+cZvcKvPxAKT1ww5kM+M09fmaCndCQC4Lo434AYb5975HJgJlp0D7dJxfYaLxMD4VwfpLOZ1Rw==
   dependencies:
-    loose-envify "^1.1.0"
+    loose-envify "^1.4.0"
     symbol-observable "^1.2.0"
 
 reflect-metadata@^0.1.12:
