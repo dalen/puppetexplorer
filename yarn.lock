@@ -1710,10 +1710,10 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-bootswatch@^4.1.3:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/bootswatch/-/bootswatch-4.1.3.tgz#30e3723b19fa89568cffcdc9c8943b469a2745e9"
-  integrity sha1-MONyOxn6iVaM/83JyJQ7RponRek=
+bootswatch@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/bootswatch/-/bootswatch-5.0.1.tgz#56c06e200fe33401c9397a39f115e82e97648628"
+  integrity sha512-qTTUvlBzyd7VR8S089uYRmCYmrAZruPhqEE9yCdek0fm4ELbJ3hGKAILT/tEv3N3r5Aps4teybQr/uCG3e9IaA==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
